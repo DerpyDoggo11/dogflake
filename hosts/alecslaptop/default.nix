@@ -17,7 +17,7 @@
   };
 
   # DaVinci Resolve OpenCL driver requirement
-  hardware.opengl.extraPackages = with pkgs; [ rocmPackages.clr.icd amdvlk ];
+  hardware.graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd amdvlk ];
 
   services.power-profiles-daemon.enable = false; # No power-profiles!
   services.tlp = {

@@ -4,6 +4,7 @@
   inputs = {
     # Nixpkgs - always pull from unstable
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # Manages home configs
     home-manager = {
@@ -23,52 +24,48 @@
     #  nixpkgs.legacyPackages.x86_64-linux.callPackage ./ags {inherit inputs;};
 
 
-
+  nixosConfigurations = {
     # Laptop config
-    alecslaptop = {
-      "alecslaptop" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          asztal = self.packages.x86_64-linux.default;
-        };
-        modules = [
-          ./nixos/alecslaptop/default.nix
-          ./nixos/alecslaptop/common.nix
-          home-manager.nixosModules.home-manager
-          { networking.hostName = "alecslaptop"; }
-        ];
-        host = {
-          primaryMonitor = "HDMI-A-1";
-        };
+    "alecslaptop" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs;
+        #asztal = self.packages.x86_64-linux.default;
       };
+      modules = [
+        ./hosts/alecslaptop/default.nix
+        ./hosts/common.nix
+        ./modules/hyprland.nix
+        #home-manager.nixosModules.home-manager
+        { networking.hostName = "alecslaptop"; }
+      ];
+      #host = {
+      #  primaryMonitor = "HDMI-A-1";
+      #};
     };
 
     # Desktop config TODO add me
-    alecspc = {
-      "alecspc" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/raspi/default.nix
-          ./nixos/alecslaptop/common.nix
-          home-manager.nixosModules.home-manager
-          { networking.hostName = "alecspc"; }
-        ];
-      };
+    /*"alecspc" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      #extraSpecialArgs = { inherit inputs; }; # Should be put in hm config
+      modules = [
+        #./hosts/raspi/default.nix
+        #./nixos/alecslaptop/common.nix
+        #home-manager.nixosModules.home-manager
+        #{ networking.hostName = "alecspc"; }
+      ];
     };
 
     # Raspberry Pi
-    alecspi = {
-      "alecpi" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/raspi/default.nix
-          home-manager.nixosModules.home-manager
-          { networking.hostName = "alecspc"; }
-        ];
-      };
-    };
+    "alecpi" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      #extraSpecialArgs = { inherit inputs; };
+      modules = [
+        #./hosts/raspi/default.nix
+        #home-manager.nixosModules.home-manager
+        #{ networking.hostName = "alecspc"; }
+      ];
+    };*/
   };
-};
+  };
+}

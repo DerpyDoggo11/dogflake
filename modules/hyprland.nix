@@ -32,8 +32,8 @@ in {
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-wlr
-    gnome.adwaita-icon-theme # Icon theme
-    gnome.gnome-bluetooth # Bluetooth service
+    adwaita-icon-theme # Icon theme
+    gnome-bluetooth # Bluetooth service
     bibata-cursors # Custom cursor
   ];
 

@@ -13,7 +13,7 @@
   ];*/
 
 
-  home-manager = {
+  /*home-manager = {
     backupFileExtension = "hm-backup";
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -32,7 +32,7 @@
         #./home.nix
       ];
     };
-  };
+  };*/
 
 
   # Better shell
