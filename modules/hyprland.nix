@@ -17,7 +17,7 @@ in {
   services.xserver.displayManager = {
     startx.enable = false;
     
-    # Remove gdm bloat (doesn't work)
+    # Remove gdm bloat
     gdm.enable = false;
   };
 

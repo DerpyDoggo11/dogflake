@@ -5,6 +5,8 @@
     ./hardware-configuration.nix # Hardware-specific settings
   ];
 
+  networking.hostName = "alecslaptop"; # Hostname
+  
   # Bootloader settings
   boot = {
     # Sea Islands Radeon support for Vulkan
@@ -16,11 +18,16 @@
     };
   };
 
-  # DaVinci Resolve OpenCL driver requirement
-  hardware.graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd amdvlk ];
+  hardware = {
+    alsa.enablePersistence = true; # Fix sound not working on boot (hopefully)
 
-  services.power-profiles-daemon.enable = false; # No power-profiles!
-  services.tlp = {
+    # DaVinci Resolve OpenCL driver requirement
+    graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd amdvlk ];
+  };
+
+  services = {
+    power-profiles-daemon.enable = false; # No power-profiles!
+    tlp = {
       enable = true;
       settings = {
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
@@ -29,7 +36,6 @@
         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       };
+    };
   };
-  
-  networking.hostName = "alecslaptop"; # Hostname
 }

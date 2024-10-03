@@ -36,8 +36,8 @@
         ./hosts/alecslaptop/default.nix
         ./hosts/common.nix
         ./modules/hyprland.nix
+        ./modules/desktop.nix
         #home-manager.nixosModules.home-manager
-        { networking.hostName = "alecslaptop"; }
       ];
       #host = {
       #  primaryMonitor = "HDMI-A-1";
@@ -52,7 +52,6 @@
         #./hosts/raspi/default.nix
         #./nixos/alecslaptop/common.nix
         #home-manager.nixosModules.home-manager
-        #{ networking.hostName = "alecspc"; }
       ];
     };
 
@@ -63,7 +62,6 @@
       modules = [
         #./hosts/raspi/default.nix
         #home-manager.nixosModules.home-manager
-        #{ networking.hostName = "alecspc"; }
       ];
     };*/
   };
