@@ -10,3 +10,5 @@
 in {
   home.packages = [nix-gc];
 }
+
+# TODO either move these scripts out of hm/ or migrate back to hm

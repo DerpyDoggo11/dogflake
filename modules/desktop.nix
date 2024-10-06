@@ -1,23 +1,27 @@
 { inputs, config, lib, pkgs, makeDesktopItem, ... }:
 
 let
-  makeWebappLib = import ../lib/makeWebapp.nix { inherit pkgs; };
+  /*makeWebappLib = import ../lib/makeWebapp.nix { inherit pkgs; };
   makeWebapp = makeWebappLib.makeWebapp;
 
   office = makeWebapp {
-    app = "office.com/login?ru=%2Flaunch%2Fonedrive";
+    name = "Microsoft Office";
+    url = "office.com/login?ru=\\%2Flaunch\\%2Fonedrive";
     icon = pkgs.fetchurl {
         url = "https://commons.wikimedia.org/wiki/File:Microsoft_Office_OneDrive_(2019%E2%80%93present).svg";
-        sha256 = "";
+        sha256 = "sha256-wSEgfCr3Wei3bwkF3vRsKbtpiN/LTkaAEzViatnwOH8=";
       };
     comment = "Microsoft Office suite - featuring Word, Excel & Powerpoint";
-    desktopName = "Microsoft Office";
-  };
+  };*/
 
 in
 {
   imports = [
     ./hyprland.nix # Hyprland-specific config
+
+    #../home-manager/scripts/nix-gc.nix
+    #../home-manager/scripts/nix-switch.nix
+    #../home-manager/scripts/spotify-sync.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -81,11 +85,34 @@ in
     jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email/IRC client & RSS reader
     
-    #firefoxpwa
-    #(pkgs.firefox-wayland.override { nativeMessagingHosts = [ pkgs.firefoxpwa ]; })
-    office # Custom Office 365 webapp
+    firefoxpwa
+    (pkgs.firefox-wayland.overrideAttrs (old: { nativeMessagingHosts = [ pkgs.firefoxpwa ]; }))
+    #(pkgs.makeDesktopItem ({
+    #  name = "Microsoft Office";
+    #  desktopName = "Microsoft Office";
+    #  comment = "Microsoft Office suite - featuring Word, Excel & Powerpoint";
+    #  exec = "microsoft-edge --app=https://office.com/launch/onedrive";
+    #  startupWMClass = "Office";
+    #  terminal = false;
+    #  icon = pkgs.fetchurl {
+    #    url = "https://commons.wikimedia.org/wiki/File:Microsoft_Office_OneDrive_(2019%E2%80%93present).svg";
+    #    sha256 = "sha256-wSEgfCr3Wei3bwkF3vRsKbtpiN/LTkaAEzViatnwOH8=";
+    #  };
+    #  type = "Application";
+    #}))
+    #office # Custom Office 365 webapp
 
-    #(prismlauncher.override{ withWaylandGLFW=true; }) # Wayland MC
+    # Overlay to apply patches to fix some bugs
+    (glfw-wayland-minecraft.overrideAttrs (old: {
+      patches = old.patches ++ [
+        #../overlays/glfw/0001-Key-Modifiers-Fix.patch
+        ../overlays/glfw/0006-Fix-chat-ctrl-keybinds.patch
+      ];
+    })
+    )
+
+    # Maybe 'override' suffices instead of 'overrideAttrs'?
+    (prismlauncher.overrideAttrs (old: { withWaylandGLFW = true; })) # Wayland MC
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical Microsoft Teams client
     libreoffice # Backup app for opening Word documents and Excel sheets

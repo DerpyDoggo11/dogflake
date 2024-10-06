@@ -38,17 +38,12 @@
       #   });
       # })
     ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-    };
   };
 
   # TODO: Set your username
   home = {
-    username = "your-username";
-    homeDirectory = "/home/your-username";
+    username = "alec";
+    homeDirectory = "/home/alec";
   };
 
   # Add stuff for your user as you see fit:

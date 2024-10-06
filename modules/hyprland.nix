@@ -3,17 +3,8 @@
 # and use them for proper GTK Hyprland integration
 
 { inputs, pkgs, ... }:
-let
-  # Install nerdfonts
-  nerdfonts = (pkgs.nerdfonts.override { fonts = [
-    "Ubuntu"
-    "UbuntuMono"
-    "CascadiaCode"
-    "FantasqueSansMono"
-    "FiraCode"
-    "Mononoki"
-  ]; });
-in {
+
+{
   services.xserver.displayManager = {
     startx.enable = false;
     
@@ -40,19 +31,15 @@ in {
   # Enable custom fonts
   fonts.fontconfig.enable = true;
   fonts.packages = with pkgs; [ 
-    #nerdfonts
     corefonts
     iosevka # Best Neovim coding font
     minecraftia # Awesome Minecraft font
     morewaita-icon-theme
-    icon-library
+    icon-library # Extra icons, maybe disable if not needed by ags
     font-awesome
   ];
   
-  programs.hyprland = {
-    enable = true;
-    #xwayland.enable = true;
-  };
+  programs.hyprland.enable = true;
 
   xdg.autostart.enable = true;
   xdg.portal = {
@@ -67,9 +54,7 @@ in {
   # Set all Electron apps to use Wayland by default 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  security = {
-    polkit.enable = true;
-  };
+  security.polkit.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -87,12 +72,12 @@ in {
     };
   };
 
+  # TODO review me
   services = {
-    gvfs.enable = true;
-    devmon.enable = true;
-    udisks2.enable = true;
-    upower.enable = true;
-    accounts-daemon.enable = true;
+    gvfs.enable = true; # Necessary for network drives, prob not needed?
+    devmon.enable = true; # Automatically mounts/unmounts attached drives
+    udisks2.enable = true; # For getting info about drives
+    accounts-daemon.enable = true; # Used by GNOME to get account information, prob not needed?
     dbus.enable = true;
     gnome = {
       glib-networking.enable = true;
@@ -114,9 +99,4 @@ in {
     POLKIT_AUTH_AGENT = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
     GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
   };
-
-  environment.extraInit = ''
-    export XDG_CONFIG_DIRS="/etc/xdg:$XDG_CONFIG_DIRS"
-  '';
-
 }

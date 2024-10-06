@@ -3,16 +3,17 @@
 # Source: https://github.com/bjornfor/nixos-config/blob/master/lib/default.nix
 
 {
-  makeWebapp = { app, icon ? null, comment ? null, desktopName ? comment, categories ? null }:
+  makeWebapp = { name, url, icon ? null, comment ? null, categories ? null }:
     pkgs.makeDesktopItem ({
-      name = app;
-      exec = "microsoft-edge --app=https://${app}/";
-      startupWMClass = "${app}";
+      name = name;
+      desktopName = name;
+      exec = "microsoft-edge --app=\"https://${url}/\"";
+      startupWMClass = name;
       #startupNotify = true;
-      #genericName = "${desktopName}"
+      genericName = name;
       terminal = false;
       type = "Application";
     } // (if icon != null then { inherit icon; } else { })
       // (if comment != null then { inherit comment; } else { })
-      // (if desktopName != null then { inherit desktopName; } else { }));
+      // (if categories != null then { inherit categories; } else { }));
 }

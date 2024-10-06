@@ -46,7 +46,7 @@
       systemd-boot.enable = true; # Systemd boot
       efi.canTouchEfiVariables = true;
       timeout = 0; # Hold down space on boot to access menu
-      systemd-boot.configurationLimit = 1; # Save space in the /boot partition
+      systemd-boot.configurationLimit = 2; # Save space in the /boot partition
     };
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest; # Use the latest Linux kernel version
@@ -110,9 +110,9 @@
 
   # Optimise Nix storage settings
   # Add 'keep-outputs = false' to not keep deps 
-  nix.extraOptions = ''
-    keep-derivations = false
-  '';
+  #nix.extraOptions = ''
+  #  keep-derivations = false
+  #'';
   
   # Remove even more useless stuff 
   environment.defaultPackages = []; # Remove all default packages

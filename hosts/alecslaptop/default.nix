@@ -19,13 +19,14 @@
   };
 
   hardware = {
-    alsa.enablePersistence = true; # Fix sound not working on boot (hopefully)
+    alsa.enablePersistence = true; # Fix sound not working on boot (hopefully) TODO check if this needs to stay
 
     # DaVinci Resolve OpenCL driver requirement
     graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd amdvlk ];
   };
 
   services = {
+    upower.enable = true; # For getting battery level (used by the desktop)
     power-profiles-daemon.enable = false; # No power-profiles!
     tlp = {
       enable = true;
