@@ -10,7 +10,7 @@ let
     #icon = pkgs.fetchurl {
     #  url = "https://commons.wikimedia.org/wiki/File:Microsoft_Office_OneDrive_(2019%E2%80%93present).svg";
     #  sha256 = "sha256-Ij3vceUgXTy/bHoaDuz6i7sNYf4vyyOWr0+PWtsdywQ=";
-    #};germ
+    #};
     comment = "Microsoft Office suite - featuring Word, Excel & Powerpoint";
   };
 
@@ -88,18 +88,18 @@ in
     office # Custom Office 365 webapp
 
     # Overlay to apply patches to fix some bugs
-    #(glfw-wayland-minecraft.overrideAttrs (prev: {
-    #  patches = prev.patches ++ [
-    #    ../overlays/glfw/0006-Fix-chat-ctrl-keybinds.patch
-    #  ];
-    #})
-    #)
+    (glfw-wayland-minecraft.overrideAttrs (prev: {
+      patches = prev.patches ++ [
+        ../overlays/glfw/0006-Fix-chat-ctrl-keybinds.patch
+      ];
+    })
+    )
+    (prismlauncher.overrideAttrs (preve: { withWaylandGLFW = true; })) # Wayland MC
 
     (writeShellScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.sh))
     (writeShellScriptBin "nx-switch" (builtins.readFile ../scripts/nx-switch.sh))
     (writeShellScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.sh))
 
-    (prismlauncher.overrideAttrs (preve: { withWaylandGLFW = true; })) # Wayland MC
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical Microsoft Teams client
     libreoffice # Backup app for opening Word documents and Excel sheets
