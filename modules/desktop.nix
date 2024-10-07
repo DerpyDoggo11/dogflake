@@ -1,18 +1,18 @@
 { inputs, config, lib, pkgs, makeDesktopItem, ... }:
 
 let
-  /*makeWebappLib = import ../lib/makeWebapp.nix { inherit pkgs; };
+  makeWebappLib = import ../lib/makeWebapp.nix { inherit pkgs; };
   makeWebapp = makeWebappLib.makeWebapp;
 
-  office = makeWebapp {
+  office = makeWebappLib.makeWebapp {
     name = "Microsoft Office";
-    url = "office.com/login?ru=\\%2Flaunch\\%2Fonedrive";
-    icon = pkgs.fetchurl {
-        url = "https://commons.wikimedia.org/wiki/File:Microsoft_Office_OneDrive_(2019%E2%80%93present).svg";
-        sha256 = "sha256-wSEgfCr3Wei3bwkF3vRsKbtpiN/LTkaAEzViatnwOH8=";
-      };
+    url = "https://office.com/launch/onedrive";
+    #icon = pkgs.fetchurl {
+    #  url = "https://commons.wikimedia.org/wiki/File:Microsoft_Office_OneDrive_(2019%E2%80%93present).svg";
+    #  sha256 = "sha256-Ij3vceUgXTy/bHoaDuz6i7sNYf4vyyOWr0+PWtsdywQ=";
+    #};germ
     comment = "Microsoft Office suite - featuring Word, Excel & Powerpoint";
-  };*/
+  };
 
 in
 {
@@ -64,7 +64,6 @@ in
     nemo-fileroller # File manager archive feature
     file-roller # Adds file archive management
     tree-sitter # Neovim dependency
-    glfw-wayland-minecraft # Weird dep for minecraft on wayland
     fzf # Fuzzy finder dep
     nodejs_22 # Node.js JavaScript runtime
     gcc13 # Neovim dependency (fixes Neovim errors)
@@ -85,34 +84,22 @@ in
     jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email/IRC client & RSS reader
     
-    firefoxpwa
-    (pkgs.firefox-wayland.overrideAttrs (old: { nativeMessagingHosts = [ pkgs.firefoxpwa ]; }))
-    #(pkgs.makeDesktopItem ({
-    #  name = "Microsoft Office";
-    #  desktopName = "Microsoft Office";
-    #  comment = "Microsoft Office suite - featuring Word, Excel & Powerpoint";
-    #  exec = "microsoft-edge --app=https://office.com/launch/onedrive";
-    #  startupWMClass = "Office";
-    #  terminal = false;
-    #  icon = pkgs.fetchurl {
-    #    url = "https://commons.wikimedia.org/wiki/File:Microsoft_Office_OneDrive_(2019%E2%80%93present).svg";
-    #    sha256 = "sha256-wSEgfCr3Wei3bwkF3vRsKbtpiN/LTkaAEzViatnwOH8=";
-    #  };
-    #  type = "Application";
-    #}))
-    #office # Custom Office 365 webapp
+    firefoxpwa # Firefox PWA extension
+    office # Custom Office 365 webapp
 
     # Overlay to apply patches to fix some bugs
-    (glfw-wayland-minecraft.overrideAttrs (old: {
-      patches = old.patches ++ [
-        #../overlays/glfw/0001-Key-Modifiers-Fix.patch
-        ../overlays/glfw/0006-Fix-chat-ctrl-keybinds.patch
-      ];
-    })
-    )
+    #(glfw-wayland-minecraft.overrideAttrs (prev: {
+    #  patches = prev.patches ++ [
+    #    ../overlays/glfw/0006-Fix-chat-ctrl-keybinds.patch
+    #  ];
+    #})
+    #)
 
-    # Maybe 'override' suffices instead of 'overrideAttrs'?
-    (prismlauncher.overrideAttrs (old: { withWaylandGLFW = true; })) # Wayland MC
+    (writeShellScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.sh))
+    (writeShellScriptBin "nx-switch" (builtins.readFile ../scripts/nx-switch.sh))
+    (writeShellScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.sh))
+
+    (prismlauncher.overrideAttrs (preve: { withWaylandGLFW = true; })) # Wayland MC
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical Microsoft Teams client
     libreoffice # Backup app for opening Word documents and Excel sheets
@@ -136,11 +123,29 @@ in
     })
   ];
 
-  # Neovim!!!
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    withNodeJs = true;
+  # This overlay doesn't work.. sticking with the systemPackages method for now
+  #nixpkgs.overlays = [
+  #  (self: super: {
+  #    glfw-wayland-minecraft = super.glfw-wayland-minecraft.overrideAttrs (oldAttrs: rec {
+  #    patches = oldAttrs.patches ++ [ ../overlays/glfw/0006-Fix-chat-ctrl-keybinds.patch ];
+  #    });
+  #  })
+  #];
+
+  programs = {
+    # For PWAs only bc Edge bug sucks
+    firefox = {
+      enable = true;
+     package = pkgs.firefox;
+      nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
+    };
+
+    # Neovim!!
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+     withNodeJs = true;
+    };
   };
 
   # Keyboard layout & language (with Chinese support)

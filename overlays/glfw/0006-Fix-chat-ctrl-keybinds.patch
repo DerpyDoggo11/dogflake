@@ -9,4 +9,3 @@ index 36128e1..15a1f28 100644
 -    if (window->callbacks.charmods)
 +    if (window->callbacks.charmods && !(mods & GLFW_MOD_CONTROL))
          window->callbacks.charmods((GLFWwindow*) window, codepoint, mods);
-         

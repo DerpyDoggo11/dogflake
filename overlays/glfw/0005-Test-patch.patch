@@ -15,8 +15,8 @@ index 58382a48..c0a31237 100644
  {
 -    _glfwInputError(GLFW_FEATURE_UNAVAILABLE,
 -                    "Wayland: The platform does not support setting the window icon");
-+    fprintf(stderr,
-+            "[GLFW] Wayland: The platform does not support setting the window icon\n");
++    _glfwInputError(GLFW_FEATURE_UNAVAILABLE,
++            "This is a test - if this crashes, the patch worked successfully");
  }
  
  void _glfwGetWindowPosWayland(_GLFWwindow* window, int* xpos, int* ypos)
