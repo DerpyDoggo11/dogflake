@@ -7,7 +7,7 @@
     pkgs.makeDesktopItem ({
       name = name;
       desktopName = name;
-      exec = "microsoft-edge --app=\"https://${url}/\"";
+      exec = "microsoft-edge --app=\"https://${url}\"";
       startupWMClass = name;
       terminal = false;
       comment = comment;

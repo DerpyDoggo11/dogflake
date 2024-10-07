@@ -55,9 +55,7 @@
 
   # Networking configuration using iwd
   networking = {
-    #dhcpcd.enable = false;
     networkmanager.wifi.backend = "iwd";
-    #useDHCP = false;
     useNetworkd = true;
     wireless.iwd = {
       enable = true;
@@ -108,16 +106,10 @@
     man.man-db.enable = false;
   };
 
-  # Optimise Nix storage settings
-  # Add 'keep-outputs = false' to not keep deps 
-  #nix.extraOptions = ''
-  #  keep-derivations = false
-  #'';
-  
   # Remove even more useless stuff 
   environment.defaultPackages = []; # Remove all default packages
   programs.less.lessopen = null;
-  programs.command-not-found.enable = false;
+  programs.command-not-found.enable = false; # Don't show recommendations when a package is missing
 
   # Even if the latest NixOS version is newer than this, we don't need to update.
   # To maintain compatibility, this version should stay the same.
