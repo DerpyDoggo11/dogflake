@@ -7,10 +7,7 @@ let
   office = makeWebappLib.makeWebapp {
     name = "Microsoft Office";
     url = "office.com/launch/onedrive";
-    #icon = pkgs.fetchurl {
-    #  url = "https://commons.wikimedia.org/wiki/File:Microsoft_Office_OneDrive_(2019%E2%80%93present).svg";
-    #  sha256 = "sha256-Ij3vceUgXTy/bHoaDuz6i7sNYf4vyyOWr0+PWtsdywQ=";
-    #};
+    icon = "view-grid-symbolic";
     comment = "Microsoft Office suite - featuring Word, Excel & Powerpoint";
   };
 
@@ -18,10 +15,6 @@ in
 {
   imports = [
     ./hyprland.nix # Hyprland-specific config
-
-    #../home-manager/scripts/nix-gc.nix
-    #../home-manager/scripts/nix-switch.nix
-    #../home-manager/scripts/spotify-sync.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -82,7 +75,9 @@ in
     lunar-client # Minecraft client
     blockbench-electron # Minecraft 3D modeler
     jetbrains.idea-community # Jetbrains IDEA
-    thunderbird # Best email/IRC client & RSS reader
+    thunderbird # Best email/IRC client
+    obs-studio # For better recording
+    ffmpeg # Needed for Davinci resolve potentially?
     
     firefoxpwa # Firefox PWA extension
     office # Custom Office 365 webapp
@@ -90,9 +85,7 @@ in
     # Wayland MC
     (prismlauncher.override {
       glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {
-        patches = [
-          ../overlays/glfw/0006-Fix-chat-ctrl-keybinds.patch
-        ];
+        patches = [ ../overlays/glfw/0001-Key-modifiers-fix.patch ];
       });
     })
 
@@ -123,20 +116,11 @@ in
     })
   ];
 
-  # This overlay doesn't work.. sticking with the systemPackages method for now
-  #nixpkgs.overlays = [
-  #  (self: super: {
-  #    glfw-wayland-minecraft = super.glfw-wayland-minecraft.overrideAttrs (oldAttrs: rec {
-  #    patches = oldAttrs.patches ++ [ ../overlays/glfw/0006-Fix-chat-ctrl-keybinds.patch ];
-  #    });
-  #  })
-  #];
-
   programs = {
     # For PWAs only bc Edge bug sucks
     firefox = {
       enable = true;
-     package = pkgs.firefox;
+      package = pkgs.firefox;
       nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
     };
 
@@ -144,7 +128,7 @@ in
     neovim = {
       enable = true;
       defaultEditor = true;
-     withNodeJs = true;
+      withNodeJs = true;
     };
   };
 
@@ -161,11 +145,6 @@ in
   };
 
   services = {
-    xserver = {
-      enable = false; # Remove Xwayland support
-      excludePackages = [ pkgs.xterm ]; # Don't include xterm
-      xkb.layout = "us";
-    };
     printing.enable = true; # Enables CUPS for printing
     logrotate.enable = false; # Don't need this
   };

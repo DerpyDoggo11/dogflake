@@ -75,10 +75,6 @@
 
   # Internationalization settings
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    earlySetup = false;
-    useXkbConfig = true;
-  };
 
   nixpkgs.config.allowUnfree = true; # Allow installing of non open-source applications
   nix.settings.experimental-features = "nix-command flakes";
