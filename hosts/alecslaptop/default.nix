@@ -23,10 +23,7 @@
 
     # OpenCL drivers for better hardware acceleration (added support for DaVinci Resolve) 
     graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
-    amdgpu = {
-      opencl.enable = true;
-      amdvlk.enable = true;
-    };
+    amdgpu.opencl.enable = true;
   };
 
   services = {
