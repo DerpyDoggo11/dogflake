@@ -26,7 +26,6 @@ in
     dart-sass # Desktop dependency
     fd # Desktop dependency
     sassc # Sass compiler
-    nix-prefetch-git # For creating Nix packages
     mpd # For the ags music player
     mpc-cli # CLI for ags music player
     glib # Gsettings dependency
@@ -41,6 +40,7 @@ in
     tmux # Super ultra terminal multiplexing dimensional warper
     swww # Background manager
     hyprlock # Lockscreen
+    jre # For minecraft - use the latest stable version
     hypridle # Laptop idle daemon
     brightnessctl # Controls laptop brightness
     wl-screenrec # Fast screen recorder

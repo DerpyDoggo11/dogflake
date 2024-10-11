@@ -1,0 +1,11 @@
+{
+   "manifest_version": 3,
+   "name": "Same Tab",
+   "permissions": [ "tabs", "webNavigation" ],
+   "version": "3.2.1",
+   "background": {
+      "service_worker": "background.js"
+   },
+   "description": "Forces link clicks from pinned tabs to always open in new tab"
+}
+
