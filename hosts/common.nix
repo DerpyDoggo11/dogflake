@@ -1,39 +1,28 @@
-# Things that all configs have (the base config)
+{ inputs, config, pkgs, modulesPath, ... }: {
 
-{ inputs, config, pkgs, ... }: let name = "alec"; in {
-  /*imports = [
-    /etc/nixos/hardware-configuration.nix
+  imports = [
+    #"${modulesPath}/profiles/perlless.nix"
+    /*/etc/nixos/hardware-configuration.nix
     ./system.nix
     ./audio.nix
     ./locale.nix
     ./nautilus.nix
     ./laptop.nix
     ./hyprland.nix
-    ./gnome.nix
-  ];*/
+    ./gnome.nix*/
+  ];
 
-
-  /*home-manager = {
+  home-manager = {
     backupFileExtension = "hm-backup";
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
-    users.${name} = {
-      home.username = name;
-      home.homeDirectory = "/home/${name}";
-
-      # TODO add these
-      imports = [
-        #../home-manager/nvim.nix
-        #../home-manager/ags.nix
-        #../home-manager/git.nix
-        #../home-manager/hyprland.nix
-        #../home-manager/packages.nix
-        #./home.nix
-      ];
+    users.alec = {
+      home.username = "alec";
+      home.homeDirectory = "/home/alec";
+      imports = [ ../home-manager/home.nix ];
     };
-  };*/
-
+  };
 
   # Better shell
   programs.zsh = {

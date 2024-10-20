@@ -1,6 +1,5 @@
 {
   inputs,
-  outputs,
   lib,
   config,
   pkgs,
@@ -8,8 +7,15 @@
 }: {
   
   imports = [
-    ./hyprland.nix
-    ./vscode.nix
+    #./hypr/hyprland.nix
+    #./fish.nix
+    ./fastfetch.nix
+    #./gtk.nix
+    #./homepage.nix
+    #./mpd.nix
+    #./starship.nix
+    #./swappy.nix
+    #./vscode.nix
   ];
 
   home = {

@@ -39,7 +39,10 @@
     font-awesome
   ];
   
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+  };
 
   xdg.autostart.enable = true;
   xdg.portal = {

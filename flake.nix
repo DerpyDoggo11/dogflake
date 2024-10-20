@@ -32,7 +32,7 @@
           ./hosts/common.nix
           ./modules/hyprland.nix
           ./modules/desktop.nix
-          #home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
         ];
         #host = {
         #  primaryMonitor = "HDMI-A-1";

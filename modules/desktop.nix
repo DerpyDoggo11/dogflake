@@ -144,34 +144,40 @@ in
     };
   };
 
+  # Sound support 
   services = {
     printing.enable = true; # Enables CUPS for printing
     logrotate.enable = false; # Don't need this
+
+    # For VIA keyboard support
+    udev.extraRules = ''
+      SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="03A1", TAG+="uaccess"
+      KERNEL=="hidraw*", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
+    '';
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber = {
+        enable = true;
+
+        # Fix unnecessary power drain issue
+        extraConfig = {
+          "10-disable-camera" = {
+            "wireplumber.profiles" = {
+              main."monitor.libcamera" = "disabled";
+            };
+          };
+        };
+      };
+    };
   };
   
   # Bluetooth & sound support
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false; # Auto-enables bluetooth on startup
-  };
-
-  # Sound support 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber = {
-      enable = true;
-
-      # Fix unnecessary power drain issue
-      extraConfig = {
-        "10-disable-camera" = {
-          "wireplumber.profiles" = {
-            main."monitor.libcamera" = "disabled";
-          };
-        };
-      };
-    };
   };
 }
