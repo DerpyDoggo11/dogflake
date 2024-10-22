@@ -1,15 +1,50 @@
-#TODO include these save paths
-file:///home/alec/Downloads Downloads
-file:///home/alec/Music Music
-file:///home/alec/Pictures Pictures
-file:///home/alec/Projects Projects
-file:///home/alec/Documents Documents
-file:///home/alec/Other Other
-file:///home/alec/Videos Videos
+{
+  pkgs,
+  config,
+  ...
+}: let
+    UbuntuNerdfont = pkgs.nerdfonts.override {
+        fonts = [ "Ubuntu" ];
+    };
+in {
+    gtk = {
+        enable = true;
+        gtk3.bookmarks = let
+            home = config.home.homeDirectory;
+        in [
+            "file:///${home}/Downloads"
+            "file:///${home}/Music"
+            "file:///${home}/Pictures"
+            "file:///${home}/Projects"
+            "file:///${home}/Documents"
+            "file:///${home}/Other"
+            "file:///${home}/Videos"
+        ];
 
-gtk-theme-name=Graphite-Dark-nord
-gtk-icon-theme-name=Adwaita
-gtk-font-name=Ubuntu Nerd Font Propo Medium 11
-gtk-cursor-theme-name=Bibata-Modern-Ice
-gtk-cursor-theme-size=24
-gtk-application-prefer-dark-theme=1
+        font = {
+            name = "Ubuntu Nerd Font Propo Medium 11";
+            package = UbuntuNerdfont;
+            size = 11;
+        };
+        cursorTheme = {
+            name = "Bibata-Modern-Ice";
+            package = pkgs.bibata-cursors;
+            size = 24;
+        };
+        iconTheme = {
+            name = "MoreWaita";
+            package = pkgs.morewaita-icon-theme;
+        };
+        theme = {
+            name = "Nordic-darker";
+            #package = pkgs.nordic;
+        };
+
+        gtk3.extraConfig = {
+            gtk-application-prefer-dark-theme = 1;
+        };
+        gtk4.extraConfig = {
+            gtk-application-prefer-dark-theme = 1;
+        };
+    };
+}

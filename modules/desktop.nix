@@ -49,6 +49,7 @@ in
     slurp # Required for recording selection tool to function
     swappy # Quick screenshot editor 
     wl-clipboard # Required for Neovim
+    nordic # Nord GTK theme
     blueman # Bluetooth management
     celluloid # Fast, simple GTK video player using mpv
     gnome-text-editor # Clean, tabbed, GTK text editor

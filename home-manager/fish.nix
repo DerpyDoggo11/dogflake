@@ -1,1 +1,1 @@
-# Fish terminalb
+# Fish terminal
