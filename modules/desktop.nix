@@ -18,55 +18,51 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-    ags # Widget system for top bar + OSD
-    git # Best source control manager
+    ags # Widget system & desktop overlay
+    git # Source control manager
     microsoft-edge # Web browser
     foot # Terminal
-    bun # Fast JS runtime
-    dart-sass # Desktop dependency
-    fd # Desktop dependency
-    sassc # Sass compiler
-    mpd # For the ags music player
-    mpc-cli # CLI for ags music player
-    glib # Gsettings dependency
-    fastfetch # For bragging rights (slow)
-    copyq # Clipboard manager (bloated)
-    psmisc # Useful cli Linux tools, not a necessary application
-    lsof # Useful util for finding items on a port (not necessary application)
-    emote # Emoji picker
-    cmake # Build tool
-    starship # Best ZSH theme
-    zip # Allow ziping and unziping of folders
-    tmux # Super ultra terminal multiplexing dimensional warper
-    swww # Background manager
-    hyprlock # Lockscreen
-    jre # For minecraft - use the latest stable version
-    hypridle # Laptop idle daemon
+    bun # Fast all-in-one JS toolkit 
+    dart-sass # Ags Desktop dependency
+    fd # Ags Desktop dependency
+    sassc # Ags Sass compiler
+    mpd # Music daemon for the Ags music player
+    mpc-cli # CLI for the Ags music player
+    glib # Gsettings dep (TODO: maybe remove me)
+    fastfetch # For bragging rights (TODO: look into faster alternatives)
+    copyq # Clipboard manager (TODO: replace with Ags clipboard system)
+    psmisc # Useful CLI utilities
+    lsof # Useful util for finding items on a port
+    emote # Emoji picker (TODO: replace with Ags emoji picker)
+    cmake # Build tool (TODO: maybe not needed)
+    starship # ZSH theme
+    swww # Background manager w/ cool transitions
+    hyprlock # Lockscreen system (TODO: replace with Ags lockscreen system)
+    jre # For Minecraft - uses the latest stable Java runtime version
+    jdk22 # Java JDK version 22
     brightnessctl # Controls laptop brightness
     wl-screenrec # Fast screen recorder
     ngrok # Tunelling for quick Discord bot development
-    grimblast # Screenshot tool
-    slurp # Required for recording selection tool to function
-    swappy # Quick screenshot editor 
-    wl-clipboard # Required for Neovim
+    grimblast # Screenshotting tool (TODO: replace with just Grim)
+    slurp # Screen selection tool for screenshots & screenrecording
+    swappy # Quick screenshot editor
+    wl-clipboard # Neovim clipboard dependency
+    tree-sitter # Neovim parser dependency
+    #gcc13 # Neovim dependency
     nordic # Nord GTK theme
-    blueman # Bluetooth management
+    #blueman # Bluetooth manager
     celluloid # Fast, simple GTK video player using mpv
     gnome-text-editor # Clean, tabbed, GTK text editor
-    amberol # Lightweight and beautiful GTK music player
+    amberol # Lightweight GTK music player
     nemo-with-extensions # Simple file manager
     nemo-fileroller # File manager archive feature
     file-roller # Adds file archive management
-    tree-sitter # Neovim dependency
-    fzf # Fuzzy finder dep
-    nodejs_22 # Node.js JavaScript runtime
-    gcc13 # Neovim dependency (fixes Neovim errors)
-    clamav # Linux virus scanner
-    jdk22 # Java JDK version 22
+    #zip # Util for compressing/decompressing folders
+    fzf # Fuzzy finder utility
+    #nodejs_22 # NodeJS JavaScript runtime
     python3 # Python
-    python312Packages.pip # Python pip
-    zulu8 # Java 8 for breakdown (maybe can be removed if disable java check)
-    steam-run # Annoying that I need this, but its required for Wrangler
+    python312Packages.pip # Python pip system (TODO: seperate into new module)
+    steam-run # Used for developing w/ Wrangler
 
     # Normal user apps
     neovide # GUI-based Neovim
@@ -79,6 +75,7 @@ in
     thunderbird # Best email/IRC client
     obs-studio # For better recording
     ffmpeg # Needed for Davinci resolve potentially?
+    tmux # Super ultra terminal multiplexing dimensional warper
     
     firefoxpwa # Firefox PWA extension
     office # Custom Office 365 webapp
@@ -172,6 +169,16 @@ in
             };
           };
         };
+      };
+    };
+
+    # Simple & basic Linux antivirus
+    clamav = {
+      daemon.enable = true;
+      scanner.enable = true;
+      updater = {
+        enable = true;
+        frequency = 1; # Check once per day
       };
     };
   };
