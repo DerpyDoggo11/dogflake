@@ -4,7 +4,12 @@
   ...
 }: let
     UbuntuNerdfont = pkgs.nerdfonts.override {
-        fonts = [ "Ubuntu" ];
+        fonts = [ 
+            "Ubuntu"
+            "UbuntuMono"
+            "CascadiaCode"
+            "FiraCode"
+        ];
     };
 in {
     gtk = {

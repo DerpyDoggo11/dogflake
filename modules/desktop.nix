@@ -171,16 +171,6 @@ in
         };
       };
     };
-
-    # Simple & basic Linux antivirus
-    clamav = {
-      daemon.enable = true;
-      scanner.enable = true;
-      updater = {
-        enable = true;
-        frequency = 1; # Check once per day
-      };
-    };
   };
   
   # Bluetooth & sound support
