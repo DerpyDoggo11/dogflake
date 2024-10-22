@@ -66,10 +66,13 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   nixpkgs.config.allowUnfree = true; # Allow installing of non open-source applications
-  nix.settings.experimental-features = "nix-command flakes";
   programs.dconf.enable = true;
-
   services.logrotate.enable = false; # Don't need this
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    auto-optimise-store = true;
+    warn-dirty = false;
+  };
   
   users.users.alec = {
     isNormalUser = true;
@@ -78,7 +81,6 @@
 
   # Random settings to optimize the system
   services.journald.extraConfig = "SystemMaxUse=1G";
-  nix.settings.auto-optimise-store = true;
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ]; # Optimize SSD trim
 
   # Disable ALL documentation

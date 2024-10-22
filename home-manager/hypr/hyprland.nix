@@ -172,3 +172,12 @@ workspace = 8, monitor:DP-1
 
 # Include keybinds
 source=~/.config/hypr/keybinds.conf
+
+
+# XDPH seperate config file
+
+
+screencopy {
+    allow_token_by_default = true
+}
+# TODO merge this with hyprland.nix when properly converted to a nix expression
