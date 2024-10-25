@@ -1,7 +1,9 @@
 {
   
   imports = [
-    #./hypr/hyprland.nix
+    ./hypr/hyprland.nix
+    ./hypr/keybinds.nix
+    ./hypr/hyprlock.nix
     #./fish.nix
     ./fastfetch.nix
     ./foot.nix
@@ -10,7 +12,7 @@
     #./mpd.nix
     #./starship.nix
     #./swappy.nix
-    #./vscode.nix
+    ./vscode.nix
   ];
 
   programs.home-manager.enable = true;

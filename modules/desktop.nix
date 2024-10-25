@@ -59,7 +59,7 @@ in
     file-roller # Adds file archive management
     #zip # Util for compressing/decompressing folders
     fzf # Fuzzy finder utility
-    #nodejs_22 # NodeJS JavaScript runtime
+    nodejs_22 # NodeJS JavaScript runtime
     python3 # Python
     python312Packages.pip # Python pip system (TODO: seperate into new module)
     steam-run # Used for developing w/ Wrangler
@@ -68,7 +68,7 @@ in
     neovide # GUI-based Neovim
     vscodium # Backup IDE (Neovim is main)
     vesktop # Custom discord client
-    davinci-resolve # Video editor
+    #davinci-resolve # Video editor
     lunar-client # Minecraft client
     blockbench-electron # Minecraft 3D modeler
     jetbrains.idea-community # Jetbrains IDEA

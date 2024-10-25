@@ -54,6 +54,9 @@
     ];
   };
 
+  # Required for hyprlock to work with home-manager TODO replace w/ Ags
+  security.pam.services.hyprlock = {};
+
   # Set all Electron apps to use Wayland by default 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

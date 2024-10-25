@@ -47,8 +47,8 @@ void main() {
 }
 
 
-// NOTE: This is a bad way to do it but its faster:
-// uses .frag extension
+// A more efficent (although less good-looking) filter
+// Uses .frag extension
 
 //precision mediump float;
 //varying vec2 v_texcoord;

@@ -1,105 +1,86 @@
+{
+  wayland.windowManager.hyprland.settings = {
+    bind = [
+      "SuperShift, R, exec, ags -q && ags" # Restart ags (when sleeping external monitor)
 
-# Alec's Hyprland Keybinds 
+      # Quick app access
+      "Super, return, exec, foot" # Terminal
+      "Super, E, exec, microsoft-edge-stable" # Edge
+      "Super, Period, exec, emote" # Emoji picker TODO replace w/ ags
+      "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
+      ",XF86PowerOff,  exec, ags -t powermenu" # Power menu
+      "Super, space, exec, ags -t launcher" # App laucher
+      # TODO: Make Super + C hide the last notification
 
-# Restart ags (when sleeping external monitor)
-bind = SuperShift, R, exec, ags -q && ags 
+      # Screen recording
+      "Super, R, exec, ags -r 'recorder.start()'"
+      "ControlSuper, R, exec, ags -r 'recorder.start(true)'" # Custom video selection size
+      ",Print, exec, ags -r 'recorder.screenshot()'"
+      "SHIFT, Print, exec, ags -r 'recorder.screenshot(true)'" # Fullscreen screensot
 
-# Volume buttons
-bindle = ,XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+
-bindle = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-
-bindle = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle
+      # Widow positioning
+      "SuperShift, left, movewindow, l"
+      "SuperShift, right, movewindow, r"
+      "SuperShift, up, movewindow, u"
+      "SuperShift, down, movewindow, d"
 
-# Brightness buttons
-bindle = ,XF86MonBrightnessUp, exec, brightnessctl set +5%
-bindle = ,XF86MonBrightnessDown, exec, brightnessctl set 5%-
+      # Keybinds to commonly used workspaces
+      #"Super, d, workspace, 1"
+      #"Super, f, workspace, 2"
+      #"Super, g, workspace, 3"
 
-# Quick application access
-bind = Super, E, exec, microsoft-edge-stable # Edge
-bind = Super, return, exec, foot # Terminal
+      # Workspace, window, tab manipulation
+      "ControlSuper, right, workspace, +1"
+      "ControlSuper, left, workspace, -1"
+      "ControlSuper, BracketLeft, workspace, -1"
+      "ControlSuper, BracketRight, workspace, +1"
+      "ControlSuper, mouse_down, workspace, -1"
+      "ControlSuper, mouse_up, workspace, +1"
+      "ControlSuperShift, Right, movetoworkspace, +1"
+      "ControlSuperShift, Left, movetoworkspace, -1"
+      "Super, Q, killactive" # Kill active app
 
-bind = Super, Period, exec, emote # Wofi emoji picker
-bind = Super, V, exec, copyq toggle # Clipboard history
+      # TODO Win + tab should automagically open up an all-apps switcher and switch between them, this is temporary
+      "ALT, Tab, cyclenext"
+      "ALT, Tab, bringactivetotop"
 
-# Disable middle mouse paste
-bindn = , mouse:274, exec, wl-copy -pc
+      # Fullscreen
+      ",F11, fullscreen, 0" # F11 functionality
+      "ControlShift,F, fullscreenstate, -1, 2" # Fake fullscreen utility
 
-# TODO: Add Super + C to hide the last notification
+      # Workspace mouse manipulation (use e+1 to skip empty workspaces)
+      "Super, mouse_up, workspace, +1"
+      "Super, mouse_down, workspace, -1"
+      "SuperShift, mouse_up, movewindow, r"
+      "SuperShift, mouse_down, movewindow, l"
+      "ControlSuperShift, mouse_up, movetoworkspace, +1"
+      "ControlSuperShift, mouse_down, movetoworkspace, -1"
+      
+      "Super, F, workspaceopt, allfloat" # Makes a workspace floating TODO change to just window floating status
 
-# Special workspace toggle
-#bind = SUPER, C, movetoworkspace, special
-#bind = SUPER, D, togglespecialworkspace
+      # Special workspaces
+      #"SUPER, C, movetoworkspace, special"
+      #"SUPER, D, togglespecialworkspace"
+    ];
 
-# Screenshot + screen recording
-bind = SUPER, R, exec, ags -r 'recorder.start()' 
-bind = ControlSuper, R, exec, ags -r 'recorder.start(true)' # Custom size recording 
+    bindle = [
+      # Volume/mute buttons
+      ",XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05+"
+      ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ .05-"
+      ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
 
-bind = ,Print, exec, ags -r 'recorder.screenshot()'
-bind = SHIFT, Print, exec, ags -r 'recorder.screenshot(true)' # Fullscreen screenshot
+      # Brightness buttons
+      ",XF86MonBrightnessUp, exec, brightnessctl set +5%"
+      ",XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+    ];
 
-# Desktop utilities
-bindr = CAPS, Caps_Lock, exec, bash /home/alec/.config/capslock-check.sh
+    bindm = [ # Move & resize windows w/ mouse
+      "Super, mouse:272, movewindow"
+      "Super, mouse:273, resizewindow"
+    ];
 
-# Using Super + F will make that workspace floating
-bind = Super, F, workspaceopt, allfloat
-
-# App launcher
-bind = Super, space, exec, ags -t launcher
-
-# Power menu
-bind=,XF86PowerOff,  exec, ags -t powermenu
-
-# Move windows around
-bind = SuperShift, left, movewindow, l
-bind = SuperShift, right, movewindow, r
-bind = SuperShift, up, movewindow, u
-bind = SuperShift, down, movewindow, d
-
-# Workspace, window, tab switch with keyboard
-bind = ControlSuper, right, workspace, +1
-bind = ControlSuper, left, workspace, -1
-bind = ControlSuper, BracketLeft, workspace, -1
-bind = ControlSuper, BracketRight, workspace, +1
-bind = ControlSuper, mouse_down, workspace, -1
-bind = ControlSuper, mouse_up, workspace, +1
-bind = ControlSuperShift, Right, movetoworkspace, +1
-bind = ControlSuperShift, Left, movetoworkspace, -1
-
-# Keybinds to commonly used workspaces
-#bind = ControlShift, q, workspace, 1
-#bind = ControlShift, a, workspace, 2
-#bind = ControlShift, z, workspace, 3
-
-#bind = ControlShift, w, workspace, 7
-#bind = ControlShift, s, workspace, 6
-#bind = ControlShift, x, workspace, 5
-
-# TODO Win + tab should automagically open up an all-apps switcher and switch between them
-
-# Alt+Tab functionality
-bind = ALT, Tab, cyclenext
-bind = ALT, Tab, bringactivetotop
-
-# Fullscreen
-bind = ,F11, fullscreen, 0 # F11 functionality
-bind = ControlShift,F, fullscreenstate, -1, 2 # Fake fullscreen util
-
-bind = Super, Q, killactive
-
-# Mouse scrollwheel window manipulation support
-
-# Scroll through workspaces
-bind = Super, mouse_up, workspace, +1
-bind = Super, mouse_down, workspace, -1
-# NOTE: use e+1 to skip empty workspaces
-
-# Scroll to move window to workspace
-bind = ControlSuperShift, mouse_up, movetoworkspace, +1
-bind = ControlSuperShift, mouse_down, movetoworkspace, -1
-
-# Scroll to move windows
-bind = SuperShift, mouse_up, movewindow, r
-bind = SuperShift, mouse_down, movewindow, l
-
-# Move and resize windows
-bindm = Super, mouse:272, movewindow
-bindm = Super, mouse:273, resizewindow
+    bindn = [
+      ", mouse:274, exec, wl-copy -pc" # Disables middle mouse paste
+    ];
+  }; 
+}
