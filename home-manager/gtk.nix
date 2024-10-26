@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{ pkgs, config, ... }: let
     UbuntuNerdfont = pkgs.nerdfonts.override {
         fonts = [ 
             "Ubuntu"

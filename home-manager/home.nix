@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, config, ... }: {
   imports = [
     ./hypr/hyprland.nix
     ./hypr/keybinds.nix
@@ -19,5 +19,15 @@
     stateVersion = "23.05";
   };
 
-  xdg.configFile."homepage.html" = { source = ./homepage.html; };
+  xdg = {
+    configFile."homepage.html" = { source = ./homepage.html; };
+
+    userDirs = {
+      enable = true; # Allows home-manager to manage & create user dirs
+      createDirectories = true; # Auto-creates all directories
+      extraConfig = {
+        XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects"; # Add Projects to xdg dirs
+      };
+    };
+  };
 }
