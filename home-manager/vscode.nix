@@ -33,7 +33,7 @@
             "diffEditor.ignoreTrimWhitespace" = false;
             "livePreview.serverRoot" = "public/";
             "editor.minimap.enabled" = false;
-
+            #TODO add the rest of the VSCode config
         };
     };
 }

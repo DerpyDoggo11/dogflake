@@ -132,6 +132,7 @@
                 "T_QPA_PLATFORM,xcb" # FCITX
                 "GTK_IM_MODULE,fcitx" # FCITX
                 "GTK_THEME,Nordic-darker" # Maybe not necessary
+                "XCURSOR_THEME,Bibata-Modern-Ice" # Remove if doesn't work
             ];
 
             exec-once = [
