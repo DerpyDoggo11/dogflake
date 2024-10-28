@@ -43,7 +43,7 @@ in
     brightnessctl # Controls laptop brightness
     wl-screenrec # Fast screen recorder
     ngrok # Tunelling for quick Discord bot development
-    grimblast # Screenshotting tool (TODO: replace with just Grim)
+    grimblast # Screenshotting tool (TODO: replace with Grim)
     slurp # Screen selection tool for screenshots & screenrecording
     swappy # Quick screenshot editor
     wl-clipboard # Neovim clipboard dependency
@@ -111,6 +111,18 @@ in
       terminal = false;
       type = "Application";
       mimeTypes = [ "x-scheme-handler/discord" ];
+    })
+    (pkgs.makeDesktopItem { # War Thunder
+      comment = "The most comprehensive free-to-play, cross-platform, MMO military game with over 2000 vehicles.";
+      desktopName = "War Thunder";
+      exec =  "steam-run /home/alec/Desktop/WarThunder/launcher";
+      genericName = "The most comprehensive free-to-play, cross-platform, MMO military game with over 2000 vehicles.";
+      icon = "/home/alec/Desktop/WarThunder/launcher.ico";
+      name = "warthunder";
+      startupNotify = true;
+      startupWMClass = "warthunder";
+      terminal = false;
+      type = "Application";
     })
   ];
 
