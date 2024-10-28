@@ -89,6 +89,7 @@ in
 
     (writeShellScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.sh))
     (writeShellScriptBin "nx-switch" (builtins.readFile ../scripts/nx-switch.sh))
+    (writeShellScriptBin "reminders" (builtins.readFile ../scripts/reminders.sh))
     (writeShellScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.sh))
 
     gimp # GNU image manipulation program

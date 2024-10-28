@@ -142,12 +142,11 @@
                 "copyq --start-server" # TODO replace with ags
                 "emote" # TODO replace with ags
                 "mpd" # Daemon for mpc player
-                "sleep 10 && bash /home/alec/.config/reminders.sh" # TODO integrate into ags
+                "sleep 10 && reminders" # TODO integrate reminders script into ags
                 "ags"
 
                 # Autostart apps
                 "[workspace 3 silent] microsoft-edge"
-                "[workspace 4 silent] teams-for-linux"
                 "[workspace 6 silent] thunderbird"
 
                 #exec-once = /usr/bin/gnome-keyring-daemon --start --components=secrets &
