@@ -131,8 +131,11 @@
                 "GDK_BACKEND,wayland,x11"
                 "T_QPA_PLATFORM,xcb" # FCITX
                 "GTK_IM_MODULE,fcitx" # FCITX
-                "GTK_THEME,Nordic-darker" # Maybe not necessary
-                "XCURSOR_THEME,Bibata-Modern-Ice" # Remove if doesn't work
+                #"GTK_THEME,Nordic-darker" # Maybe not necessary
+                
+                # Some legacy apps still use xcursor
+                "XCURSOR_THEME,Bibata-Modern-Ice" 
+                "XCURSOR_SIZE,24"
             ];
 
             exec-once = [
@@ -160,10 +163,10 @@
                 "2, monitor:HDMI-A-1"
                 "3, monitor:HDMI-A-1"
                 "4, monitor:DP-1"
-                "5, monitor:DP-1"
-                "6, monitor:DP-1"
-                "7, monitor:DP-1"
-                "8, monitor:DP-1"
+                #"5, monitor:DP-1"
+                #"6, monitor:DP-1"
+                #"7, monitor:DP-1"
+                #"8, monitor:DP-1"
             ];
         };
     };

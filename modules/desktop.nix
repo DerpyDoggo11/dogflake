@@ -39,7 +39,7 @@ in
     swww # Background manager w/ cool transitions
     hyprlock # Lockscreen system (TODO: replace with Ags lockscreen system)
     jre # For Minecraft - uses the latest stable Java runtime version
-    jdk22 # Java JDK version 22
+    jdk23 # Java JDK version 23
     brightnessctl # Controls laptop brightness
     wl-screenrec # Fast screen recorder
     ngrok # Tunelling for quick Discord bot development
@@ -187,8 +187,12 @@ in
   };
   
   # Bluetooth & sound support
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false; # Auto-enables bluetooth on startup
+  hardware = {
+    # Sometimes doesn't work on boot - must run: 
+    #   sudo hciconfig hci0 down && sudo rmmod btusb && sudo modprobe btusb && sudo hciconfig hci0 up
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false; # Auto-enables bluetooth on startup
+    };
   };
 }

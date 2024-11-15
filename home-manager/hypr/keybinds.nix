@@ -18,6 +18,11 @@
       ",Print, exec, ags -r 'recorder.screenshot()'"
       "SHIFT, Print, exec, ags -r 'recorder.screenshot(true)'" # Fullscreen screensot
 
+      # Mpc player manipluation (Ags integration)
+      # TODO: Add Super + , (left arrow) for previous track
+      # TODO: Add Super + . (right arrow) for next track
+      # TODO: Add super + / to play/pause MPC 
+
       # Widow positioning
       "SuperShift, left, movewindow, l"
       "SuperShift, right, movewindow, r"
