@@ -192,7 +192,7 @@ in
     #   sudo hciconfig hci0 down && sudo rmmod btusb && sudo modprobe btusb && sudo hciconfig hci0 up
     bluetooth = {
       enable = true;
-      powerOnBoot = false; # Auto-enables bluetooth on startup
+      #powerOnBoot = false; # Auto-enables bluetooth on startup
     };
   };
 }
