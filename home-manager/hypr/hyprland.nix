@@ -45,7 +45,6 @@
             dwindle = {
                 preserve_split = true;
                 force_split = 2;
-                no_gaps_when_only = 1; # Hides gaps on fullscreen
             };
 
             misc = {
@@ -74,7 +73,10 @@
                     brightness = 0.8;
                     noise = 0.1;
                 };
-                drop_shadow = false; # Diable shadow for better performance
+
+                shadow = {
+                    enabled = false; # Diable shadow for better performance
+                };
 
                 # Blue light filter shader
                 # TODO import instead of making it hardlinked to flake
@@ -120,6 +122,12 @@
                 "workspace 3,class:^microsoft-edge$" # MS Edge on Workspace 3
                 "workspace 4,class:^teams-for-linux$" # Teams on Workspace 4
                 "workspace 6,class:thunderbird" # Thunderbird on Workspace 6
+                
+                # No gaps when only window in workspace
+                "bordersize 0, floating:0, onworkspace:w[tv1]"
+                "rounding 0, floating:0, onworkspace:w[tv1]"
+                "bordersize 0, floating:0, onworkspace:f[1]"
+                "rounding 0, floating:0, onworkspace:f[1]"
             ];
 
             layerrule = [ # Ags
@@ -167,6 +175,10 @@
                 #"6, monitor:DP-1"
                 #"7, monitor:DP-1"
                 #"8, monitor:DP-1"
+                
+                # No gaps when only window in workspace
+                "w[tv1], gapsout:0, gapsin:0"
+                "f[1], gapsout:0, gapsin:0"
             ];
         };
     };
