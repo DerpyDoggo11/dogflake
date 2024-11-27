@@ -1,30 +1,48 @@
 <!doctype html>
+<!-- Original source code from tilde: https://github.com/xvvvyz/tilde (public domain) -->
 <meta charset="utf-8" />
 <meta name="color-scheme" content="dark light" />
 <meta name="robots" content="noindex" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>~</title>
+<title>New tab</title>
 
 <style>
   :root {
     --border-radius: 1rem;
-    --color-background: #111;
-    --color-text-subtle: #888;
-    --color-text: #eee;
-    --font-family: -apple-system, Helvetica, sans-serif;
     --font-size: clamp(16px, 1.6vw, 18px);
     --font-weight-bold: 700;
     --font-weight-normal: 400;
     --space: 1rem;
-    --transition-speed: 200ms;
-  }
 
-  @media (prefers-color-scheme: light) {
-    :root {
-      --color-background: #e8e8e8;
-      --color-text-subtle: #606060;
-      --color-text: #111;
-    }
+    /* Polar Night colors */
+    --darkest1: #2e3440;
+    --darkest2: #3b4252;
+    --darkest3: #434c5e;
+    --darkest4: #4c566a;
+
+    /* Snow Storm colors */
+    --lightest1: #eceff4;
+    --lightest2: #e5e9f0;
+    --lightest3: #d8dee9;
+
+    /* Nord Aurora misc colors */
+    --red: #bf616a;
+    --orange: #d08770;
+    --yellow: #ebcb8b;
+    --green: #a3be8c;
+    --purple: #b48ead;
+
+    /* Frost */
+    --blue1: #b5d2d9; /* Permafrost Blue */
+    --blue2: #81a1c1;
+    --blue3: #5e81ac;
+
+    /* Fonts */
+    --headerFont: 'Hammersmith One', Roboto, Helvetica, Arial, sans-serif;
+    --primaryFont: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+    --ease: cubic-bezier(0, 0.6, 0.3, 1);
   }
 </style>
 
@@ -41,15 +59,15 @@
     ['g', { 
       name: 'GitHub', 
       url: 'https://github.com',
-      searchTemplate: 'search?q={}',
-      suggestions: ['Site', ''], 
+      searchTemplate: '/search?q={}',
+      suggestions: ['site', 'journal', 'flake'], 
     }],
     ['t', { name: 'Translate', url: 'https://www.deepl.com/translator' }],
     ['c', { name: 'Cloudflare', url: 'https://dash.cloudflare.com' }],
     ['l', {
       name: 'localhost',
       searchTemplate: ':{}',
-      suggestions: ['54323', '54324'],
+      suggestions: ['3000', '54324'],
       url: 'http://localhost:3000',
     }],
   ]);
@@ -76,15 +94,17 @@
       padding: var(--space);
       position: relative;
       text-decoration: none;
+      background: var(--darkest2);
     }
 
     .command::after {
-      background: var(--color-text-subtle);
+      background: var(--lightest1);
       content: ' ';
-      inset: 1px;
+      inset: 4px;
       opacity: 0.05;
       position: absolute;
-      transition: opacity var(--transition-speed);
+      transition: opacity .2s var(--ease);
+      border-radius: 12px;
     }
 
     .command:where(:focus, :hover)::after {
@@ -92,19 +112,19 @@
     }
 
     .key {
-      color: var(--color-text);
+      color: var(--lightest1);
       display: inline-block;
       text-align: center;
       width: 3ch;
     }
 
     .name {
-      color: var(--color-text-subtle);
-      transition: color var(--transition-speed);
+      color: var(--lightest3);
+      transition: color .2s var(--ease);
     }
 
     .command:where(:focus, :hover) .name {
-      color: var(--color-text);
+      color: var(--lightest1);
     }
 
     @media (min-width: 500px) {
@@ -175,7 +195,7 @@
 
     .dialog {
       align-items: center;
-      background: var(--color-background);
+      background: var(--darkest1);
       border: none;
       display: none;
       flex-direction: column;
@@ -196,7 +216,7 @@
     }
 
     .input {
-      color: var(--color-text);
+      color: var(--lightest1);
       font-size: 3rem;
       font-weight: var(--font-weight-bold);
       padding: 0;
@@ -217,29 +237,29 @@
     }
 
     .suggestion {
-      color: var(--color-text);
+      color: var(--lightest1);
       cursor: pointer;
       font-size: 1rem;
       padding: var(--space);
       position: relative;
-      transition: color var(--transition-speed);
+      transition: color .2s var(--ease);
       white-space: nowrap;
       z-index: 1;
     }
 
     .suggestion:where(:focus, :hover) {
-      color: var(--color-background);
+      color: var(--darkest1);
     }
 
     .suggestion::before {
-      background-color: var(--color-text);
+      background-color: var(--lightest1);
       border-radius: calc(var(--border-radius) / 5);
       content: ' ';
       inset: calc(var(--space) / 1.5) calc(var(--space) / 3);
       opacity: 0;
       position: absolute;
       transform: translateY(0.5em);
-      transition: all var(--transition-speed);
+      transition: all .2s var(--ease);
       z-index: -1;
     }
 
@@ -249,12 +269,12 @@
     }
 
     .match {
-      color: var(--color-text-subtle);
-      transition: color var(--transition-speed);
+      color: var(--lightest3);
+      transition: color .2s var(--ease);
     }
 
     .suggestion:where(:focus, :hover) .match {
-      color: var(--color-background);
+      color: var(--darkest1);
     }
 
     @media (min-width: 700px) {
@@ -529,8 +549,8 @@
 
 <style>
   html {
-    background-color: var(--color-background);
-    font-family: var(--font-family);
+    background-color: var(--darkest1);
+    font-family: var(--primaryFont);
     font-size: var(--font-size);
     line-height: 1.4;
   }

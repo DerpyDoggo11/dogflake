@@ -5,6 +5,7 @@
     ./hypr/hyprlock.nix
     ./fish.nix
     ./fastfetch.nix
+    ./fonts.nix
     ./foot.nix
     ./gtk.nix
     ./mpd.nix
