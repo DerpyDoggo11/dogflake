@@ -68,13 +68,10 @@
   nixpkgs.config.allowUnfree = true; # Allow installing of non open-source applications
   programs.dconf.enable = true;
   services.logrotate.enable = false; # Don't need this
-  nix = {
-    settings = {
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-      warn-dirty = false;
-    };
-    channel.enable = false; # Disable channels - we use flakes only now
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    auto-optimise-store = true;
+    warn-dirty = false;
   };
   
   users.users.alec = {
