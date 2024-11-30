@@ -60,7 +60,7 @@
     };
   };
 
-  time.timeZone = "America/Los_Angeles"; # US West Coast timezone
+  time.timeZone = "America/Los_Angeles"; # US West Coast
 
   # Internationalization settings
   i18n.defaultLocale = "en_US.UTF-8";
@@ -68,10 +68,13 @@
   nixpkgs.config.allowUnfree = true; # Allow installing of non open-source applications
   programs.dconf.enable = true;
   services.logrotate.enable = false; # Don't need this
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    auto-optimise-store = true;
-    warn-dirty = false;
+  nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+      auto-optimise-store = true;
+      warn-dirty = false;
+    };
+    channel.enable = false; # Disable channels - we use flakes only now
   };
   
   users.users.alec = {
