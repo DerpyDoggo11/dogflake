@@ -6,9 +6,9 @@
             # TODO add hycov
         ];
         settings = {
-            monitor = [
+            monitor = [ # https://wiki.hyprland.org/Configuring/Monitors/
                 "        , preferred,     auto,     auto"
-                "HDMI-A-1, 1920x1080@144, auto-up,  auto"
+                "HDMI-A-1, 1920x1080@144, auto-left,  auto"
             ];
 
             input = {

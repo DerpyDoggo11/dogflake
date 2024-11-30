@@ -1,30 +1,28 @@
-{ pkgs, config, ... }: let
-    UbuntuNerdfont = pkgs.nerdfonts.override {
-        fonts = [ 
-            "Ubuntu"
-            "UbuntuMono"
-            "CascadiaCode"
-            "FiraCode"
-        ];
-    };
-in {
+{ pkgs, config, ... }: {
     gtk = {
         enable = true;
         gtk3.bookmarks = let
             home = config.home.homeDirectory;
         in [
+            "file:///${home}/Desktop"
             "file:///${home}/Downloads"
+            "file:///${home}/Documents"
             "file:///${home}/Music"
             "file:///${home}/Pictures"
             "file:///${home}/Projects"
-            "file:///${home}/Documents"
             "file:///${home}/Other"
             "file:///${home}/Videos"
         ];
 
         font = {
             name = "Ubuntu Nerd Font Propo Medium 11";
-            package = UbuntuNerdfont;
+            package = pkgs.nerd-fonts.ubuntu-sans; 
+            #with pkgs; [
+                #nerd-fonts.ubuntu-sans
+                #nerd-fonts.ubuntu-mono
+                #nerd-fonts.caskaydia-mono
+                #nerd-fonts.fira-code
+            #];
             size = 11;
         };
         cursorTheme = {
