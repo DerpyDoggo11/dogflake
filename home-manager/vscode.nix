@@ -9,19 +9,19 @@
             "git.enableSmartCommit" = true;
             "git.confirmSync" = false;
             "git.autofetch" = true;
-            #"workbench.startupEditor": "none",
+            "workbench.startupEditor" = "fish";
 
             "terminal.integrated.profiles.linux" = {
-                "zsh" = {
-                    "path" = "zsh";
-                    "icon" = "terminal-bash";
+                fish = {
+                    path = "fish";
+                    icon = "terminal-bash";
                 };
-                "tmux" = {
-                    "path" = "tmux";
-                    "icon" = "terminal-tmux";
+                tmux = {
+                    path = "tmux";
+                    icon = "terminal-tmux";
                 };
             };
-            "terminal.integrated.defaultProfile.linux" = "zsh";
+            "terminal.integrated.defaultProfile.linux" = "fish";
             "svelte.enable-ts-plugin" = true;
             "editor.fontFamily" = "'Iosevka', 'Droid Sans Mono', 'monospace', monospace";
             "editor.fontLigatures" = "'calt'";
@@ -33,7 +33,6 @@
             "diffEditor.ignoreTrimWhitespace" = false;
             "livePreview.serverRoot" = "public/";
             "editor.minimap.enabled" = false;
-            #TODO add the rest of the VSCode config
         };
     };
 }

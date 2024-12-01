@@ -35,7 +35,6 @@ in
     lsof # Useful util for finding items on a port
     emote # Emoji picker (TODO: replace with Ags emoji picker)
     cmake # Build tool (TODO: maybe not needed)
-    starship # ZSH theme
     swww # Background manager w/ cool transitions
     hyprlock # Lockscreen system (TODO: replace with Ags lockscreen system)
     jre # For Minecraft - uses the latest stable Java runtime version
@@ -63,6 +62,7 @@ in
     python3 # Python
     python312Packages.pip # Python pip system (TODO: seperate into new module)
     steam-run # Used for developing w/ Wrangler
+    fish # Better shell
 
     # Normal user apps
     neovide # GUI-based Neovim
@@ -88,7 +88,6 @@ in
     })
 
     (writeShellScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.sh))
-    (writeShellScriptBin "nx-switch" (builtins.readFile ../scripts/nx-switch.sh))
     (writeShellScriptBin "reminders" (builtins.readFile ../scripts/reminders.sh))
     (writeShellScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.sh))
 

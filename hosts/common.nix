@@ -24,11 +24,6 @@
     };
   };
 
-  # Better shell
-  programs.zsh = {
-    enable = true;
-  };
-
   # Optimized bootloader settings
   boot = {
     loader = {

@@ -6,11 +6,11 @@
       main = {
         title = "Terminal";
         locked-title = true;
-        shell = "zsh -c 'fastfetch && zsh -i'"; # Show fetch on start
+        shell = "fish";
         pad = "5x5";
         font = "Iosevka\:size\=\9";
       };
-      url.protocols = "http, https, ftp, ftps, file";
+      url.protocols = "http, https, ftp, ftps, sftp, file";
       cursor = {
         style = "beam";
         blink = true;

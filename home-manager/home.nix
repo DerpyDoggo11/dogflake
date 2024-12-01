@@ -3,8 +3,8 @@
     ./hypr/hyprland.nix
     ./hypr/keybinds.nix
     ./hypr/hyprlock.nix
-    ./fish.nix
     ./fastfetch.nix
+    ./fish.nix
     ./fonts.nix
     ./foot.nix
     ./gtk.nix
