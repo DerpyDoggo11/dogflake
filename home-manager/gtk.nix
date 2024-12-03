@@ -17,12 +17,6 @@
         font = {
             name = "Ubuntu Nerd Font Propo Medium 11";
             package = pkgs.nerd-fonts.ubuntu-sans; 
-            #with pkgs; [
-                #nerd-fonts.ubuntu-sans
-                #nerd-fonts.ubuntu-mono
-                #nerd-fonts.caskaydia-mono
-                #nerd-fonts.fira-code
-            #];
             size = 11;
         };
         cursorTheme = {

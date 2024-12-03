@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# TODO: Rewrite this in Ags
-
 day=$(date +%u)
 downloadsDir=("/home/alec/Downloads"/*)
 downloadsDirSize=$(du -sb "/home/alec/Downloads/" | awk '{print $1}')

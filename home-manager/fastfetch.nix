@@ -1,8 +1,4 @@
 {
-    # TODO: add padding to keys instead of using literal spaces
-    # Then we can replace memory and uptime with strings as seen in demo:
-    # https://nix-community.github.io/home-manager/options.xhtml
-    
     programs.fastfetch = {
         enable = true;
         settings = {
