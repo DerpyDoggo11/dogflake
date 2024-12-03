@@ -19,6 +19,7 @@
             package = pkgs.nerd-fonts.ubuntu-sans; 
             size = 11;
         };
+        # Although we use Hyprcursor, GTK apps use their own cursor for some reason
         cursorTheme = {
             name = "Bibata-Modern-Ice";
             package = pkgs.bibata-cursors;

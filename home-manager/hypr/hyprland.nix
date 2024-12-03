@@ -1,4 +1,8 @@
-{
+{ pkgs, ...}: let
+  cursorPkg = pkgs.callPackage ../../overlays/bibata-hyprcursor {};
+in {
+    xdg.dataFile."icons/Bibata-Modern-Ice-Hyprcursor".source = "${cursorPkg}/share/icons/Bibata-Modern-Ice-Hyprcursor";
+
     wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = false;
@@ -140,9 +144,13 @@
                 "T_QPA_PLATFORM,xcb" # FCITX
                 "GTK_IM_MODULE,fcitx" # FCITX
                 #"GTK_THEME,Nordic-darker" # Maybe not necessary
+
+                "HYPRCURSOR_THEME,Bibata-Modern-Ice-Hyprcursor"
+                "HYPRCURSOR_SIZE,24"
+
                 
                 # Some legacy apps still use xcursor
-                "XCURSOR_THEME,Bibata-Modern-Ice" 
+                "XCURSOR_THEME,Bibata-Modern-Ice"
                 "XCURSOR_SIZE,24"
             ];
 
@@ -155,6 +163,7 @@
                 "mpd" # Daemon for mpc player
                 "sleep 10 && reminders" # TODO integrate reminders script into ags
                 "ags"
+                "hyprctl setcursor Bibata-Modern-Ice-Hyprcursor 24"
 
                 # Autostart apps
                 "[workspace 3 silent] microsoft-edge"
