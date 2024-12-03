@@ -3,9 +3,6 @@
   programs.fish = {
     enable = true;
     generateCompletions = false; # Fix build error
-    plugins = [
-      { name = "tide"; src = pkgs.fishPlugins.tide.src; }
-    ];
     shellAliases = {
       nx-switch = "sudo nixos-rebuild switch --flake /home/alec/Projects/flake/";
       g = "git";
@@ -13,7 +10,7 @@
       gp = "git pull";
     };
     interactiveShellInit = ''
-      tide configure --auto --style=Rainbow --prompt_colors='16 colors' --show_time=No --rainbow_prompt_separators=Round --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='One line' --prompt_spacing=Sparse --icons='Few icons' --transient=No
+      set fish_greeting
       fastfetch
 
       set nord0 2e3440
@@ -54,7 +51,9 @@
       set fish_pager_color_completion $nord6
       set fish_pager_color_description $nord10
       set fish_pager_color_progress $nord12
-      set fish_pager_color_secondary $nord1
+      set fish_pager_color_secondary $nord1      
+
+      starship init fish | source
     '';
   };
 }

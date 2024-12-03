@@ -63,6 +63,7 @@ in
     python312Packages.pip # Python pip system (TODO: seperate into new module)
     steam-run # Used for developing w/ Wrangler
     fish # Better shell
+    starship # Fish prompt theme
 
     # Normal user apps
     neovide # GUI-based Neovim

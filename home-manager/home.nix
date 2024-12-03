@@ -9,8 +9,10 @@
     ./foot.nix
     ./gtk.nix
     ./mpd.nix
+    ./starship.nix
     ./swappy.nix
     ./vscode.nix
+    ./wallpapers.nix
   ];
 
   programs.home-manager.enable = true;
