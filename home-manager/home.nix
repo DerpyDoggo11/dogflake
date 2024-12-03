@@ -12,8 +12,13 @@
     ./starship.nix
     ./swappy.nix
     ./vscode.nix
-    ./wallpapers.nix
   ];
+
+  # Adds all wallpapers
+  home.file."wallpapers" = {
+    target = "./wallpapers";
+    source = ./wallpapers;
+  };
 
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch"; # Better system unit reloads

@@ -7,9 +7,4 @@ in {
     sora
     hammersmith-one
   ];
-
-  #fonts.packages = with pkgs; [
-  #  sora
-  #  hammersmith-one
-  #];
 }
