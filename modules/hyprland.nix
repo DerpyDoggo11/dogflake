@@ -99,6 +99,7 @@
         default_session = initial_session;
       };
     };
+    libinput.mouse.scrollButton = 1; # Middle mouse scroll 
   };
 
   environment.sessionVariables = {

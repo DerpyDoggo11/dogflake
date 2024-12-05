@@ -61,7 +61,8 @@ in
     nodejs_22 # NodeJS JavaScript runtime
     python3 # Python
     python312Packages.pip # Python pip system (TODO: seperate into new module)
-    steam-run # Used for developing w/ Wrangler
+    steam-run # Used for running some games
+    wrangler # Local Workers development
     fish # Better shell
     starship # Fish prompt theme
 

@@ -2,8 +2,7 @@
 
 {
   imports = [
-    ./hardware-configuration.nix # Hardware-specific settings
-    inputs.hardware.nixosModules.raspberry-pi-4
+    #./hardware-configuration.nix # Hardware-specific settings
   ];
 
   networking.hostName = "alecpi"; # Hostname
@@ -11,6 +10,7 @@
   # Enable SSH support
   services.openssh = {
     enable = true;
+    startWhenNeeded = true;
     passwordAuthentication = true;
-  }
+  };
 }
