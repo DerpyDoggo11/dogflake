@@ -6,7 +6,7 @@
     shellAliases = {
       nx-switch = "sudo nixos-rebuild switch --flake /home/alec/Projects/flake/";
       g = "git";
-      ga = "git add -A";
+      ga = "git add .";
       gp = "git pull";
     };
     interactiveShellInit = ''
