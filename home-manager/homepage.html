@@ -490,13 +490,13 @@
       const shift = e.shiftKey ? 'shift-' : '';
       const modifierPrefixedKey = `${alt}${ctrl}${meta}${shift}${e.key}`;
 
-      if (/^(ArrowDown|Tab|ctrl-n)$/.test(modifierPrefixedKey)) {
+      if (/^(ArrowDown|ArrowLeft|Tab|ctrl-n)$/.test(modifierPrefixedKey)) {
         e.preventDefault();
         this.#focusNextSuggestion();
         return;
       }
 
-      if (/^(ArrowUp|ctrl-p|shift-Tab)$/.test(modifierPrefixedKey)) {
+      if (/^(ArrowUp|ArrowRight|ctrl-p|shift-Tab)$/.test(modifierPrefixedKey)) {
         e.preventDefault();
         this.#focusNextSuggestion(true);
       }

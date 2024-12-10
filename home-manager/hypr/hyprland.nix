@@ -6,6 +6,7 @@ in {
     wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = false;
+        systemd.enable = false; # Required to not conflict with UWSM
         plugins = [
             # TODO add hycov
         ];
@@ -139,10 +140,11 @@ in {
                 "ignorezero, gtk-layer-shell" 
             ];
 
+            # TODO Better UWSM support research -> https://wiki.hyprland.org/Configuring/Environment-variables/
             env = [
                 "GDK_BACKEND,wayland,x11"
                 "T_QPA_PLATFORM,xcb" # FCITX
-                "GTK_IM_MODULE,fcitx" # FCITX
+                #"GTK_IM_MODULE,fcitx" # FCITX
                 #"GTK_THEME,Nordic-darker" # Maybe not necessary
 
                 "HYPRCURSOR_THEME,Bibata-Modern-Ice-Hyprcursor"
@@ -154,9 +156,10 @@ in {
                 "XCURSOR_SIZE,24"
             ];
 
+            # TODO for UWSM -> https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#launching-applications-inside-session
             exec-once = [
                 "hyprlock" # TODO replace with ags
-                "fcitx5" # Chinese support
+                "fcitx5 -d" # Chinese support
                 "swww-daemon" # Wallpaper service
                 "copyq --start-server" # TODO replace with ags
                 "emote" # TODO replace with ags
@@ -167,6 +170,7 @@ in {
 
                 # Autostart apps
                 "[workspace 3 silent] microsoft-edge"
+                "[workspace 4 silent] teams-for-linux"
                 "[workspace 6 silent] thunderbird"
 
                 #exec-once = /usr/bin/gnome-keyring-daemon --start --components=secrets &

@@ -5,13 +5,6 @@
 { inputs, pkgs, ... }:
 
 {
-  services.xserver.displayManager = {
-    startx.enable = false;
-    
-    # Remove gdm bloat
-    gdm.enable = false;
-  };
-
   environment.systemPackages = with pkgs; [
     # Icon packs
     morewaita-icon-theme
@@ -41,7 +34,7 @@
   
   programs.hyprland = {
     enable = true;
-    package = pkgs.hyprland;
+    withUWSM = true;
   };
 
   xdg.autostart.enable = true;
@@ -78,28 +71,18 @@
     };
   };
 
-  # TODO review me
   services = {
-    gvfs.enable = true; # Necessary for network drives, prob not needed?
     devmon.enable = true; # Automatically mounts/unmounts attached drives
     udisks2.enable = true; # For getting info about drives
-    accounts-daemon.enable = true; # Used by GNOME to get account information, prob not needed?
-    dbus.enable = true;
-    gnome = {
-      glib-networking.enable = true;
-      gnome-keyring.enable = true;
-    };
+    dbus.enable = true; # TODO check if disabling this will improve performance
+    gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring
     greetd = {
       enable = true;
-      settings = rec {
-        initial_session = {
-          command = "Hyprland";
-          user = "alec";
-        };
-        default_session = initial_session;
+      settings.default_session = {
+        command = "Hyprland";
+        user = "alec"; # Probably not required
       };
     };
-    libinput.mouse.scrollButton = 1; # Middle mouse scroll 
   };
 
   environment.sessionVariables = {

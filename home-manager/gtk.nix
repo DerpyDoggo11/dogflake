@@ -31,14 +31,16 @@
         };
         theme = {
             name = "Nordic-darker";
-            #package = pkgs.nordic;
+            package = pkgs.nordic;
         };
 
         gtk3.extraConfig = {
             gtk-application-prefer-dark-theme = 1;
+            gtk-im-module = "fcitx";
         };
         gtk4.extraConfig = {
             gtk-application-prefer-dark-theme = 1;
+            gtk-im-module = "fcitx";
         };
     };
 }

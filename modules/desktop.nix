@@ -65,12 +65,13 @@ in
     wrangler # Local Workers development
     fish # Better shell
     starship # Fish prompt theme
+    fcitx5-nord # For fcitx5
 
     # Normal user apps
     neovide # GUI-based Neovim
     vscodium # Backup IDE (Neovim is main)
     vesktop # Custom discord client
-    #davinci-resolve # Video editor
+    davinci-resolve # Video editor
     lunar-client # Minecraft client
     blockbench-electron # Minecraft 3D modeler
     jetbrains.idea-community # Jetbrains IDEA
@@ -79,7 +80,6 @@ in
     ffmpeg # Needed for Davinci resolve potentially?
     tmux # Super ultra terminal multiplexing dimensional warper
     
-    firefoxpwa # Firefox PWA extension
     office # Custom Office 365 webapp
     
     # Wayland MC
@@ -129,13 +129,6 @@ in
   ];
 
   programs = {
-    # For PWAs only bc Edge bug sucks
-    firefox = {
-      enable = true;
-      package = pkgs.firefox;
-      nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
-    };
-
     # Neovim!!
     neovim = {
       enable = true;
@@ -146,26 +139,42 @@ in
 
   # Keyboard layout & language (with Chinese support)
   i18n.inputMethod = {
-    type = "fcitx5";
+    enable = true;
+    type = "fcitx5"; 
     fcitx5 = {
       addons = with pkgs; [
-        fcitx5-chinese-addons
-        fcitx5-gtk
+        fcitx5-gtk # For frontend & configtool
+        fcitx5-chinese-addons # Pinyin
+        fcitx5-nord # Theme
+
+        # Simplified Chinese
+        fcitx5-rime
+        fcitx5-mozc
       ];
-      waylandFrontend = true;
+
+      waylandFrontend = true; # Hide warnings on Wayland
+      #ignoreUserConfig = true; # Only options below will apply - ignore .config
+      settings = {
+        inputMethod = { # Options in 'fcitx5/profile'
+          "Groups/0/Items/0".Name = "keyboard-us";
+          "Groups/0/Items/1".Name = "pinyin";
+        };
+        globalOptions."Hotkey/TriggerKeys"."0" = "Control+Super+space";
+        
+        addons = {
+          clipboard.globalSection."TriggerKey" = ""; # Disable clipboard
+          classicui.globalSection."Theme" = "Nord-Dark"; # Enable theme
+        };
+      };
     };
   };
+
+  services.xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5
 
   # Sound support 
   services = {
     printing.enable = true; # Enables CUPS for printing
     logrotate.enable = false; # Don't need this
-
-    # For VIA keyboard support
-    udev.extraRules = ''
-      SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="03A1", TAG+="uaccess"
-      KERNEL=="hidraw*", MODE="0660", TAG+="uaccess", TAG+="udev-acl"
-    '';
 
     pipewire = {
       enable = true;
@@ -187,13 +196,6 @@ in
     };
   };
   
-  # Bluetooth & sound support
-  hardware = {
-    # Sometimes doesn't work on boot - must run: 
-    #   sudo hciconfig hci0 down && sudo rmmod btusb && sudo modprobe btusb && sudo hciconfig hci0 up
-    bluetooth = {
-      enable = true;
-      #powerOnBoot = false; # Auto-enables bluetooth on startup
-    };
-  };
+  # Bluetooth support
+  hardware.bluetooth.enable = true;
 }
