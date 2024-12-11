@@ -19,7 +19,6 @@ in
 
   environment.systemPackages = with pkgs; [
     ags # Widget system & desktop overlay
-    git # Source control manager
     microsoft-edge # Web browser
     foot # Terminal
     bun # Fast all-in-one JS toolkit 
@@ -65,18 +64,18 @@ in
     wrangler # Local Workers development
     fish # Better shell
     starship # Fish prompt theme
-    fcitx5-nord # For fcitx5
 
     # Normal user apps
     neovide # GUI-based Neovim
     vscodium # Backup IDE (Neovim is main)
-    vesktop # Custom discord client
+    discord-canary # Voice & video chat app
     davinci-resolve # Video editor
     lunar-client # Minecraft client
     blockbench-electron # Minecraft 3D modeler
     jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email/IRC client
     obs-studio # For better recording
+    gnome-system-monitor # Task manager
     ffmpeg # Needed for Davinci resolve potentially?
     tmux # Super ultra terminal multiplexing dimensional warper
     
@@ -101,19 +100,6 @@ in
     # this needs to be removed after fixed https://github.com/russelltg/wl-screenrec/issues/50
     wf-recorder
     
-    (pkgs.makeDesktopItem { # Vesktop Discord client
-      comment = "Voice and text chat application for gamers";
-      desktopName = "Discord";
-      exec =  "${pkgs.vesktop}/bin/vesktop";
-      genericName = "Voice and text chat application for gamers";
-      icon = "discord";
-      name = "discord";
-      startupNotify = true;
-      startupWMClass = "discord";
-      terminal = false;
-      type = "Application";
-      mimeTypes = [ "x-scheme-handler/discord" ];
-    })
     (pkgs.makeDesktopItem { # War Thunder
       comment = "The most comprehensive free-to-play, cross-platform, MMO military game with over 2000 vehicles.";
       desktopName = "War Thunder";
@@ -129,11 +115,23 @@ in
   ];
 
   programs = {
-    # Neovim!!
     neovim = {
       enable = true;
       defaultEditor = true;
       withNodeJs = true;
+    };
+    git = {
+      enable = true;
+      config = {
+        init.defaultBranch = "main";
+        url."https://github.com/" = { insteadOf = [ "gh:" "github:" ]; };
+        color.ui = true;
+        core.editor = "codium";
+        credential.helper = "store";
+        github.user = "AmazinAxel"; # Github
+        user.name = "AmazinAxel"; # Git
+        push.autoSetupRemote = true;
+      };
     };
   };
 
@@ -156,6 +154,11 @@ in
       #ignoreUserConfig = true; # Only options below will apply - ignore .config
       settings = {
         inputMethod = { # Options in 'fcitx5/profile'
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout" = "us";
+            DefaultIM = "pinyin";
+          };
           "Groups/0/Items/0".Name = "keyboard-us";
           "Groups/0/Items/1".Name = "pinyin";
         };
@@ -171,11 +174,11 @@ in
 
   services.xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5
 
-  # Sound support 
   services = {
     printing.enable = true; # Enables CUPS for printing
     logrotate.enable = false; # Don't need this
 
+    # Sound support 
     pipewire = {
       enable = true;
       alsa.enable = true;

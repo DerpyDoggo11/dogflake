@@ -110,9 +110,6 @@ in {
                 (t "Library")
                 (c "com.github.Aylur.ags")
 
-                # Hide vesktop splash (https://github.com/Vencord/Vesktop/issues/384)
-                "opacity 0.0 override,title:vesktop"
-
                 "size 20% 90%,^(copyq)$" # CopyQ autosize
                 "size 50% 68%,^(emote)$" # Emote autosize
             ];
