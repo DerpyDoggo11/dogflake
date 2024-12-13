@@ -85,8 +85,10 @@ in
     # this needs to be removed after fixed https://github.com/russelltg/wl-screenrec/issues/50
     wf-recorder
 
-    microfetch
-    #(addPatches [ ../overlays/glfw/Microfetch.patch ])
+    (microfetch.overrideAttrs ({ patches, ... }: {
+      patches = [ ../overlays/microfetch/Microfetch.patch ];
+    }))
+
     
     (pkgs.makeDesktopItem { # War Thunder
       comment = "The most comprehensive free-to-play, cross-platform, MMO military game with over 2000 vehicles.";
@@ -166,11 +168,10 @@ in
     };
   };
 
-  services.xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5
-
   services = {
     printing.enable = true; # Enables CUPS for printing
     logrotate.enable = false; # Don't need this
+    #openssh.enable = true; # For connecting to other computers
 
     # Sound support 
     pipewire = {
@@ -191,6 +192,7 @@ in
         };
       };
     };
+    xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5
   };
   
   # Bluetooth support

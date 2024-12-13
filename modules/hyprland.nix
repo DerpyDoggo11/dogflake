@@ -10,6 +10,7 @@
     morewaita-icon-theme
     icon-library
     font-awesome # For Swappy
+    wqy_zenhei # Chinese font for clearer characters TODO see if i work
 
     polkit_gnome
     gsettings-desktop-schemas
@@ -30,6 +31,7 @@
     morewaita-icon-theme
     icon-library # Extra icons, maybe disable if not needed by ags
     font-awesome
+    wqy_zenhei # Chinese font for clearer characters TODO see if i work
   ];
   
   programs.hyprland = {

@@ -38,4 +38,17 @@
       };
     };
   };
+
+  # for postmarketos
+  programs.ssh.enable = true;
+  programs.ssh.extraConfig = ''
+    Host 172.16.42.1 pmos
+        HostName 172.16.42.1
+        User user
+        StrictHostKeyChecking no
+        UserKnownHostsFile=/dev/null
+        ConnectTimeout 5
+        ServerAliveInterval 1
+        ServerAliveCountMax 5
+  '';
 }
