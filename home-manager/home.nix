@@ -3,7 +3,7 @@
     ./hypr/hyprland.nix
     ./hypr/keybinds.nix
     ./hypr/hyprlock.nix
-    ./fastfetch.nix
+    ./fastfetch.nix # TODO remove me after patching microfetch
     ./fish.nix
     ./fonts.nix
     ./foot.nix

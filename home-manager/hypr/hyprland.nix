@@ -141,8 +141,6 @@ in {
             env = [
                 "GDK_BACKEND,wayland,x11"
                 "T_QPA_PLATFORM,xcb" # FCITX
-                #"GTK_IM_MODULE,fcitx" # FCITX
-                #"GTK_THEME,Nordic-darker" # Maybe not necessary
 
                 "HYPRCURSOR_THEME,Bibata-Modern-Ice-Hyprcursor"
                 "HYPRCURSOR_SIZE,24"

@@ -1,15 +1,15 @@
 { inputs, config, lib, pkgs, makeDesktopItem, ... }:
 
 let
-  makeWebappLib = import ../lib/makeWebapp.nix { inherit pkgs; };
-  makeWebapp = makeWebappLib.makeWebapp;
+  #makeWebappLib = import ../lib/makeWebapp.nix { inherit pkgs; };
+  #makeWebapp = makeWebappLib.makeWebapp;
 
-  office = makeWebappLib.makeWebapp {
-    name = "Microsoft Office";
-    url = "office.com/launch/onedrive";
-    icon = "view-grid-symbolic";
-    comment = "Microsoft Office suite - featuring Word, Excel & Powerpoint";
-  };
+  #webappName = makeWebappLib.makeWebapp {
+  #  name = "Webapp";
+  #  url = "amazinaxel.com/tools/textconverter";
+  #  icon = "view-grid-symbolic";
+  #  comment = "Webapp Description";
+  #};
 
 in
 {
@@ -19,72 +19,57 @@ in
 
   environment.systemPackages = with pkgs; [
     ags # Widget system & desktop overlay
-    microsoft-edge # Web browser
     foot # Terminal
     bun # Fast all-in-one JS toolkit 
     dart-sass # Ags Desktop dependency
     fd # Ags Desktop dependency
     sassc # Ags Sass compiler
     mpd # Music daemon for the Ags music player
-    mpc-cli # CLI for the Ags music player
-    glib # Gsettings dep (TODO: maybe remove me)
-    fastfetch # For bragging rights (TODO: look into faster alternatives)
+    mpc # CLI for the Ags music player
     copyq # Clipboard manager (TODO: replace with Ags clipboard system)
-    psmisc # Useful CLI utilities
-    lsof # Useful util for finding items on a port
     emote # Emoji picker (TODO: replace with Ags emoji picker)
-    cmake # Build tool (TODO: maybe not needed)
-    swww # Background manager w/ cool transitions
+    swww # Background manager w/ cool transitions - - remove when done migrating to sway
     hyprlock # Lockscreen system (TODO: replace with Ags lockscreen system)
     jre # For Minecraft - uses the latest stable Java runtime version
-    jdk23 # Java JDK version 23
-    brightnessctl # Controls laptop brightness
+    jdk23 # Java JDK version 23 for compling & running jars
+    brightnessctl # Controls laptop brightness - remove when done migrating to sway
     wl-screenrec # Fast screen recorder
-    ngrok # Tunelling for quick Discord bot development
     grimblast # Screenshotting tool (TODO: replace with Grim)
     slurp # Screen selection tool for screenshots & screenrecording
     swappy # Quick screenshot editor
     wl-clipboard # Neovim clipboard dependency
     tree-sitter # Neovim parser dependency
-    #gcc13 # Neovim dependency
-    nordic # Nord GTK theme
-    #blueman # Bluetooth manager
     celluloid # Fast, simple GTK video player using mpv
     gnome-text-editor # Clean, tabbed, GTK text editor
     amberol # Lightweight GTK music player
     nemo-with-extensions # Simple file manager
     nemo-fileroller # File manager archive feature
-    file-roller # Adds file archive management
-    #zip # Util for compressing/decompressing folders
-    fzf # Fuzzy finder utility
-    nodejs_22 # NodeJS JavaScript runtime
+    file-roller # File manager archive feature part 2
+    nodejs_22 # Slow JS runtime
     python3 # Python
-    python312Packages.pip # Python pip system (TODO: seperate into new module)
+    python312Packages.pip # Temporary way to install non-declarative pip deps
     steam-run # Used for running some games
     wrangler # Local Workers development
     fish # Better shell
     starship # Fish prompt theme
 
     # Normal user apps
+    microsoft-edge # Web browser
     neovide # GUI-based Neovim
     vscodium # Backup IDE (Neovim is main)
     discord-canary # Voice & video chat app
-    davinci-resolve # Video editor
-    lunar-client # Minecraft client
+    libsForQt5.kdenlive # Video editor
+    lunar-client # PvP Minecraft client
     blockbench-electron # Minecraft 3D modeler
     jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email/IRC client
     obs-studio # For better recording
     gnome-system-monitor # Task manager
-    ffmpeg # Needed for Davinci resolve potentially?
-    tmux # Super ultra terminal multiplexing dimensional warper
-    
-    office # Custom Office 365 webapp
-    
+        
     # Wayland MC
     (prismlauncher.override {
       glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {
-        patches = [ ../overlays/glfw/0001-Key-modifiers-fix.patch ];
+        patches = [ ../overlays/glfw/Key-Modifiers-Fix.patch ];
       });
     })
 
@@ -93,12 +78,15 @@ in
     (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
 
     gimp # GNU image manipulation program
-    teams-for-linux # Unoffical Microsoft Teams client
-    libreoffice # Backup app for opening Word documents and Excel sheets
-    spotdl # Download spotify playlists
+    teams-for-linux # Unoffical MS Teams client
+    libreoffice # Preview Word documents and Excel sheets
+    spotdl # Download Spotify playlists
 
     # this needs to be removed after fixed https://github.com/russelltg/wl-screenrec/issues/50
     wf-recorder
+
+    microfetch
+    #(addPatches [ ../overlays/glfw/Microfetch.patch ])
     
     (pkgs.makeDesktopItem { # War Thunder
       comment = "The most comprehensive free-to-play, cross-platform, MMO military game with over 2000 vehicles.";
@@ -124,7 +112,7 @@ in
       enable = true;
       config = {
         init.defaultBranch = "main";
-        url."https://github.com/" = { insteadOf = [ "gh:" "github:" ]; };
+        url."https://github.com/".insteadOf = [ "gh:" ];
         color.ui = true;
         core.editor = "codium";
         credential.helper = "store";
@@ -132,6 +120,12 @@ in
         user.name = "AmazinAxel"; # Git
         push.autoSetupRemote = true;
       };
+    };
+    sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+      extraPackages = with pkgs; [ swayidle swww ];
+      #xwayland.enable = false;
     };
   };
 

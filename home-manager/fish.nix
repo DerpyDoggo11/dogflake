@@ -11,7 +11,7 @@
     };
     interactiveShellInit = ''
       set fish_greeting
-      fastfetch
+      microfetch
 
       set nord0 2e3440
       set nord1 3b4252

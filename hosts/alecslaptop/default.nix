@@ -21,7 +21,7 @@
   hardware = {
     #alsa.enablePersistence = true; # Fix sound not working on boot
 
-    # OpenCL drivers for better hardware acceleration (added support for DaVinci Resolve) 
+    # OpenCL drivers for better hardware acceleration
     graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
     amdgpu.opencl.enable = true;
   };
