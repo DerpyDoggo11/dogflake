@@ -6,7 +6,6 @@ in {
     wayland.windowManager.hyprland = {
         enable = true;
         xwayland.enable = false;
-        systemd.enable = false; # Required to not conflict with UWSM
         plugins = [
             # TODO add hycov
         ];
@@ -137,7 +136,6 @@ in {
                 "ignorezero, gtk-layer-shell" 
             ];
 
-            # TODO Better UWSM support research -> https://wiki.hyprland.org/Configuring/Environment-variables/
             env = [
                 "GDK_BACKEND,wayland,x11"
                 "T_QPA_PLATFORM,xcb" # FCITX
@@ -151,7 +149,6 @@ in {
                 "XCURSOR_SIZE,24"
             ];
 
-            # TODO for UWSM -> https://wiki.hyprland.org/Useful-Utilities/Systemd-start/#launching-applications-inside-session
             exec-once = [
                 "hyprlock" # TODO replace with ags
                 "fcitx5 -d" # Chinese support

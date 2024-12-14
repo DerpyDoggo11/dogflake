@@ -86,6 +86,7 @@ in
     # this needs to be removed after fixed https://github.com/russelltg/wl-screenrec/issues/50
     wf-recorder
 
+    # Patched fetch program
     (microfetch.overrideAttrs ({ patches, ... }: {
       patches = [ ../overlays/microfetch/Microfetch.patch ];
     }))
@@ -148,7 +149,7 @@ in
       ];
 
       waylandFrontend = true; # Hide warnings on Wayland
-      #ignoreUserConfig = true; # Only options below will apply - ignore .config
+      ignoreUserConfig = true; # Ignore .config options - only Nix config applies
       settings = {
         inputMethod = { # Options in 'fcitx5/profile'
           "Groups/0" = {
@@ -172,7 +173,6 @@ in
   services = {
     printing.enable = true; # Enables CUPS for printing
     logrotate.enable = false; # Don't need this
-    openssh.enable = true; # For connecting to other computers
 
     # Sound support 
     pipewire = {
@@ -198,6 +198,4 @@ in
   
   # Bluetooth support
   hardware.bluetooth.enable = true;
-
-  #boot.initrd.network.enable = true; # for postmarketos
 }

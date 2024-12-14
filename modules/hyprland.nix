@@ -10,7 +10,6 @@
     morewaita-icon-theme
     icon-library
     font-awesome # For Swappy
-    wqy_zenhei # Chinese font for clearer characters TODO see if i work
 
     polkit_gnome
     gsettings-desktop-schemas
@@ -31,13 +30,10 @@
     morewaita-icon-theme
     icon-library # Extra icons, maybe disable if not needed by ags
     font-awesome
-    wqy_zenhei # Chinese font for clearer characters TODO see if i work
+    wqy_zenhei # Chinese font for generally cleaner chars
   ];
   
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-  };
+  programs.hyprland.enable = true;
 
   xdg.autostart.enable = true;
   xdg.portal = {
@@ -76,7 +72,6 @@
   services = {
     devmon.enable = true; # Automatically mounts/unmounts attached drives
     udisks2.enable = true; # For getting info about drives
-    dbus.enable = true; # TODO check if disabling this will improve performance
     gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring
     greetd = {
       enable = true;
