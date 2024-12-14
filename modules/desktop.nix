@@ -20,6 +20,7 @@ in
   environment.systemPackages = with pkgs; [
     ags # Widget system & desktop overlay
     foot # Terminal
+    nordic # GTK theme - must add it here to apply system-wide
     bun # Fast all-in-one JS toolkit 
     dart-sass # Ags Desktop dependency
     fd # Ags Desktop dependency
@@ -171,7 +172,7 @@ in
   services = {
     printing.enable = true; # Enables CUPS for printing
     logrotate.enable = false; # Don't need this
-    #openssh.enable = true; # For connecting to other computers
+    openssh.enable = true; # For connecting to other computers
 
     # Sound support 
     pipewire = {
@@ -197,4 +198,6 @@ in
   
   # Bluetooth support
   hardware.bluetooth.enable = true;
+
+  #boot.initrd.network.enable = true; # for postmarketos
 }
