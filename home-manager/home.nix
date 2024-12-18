@@ -5,7 +5,6 @@
     ./hypr/hyprlock.nix
     ./fastfetch.nix # TODO remove me after patching microfetch
     ./fish.nix
-    ./fonts.nix
     ./foot.nix
     ./gtk.nix
     ./mpd.nix
@@ -41,6 +40,12 @@
 
   xdg = {
     configFile."homepage.html" = { source = ./homepage.html; };
+    
+    # Symlink all fonts
+    dataFile."fonts" = {
+      target = "./fonts";
+      source = ./fonts;
+    };
 
     userDirs = {
       enable = true; # Allows home-manager to manage & create user dirs

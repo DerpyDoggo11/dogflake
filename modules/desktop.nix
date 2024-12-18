@@ -21,7 +21,7 @@ in
     gnome-boxes # For sway branch development
     ags # Widget system & desktop overlay
     foot # Terminal
-    #graphite-gtk-theme # GTK theme - must add it here to apply system-wide
+    #graphite-gtk-theme # GTK theme - must add it here to actually apply the theme
     bun # Fast all-in-one JS toolkit 
     dart-sass # Ags Desktop dependency
     fd # Ags Desktop dependency
@@ -67,6 +67,7 @@ in
     thunderbird # Best email/IRC client
     obs-studio # For better recording
     gnome-system-monitor # Task manager
+    gnome-sound-recorder # Voice recording app
     textConvert # AmazinAxel.com small text converter
 
     # Wayland MC
