@@ -10,7 +10,7 @@
     ./mpd.nix
     ./starship.nix
     ./swappy.nix
-    ./vscode.nix
+    ./codium.nix
 
     ./sway/sway.nix
     ./sway/keybinds.nix
