@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+# TODO delete me when finished w/ agsv2 rewrite
+
 set day (date +%u)
 set downloadsDir (ls /home/alec/Downloads)
 set downloadsDirSize (du -sb /home/alec/Downloads | awk '{print $1}')

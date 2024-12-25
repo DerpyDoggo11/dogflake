@@ -12,13 +12,10 @@ let
   };
 in
 {
-  imports = [
-    ./hyprland.nix # Hyprland-specific config
-    ./sway.nix
-  ];
+  imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
-    gnome-boxes # For sway branch development
+    gnome-boxes # VM manager
     ags # Widget system & desktop overlay
     foot # Terminal
     bun # Fast all-in-one JS toolkit 
@@ -29,11 +26,10 @@ in
     mpc # CLI for the Ags music player
     copyq # Clipboard manager (TODO: replace with Ags clipboard system)
     emote # Emoji picker (TODO: replace with Ags emoji picker)
-    #swww # Background manager w/ cool transitions - - remove when done migrating to sway
-    hyprlock # Lockscreen system (TODO: replace with Ags lockscreen system)
+    swww # Background manager w/ cool transitions
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars
-    #brightnessctl # Controls laptop brightness - remove when done migrating to sway
+    brightnessctl # Control laptop brightness
     wl-screenrec # Fast screen recorder
     grimblast # Screenshotting tool (TODO: replace with Grim)
     slurp # Screen selection tool for screenshots & screenrecording
@@ -82,6 +78,7 @@ in
       });
     })
 
+    (writeScriptBin "data-sync" (builtins.readFile ../scripts/data-sync.fish))
     (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
     (writeScriptBin "reminders" (builtins.readFile ../scripts/reminders.fish))
     (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
@@ -182,21 +179,21 @@ in
     printing = { # CUPS
       enable = true;
       drivers = with pkgs; [ hplip ]; # HP
-      #listenAddresses = [ "*:631" ];
-      #allowFrom = [ "all" ];
-      #browsing = true;
-      #defaultShared = true;
+      listenAddresses = [ "*:631" ];
+      allowFrom = [ "all" ];
+      browsing = true;
+      defaultShared = true;
       openFirewall = true;
     };
-    #avahi = {
-      #enable = true;
-      #nssmdns4 = true;
-      #openFirewall = true;
-      #publish = {
-      #  enable = true;
-      #  userServices = true;
-      #};
-    #};
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+    };
 
     # Sound support 
     pipewire = {

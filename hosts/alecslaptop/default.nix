@@ -1,9 +1,7 @@
 { inputs, config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix # Hardware-specific settings
-  ];
+  imports = [ ./hardware-configuration.nix ]; # Hardware-specific settings
 
   networking.hostName = "alecslaptop"; # Hostname
   
@@ -18,10 +16,7 @@
     };
   };
 
-  hardware = {
-    #alsa.enablePersistence = true; # Fix sound not working on boot
-
-    # OpenCL drivers for better hardware acceleration
+  hardware = { # OpenCL drivers for better hardware acceleration
     graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
     amdgpu.opencl.enable = true;
   };
@@ -29,7 +24,7 @@
   services = {
     upower.enable = true; # For getting battery level (used by the desktop)
     power-profiles-daemon.enable = false; # No power-profiles!
-    tlp = {
+    tlp = { # Better battery life
       enable = true;
       settings = {
         CPU_SCALING_GOVERNOR_ON_AC = "performance";

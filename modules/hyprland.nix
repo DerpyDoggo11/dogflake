@@ -1,7 +1,3 @@
-# To save storage, GNOME isn't installed
-# Rather, we install all necessary GNOME dependencies
-# and use them for proper GTK Hyprland integration
-
 { inputs, pkgs, ... }:
 
 {
@@ -44,9 +40,6 @@
     ];
   };
 
-  # Required for hyprlock to work with home-manager
-  security.pam.services.hyprlock = {};
-
   # Set all Electron apps to use Wayland by default 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -74,12 +67,8 @@
     gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring
     greetd = {
       enable = true;
-      settings.default_session = {
-        command = "Hyprland";
-        user = "alec"; # Probably not required
-      };
+      settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks -r --theme border=lightcyan;prompt=blue;container=black;action=white;input=white; --cmd Hyprland";
     };
-  };
 
   environment.sessionVariables = {
     POLKIT_AUTH_AGENT = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";

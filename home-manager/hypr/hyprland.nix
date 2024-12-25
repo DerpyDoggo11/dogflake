@@ -142,7 +142,6 @@
             ];
 
             exec-once = [
-                "hyprlock" # TODO replace with ags
                 "fcitx5 -d" # Chinese support
                 "swww-daemon" # Wallpaper service
                 "copyq --start-server" # TODO replace with ags

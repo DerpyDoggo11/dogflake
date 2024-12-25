@@ -1,5 +1,5 @@
 {
-  description = "Alec's Nix config";
+  description = "Alec's Nix system configurations";
 
   inputs = {
     # Nixpkgs - always pull from unstable
@@ -10,15 +10,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    }
   };
 
-  outputs = inputs @ {
-    self,
-    home-manager,
-    nixpkgs,
-    ...
-  }: {
-
+  outputs = inputs @ { self, home-manager, nixpkgs, ... }: {
     nixosConfigurations = {
       # Laptop config
       "alecslaptop" = nixpkgs.lib.nixosSystem {
@@ -28,6 +27,18 @@
           ./hosts/alecslaptop/default.nix
           ./hosts/common.nix
           ./modules/hyprland.nix
+          ./modules/desktop.nix
+          home-manager.nixosModules.home-manager
+        ];
+      };
+      
+      # VM config
+      "vm" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/vm/hardware-configuration.nix
+          ./hosts/common.nix
           ./modules/desktop.nix
           home-manager.nixosModules.home-manager
         ];
