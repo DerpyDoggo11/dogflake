@@ -9,12 +9,8 @@
         "jsx": "react-jsx",
         "jsxImportSource": "/home/alec/.local/share/ags/gtk3",
         "paths": {
-            "astal": [
-                "/home/alec/.local/share/ags"
-            ],
-            "astal/*": [
-                "/home/alec/.local/share/ags"
-            ]
+            "astal": [ "/home/alec/.local/share/ags" ],
+            "astal/*": [ "/home/alec/.local/share/ags" ]
         }
     }
 }

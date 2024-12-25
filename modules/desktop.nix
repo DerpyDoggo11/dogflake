@@ -133,8 +133,15 @@ in
   };
 
   # For gnome-boxes & vm stuff
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
 
+    qemu.options = [
+      "-device virtio-vga-gl"
+      "-display sdl,gl=on,show-cursor=off"
+      "-audio pa,model=hda"
+    ];
+  };
 
   # Keyboard layout & language (with Chinese support)
   i18n.inputMethod = {
