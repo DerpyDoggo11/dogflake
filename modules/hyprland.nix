@@ -42,6 +42,8 @@
 
   # Set all Electron apps to use Wayland by default 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
+
 
   security.polkit.enable = true;
 
@@ -67,7 +69,7 @@
     gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring
     greetd = {
       enable = true;
-      settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks -r --theme border=lightcyan;prompt=blue;container=black;action=white;input=white; --cmd Hyprland";
+      settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks -r --theme border=lightcyan;prompt=blue;container=black;action=white;input=white; --cmd 'WLR_NO_HARDWARE_CURSORS=1 WLR_RENDERER_ALLOW_SOFTWARE=1 Hyprland'";
     };
   };
 

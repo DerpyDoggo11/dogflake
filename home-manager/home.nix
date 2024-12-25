@@ -71,7 +71,7 @@ in {
 
   # Custom tty colors
   programs.bash = {
-    enable = true;
+    enable = false;
     bashrcExtra = ''
         if [ "$TERM" = "linux" ]; then
             echo -en "\e]P0222222" #black

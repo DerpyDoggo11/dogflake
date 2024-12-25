@@ -1,7 +1,7 @@
 { pkgs, ...}: {
     wayland.windowManager.hyprland = {
         enable = true;
-        xwayland.enable = false;
+        #xwayland.enable = true; # causes build error if set to false...
         plugins = [
             # TODO add hycov
         ];
@@ -49,7 +49,7 @@
 
             misc = {
                 vfr = true; # Better power usage
-                vrr = 1; # Always sync to monitor refresh rate, even when not fullscreened
+                #vrr = 1; # Always sync to monitor refresh rate, even when not fullscreened
                 focus_on_activate = true;
                 animate_manual_resizes = false;
                 force_default_wallpaper = 0;
@@ -74,9 +74,7 @@
                     noise = 0.1;
                 };
 
-                shadow = {
-                    enabled = false; # Diable shadow for better performance
-                };
+                shadow.enabled = false; # Diable shadow for better performance
 
                 # Blue light filter shader
                 # TODO import instead of making it hardlinked to flake
