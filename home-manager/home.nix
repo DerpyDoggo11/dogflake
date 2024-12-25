@@ -30,7 +30,6 @@ in {
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch"; # Better system unit reloads
   home = {
-    packages = lib.mkForce []; # Don't install packages to user PATH
     stateVersion = "23.05";
 
     # Symlink all wallpapers
@@ -46,6 +45,10 @@ in {
       size = 24;
       gtk.enable = true;
     };
+
+    # For fast ags development:
+    # nix shell github:aylur/ags#agsFull
+    packages = [ ags-widgets ];
   };
 
   xdg = {
@@ -104,8 +107,4 @@ in {
         ServerAliveInterval 1
         ServerAliveCountMax 5
   '';
-
-  # For fast ags development:
-  # nix shell github:aylur/ags#agsFull
-  packages = [ ags-widgets ];
 }

@@ -69,6 +69,7 @@
       enable = true;
       settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks -r --theme border=lightcyan;prompt=blue;container=black;action=white;input=white; --cmd Hyprland";
     };
+  };
 
   environment.sessionVariables = {
     POLKIT_AUTH_AGENT = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";

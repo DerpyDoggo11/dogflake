@@ -14,7 +14,7 @@
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
-    }
+    };
   };
 
   outputs = inputs @ { self, home-manager, nixpkgs, ... }: {
