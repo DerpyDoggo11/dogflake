@@ -48,7 +48,7 @@ in {
 
     # For fast ags development:
     # nix shell github:aylur/ags#agsFull
-    packages = [ ags-widgets ];
+    #packages = [ ags-widgets ]; # todo fix me pls
   };
 
   xdg = {
