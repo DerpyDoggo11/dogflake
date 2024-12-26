@@ -1,7 +1,7 @@
 // @ts-nocheck TODO fix types
 
 import { Tray, trayVisible } from "./Tray";
-import { Workspaces } from "./workspaces";
+//import { Workspaces } from "./workspaces";
 import { App, Astal } from "astal/gtk3";
 import { bind, execAsync } from "astal";
 import { Time } from "./modules/time";
@@ -20,9 +20,9 @@ export default function bar(gdkmonitor: Gdk.Monitor) {
       application={App}
     >
       <box vertical hexpand>
-        <box className="container">
+        {/*<box className="container">
           <Workspaces/>
-        </box>
+        </box>*/}
 
 
         <box vertical vexpand hexpand />

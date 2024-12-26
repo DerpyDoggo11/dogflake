@@ -1,17 +1,4 @@
-{ inputs, config, pkgs, ... }: let 
-  ags-widgets = inputs.ags.lib.bundle {
-    inherit pkgs;
-    src = ../ags;
-    name = "desktop-widgets";
-    entry = "app.ts";
-    extraPackages = [
-      inputs.ags.packages.${pkgs.system}.astal3
-      inputs.ags.packages.${pkgs.system}.apps
-      inputs.ags.packages.${pkgs.system}.mpris
-      inputs.ags.packages.${pkgs.system}.tray
-    ];
-  };
-in {
+{ inputs, config, pkgs, ... }: {
   imports = [
     ./hypr/hyprland.nix
     ./hypr/keybinds.nix
@@ -48,7 +35,18 @@ in {
 
     # For fast ags development:
     # nix shell github:aylur/ags#agsFull
-    #packages = [ ags-widgets ]; # todo fix me pls
+    packages = [(inputs.ags.lib.bundle {
+      inherit pkgs;
+      src = ./ags;
+      name = "desktop-widgets";
+      entry = "app.ts";
+      extraPackages = [
+        inputs.ags.packages.${pkgs.system}.astal3
+        inputs.ags.packages.${pkgs.system}.apps
+        inputs.ags.packages.${pkgs.system}.mpris
+        inputs.ags.packages.${pkgs.system}.tray
+      ];
+    })];
   };
 
   xdg = {
