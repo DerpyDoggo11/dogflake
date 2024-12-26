@@ -4,9 +4,7 @@ import Network from "gi://AstalNetwork"
 import Wp from "gi://AstalWp"
 
 const bluetooth = Bluetooth.get_default()
-const network = Network.get_default().wifi;
-
-//console.log(network);
+const network = Network.get_default()?.wifi!; // TODO: fix This[#emitter] is null error encountered when using ethernet - check object properties
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 
 const bluetoothIcon = () =>
@@ -36,7 +34,7 @@ export const Status = () => {
     <button onClicked={onClicked} className="time" cursor="pointer">
       <box vertical hexpand>
         {bluetoothIcon()}
-        {/*networkIcon()*/}
+        {networkIcon()}
         {volumeIcon()}
         {DNDIcon()}
         {battery()}

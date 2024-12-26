@@ -32,17 +32,14 @@
       enable = true; # For ags network integration
       wifi.backend = "iwd";
     };
-    useNetworkd = true;
     wireless.iwd = {
       enable = true;
       settings = {
         Settings = {
           AutoConnect = true;
-          EnableNetworkConfiguration = true;
+          #EnableNetworkConfiguration = true;
         };
-        General = {
-          EnableNetworkConfiguration = true;
-        };
+        #General.EnableNetworkConfiguration = true;
       };
     };
   };
