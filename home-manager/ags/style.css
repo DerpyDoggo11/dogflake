@@ -26,4 +26,17 @@ window.bar button {
     font-weight: bold;
     color: #5E81AC; /* Nord frost color */
 }
-  
+
+
+/* Workspace list */
+.workspaceBtn { /* Empty workspace */
+    color: black;
+}
+
+.workspaceBtn.active {
+    color: blue;
+}
+
+.workspaceBtn.occupied {
+    color: red;
+}

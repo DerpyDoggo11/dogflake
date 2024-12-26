@@ -30,16 +30,16 @@ const WorkspaceBtn = ({ id }: { id: number }) => {
     (workspaces, focused) => {
       const workspace = workspaces.find((w) => w.id === id);
 
-      if (!workspace)
-        return 'hyprland__workspace';
+      if (!workspace) /* Empty workspace */
+        return 'workspaceBtn';
 
       const occupied = workspace.get_clients().length > 0;
       const active = focused.id === id;
 
-      return `hyprland__workspace ${
+      return `workspaceBtn ${
         (active)
-          ? 'hyprland__workspace_active'
-          : occupied && 'hyprland__workspace_occupied'
+          ? 'active'
+          : occupied && 'occupied'
       }`;
     }
   );

@@ -1,9 +1,7 @@
-import { Tray, trayVisible } from "./Tray";
-//import { Workspaces } from "./workspaces";
 import { App, Astal } from "astal/gtk3";
-import { bind, execAsync } from "astal";
 import { Time } from "./modules/time";
 import { Workspaces } from "./modules/workspaces"
+import { Status } from "./modules/statusmenu"
 
 export default function bar(gdkmonitor: Gdk.Monitor) {
     return (
@@ -37,9 +35,7 @@ export default function bar(gdkmonitor: Gdk.Monitor) {
         </box>
 
         <box className="Container">
-
-          {/* control center:
-          battery power, bluetooth, sound, DND */}
+          <Status/>
         </box>
       </box>
     </window>

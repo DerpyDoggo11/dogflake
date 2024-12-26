@@ -28,7 +28,10 @@
 
   # Networking configuration using iwd
   networking = {
-    networkmanager.wifi.backend = "iwd";
+    networkmanager = {
+      enable = true; # For ags network integration
+      wifi.backend = "iwd";
+    };
     useNetworkd = true;
     wireless.iwd = {
       enable = true;

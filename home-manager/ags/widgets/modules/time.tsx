@@ -1,5 +1,4 @@
 import { Variable, GLib } from "astal";
-import { Gtk } from "astal/gtk3"
 
 const date = GLib.DateTime.new_now_local().format("%m/%d")!;
 const time = Variable<string>("").poll(1000,

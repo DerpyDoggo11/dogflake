@@ -64,7 +64,7 @@ in
     libsForQt5.kdenlive # Video editor
     lunar-client # PvP Minecraft client
     blockbench-electron # Minecraft 3D modeler
-    jetbrains.idea-community # Jetbrains IDEA
+    #jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email/IRC client
     obs-studio # For better recording
     gnome-system-monitor # Task manager
