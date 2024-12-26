@@ -45,7 +45,7 @@
       "ControlSuperShift, Left, movetoworkspace, -1"
       "Super, Q, killactive" # Kill active app
 
-      # TODO Win + tab should automagically open up an all-apps switcher and switch between them, this is temporary
+      # Alt+tab functionality
       "ALT, Tab, cyclenext"
       "ALT, Tab, bringactivetotop"
 

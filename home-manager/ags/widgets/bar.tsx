@@ -1,5 +1,3 @@
-// @ts-nocheck TODO fix types
-
 import { Tray, trayVisible } from "./Tray";
 //import { Workspaces } from "./workspaces";
 import { App, Astal } from "astal/gtk3";

@@ -1,5 +1,3 @@
-// @ts-nocheck TODO fix types
-
 // Stolen from https://github.com/rice-cracker-dev/nixos-config/blob/main/modules/extends/candy/home/desktop/shell/ags/config/widgets/HyprlandWidget/index.tsx
 import { Gtk, Widget } from 'astal/gtk3';
 import { bind, Variable } from 'astal';

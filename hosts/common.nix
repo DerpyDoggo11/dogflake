@@ -13,22 +13,18 @@
   # Optimized bootloader settings
   boot = {
     loader = {
-      systemd-boot.enable = lib.mkDefault true; # Systemd boot
+      systemd-boot = {
+        enable = lib.mkDefault true; # Systemd boot - vm ignores this option
+        configurationLimit = 3; # Save space in the /boot partition
+        editor = false; # For faster boot
+      };
       efi.canTouchEfiVariables = true;
       timeout = 0; # Hold down space on boot to access menu
-      systemd-boot.configurationLimit = 3; # Save space in the /boot partition
     };
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest; # Use the latest Linux kernel version
     enableContainers = false;
-    #plymouth.enable = true; # Hide boot stuff TODO test me
   };
-
-  # Faster systemd boot TODO test me
-  #systemd.services = {
-  #  systemd-udev-settle.enable = false;
-  #  NetworkManager-wait-online.enable = false;
-  #}
 
   # Networking configuration using iwd
   networking = {

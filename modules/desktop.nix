@@ -16,12 +16,12 @@ in
 
   environment.systemPackages = with pkgs; [
     gnome-boxes # VM manager
-    ags # Widget system & desktop overlay
+    ags # Widget system & desktop overlay TODO remove me when finished migrating to agsv2
     foot # Terminal
     bun # Fast all-in-one JS toolkit 
-    dart-sass # Ags Desktop dependency
-    fd # Ags Desktop dependency
-    sassc # Ags Sass compiler
+    dart-sass # Ags Desktop dependency TODO remove me after migrating to agsv2
+    fd # Ags Desktop dependency TODO remove me after migrating to agsv2
+    sassc # Ags Sass compiler TODO remove me after migrating to agsv2
     mpd # Music daemon for the Ags music player
     mpc # CLI for the Ags music player
     copyq # Clipboard manager (TODO: replace with Ags clipboard system)

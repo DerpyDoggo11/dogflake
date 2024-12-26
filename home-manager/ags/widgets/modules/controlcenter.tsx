@@ -1,4 +1,3 @@
-// @ts-nocheck TODO fix types
 import { Variable, GLib } from "astal";
 import { Gtk } from "astal/gtk3"
 import Bluetooth from "gi://AstalBluetooth";
