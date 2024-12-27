@@ -173,6 +173,7 @@ in
 
   services = {
     logrotate.enable = false; # Don't need this
+    #gvfs.enable = true; # Caching for astal mpris 
     
     # Printing support
     printing = { # CUPS

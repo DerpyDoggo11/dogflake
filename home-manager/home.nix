@@ -33,18 +33,21 @@
       gtk.enable = true;
     };
 
-    # For fast ags development:
-    # nix shell github:aylur/ags#agsFull
+    # Ags + Astal shell
     packages = [(inputs.ags.lib.bundle {
       inherit pkgs;
       src = ./ags;
       name = "desktop-widgets";
       entry = "app.ts";
       extraPackages = [
-        inputs.ags.packages.${pkgs.system}.astal3
-        inputs.ags.packages.${pkgs.system}.apps
-        inputs.ags.packages.${pkgs.system}.mpris
-        inputs.ags.packages.${pkgs.system}.tray
+        inputs.ags.packages.${pkgs.system}.astal3 # Core lib
+        inputs.ags.packages.${pkgs.system}.apps # App launcher
+        inputs.ags.packages.${pkgs.system}.mpris # Media controls
+        inputs.ags.packages.${pkgs.system}.hyprland # Workspace integration
+        inputs.ags.packages.${pkgs.system}.bluetooth # Bluez integration
+        inputs.ags.packages.${pkgs.system}.battery # For laptop only - not used on desktop
+        inputs.ags.packages.${pkgs.system}.network # Requires networkmanager
+        inputs.ags.packages.${pkgs.system}.wireplumber # Used by pipewire
       ];
     })];
   };

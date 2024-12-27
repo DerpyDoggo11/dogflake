@@ -7,13 +7,16 @@ App.start({
     css: style,
     main() {
         App.get_monitors().map(bar)
+
+        App.connect('monitor-added', (_, monitor) => bar(monitor))
+        App.connect('monitor-removed', (_, monitor) => bar(monitor))
     },
     requestHandler(req, res) {
         if (req == "hideNotif") {
             res("ok");
         };
     }
-})
+});
 
 /* Reminders script:
 if it's a monday and there's more than five files in Downloads folder

@@ -1,4 +1,4 @@
-import { Variable, GLib } from "astal";
+import { Variable, GLib } from 'astal';
 
 const date = GLib.DateTime.new_now_local().format("%m/%d")!;
 const time = Variable<string>("").poll(1000,

@@ -1,7 +1,8 @@
-import { App, Astal } from "astal/gtk3";
-import { Time } from "./modules/time";
-import { Workspaces } from "./modules/workspaces"
-import { Status } from "./modules/statusmenu"
+import { App, Astal, Gdk } from 'astal/gtk3';
+import { Time } from './modules/time';
+import { Workspaces } from './modules/workspaces'
+import { Status } from './modules/statusmenu'
+import { Media } from './modules/media'
 
 export default function bar(gdkmonitor: Gdk.Monitor) {
     return (
@@ -24,10 +25,12 @@ export default function bar(gdkmonitor: Gdk.Monitor) {
 
         <box vertical vexpand hexpand />
 
+        <box className="Container">
+          {/* @ts-ignore - TODO fix this lsp warning */}
+          <Media/>
+        </box>
 
-        {/* <box className="Container">
-          <Media />
-        </box> */}
+        <box vertical vexpand hexpand />
 
         <box className="Container">
 

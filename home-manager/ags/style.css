@@ -40,3 +40,8 @@ window.bar button {
 .workspaceBtn.occupied {
     color: red;
 }
+
+/* Status menu */
+.btConnected {
+    color: blue;
+}
