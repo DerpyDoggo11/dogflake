@@ -49,7 +49,7 @@
 
             misc = {
                 vfr = true; # Better power usage
-                #vrr = 1; # Always sync to monitor refresh rate, even when not fullscreened
+                vrr = 1; # Always sync to monitor refresh rate, even when not fullscreened
                 focus_on_activate = true;
                 animate_manual_resizes = false;
                 force_default_wallpaper = 0;
@@ -57,6 +57,7 @@
                 disable_hyprland_logo = true;
                 new_window_takes_over_fullscreen = 2;
                 initial_workspace_tracking = 0; # Always open in current workspace
+                disable_hyprland_qtutils_check = true; # Hide annoying qtutils popup
             };
             binds.scroll_event_delay = 0;
 

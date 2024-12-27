@@ -5,7 +5,7 @@ import Wp from 'gi://AstalWp'
 import { FlowBox } from "../../astalify/flowbox";
 
 const bluetooth = Bluetooth.get_default()
-const network = Network.get_default()?.wifi!; // TODO: fix This[#emitter] is null error encountered when using ethernet - check object properties
+const network = Network.get_default()?.wifi!; // TODO: fix This[#emitter] is null error encountered when using ethernet - check object props
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 
 const bluetoothIcon = () => {
@@ -37,6 +37,7 @@ export const Status = () => {
 
   return (
     <button onClicked={onClicked} className="time" cursor="pointer">
+      {/* todo center meee */}
       <FlowBox hexpand min_children_per_line={2} max_children_per_line={2}>
         {bluetoothIcon()}
         {networkIcon()}

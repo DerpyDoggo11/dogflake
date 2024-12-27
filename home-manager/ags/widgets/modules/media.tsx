@@ -5,9 +5,9 @@ const mpris = Mpris.get_default();
 
 export const Media = () => {
     return bind(mpris, "players").as((players) => {
-        if (players.length == 0) 
-            return; // Don't show anything if no player to control
-
+        if (players.length < 1)
+            return ""; // Don't show anything if no player to control
+        
         return (
             <button
                 onClick={() => mpris.players[0].play_pause()}
