@@ -58,14 +58,14 @@
   
   users.users.alec = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "video" "networkmanager" "libvirtd" ]; 
+    extraGroups = [ "wheel" "audio" "video" "networkmanager" ]; 
   };
 
-  # Random settings to optimize the system
+  # Random machine optimization settings
   services.journald.extraConfig = "SystemMaxUse=1G";
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ]; # Optimize SSD trim
 
-  # Disable ALL documentation
+  # Disable all documentation
   documentation = {
     enable = false;
     doc.enable = false;

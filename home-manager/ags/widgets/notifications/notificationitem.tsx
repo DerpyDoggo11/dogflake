@@ -67,7 +67,7 @@ export const NotificationItem = (n: Notifd.Notification) =>
                     {n.get_actions().map(({ label, id }) => (
                         <button
                             hexpand
-                            onClicked={() => n.invoke(id)}>
+                            onClicked={() => { n.invoke(id); /* delete me here */ }}>
                             <label label={label} halign={CENTER}/>
                         </button>
                     ))}

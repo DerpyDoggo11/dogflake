@@ -1,7 +1,7 @@
 import { App, Astal, Gdk } from 'astal/gtk3';
+import { FlowBox } from "../astalify/flowbox";
 
-export default function emojiPicker(gdkmonitor: Gdk.Monitor) {
-    return (
+export const EmojiPicker = (gdkmonitor: Gdk.Monitor) =>
     <window
       name="emojiPicker"
       className="emojiPicker"
@@ -10,7 +10,6 @@ export default function emojiPicker(gdkmonitor: Gdk.Monitor) {
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT | Astal.WindowAnchor.BOTTOM}
       application={App}
     >
-        Emoji picker goes here
+      <FlowBox hexpand min_children_per_line={10} max_children_per_line={10}>
+      </FlowBox>
     </window>
-  );
-}

@@ -15,7 +15,6 @@ in
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
-    gnome-boxes # VM manager
     ags # Widget system & desktop overlay TODO remove me when finished migrating to agsv2
     foot # Terminal
     bun # Fast all-in-one JS toolkit 
@@ -131,9 +130,6 @@ in
       };
     };
   };
-
-  # For gnome-boxes & vm stuff
-  virtualisation.libvirtd.enable = true;
 
   # Keyboard layout & language (with Chinese support)
   i18n.inputMethod = {

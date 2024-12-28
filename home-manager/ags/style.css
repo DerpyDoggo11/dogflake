@@ -82,3 +82,16 @@ window.bar button {
 calendar {
     border-radius: 5px;
 }
+
+
+/* App launcher */
+.launcher { 
+    background-color: @theme_bg_color;
+    border-radius: 7px;
+    margin: 1rem;
+    padding: 0.8rem;
+}
+
+.launcher entry { /* Search bar */
+    margin-bottom: 0.5rem;
+}

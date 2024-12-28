@@ -3,9 +3,9 @@ import style from './style.css';
 import bar from './widgets/bar';
 import corners from './widgets/corners';
 import { calendar } from './widgets/calendar';
-import EmojiPicker from './widgets/emojipicker';
+import { EmojiPicker } from './widgets/emojipicker';
 import { Notifications, clearNewestNotification } from './widgets/notifications/notifications';
-
+import { Launcher } from './widgets/launcher';
 App.start({
     instanceName: "desktop-widgets",
     css: style,
@@ -16,6 +16,7 @@ App.start({
         App.get_monitors().map(calendar);
         Notifications(App.get_monitors()[1]); // For debugging only - find a permanent all-monitor solution
         //App.get_monitors().map(EmojiPicker);
+        App.get_monitors().map(Launcher);
 
         // Reconnect/disconnect widgets automatically
         App.connect('monitor-added', (_, monitor) => bar(monitor))

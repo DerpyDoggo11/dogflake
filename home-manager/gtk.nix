@@ -1,16 +1,14 @@
 { pkgs, config, ... }: {
     gtk = {
         enable = true;
-        gtk3.bookmarks = let
-            home = config.home.homeDirectory;
-        in [
-            "file:///${home}/Desktop"
-            "file:///${home}/Downloads"
-            "file:///${home}/Documents"
-            "file:///${home}/Music"
-            "file:///${home}/Pictures"
-            "file:///${home}/Projects"
-            "file:///${home}/Videos"
+        gtk3.bookmarks = [
+            "file:///home/alec/Desktop"
+            "file:///home/alec/Downloads"
+            "file:///home/alec/Documents"
+            "file:///home/alec/Music"
+            "file:///home/alec/Pictures"
+            "file:///home/alec/Projects"
+            "file:///home/alec/Videos"
         ];
 
         font = {
