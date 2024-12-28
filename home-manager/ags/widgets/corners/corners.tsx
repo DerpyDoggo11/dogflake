@@ -3,11 +3,9 @@
 import { Gtk } from 'astal/gtk3';
 import Cairo from 'cairo';
 
+const radius = 10;
 
-export default (
-    place = 'top left',
-    css = 'background-color: @theme_bg_color;',
-) => (
+export default (place: string) => (
     <box
         halign={place.includes('left') ? Gtk.Align.START : Gtk.Align.END}
         valign={place.includes('top') ? Gtk.Align.START : Gtk.Align.END}
@@ -22,15 +20,13 @@ export default (
     >
         <drawingarea
             css={`
-                border-radius: 8px;
-                border-width: 0.068rem;
-                ${css}
+                border-radius: ${radius}px;
+                border-width: 0.06rem;
+                background-color: @theme_bg_color
             `}
 
             setup={(widget) => {
                 const styleContext = widget.get_style_context();
-
-                let radius = styleContext.get_property('border-radius', Gtk.StateFlags.NORMAL) as number;
 
                 widget.set_size_request(radius, radius);
 
@@ -38,8 +34,6 @@ export default (
                     const bgColor = styleContext.get_background_color(Gtk.StateFlags.NORMAL);
                     const borderColor = styleContext.get_color(Gtk.StateFlags.NORMAL);
                     const borderWidth = styleContext.get_border(Gtk.StateFlags.NORMAL).left;
-
-                    radius = styleContext.get_property('border-radius', Gtk.StateFlags.NORMAL) as number;
 
                     widget.set_size_request(radius, radius);
 

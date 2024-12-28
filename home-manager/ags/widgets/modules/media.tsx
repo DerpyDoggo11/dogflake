@@ -3,8 +3,8 @@ import Mpris from 'gi://AstalMpris'
 
 const mpris = Mpris.get_default();
 
-export const Media = () => {
-    return bind(mpris, "players").as((players) => {
+export const Media = () =>
+    bind(mpris, "players").as((players) => {
         if (players.length < 1)
             return ""; // Don't show anything if no player to control
         
@@ -17,4 +17,4 @@ export const Media = () => {
             </button>
         );
     });
-};
+

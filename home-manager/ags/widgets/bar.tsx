@@ -10,30 +10,25 @@ export default function bar(gdkmonitor: Gdk.Monitor) {
       className="bar"
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={
-        Astal.WindowAnchor.LEFT |
-        Astal.WindowAnchor.TOP |
-        Astal.WindowAnchor.BOTTOM
-      }
+      anchor={Astal.WindowAnchor.LEFT | Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
       application={App}
     >
       <box vertical hexpand>
-        {<box className="container">
+        <box className="container">
           <Workspaces/>
-        </box>}
+        </box>
 
 
-        <box vertical vexpand hexpand />
+        <box vertical vexpand hexpand/>
 
         <box className="Container">
           {/* @ts-ignore - TODO fix this lsp warning */}
           <Media/>
         </box>
 
-        <box vertical vexpand hexpand />
+        <box vertical vexpand hexpand/>
 
         <box className="Container">
-
           <Time/>
         </box>
 

@@ -20,14 +20,14 @@ window.bar button {
 
 /* Time bar widget */
 .time .date {
-    font-size:  0.6rem;
-    font-family: 'Sora';
+    font-size: 0.7rem;
+    font-family: 'Liberation Mono';
     color: #81A1C1; /* Nord Green frost color */ 
 }
 
 .time .time {
-    font-size:  1.2rem;
-    font-family: 'Iosveka'; /* Monospaced font */
+    font-size: 1.5rem;
+    font-family: 'WenQuanYi Zen Hei Mono'; /* Monospaced font */
     font-weight: bold;
     color: #5E81AC; /* Nord frost color */
 }
@@ -50,3 +50,30 @@ window.bar button {
 .btConnected {
     color: blue;
 }
+
+
+/* Notification popups */
+
+.notification {
+    background-color: @theme_bg_color;
+    margin: 0.4rem;
+    border-radius: 4px; /* 7px */
+    padding: 0;
+    min-width: 15rem;
+}
+
+.notification .header {
+    background-color: #3b4252;
+    padding: 0.5rem;
+    margin: 0;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 2px solid #5e81ac;
+}
+
+.notification .content {
+    margin-top: 0;
+    padding: 0.7rem;
+}
+
+.notification .summary { font-weight: bold; }
+.notification .actions { padding-top: 0.7rem; }

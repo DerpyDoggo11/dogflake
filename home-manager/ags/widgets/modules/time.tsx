@@ -12,7 +12,7 @@ export const Time = () => {
 
   return (
     <button onClicked={onClicked} className="time" cursor="pointer">
-      <box vertical>
+      <box vertical hexpand>
         <label className="date" label={date}/>
         <label className="time" label={time()} />
       </box>

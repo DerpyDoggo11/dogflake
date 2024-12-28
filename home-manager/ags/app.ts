@@ -2,7 +2,9 @@ import { App } from 'astal/gtk3';
 import style from './style.css';
 import bar from './widgets/bar';
 import Corners from './widgets/corners';
-  
+import EmojiPicker from './widgets/emojipicker';
+import { Notifications, clearNewestNotification } from './widgets/notifications/notifications';
+
 App.start({
     instanceName: "desktop-widgets",
     css: style,
@@ -10,6 +12,8 @@ App.start({
         App.get_monitors().map(bar)
         reminders();
         App.get_monitors().map(Corners);
+        Notifications(App.get_monitors()[1]); // For debugging only - find a permanent all-monitor solution
+        //App.get_monitors().map(EmojiPicker);
 
         // Reconnect/disconnect widgets automatically
         App.connect('monitor-added', (_, monitor) => bar(monitor))
@@ -18,18 +22,11 @@ App.start({
     requestHandler(req, res) {
         switch(req) {
             case "hideNotif":
-                // code here
-                break;
-            case "togglePowerMenu":
-                // code here
-                break;
-            case "toggleEmojiPicker":
-                // code here
-                break;
-            case "toggleClipboard":
-                // code here
+                clearNewestNotification();
                 break;
         };
+        res("Success");
+        // ags toggle <windowname>
     }
 });
 

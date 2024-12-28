@@ -10,7 +10,8 @@
       "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
       ",XF86PowerOff,  exec, ags -t powermenu" # Power menu
       "Super, space, exec, ags -t launcher" # App laucher
-      # TODO: Make Super + C hide the last notification
+
+      "Super, C, exec, ags request -i desktop-widgets hideNotif" # Hide most recent notification
 
       # Screen recording
       "Super, R, exec, ags -r 'recorder.start()'"
