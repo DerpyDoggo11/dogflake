@@ -7,9 +7,6 @@ const radius = 10;
 
 export default (place: string) => (
     <box
-        halign={place.includes('left') ? Gtk.Align.START : Gtk.Align.END}
-        valign={place.includes('top') ? Gtk.Align.START : Gtk.Align.END}
-
         css={`
             padding: 1px; margin:
                 ${place.includes('top') ? '-1px' : '0'}

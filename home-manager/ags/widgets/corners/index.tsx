@@ -1,19 +1,15 @@
 // Stolen from https://github.com/matt1432/nixos-configs/blob/master/modules/ags/config/widgets/corners/index.tsx
 
-import { Astal, Gdk } from 'astal/gtk3';
+import { Astal, Gdk, App } from 'astal/gtk3';
 
 import RoundedCorner from './corners';
 
 const TopLeft = (gdkmonitor: Gdk.Monitor) => (
     <window
         name="cornertl"
-        layer={Astal.Layer.OVERLAY}
-        exclusivity={Astal.Exclusivity.IGNORE}
         gdkmonitor={gdkmonitor}
-        anchor={
-            Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT
-        }
-        clickThrough={true}
+        anchor={ Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT }
+        application={App}
     >
         {RoundedCorner('topleft')}
     </window>
@@ -22,13 +18,9 @@ const TopLeft = (gdkmonitor: Gdk.Monitor) => (
 const TopRight = (gdkmonitor: Gdk.Monitor) => (
     <window
         name="cornertr"
-        layer={Astal.Layer.OVERLAY}
-        exclusivity={Astal.Exclusivity.IGNORE}
         gdkmonitor={gdkmonitor}
-        anchor={
-            Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT
-        }
-        clickThrough={true}
+        anchor={ Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT }
+        application={App}
     >
         {RoundedCorner('topright')}
     </window>
@@ -37,13 +29,9 @@ const TopRight = (gdkmonitor: Gdk.Monitor) => (
 const BottomLeft = (gdkmonitor: Gdk.Monitor) => (
     <window
         name="cornerbl"
-        layer={Astal.Layer.OVERLAY}
-        exclusivity={Astal.Exclusivity.IGNORE}
         gdkmonitor={gdkmonitor}
-        anchor={
-            Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT
-        }
-        clickThrough={true}
+        anchor={ Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT }
+        application={App}
     >
         {RoundedCorner('bottomleft')}
     </window>
@@ -52,13 +40,9 @@ const BottomLeft = (gdkmonitor: Gdk.Monitor) => (
 const BottomRight = (gdkmonitor: Gdk.Monitor) => (
     <window
         name="cornerbr"
-        layer={Astal.Layer.OVERLAY}
-        exclusivity={Astal.Exclusivity.IGNORE}
         gdkmonitor={gdkmonitor}
-        anchor={
-            Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT
-        }
-        clickThrough={true}
+        anchor={ Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT }
+        application={App}
     >
         {RoundedCorner('bottomright')}
     </window>

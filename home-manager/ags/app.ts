@@ -1,7 +1,8 @@
 import { App } from 'astal/gtk3';
 import style from './style.css';
 import bar from './widgets/bar';
-import Corners from './widgets/corners';
+import corners from './widgets/corners';
+import { calendar } from './widgets/calendar';
 import EmojiPicker from './widgets/emojipicker';
 import { Notifications, clearNewestNotification } from './widgets/notifications/notifications';
 
@@ -11,7 +12,8 @@ App.start({
     main() {
         App.get_monitors().map(bar)
         reminders();
-        App.get_monitors().map(Corners);
+        App.get_monitors().map(corners);
+        App.get_monitors().map(calendar);
         Notifications(App.get_monitors()[1]); // For debugging only - find a permanent all-monitor solution
         //App.get_monitors().map(EmojiPicker);
 

@@ -5,24 +5,22 @@ import AstalHyprland from 'gi://AstalHyprland';
 
 const hyprland = AstalHyprland.get_default();
 
-export const Workspaces = (props: Omit<Widget.EventBoxProps, 'child' | 'on_scroll' | 'onScroll'>) => {
-  return (
-    <eventbox
-      {...props}
-      hexpand
-      onScroll={ (_, e) => hyprland.dispatch('workspace', (e.delta_y > 0) ? '+1' : '-1') }
+export const Workspaces = (props: Omit<Widget.EventBoxProps, 'child' | 'on_scroll' | 'onScroll'>) =>
+  <eventbox
+    {...props}
+    hexpand
+    onScroll={ (_, e) => hyprland.dispatch('workspace', (e.delta_y > 0) ? '+1' : '-1') }
+  >
+    <box
+      halign={Gtk.Align.CENTER}
+      orientation={Gtk.Orientation.VERTICAL}
     >
-      <box
-        halign={Gtk.Align.CENTER}
-        orientation={Gtk.Orientation.VERTICAL}
-      >
-        {[...Array(7).keys()].map((i) => (
-          <WorkspaceBtn id={i + 1} />
-        ))}
-      </box>
-    </eventbox>
-  );
-};
+      {[...Array(7).keys()].map((i) => (
+        <WorkspaceBtn id={i + 1} />
+      ))}
+    </box>
+  </eventbox>
+
 
 const WorkspaceBtn = ({ id }: { id: number }) => {
   const className = Variable.derive(

@@ -77,3 +77,8 @@ window.bar button {
 
 .notification .summary { font-weight: bold; }
 .notification .actions { padding-top: 0.7rem; }
+
+/* Calendar */
+calendar {
+    border-radius: 5px;
+}
