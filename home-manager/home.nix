@@ -70,7 +70,20 @@
   };
 
   programs = {
-    ags.enable = true; # For Hypr keybinds
+    ags = {
+      enable = true; # For Hypr keybinds
+      extraPackages = [
+        inputs.ags.packages.${pkgs.system}.astal3 # Core lib
+        inputs.ags.packages.${pkgs.system}.apps # App launcher
+        inputs.ags.packages.${pkgs.system}.mpris # Media controls
+        inputs.ags.packages.${pkgs.system}.hyprland # Workspace integration
+        inputs.ags.packages.${pkgs.system}.bluetooth # Bluez integration
+        inputs.ags.packages.${pkgs.system}.battery # For laptop only - not used on desktop
+        inputs.ags.packages.${pkgs.system}.network # Requires networkmanager
+        inputs.ags.packages.${pkgs.system}.wireplumber # Used by pipewire
+        inputs.ags.packages.${pkgs.system}.notifd # Desktop notification integration
+      ];
+    };
     bash = { # Custom tty colors
       enable = false;
       bashrcExtra = ''

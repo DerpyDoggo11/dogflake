@@ -14,7 +14,7 @@ App.start({
         reminders();
         App.get_monitors().map(corners);
         App.get_monitors().map(calendar);
-        Notifications(App.get_monitors()[1]); // For debugging only - find a permanent all-monitor solution
+        App.get_monitors().map(Notifications);
         //App.get_monitors().map(EmojiPicker);
         App.get_monitors().map(Launcher);
 

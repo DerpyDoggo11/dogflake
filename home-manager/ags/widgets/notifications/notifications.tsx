@@ -59,7 +59,8 @@ export const Notifications = (gdkmonitor: Gdk.Monitor) =>
         className="Notifications"
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
-        anchor={TOP | RIGHT}>
+        anchor={TOP | RIGHT}
+    >
         <box vertical>
             {bind(allNotifications)}
         </box>

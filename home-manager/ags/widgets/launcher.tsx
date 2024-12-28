@@ -2,15 +2,17 @@ import Apps from "gi://AstalApps"
 import { App, Astal, Gdk, Gtk } from "astal/gtk3"
 import { Variable } from "astal"
 
-const MAX_ITEMS = 8
+const apps = new Apps.Apps()
+const text = Variable("")
+const list = text(text => apps.fuzzy_query(text).slice(0, 5)) // 5 max items
 
 const hide = () => App.toggle_window("launcher");
 
-
-function AppButton({ app }: { app: Apps.Application }) {
-    return <button
+const AppButton = ({ app }: { app: Apps.Application }) =>
+    <button
         className="AppButton"
-        onClicked={() => { hide; app.launch(); }}>
+        onClicked={() => { app.launch(); hide(); }}
+    >
         <box>
             <icon icon={app.iconName} />
             <box valign={Gtk.Align.CENTER} vertical>
@@ -29,15 +31,10 @@ function AppButton({ app }: { app: Apps.Application }) {
             </box>
         </box>
     </button>
-}
 
-export const Launcher = () => {
-    const apps = new Apps.Apps()
 
-    const text = Variable("")
-    const list = text(text => apps.fuzzy_query(text).slice(0, MAX_ITEMS))
-
-    return <window
+export const Launcher = () =>
+    <window
         name="launcher"
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
         exclusivity={Astal.Exclusivity.IGNORE}
@@ -47,12 +44,11 @@ export const Launcher = () => {
         onShow={() => text.set("")}
         onKeyPressEvent={function (self, event: Gdk.Event) {
             if (event.get_keyval()[1] === Gdk.KEY_Escape)
-                self.hide
-        }}>
+               self.hide()
+        }}
+    >
         <box>
-            <eventbox widthRequest={4000} expand onClick={hide} />
             <box hexpand={false} vertical>
-                <eventbox heightRequest={100} onClick={hide} />
                 <box widthRequest={500} className="launcher" vertical>
                     <entry
                         placeholderText="Search"
@@ -60,18 +56,22 @@ export const Launcher = () => {
                         onChanged={self => text.set(self.text)}
                         onActivate={() => {
                             apps.fuzzy_query(text.get())?.[0].launch();
-                            hide;
+                            hide();
+                        }}
+                        setup={self => { // Auto-grab focus when launched
+                            App.connect("window-toggled", () => {
+                                const win = App.get_window("launcher");
+                                if (win && win.name == "launcher" && win.visible == true)
+                                    self.grab_focus()
+                            })
                         }}
                     />
                     <box spacing={6} vertical>
                         {list.as(list => list.map(app => (
-                            <AppButton app={app} />
+                            <AppButton app={app}/>
                         )))}
                     </box>
                 </box>
-                <eventbox expand onClick={hide} />
             </box>
-            <eventbox widthRequest={4000} expand onClick={hide} />
         </box>
     </window>
-}
