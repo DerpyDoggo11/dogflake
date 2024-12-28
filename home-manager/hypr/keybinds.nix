@@ -9,12 +9,13 @@
       "Super, Period, exec, emote" # Emoji picker TODO replace w/ ags
       "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
       ",XF86PowerOff,  exec, ags -t powermenu" # Power menu
-      "Super, space, exec, ags -t launcher" # App laucher
+      #"Super, space, exec, ags -t launcher" # App laucher
+      "Super, space, exec, ags -i desktop-widgets toggle launcher" # App laucher
 
-      "Super, C, exec, ags request -i desktop-widgets hideNotif" # Hide most recent notification
+      "Super, C, exec, ags -i desktop-widgets request hideNotif" # Hide most recent notification
 
       # Screen recording
-      "Super, R, exec, ags -r 'recorder.start()'"
+      #"Super, R, exec, ags -r 'recorder.start()'"
       "ControlSuper, R, exec, ags -r 'recorder.start(true)'" # Custom video selection size
       ",Print, exec, ags -r 'recorder.screenshot()'"
       "SHIFT, Print, exec, ags -r 'recorder.screenshot(true)'" # Fullscreen screensot

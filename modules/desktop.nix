@@ -15,7 +15,7 @@ in
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
-    ags # Widget system & desktop overlay TODO remove me when finished migrating to agsv2
+    #ags # Widget system & desktop overlay TODO remove me when finished migrating to agsv2
     foot # Terminal
     bun # Fast all-in-one JS toolkit 
     dart-sass # Ags Desktop dependency TODO remove me after migrating to agsv2
@@ -94,20 +94,6 @@ in
     (microfetch.overrideAttrs ({ patches, ... }: {
       patches = [ ../overlays/microfetch/Microfetch.patch ];
     }))
-
-    
-    (pkgs.makeDesktopItem { # War Thunder
-      comment = "The most comprehensive free-to-play, cross-platform, MMO military game with over 2000 vehicles.";
-      desktopName = "War Thunder";
-      exec =  "steam-run /home/alec/Desktop/WarThunder/launcher";
-      genericName = "The most comprehensive free-to-play, cross-platform, MMO military game with over 2000 vehicles.";
-      icon = "/home/alec/Desktop/WarThunder/launcher.ico";
-      name = "warthunder";
-      startupNotify = true;
-      startupWMClass = "warthunder";
-      terminal = false;
-      type = "Application";
-    })
   ];
 
   programs = {

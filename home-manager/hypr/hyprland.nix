@@ -1,7 +1,7 @@
 { pkgs, ...}: {
     wayland.windowManager.hyprland = {
         enable = true;
-        #xwayland.enable = true; # causes build error if set to false...
+        #xwayland.enable = false; # Causes build error?
         plugins = [
             # TODO add hycov
         ];

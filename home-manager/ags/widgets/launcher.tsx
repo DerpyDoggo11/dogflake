@@ -10,7 +10,7 @@ const hide = () => App.toggle_window("launcher");
 function AppButton({ app }: { app: Apps.Application }) {
     return <button
         className="AppButton"
-        onClicked={() => { hide; app.launch() }}>
+        onClicked={() => { hide; app.launch(); }}>
         <box>
             <icon icon={app.iconName} />
             <box valign={Gtk.Align.CENTER} vertical>
@@ -32,7 +32,6 @@ function AppButton({ app }: { app: Apps.Application }) {
 }
 
 export const Launcher = () => {
-    const { CENTER } = Gtk.Align
     const apps = new Apps.Apps()
 
     const text = Variable("")
@@ -44,7 +43,7 @@ export const Launcher = () => {
         exclusivity={Astal.Exclusivity.IGNORE}
         keymode={Astal.Keymode.ON_DEMAND}
         application={App}
-        //visible={false}
+        visible={false}
         onShow={() => text.set("")}
         onKeyPressEvent={function (self, event: Gdk.Event) {
             if (event.get_keyval()[1] === Gdk.KEY_Escape)

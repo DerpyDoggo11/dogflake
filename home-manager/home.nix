@@ -70,6 +70,7 @@
   };
 
   programs = {
+    ags.enable = true; # For Hypr keybinds
     bash = { # Custom tty colors
       enable = false;
       bashrcExtra = ''
