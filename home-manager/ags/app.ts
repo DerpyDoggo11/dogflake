@@ -4,9 +4,9 @@ import style from './style.css';
 import bar from './widgets/bar';
 import corners from './widgets/corners';
 import { calendar } from './widgets/calendar';
-import { EmojiPicker } from './widgets/emojipicker';
-import { Notifications, clearNewestNotification } from './widgets/notifications/notifications';
-import { Launcher } from './widgets/launcher';
+import { emojiPicker } from './widgets/emojipicker';
+import { notifications, clearNewestNotification } from './widgets/notifications/notifications';
+import { launcher } from './widgets/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, record } from './services/screen';
 
@@ -17,9 +17,9 @@ App.start({
         App.get_monitors().map(bar)
         App.get_monitors().map(corners);
         App.get_monitors().map(calendar);
-        App.get_monitors().map(Notifications);
-        //App.get_monitors().map(EmojiPicker);
-        App.get_monitors().map(Launcher);
+        App.get_monitors().map(notifications);
+        //App.get_monitors().map(emojiPicker);
+        App.get_monitors().map(launcher);
         reminders();
 
         // Reconnect/disconnect widgets automatically

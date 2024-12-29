@@ -33,7 +33,7 @@ const AppButton = ({ app }: { app: Apps.Application }) =>
     </button>
 
 
-export const Launcher = () =>
+export const launcher = () =>
     <window
         name="launcher"
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}

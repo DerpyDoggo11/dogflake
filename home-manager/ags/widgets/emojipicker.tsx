@@ -1,7 +1,7 @@
 import { App, Astal, Gdk } from 'astal/gtk3';
 import { FlowBox } from "../astalify/flowbox";
 
-export const EmojiPicker = (gdkmonitor: Gdk.Monitor) =>
+export const emojiPicker = (gdkmonitor: Gdk.Monitor) =>
     <window
       name="emojiPicker"
       className="emojiPicker"

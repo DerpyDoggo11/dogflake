@@ -17,6 +17,7 @@ in
   environment.systemPackages = with pkgs; [
     #ags # Widget system & desktop overlay TODO remove me when finished migrating to agsv2
     foot # Terminal
+    libnotify # For ags internal notifications
     bun # Fast all-in-one JS toolkit 
     dart-sass # Ags Desktop dependency TODO remove me after migrating to agsv2
     fd # Ags Desktop dependency TODO remove me after migrating to agsv2
@@ -29,7 +30,7 @@ in
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars
     brightnessctl # Control laptop brightness
-    wl-screenrec # Fast screen recorder
+    wl-screenrec # Efficient screen recorder
     grimblast # Screenshotting tool (TODO: replace with Grim)
     slurp # Screen selection tool for screenshots & screenrecording
     swappy # Quick screenshot editor
@@ -86,9 +87,6 @@ in
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets
     spotdl # Download Spotify playlists
-
-    # this needs to be removed after fixed https://github.com/russelltg/wl-screenrec/issues/50
-    wf-recorder
 
     # Patched fetch program
     (microfetch.overrideAttrs ({ patches, ... }: {

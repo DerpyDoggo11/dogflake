@@ -13,8 +13,8 @@ const time = (time: number) => GLib.DateTime
     .new_from_unix_local(time)
     .format("%H:%M")!
 
-export const NotificationItem = (n: Notifd.Notification) =>
-    <box vertical className="notification">
+export const notificationItem = (n: Notifd.Notification) =>
+    <box vertical vexpand className="notification">
         <box className="header">
             {(n.appIcon || n.desktopEntry) && <icon
                 className="app-icon"
@@ -63,7 +63,7 @@ export const NotificationItem = (n: Notifd.Notification) =>
                     justifyFill
                     label={n.body}
                 />}
-                {n.get_actions().length > 0 && <box className="actions">
+                {n.get_actions().length > 0 && <box className="actions" spacing={5}>
                     {n.get_actions().map(({ label, id }) => (
                         <button
                             hexpand

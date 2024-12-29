@@ -43,6 +43,7 @@ export const notifySend = ({
         actions.map(({ id, label }) => `--action=${escapeShellArg(id)}=${escapeShellArg(label)}`),
     ).join(' ');
 
+    console.log(cmd);
     subprocess(
         cmd,
         (out) => {
