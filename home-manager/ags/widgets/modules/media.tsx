@@ -3,10 +3,10 @@ import Mpris from 'gi://AstalMpris'
 
 const mpris = Mpris.get_default();
 
-export const Media = () =>
+export const Media = () => {
     bind(mpris, "players").as((players) => {
         if (players.length < 1)
-            return ""; // Don't show anything if no player to control
+            return ''; // Don't show anything if no player to control
         
         return (
             <button
@@ -17,4 +17,5 @@ export const Media = () =>
             </button>
         );
     });
-
+    return <box/>; // Fix LSP type issue
+};

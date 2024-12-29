@@ -1,11 +1,9 @@
 
-import { exec, execAsync, GLib, Variable } from 'astal';
+import { exec, execAsync, GLib, subprocess, Variable, bind } from 'astal';
 import { notifySend } from '../lib/notifySend';
 import { interval } from 'astal';
-const RecordingIndicator = () => <box/>; // todo do stuff here
 
-
-const isRecording: Variable<Boolean> = new Variable(false);
+const isRecording: Variable<Boolean> = new Variable(true);
 const timer: Variable<number> = new Variable(0);
 
 const file: Variable<String> = new Variable('');
@@ -14,6 +12,14 @@ const captureDir = "/home/alec/Videos/Captures";
 const screenshotDir = "/home/alec/Pictures/Screenshots";
 
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S');
+
+export const RecordingIndicator = () => {
+	isRecording.subscribe((isRec: boolean) => {
+		if (isRec) return <label hexpand label={bind(timer).as((t) => String(t))}/>
+	});
+	return <box/>; // Fallback
+};
+
 
 // TODO get default output of pactl -f json list short sources
 // parse it as json and get the name with state RUNNING
@@ -36,19 +42,19 @@ export const record = async (fullscreen: boolean) => {
 				{
 					id: '1',
 					label: 'Open Captures folder',
-					callback: () => exec('nemo ' + captureDir),
+					callback: () => execAsync('nemo ' + captureDir),
 				},
 				{
 					id: '2',
 					label: 'View',
-					callback: () => exec('xdg-open ' + file)
+					callback: () => execAsync('xdg-open ' + file)
 				}
 			]
 		});
 		return;
 	};
 
-	file.set(`captureDir/${now()}.mp4`); // Start recording
+	file.set(`${captureDir}/${now()}.mp4`); // Start recording
 
 	// Disable blue light shader
 	exec("hyprctl keyword decoration:screen_shader '' ''"); 
@@ -56,7 +62,7 @@ export const record = async (fullscreen: boolean) => {
 	// Select screen size
 	let size = '';
 	if (fullscreen) {
-		size = await exec('slurp');
+		size = await execAsync('slurp');
 		if (!size) return;
 	}
 
@@ -81,20 +87,12 @@ export const screenshot = async (fullscreen: boolean) => {
 	// Disable blue light shader
 	exec("hyprctl keyword decoration:screen_shader '' ''"); 
 
-	const regionType = (fullscreen) ? 'screen' : 'area'
-	await execAsync(`grimblast --freeze copysave ${regionType} ${file}`)
-		.then((msg) => {
-			// Re-enable blue light shader
-			execAsync("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
-			
-			// msg is the absolute file path now - otherwise says "selection cancelled" if failed
-			// If cancelled, do not continue
-			if (msg.includes("selection cancelled")) {
-				console.error("E")
-				return;
-			}
-			console.log("Passed file test?");
+	const regionType = (fullscreen) ? 'screen' : 'area';
 
+	subprocess(
+		`bash -c 'grimblast --freeze copysave ${regionType} ${file}'`, // Run copy command
+		(file) => {
+			exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
 			notifySend({
 				title: 'Screenshot Saved',
 				iconName: 'image-x-generic-symbolic',
@@ -102,16 +100,19 @@ export const screenshot = async (fullscreen: boolean) => {
 					{
 						id: '1',
 						label: 'Open Captures folder',
-						callback: () => exec('nemo ' + screenshotDir), // todo try msg
+						callback: () => execAsync('nemo ' + screenshotDir), // todo try msg
 					},
 					{
 						id: '2',
 						label: 'Edit',
-						callback: () => exec('swappy -f ' + msg)
+						callback: () => execAsync('swappy -f ' + file)
 					}
 				]
 			});
-		})
-		.catch((e) => console.log(e)); // Suppress gjs warnings
-	console.log('wait')
+		},
+		() => { 
+			console.log("Selection was cancelled") 
+			exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
+		},
+	);
 };

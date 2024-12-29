@@ -3,7 +3,7 @@
 import { subprocess } from 'astal';
 
 interface NotifyAction {
-    id: string
+    id: string // TODO retype id as integer
     label: string
     callback: () => void
 }
@@ -55,8 +55,6 @@ export const notifySend = ({
                 actions.find((action) => action.id === out)?.callback();
             }
         },
-        (err) => {
-            console.error(`[Notify] ${err}`);
-        }
+        (err) => console.log('[Notify] ' + err)
     );
 });

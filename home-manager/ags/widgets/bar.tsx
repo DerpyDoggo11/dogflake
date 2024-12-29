@@ -3,6 +3,7 @@ import { Time } from './modules/time';
 import { Workspaces } from './modules/workspaces'
 import { Status } from './modules/statusmenu'
 import { Media } from './modules/media'
+import { RecordingIndicator } from '../services/screen';
 
 export default function bar(gdkmonitor: Gdk.Monitor) {
     return (
@@ -14,27 +15,17 @@ export default function bar(gdkmonitor: Gdk.Monitor) {
       application={App}
     >
       <box vertical hexpand>
-        <box className="container">
-          <Workspaces/>
-        </box>
-
+        <Workspaces/>
 
         <box vertical vexpand hexpand/>
 
-        <box className="Container">
-          {/* @ts-ignore - TODO fix this lsp warning */}
-          <Media/>
-        </box>
+        <Media/>
 
         <box vertical vexpand hexpand/>
 
-        <box className="Container">
-          <Time/>
-        </box>
-
-        <box className="Container">
-          <Status/>
-        </box>
+        <RecordingIndicator/>
+        <Time/>
+        <Status/>
       </box>
     </window>
   );
