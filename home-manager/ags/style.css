@@ -82,6 +82,7 @@ window.bar button {
 /* Calendar */
 calendar {
     border-radius: 5px;
+    border: 0;
 }
 
 

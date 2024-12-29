@@ -1,37 +1,14 @@
 // Stolen from https://github.com/matt1432/nixos-configs/blob/master/modules/ags/config/widgets/corners/screen-corners.tsx
 
-import { Gtk } from 'astal/gtk3';
 import Cairo from 'cairo';
 
 const radius = 10;
 
 export default (place: string) => (
-    <box
-        css={`
-            padding: 1px; margin:
-                ${place.includes('top') ? '-1px' : '0'}
-                ${place.includes('right') ? '-1px' : '0'}
-                ${place.includes('bottom') ? '-1px' : '0'}
-                ${place.includes('left') ? '-1px' : '0'};
-        `}
-    >
+    <box>
         <drawingarea
-            css={`
-                border-radius: ${radius}px;
-                border-width: 0.06rem;
-                background-color: @theme_bg_color
-            `}
-
             setup={(widget) => {
-                const styleContext = widget.get_style_context();
-
-                widget.set_size_request(radius, radius);
-
                 widget.connect('draw', (_, cairoContext: Cairo.Context) => {
-                    const bgColor = styleContext.get_background_color(Gtk.StateFlags.NORMAL);
-                    const borderColor = styleContext.get_color(Gtk.StateFlags.NORMAL);
-                    const borderWidth = styleContext.get_border(Gtk.StateFlags.NORMAL).left;
-
                     widget.set_size_request(radius, radius);
 
                     switch (place) {
@@ -55,18 +32,8 @@ export default (place: string) => (
                             cairoContext.lineTo(radius, radius);
                             break;
                     }
-
-                    cairoContext.closePath();
-                    cairoContext.setSourceRGBA(bgColor.red, bgColor.green, bgColor.blue, bgColor.alpha);
+                    cairoContext.setSourceRGB(0.19215686274509805, 0.21568627450980393, 0.26666666666666666); // #2E3440
                     cairoContext.fill();
-                    cairoContext.setLineWidth(borderWidth);
-                    cairoContext.setSourceRGBA(
-                        borderColor.red,
-                        borderColor.green,
-                        borderColor.blue,
-                        borderColor.alpha,
-                    );
-                    cairoContext.stroke();
                 });
             }}
         />

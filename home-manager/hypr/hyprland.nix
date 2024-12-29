@@ -127,8 +127,9 @@
             ];
 
             layerrule = [ # Ags
-                "blur, gtk-layer-shell"
-                "ignorezero, gtk-layer-shell" 
+                # White border outline bug when enabling blur..
+                #"blur, gtk-layer-shell"
+                #"ignorezero, gtk-layer-shell" 
             ];
 
             env = [
