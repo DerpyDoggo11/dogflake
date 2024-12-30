@@ -61,7 +61,7 @@ export const launcher = () =>
                         setup={self => { // Auto-grab focus when launched
                             App.connect("window-toggled", () => {
                                 const win = App.get_window("launcher");
-                                if (win && win.name == "launcher" && win.visible == true)
+                                if (win.visible == true)
                                     self.grab_focus()
                             })
                         }}

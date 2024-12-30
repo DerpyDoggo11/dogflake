@@ -60,7 +60,6 @@ export const notifications = (gdkmonitor: Gdk.Monitor) =>
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | RIGHT}
-        clickThrough={true}
     >
         <box vertical>
             {bind(allNotifications)}

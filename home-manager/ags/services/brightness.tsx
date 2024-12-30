@@ -1,6 +1,7 @@
 import GObject, { register, property } from 'astal/gobject';
 import { monitorFile, readFileAsync } from 'astal/file';
 import { exec, execAsync } from 'astal/process';
+import { bind } from 'astal';
 
 const get = (args: string) => Number(exec(`brightnessctl ${args}`));
 const screen = exec(`bash -c "ls -w1 /sys/class/backlight | head -1"`);
@@ -46,3 +47,12 @@ export default class Brightness extends GObject.Object {
         });
     };
 };
+
+export const BrightnessSlider = () => {
+    const brightness = Brightness.get_default()
+
+    return <slider
+        value={bind(brightness, "screen")}
+        onDragged={({ value }) => brightness.screen = value}
+    />
+}

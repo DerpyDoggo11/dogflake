@@ -1,28 +1,28 @@
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "SuperShift, R, exec, ags quit -i desktop-widgets && desktop-widgets" # Restart ags (TODO remove me - for debugging only)
+      "SuperShift, R, exec, astal -q || true && desktop-widgets" # Force restart ags (TODO remove me - for debugging only)
 
       # Quick app access
       "Super, return, exec, foot" # Terminal
       "Super, E, exec, microsoft-edge-stable" # Edge
       "Super, Period, exec, emote" # Emoji picker TODO replace w/ ags
       "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
-      ",XF86PowerOff,  exec, ags -i desktop-widgets toggle powermenu" # Power menu
-      "Super, space, exec, ags -i desktop-widgets toggle launcher" # App laucher
+      ",XF86PowerOff,  exec, astal -t powermenu" # Power menu
+      "Super, space, exec, astal -t launcher" # App laucher
 
-      "Super, C, exec, ags -i desktop-widgets request hideNotif" # Hide most recent notification
+      "Super, C, exec, astal hideNotif" # Hide most recent notification
 
       # Screen recording
-      "Super, R, exec, ags request -i desktop-widgets 'screenrec false'"
-      "ControlSuper, R, exec, ags request -i desktop-widgets 'screenrec true'" # Custom video selection size
-      ",Print, exec, ags request -i desktop-widgets 'screenshot false'"
-      "SHIFT, Print, exec, ags request -i desktop-widgets 'screenshot true'" # Fullscreen screenshot
+      "Super, R, exec, astal 'screenrec false'"
+      "ControlSuper, R, exec, astal 'screenrec true'" # Custom video selection size
+      ",Print, exec, astal 'screenshot false'"
+      "SHIFT, Print, exec, astal 'screenshot true'" # Fullscreen screenshot
 
       # Mpc player manipluation (Ags integration)
       # TODO: Add Super + , (left arrow) for previous track
       # TODO: Add Super + . (right arrow) for next track
-      # TODO: Add super + / to play/pause MPC 
+      # TODO: Add super + / to play/pause MPC
 
       # Widow positioning
       "SuperShift, left, movewindow, l"

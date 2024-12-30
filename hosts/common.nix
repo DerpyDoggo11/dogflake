@@ -37,9 +37,9 @@
       settings = {
         Settings = {
           AutoConnect = true;
-          #EnableNetworkConfiguration = true;
+          EnableNetworkConfiguration = true;
         };
-        #General.EnableNetworkConfiguration = true;
+        General.EnableNetworkConfiguration = true;
       };
     };
   };

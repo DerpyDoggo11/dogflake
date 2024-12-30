@@ -5,13 +5,12 @@
     # Nixpkgs - always pull from unstable
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Manages home configs
-    home-manager = {
+    home-manager = { # Manage user home
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags = {
+    ags = { # Desktop shell
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };

@@ -148,7 +148,7 @@
                 "emote" # TODO replace with ags
                 "mpd" # Daemon for mpc player
                 "sleep 10 && reminders" # TODO integrate reminders script into ags
-                #"desktop-widgets"
+                "desktop-widgets"
 
                 # Autostart apps
                 "[workspace 3 silent] microsoft-edge"

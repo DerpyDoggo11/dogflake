@@ -15,13 +15,9 @@ in
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
-    #ags # Widget system & desktop overlay TODO remove me when finished migrating to agsv2
     foot # Terminal
     libnotify # For ags internal notifications
     bun # Fast all-in-one JS toolkit 
-    dart-sass # Ags Desktop dependency TODO remove me after migrating to agsv2
-    fd # Ags Desktop dependency TODO remove me after migrating to agsv2
-    sassc # Ags Sass compiler TODO remove me after migrating to agsv2
     mpd # Music daemon for the Ags music player
     mpc # CLI for the Ags music player
     copyq # Clipboard manager (TODO: replace with Ags clipboard system)

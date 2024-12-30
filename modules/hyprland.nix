@@ -23,7 +23,6 @@
     iosevka # Best Neovim coding font
     minecraftia # Awesome Minecraft font
     morewaita-icon-theme
-    icon-library # Extra icons, maybe disable if not needed by ags
     font-awesome
     wqy_zenhei # Chinese font for generally cleaner chars
   ];

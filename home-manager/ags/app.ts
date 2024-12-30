@@ -1,4 +1,4 @@
-import { App } from 'astal/gtk3';
+import { App, Gdk } from 'astal/gtk3';
 import { execAsync } from 'astal';
 import style from './style.css';
 import bar from './widgets/bar';
@@ -9,22 +9,28 @@ import { notifications, clearNewestNotification } from './widgets/notifications/
 import { launcher } from './widgets/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, record } from './services/screen';
+import { quickSettings } from './widgets/quicksettings';
+
+export const widgets = (monitor: Gdk.Monitor) => {
+    bar(monitor);
+    corners(monitor);
+    notifications(monitor);
+}
+
 
 App.start({
-    instanceName: "desktop-widgets",
     css: style,
     main() {
-        App.get_monitors().map(bar)
-        App.get_monitors().map(corners);
-        App.get_monitors().map(calendar);
-        App.get_monitors().map(notifications);
-        //App.get_monitors().map(emojiPicker);
-        App.get_monitors().map(launcher);
-        reminders();
+        App.get_monitors().map(widgets);
 
-        // Reconnect/disconnect widgets automatically
-        App.connect('monitor-added', (_, monitor) => bar(monitor))
-        App.connect('monitor-removed', (_, monitor) => bar(monitor))
+        reminders();
+        calendar();
+        //emojiPicker();
+        launcher();
+        quickSettings();
+
+        // Reconnect widgets when new monitor added
+        App.connect('monitor-added', (_, monitor) => widgets(monitor))
     },
     requestHandler(req, res) {
         const reqArgs = req.split(" ");
