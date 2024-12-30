@@ -20,7 +20,7 @@
   fonts.fontconfig.enable = true;
   fonts.packages = with pkgs; [ 
     corefonts
-    iosevka # Best Neovim coding font
+    iosevka # Best coding font
     minecraftia # Awesome Minecraft font
     morewaita-icon-theme
     font-awesome

@@ -30,8 +30,7 @@ in
     grimblast # Screenshotting tool (TODO: replace with Grim)
     slurp # Screen selection tool for screenshots & screenrecording
     swappy # Quick screenshot editor
-    wl-clipboard # Neovim clipboard dependency
-    tree-sitter # Neovim parser dependency
+    wl-clipboard # Wayland clipboard utils
     celluloid # Fast, simple GTK video player using mpv
     gnome-text-editor # Clean, tabbed, GTK text editor
     amberol # Lightweight GTK music player
@@ -39,13 +38,12 @@ in
     nemo-fileroller # File manager archive feature
     file-roller # File manager archive feature part 2
     nodejs_22 # Slow JS runtime
-    python3 # Python
-    python312Packages.pip # Temporary way to install non-declarative pip deps
     steam-run # Used for running some games
     wrangler # Local Workers development
     fish # Better shell
     starship # Fish prompt theme
-    # Putting graphite in hm-managed gtk will not apply - so add it here
+
+    # Theme in hm-managed gtk will not apply - so add it here
     (pkgs.graphite-gtk-theme.override {
       tweaks = [ "nord" ];
       themeVariants = [ "default" ];
@@ -54,48 +52,41 @@ in
 
     # Normal user apps
     microsoft-edge # Web browser
-    neovide # GUI-based Neovim
-    vscodium # Backup IDE (Neovim is main)
+    vscodium # Best IDE
     discord-canary # Voice & video chat app
     libsForQt5.kdenlive # Video editor
     lunar-client # PvP Minecraft client
-    blockbench-electron # Minecraft 3D modeler
+    blockbench-electron # Minecraft 3D modeling app
     #jetbrains.idea-community # Jetbrains IDEA
-    thunderbird # Best email/IRC client
-    obs-studio # For better recording
+    thunderbird # Best email & IRC client
     gnome-system-monitor # Task manager
     gnome-sound-recorder # Voice recording app
     textConvert # AmazinAxel.com small text converter
+    gimp # GNU image manipulation program
+    teams-for-linux # Unoffical MS Teams client
+    libreoffice # Preview Word documents and Excel sheets offline
+    spotdl # Download Spotify playlists
 
-    # Wayland MC
+    # Wayland MC w/ key modifiers patch
     (prismlauncher.override {
       glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {
         patches = [ ../overlays/glfw/Key-Modifiers-Fix.patch ];
       });
     })
 
+    # Patched microfetch program
+    (microfetch.overrideAttrs ({ patches, ... }: {
+      patches = [ ../overlays/microfetch/Microfetch.patch ];
+    }))
+
+    # Global scripts
     (writeScriptBin "data-sync" (builtins.readFile ../scripts/data-sync.fish))
     (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
     (writeScriptBin "reminders" (builtins.readFile ../scripts/reminders.fish))
     (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
-
-    gimp # GNU image manipulation program
-    teams-for-linux # Unoffical MS Teams client
-    libreoffice # Preview Word documents and Excel sheets
-    spotdl # Download Spotify playlists
-
-    # Patched fetch program
-    (microfetch.overrideAttrs ({ patches, ... }: {
-      patches = [ ../overlays/microfetch/Microfetch.patch ];
-    }))
   ];
 
   programs = {
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      withNodeJs = true;
-    };
     git = {
       enable = true;
       config = {
