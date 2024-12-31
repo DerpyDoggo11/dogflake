@@ -68,6 +68,7 @@
       enable = true; # Allows home-manager to manage & create user dirs
       createDirectories = true; # Auto-creates all directories
       extraConfig.XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects"; # Add Projects to xdg dirs
+      extraConfig.XDG_CAPTURES_DIR = "${config.home.homeDirectory}/Videos/Captures"; # Add Captures to xdg dirs
     };
   };
 

@@ -1,10 +1,13 @@
 
-import GObject, { register } from 'astal/gobject';
-
+import GObject from 'astal/gobject';
 import { AstalIO, exec, execAsync, GLib, subprocess, interval, bind } from "astal";
 import { notifySend } from '../lib/notifySend';
 import hypr from "gi://AstalHyprland?version=0.1";
+import Wp from "gi://AstalWp"
+
+const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const Hypr = hypr.get_default();
+const audio = Wp.get_default().audio
 const captureDir = "/home/alec/Videos/Captures";
 const screenshotDir = "/home/alec/Pictures/Screenshots";
 
@@ -17,51 +20,62 @@ export const RecordingIndicator = () =>
 	/>
 
 
-@register({ GTypeName: "ScreenRec" })
+const ScreenRec = GObject.registerClass({
+	Properties: {
+		timer: GObject.ParamSpec.int64(
+			"timer",
+			"Timer",
+			"Recording timer",
+			GObject.ParamFlags.READABLE,
+			Number.MIN_SAFE_INTEGER,
+			Number.MAX_SAFE_INTEGER,
+			0,
+		),
+		recording: GObject.ParamSpec.boolean(
+			"recording",
+			"Recording",
+			"Is recording state",
+			GObject.ParamFlags.READABLE,
+			false,
+	)}
+},
 class ScreenRec extends GObject.Object {
-	  #recorder: AstalIO.Process | null = null;
-	  #file = "";
-	  #interval: AstalIO.Time | null = null;
-  
-	  #timer = 0;
-  
-	  get recording() {
-		return this.#recorder != null;
-	  }
+	#recorder: AstalIO.Process | null = null;
+	#interval: AstalIO.Time | null = null;
+	#file = "";
+	#timer = 0;
 
-	  get timer() {
-		return this.#timer;
-	  }
-
-	  toggle() {
-		(this.recording) 
-		? this.stop()
-		: this.start();
-	  };
-  
-	  async start() {
+	get recording() { return (this.#recorder != null); }
+	get timer() { return this.#timer; }
+	toggle = () => (this.recording) ? this.stop() : this.start();
+	
+	async start() {
 		// Disable blue light shader
 		exec("hyprctl keyword decoration:screen_shader '' ''"); 
-  
+
 		this.#file = `${captureDir}/${now()}.mp4`; // Start recording
-		
-		// TODO get default output of pactl -f json list short sources
-		// parse it as json and get the name with state RUNNING
-		//exec("pactl list short sources | grep 'RUNNING'").split("")[1]
+		console.log(this.#file, "screen rec started")
+
+		let audioOutput = "";
+		await execAsync("wpctl status")
+			.then(output => audioOutput = output.split(/\r?\n/).pop().split(/\s+/).pop()
+		);
+
+		console.log(bind(speaker, "name").get())
 
 		this.#recorder = AstalIO.Process.subprocess(`
-			wl-screenrec --audio --audio-device=alsa -o ${Hypr.focusedMonitor.name} -f ${this.#file}
+			wl-screenrec --audio --audio-device=${audioOutput} -o ${Hypr.focusedMonitor.name} -f ${this.#file}
 		`);
 		this.notify("recording");
-  
+
 		this.#timer = 0;
 		this.#interval = interval(1000, () => {
-		  this.notify("timer");
-		  this.#timer++;
+			this.notify("timer");
+			this.#timer++;
 		});
-	  }
-  
-	  async stop() {  
+	};
+
+	async stop() {
 		this.#recorder.signal(15); // Request wl-screenrec to finish gracefully
 		this.#recorder = null;
 		this.notify("recording");
@@ -91,7 +105,7 @@ class ScreenRec extends GObject.Object {
 			]
 		});
 	};
-};
+});
 
 export const screenRec = new ScreenRec();
 

@@ -1,5 +1,5 @@
 import { App, Gdk } from 'astal/gtk3';
-import { execAsync } from 'astal';
+import { execAsync, bind } from 'astal';
 import style from './style.css';
 import bar from './widgets/bar';
 import corners from './widgets/corners';
@@ -10,6 +10,9 @@ import { launcher } from './widgets/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, screenRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings';
+import Wp from "gi://AstalWp"
+
+const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 
 const allNotifications = new NotifiationMap();
 
@@ -29,6 +32,7 @@ App.start({
         //emojiPicker();
         launcher();
         quickSettings();
+        console.log(speaker.name.replaceAll("output", "input"))
 
         // Reconnect widgets when new monitor added
         App.connect('monitor-added', (_, monitor) => widgets(monitor))
@@ -45,7 +49,7 @@ App.start({
                 ? screenshot(true)
                 : screenshot(false)
                 break;
-            case "record":
+            case "screenrec":
                 screenRec.toggle();
                 break;
         };
