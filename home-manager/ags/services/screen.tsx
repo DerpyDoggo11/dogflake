@@ -1,23 +1,26 @@
 
 import GObject from 'astal/gobject';
-import { AstalIO, exec, execAsync, GLib, subprocess, interval, bind } from "astal";
+import { AstalIO, exec, execAsync, GLib, subprocess, interval, bind } from 'astal';
+import { Gtk } from 'astal/gtk3'
 import { notifySend } from '../lib/notifySend';
-import hypr from "gi://AstalHyprland?version=0.1";
-import Wp from "gi://AstalWp"
+import hypr from 'gi://AstalHyprland?version=0.1';
 
-const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const Hypr = hypr.get_default();
-const audio = Wp.get_default().audio
-const captureDir = "/home/alec/Videos/Captures";
-const screenshotDir = "/home/alec/Pictures/Screenshots";
+const captureDir = '/home/alec/Videos/Captures';
+const screenshotDir = '/home/alec/Pictures/Screenshots';
 
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S');
 
 export const RecordingIndicator = () =>
-	<label
+	<box
+		hexpand
 		visible={bind(screenRec, "recording").as(Boolean)}
-		label={bind(screenRec, "timer").as((t) => t + "s")}
-	/>
+		halign={Gtk.Align.CENTER}
+		className="recIndicator"
+	>
+		<icon icon="media-record-symbolic"/>
+		<label label={bind(screenRec, "timer").as((t) => t + "s")}/>
+	</box>
 
 
 const ScreenRec = GObject.registerClass({
@@ -54,17 +57,10 @@ class ScreenRec extends GObject.Object {
 		exec("hyprctl keyword decoration:screen_shader '' ''"); 
 
 		this.#file = `${captureDir}/${now()}.mp4`; // Start recording
-		console.log(this.#file, "screen rec started")
-
-		let audioOutput = "";
-		await execAsync("wpctl status")
-			.then(output => audioOutput = output.split(/\r?\n/).pop().split(/\s+/).pop()
-		);
-
-		console.log(bind(speaker, "name").get())
+		const audioOutput = exec("bash -c 'wpctl inspect @DEFAULT_AUDIO_SINK@ | grep node.name'")
 
 		this.#recorder = AstalIO.Process.subprocess(`
-			wl-screenrec --audio --audio-device=${audioOutput} -o ${Hypr.focusedMonitor.name} -f ${this.#file}
+			wl-screenrec --audio --audio-device=${audioOutput.split('"')[1]}.monitor -o ${Hypr.focusedMonitor.name} -f ${this.#file}
 		`);
 		this.notify("recording");
 

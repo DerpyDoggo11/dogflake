@@ -10,9 +10,6 @@ import { launcher } from './widgets/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, screenRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings';
-import Wp from "gi://AstalWp"
-
-const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 
 const allNotifications = new NotifiationMap();
 
@@ -32,7 +29,6 @@ App.start({
         //emojiPicker();
         launcher();
         quickSettings();
-        console.log(speaker.name.replaceAll("output", "input"))
 
         // Reconnect widgets when new monitor added
         App.connect('monitor-added', (_, monitor) => widgets(monitor))

@@ -117,3 +117,8 @@ calendar {
 .launcher button label.description {
     color: #d8dee9;
 }
+
+/* Recording indicator */
+.recIndicator { color: #bf616a; }
+.recIndicator icon { padding-right: 3px; }
+.recIndicator label { margin-top: 0px; }
