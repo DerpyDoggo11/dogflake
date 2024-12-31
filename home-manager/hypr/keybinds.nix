@@ -13,10 +13,8 @@
 
       "Super, C, exec, astal hideNotif" # Hide most recent notification
 
-      # Screen recording
-      "Super, R, exec, astal 'screenrec false'"
-      "ControlSuper, R, exec, astal 'screenrec true'" # Custom video selection size
-      ",Print, exec, astal 'screenshot false'"
+      "Super, R, exec, astal screenrec" # Toggle screen recording
+      ",Print, exec, astal 'screenshot false'" # Custom-size screenshot
       "SHIFT, Print, exec, astal 'screenshot true'" # Fullscreen screenshot
 
       # Mpc player manipluation (Ags integration)

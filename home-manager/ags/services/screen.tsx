@@ -1,43 +1,82 @@
 
-import { exec, execAsync, GLib, subprocess, Variable, bind } from 'astal';
+import GObject, { register } from 'astal/gobject';
+
+import { AstalIO, exec, execAsync, GLib, subprocess, interval, bind } from "astal";
 import { notifySend } from '../lib/notifySend';
-import { interval } from 'astal';
-
-const isRecording: Variable<Boolean> = new Variable(true);
-const timer: Variable<number> = new Variable(0);
-
-const file: Variable<String> = new Variable('');
-
+import hypr from "gi://AstalHyprland?version=0.1";
+const Hypr = hypr.get_default();
 const captureDir = "/home/alec/Videos/Captures";
 const screenshotDir = "/home/alec/Pictures/Screenshots";
 
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S');
 
-export const RecordingIndicator = () => {
-	isRecording.subscribe((isRec: boolean) => {
-		if (isRec) return <label hexpand label={bind(timer).as((t) => String(t))}/>
-	});
-	return <box/>; // Fallback
-};
+export const RecordingIndicator = () =>
+	<label
+		visible={bind(screenRec, "recording").as(Boolean)}
+		label={bind(screenRec, "timer").as((t) => t + "s")}
+	/>
 
 
-// TODO get default output of pactl -f json list short sources
-// parse it as json and get the name with state RUNNING
-//exec("pactl list short sources | grep 'RUNNING'").split("")[1]
+@register({ GTypeName: "ScreenRec" })
+class ScreenRec extends GObject.Object {
+	  #recorder: AstalIO.Process | null = null;
+	  #file = "";
+	  #interval: AstalIO.Time | null = null;
+  
+	  #timer = 0;
+  
+	  get recording() {
+		return this.#recorder != null;
+	  }
 
-export const record = async (fullscreen: boolean) => {
-	if (isRecording.get() == false) {
-		// Stop the recording
-		exec('pkill wl-screenrec');
-		isRecording.set(false);
+	  get timer() {
+		return this.#timer;
+	  }
+
+	  toggle() {
+		(this.recording) 
+		? this.stop()
+		: this.start();
+	  };
+  
+	  async start() {
+		// Disable blue light shader
+		exec("hyprctl keyword decoration:screen_shader '' ''"); 
+  
+		this.#file = `${captureDir}/${now()}.mp4`; // Start recording
 		
+		// TODO get default output of pactl -f json list short sources
+		// parse it as json and get the name with state RUNNING
+		//exec("pactl list short sources | grep 'RUNNING'").split("")[1]
+
+		this.#recorder = AstalIO.Process.subprocess(`
+			wl-screenrec --audio --audio-device=alsa -o ${Hypr.focusedMonitor.name} -f ${this.#file}
+		`);
+		this.notify("recording");
+  
+		this.#timer = 0;
+		this.#interval = interval(1000, () => {
+		  this.notify("timer");
+		  this.#timer++;
+		});
+	  }
+  
+	  async stop() {  
+		this.#recorder.signal(15); // Request wl-screenrec to finish gracefully
+		this.#recorder = null;
+		this.notify("recording");
+
+		if (this.#interval) this.#interval.cancel();
+		this.#timer = 0;
+		this.notify("timer");
+
 		// Re-enable blue light shader
 		exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
-
+		
 		notifySend({
 			title: 'Screenrecord',
 			iconName: 'emblem-videos-symbolic',
-			body: String(file.get()),
+			body: this.#file,
 			actions: [
 				{
 					id: '1',
@@ -47,39 +86,14 @@ export const record = async (fullscreen: boolean) => {
 				{
 					id: '2',
 					label: 'View',
-					callback: () => execAsync('xdg-open ' + file)
+					callback: () => execAsync('xdg-open ' + this.#file)
 				}
 			]
 		});
-		return;
 	};
+};
 
-	file.set(`${captureDir}/${now()}.mp4`); // Start recording
-
-	// Disable blue light shader
-	exec("hyprctl keyword decoration:screen_shader '' ''"); 
-
-	// Select screen size
-	let size = '';
-	if (fullscreen) {
-		size = await execAsync('slurp');
-		if (!size) return;
-	}
-
-	// todo add audio support & mic support (optional)
-	// todo show a screen to choose audio input and monitor selection
-	(fullscreen)
-	? exec(`wl-screenrec --audio --audio-device=alsa -o HDMI-A-1 -g "${size}" -f ${file.get()}`) // Custom size
-	: exec(`wl-screenrec --audio --audio-device=alsa -o HDMI-A-1 -f ${file.get()}`) // Custom size
-	
-	isRecording.set(true);
-
-	timer.set(0);
-	interval(1000, () => {
-		timer.set(timer.get() + 1);
-	});
-}
-
+export const screenRec = new ScreenRec();
 
 export const screenshot = async (fullscreen: boolean) => {
 	const file = `${screenshotDir}/${now()}.png`;
@@ -113,6 +127,6 @@ export const screenshot = async (fullscreen: boolean) => {
 		() => { 
 			console.log("Selection was cancelled") 
 			exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
-		},
+		}
 	);
 };

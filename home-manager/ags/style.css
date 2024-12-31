@@ -22,13 +22,15 @@ window.bar button {
 .time .date {
     font-size: 0.7rem;
     font-family: 'Liberation Mono';
+    font-style: italic;
     color: #81A1C1; /* Nord Green frost color */ 
 }
 
 .time .time {
-    font-size: 1.5rem;
+    font-size: 1.55rem;
     font-family: 'WenQuanYi Zen Hei Mono'; /* Monospaced font */
     font-weight: bold;
+    letter-spacing: 4px;
     color: #5E81AC; /* Nord frost color */
 }
 

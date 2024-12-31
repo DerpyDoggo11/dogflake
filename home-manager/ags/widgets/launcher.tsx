@@ -8,9 +8,9 @@ const list = text(text => apps.fuzzy_query(text).slice(0, 5)) // 5 max items
 
 const hide = () => App.toggle_window("launcher");
 
-const AppButton = ({ app }: { app: Apps.Application }) =>
+const AppBtn = ({ app }: { app: Apps.Application }) =>
     <button
-        className="AppButton"
+        className="AppBtn"
         onClicked={() => { app.launch(); hide(); }}
     >
         <box>
@@ -36,8 +36,7 @@ const AppButton = ({ app }: { app: Apps.Application }) =>
 export const launcher = () =>
     <window
         name="launcher"
-        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
-        exclusivity={Astal.Exclusivity.IGNORE}
+        anchor={Astal.WindowAnchor.TOP}
         keymode={Astal.Keymode.ON_DEMAND}
         application={App}
         visible={false}
@@ -67,9 +66,7 @@ export const launcher = () =>
                         }}
                     />
                     <box spacing={6} vertical>
-                        {list.as(list => list.map(app => (
-                            <AppButton app={app}/>
-                        )))}
+                        {list.as(list => list.map(app => <AppBtn app={app}/>))}
                     </box>
                 </box>
             </box>

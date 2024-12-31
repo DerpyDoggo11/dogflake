@@ -5,24 +5,25 @@ import bar from './widgets/bar';
 import corners from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker';
-import { notifications, clearNewestNotification } from './widgets/notifications/notifications';
+import { notifications, NotifiationMap } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher';
 import { notifySend } from './lib/notifySend';
-import { screenshot, record } from './services/screen';
+import { screenshot, screenRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings';
+
+const allNotifications = new NotifiationMap();
 
 export const widgets = (monitor: Gdk.Monitor) => {
     bar(monitor);
     corners(monitor);
-    notifications(monitor);
-}
-
+};
 
 App.start({
     css: style,
     main() {
         App.get_monitors().map(widgets);
-
+        notifications(App.get_monitors()[0], allNotifications);
+        notifications(App.get_monitors()[1], allNotifications);
         reminders();
         calendar();
         //emojiPicker();
@@ -37,18 +38,18 @@ App.start({
         switch(reqArgs[0]) {
 
             case "hideNotif":
-                clearNewestNotification();
+                allNotifications.clearNewestNotification();
                 break;
             case "screenshot":
                 (reqArgs[1] == "true")
                 ? screenshot(true)
                 : screenshot(false)
+                break;
             case "record":
-                (reqArgs[1] == "true")
-                ? record(true)
-                : record(false)
+                screenRec.toggle();
+                break;
         };
-        res("Success");
+        res("Request handled successfully");
     }
 });
 

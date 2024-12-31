@@ -1,17 +1,16 @@
-import { Astal, Gtk, Gdk } from 'astal/gtk3';
+import { App, Astal, Gtk, Gdk } from 'astal/gtk3';
 import Notifd from 'gi://AstalNotifd';
 import { notificationItem } from './notificationitem';
 import { type Subscribable } from 'astal/binding';
 import { Variable, bind } from 'astal';
 const { TOP, RIGHT } = Astal.WindowAnchor;
 
-class NotifiationMap implements Subscribable {
+export class NotifiationMap implements Subscribable {
     private map: Map<number, Gtk.Widget> = new Map();
     private var: Variable<Array<Gtk.Widget>> = new Variable([]);
 
     private notifiy = () =>
         this.var.set([...this.map.values()].reverse());
-    
 
     constructor() {
         const notifd = Notifd.get_default();
@@ -48,18 +47,12 @@ class NotifiationMap implements Subscribable {
         this.var.subscribe(callback);
 };
 
-const allNotifications = new NotifiationMap()
-
-export const clearNewestNotification = () =>
-    allNotifications.clearNewestNotification();
-
-
-export const notifications = (gdkmonitor: Gdk.Monitor) =>
+export const notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscribable) =>
     <window
         className="Notifications"
         gdkmonitor={gdkmonitor}
-        exclusivity={Astal.Exclusivity.EXCLUSIVE}
         anchor={TOP | RIGHT}
+        application={App}
     >
         <box vertical>
             {bind(allNotifications)}

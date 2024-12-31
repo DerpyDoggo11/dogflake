@@ -4,7 +4,7 @@ import { Workspaces } from './modules/workspaces'
 import { Status } from './modules/statusmenu'
 import { Media } from './modules/media'
 import { RecordingIndicator } from '../services/screen';
-
+import { BatteryWidget } from './modules/battery';
 export default function bar(gdkmonitor: Gdk.Monitor) {
     return (
     <window
@@ -24,6 +24,7 @@ export default function bar(gdkmonitor: Gdk.Monitor) {
         <box vertical vexpand hexpand/>
 
         <RecordingIndicator/>
+        <BatteryWidget/>
         <Time/>
         <Status/>
       </box>

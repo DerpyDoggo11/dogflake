@@ -1,3 +1,4 @@
+import { App } from 'astal/gtk3';
 import { bind } from 'astal';
 import Bluetooth from 'gi://AstalBluetooth';
 import Network from 'gi://AstalNetwork'
@@ -30,20 +31,18 @@ const DNDIcon = () =>
 const battery = () => 
   <box/>
 
-export const Status = () => {
-  const onClicked = () => {
-    console.log("TODO open quicksettings");
-  };
-
-  return (
-    <button onClicked={onClicked} className="time" cursor="pointer">
-      {/* todo center meee */}
-      <FlowBox hexpand min_children_per_line={2} max_children_per_line={2}>
-        {bluetoothIcon()}
-        {networkIcon()}
-        {volumeIcon()}
-        {DNDIcon()}
-      </FlowBox>
-    </button>
-  );
-};
+export const Status = () =>
+  <button 
+    onClicked={() => App.toggle_window("quickSettings")} 
+    className="time" 
+    cursor="pointer"
+    //todo onScroll={(_, e) => (e.delta_y > 0) ? volumeup : voldown }
+  >
+    {/* todo center meee */}
+    <FlowBox hexpand min_children_per_line={2} max_children_per_line={2}>
+      {bluetoothIcon()}
+      {networkIcon()}
+      {volumeIcon()}
+      {DNDIcon()}
+    </FlowBox>
+  </button>
