@@ -1,4 +1,5 @@
 import { BrightnessSlider } from "../services/brightness"
+import { SoundSlider } from '../services/sound'
 import { App, Astal } from 'astal/gtk3';
 
 export const quickSettings = () =>
@@ -9,5 +10,6 @@ export const quickSettings = () =>
         visible={false} // Not visible by default
     >
         <BrightnessSlider/>
+        <SoundSlider/>
     </window>
 

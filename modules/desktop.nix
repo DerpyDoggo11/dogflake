@@ -57,7 +57,7 @@ in
     libsForQt5.kdenlive # Video editor
     lunar-client # PvP Minecraft client
     blockbench-electron # Minecraft 3D modeling app
-    jetbrains.idea-community # Jetbrains IDEA
+    #jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email & IRC client
     gnome-system-monitor # Task manager
     gnome-sound-recorder # Voice recording app
@@ -74,8 +74,8 @@ in
       });
     })
 
-    # Patched microfetch program
-    (microfetch.overrideAttrs ({ patches, ... }: {
+    # Patched microfetch program using its flake
+    (inputs.microfetch.packages.x86_64-linux.default.overrideAttrs ({ patches, ... }: {
       patches = [ ../overlays/microfetch/Microfetch.patch ];
     }))
 

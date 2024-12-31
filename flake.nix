@@ -14,6 +14,11 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    microfetch = {
+      url = "github:NotAShelf/microfetch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ { self, home-manager, nixpkgs, ... }: {
