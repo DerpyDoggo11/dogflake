@@ -19,13 +19,13 @@ window.bar button {
 
 
 /* Time bar widget */
-.time .date {
+.time .date, .time .day {
     font-size: 0.7rem;
     font-family: 'Liberation Mono';
     font-style: italic;
     color: #81A1C1; /* Nord greenish frost color */ 
 }
-
+.time .day { letter-spacing: 1px; font-weight: bold; }
 .time .time {
     font-size: 1.55rem;
     font-family: 'WenQuanYi Zen Hei Mono';
