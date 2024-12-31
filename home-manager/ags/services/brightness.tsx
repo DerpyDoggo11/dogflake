@@ -8,14 +8,6 @@ const screen = exec(`bash -c "ls -w1 /sys/class/backlight | head -1"`);
 
 @register({ GTypeName: "Brightness" })
 export default class Brightness extends GObject.Object {
-    static instance: Brightness;
-    static get_default() {
-        if (!this.instance)
-            this.instance = new Brightness();
-
-        return this.instance;
-    }
-
     #screenMax = get("max");
     #screen = get("get") / (get("max") || 1);
 
@@ -48,11 +40,13 @@ export default class Brightness extends GObject.Object {
     };
 };
 
-export const BrightnessSlider = () => {
-    const brightness = Brightness.get_default()
-
-    return <slider
-        value={bind(brightness, "screen")}
-        onDragged={({ value }) => brightness.screen = value}
-    />
-}
+const brightness = new Brightness();
+export const BrightnessSlider = () => 
+    <box>
+        <icon icon="display-brightness-symbolic"/>
+        <slider
+            hexpand
+            value={bind(brightness, "screen")}
+            onDragged={({ value }) => brightness.screen = value}
+        />
+    </box>

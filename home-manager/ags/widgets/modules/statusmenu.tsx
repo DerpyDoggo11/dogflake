@@ -33,7 +33,10 @@ const battery = () =>
 
 export const Status = () =>
   <button 
-    onClicked={() => App.toggle_window("quickSettings")} 
+    onClicked={() => {
+      App.get_window("calendar").hide();
+      App.toggle_window("quickSettings");
+    }}
     className="time" 
     cursor="pointer"
     //todo onScroll={(_, e) => (e.delta_y > 0) ? volumeup : voldown }

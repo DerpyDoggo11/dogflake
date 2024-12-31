@@ -23,12 +23,12 @@ window.bar button {
     font-size: 0.7rem;
     font-family: 'Liberation Mono';
     font-style: italic;
-    color: #81A1C1; /* Nord Green frost color */ 
+    color: #81A1C1; /* Nord greenish frost color */ 
 }
 
 .time .time {
     font-size: 1.55rem;
-    font-family: 'WenQuanYi Zen Hei Mono'; /* Monospaced font */
+    font-family: 'WenQuanYi Zen Hei Mono';
     font-weight: bold;
     letter-spacing: 4px;
     color: #5E81AC; /* Nord frost color */
@@ -122,3 +122,11 @@ calendar {
 .recIndicator { color: #bf616a; }
 .recIndicator icon { padding-right: 3px; }
 .recIndicator label { margin-top: 0px; }
+
+/* Quicksettings menu */
+.quickSettings {
+    min-width: 10rem;
+    background-color: @theme_bg_color;
+    border-radius: 7px;
+    padding: 0.8rem;
+}
