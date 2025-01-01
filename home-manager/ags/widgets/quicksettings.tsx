@@ -1,5 +1,5 @@
 import { BrightnessSlider } from "../services/brightness"
-import { VolumeSlider, Mixer } from '../services/sound'
+import { VolumeSlider, SinkSelector } from '../services/sound'
 import { App, Astal } from 'astal/gtk3';
 
 export const quickSettings = () =>
@@ -13,7 +13,7 @@ export const quickSettings = () =>
             <VolumeSlider/>
             <BrightnessSlider/>
 
-            <Mixer/>
+            <SinkSelector/>
         </box>
     </window>
 

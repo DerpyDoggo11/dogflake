@@ -16,10 +16,10 @@ export const VolumeSlider = () =>
         />
     </box>
 
-export const Mixer = () => {
+export const SinkSelector = () => {
 	const audio = Wp.get_default()?.audio!;
 
-	const MixerItem = (stream: Wp.Endpoint) => {
+	const SinkItem = (stream: Wp.Endpoint) => {
 		return new Widget.Box({
 			hexpand: true,
 			className: "popup-menu__item mixer__item",
@@ -88,7 +88,7 @@ export const Mixer = () => {
 					shown={streams.length > 0 ? "streams" : "placeholder"}
 				>
 					<box vertical name={"streams"}>
-						{streams.map(MixerItem)}
+						{streams.map(SinkItem)}
 					</box>
 					<Placeholder />
 				</stack>

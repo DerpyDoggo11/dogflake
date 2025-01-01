@@ -28,19 +28,19 @@
 
   # Networking configuration using iwd
   networking = {
+    wireless.iwd = {
+      enable = true;
+      #settings = {
+      #  Network.EnableIPv6 = true;
+      #  Settings.AutoConnect = true;
+      #  General.UseDefaultInterface = true;
+      #};
+    };
     networkmanager = {
       enable = true; # For ags network integration
       wifi.backend = "iwd";
-    };
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        Settings = {
-          AutoConnect = true;
-          EnableNetworkConfiguration = true;
-        };
-        General.EnableNetworkConfiguration = true;
-      };
+      #wifi.powersave = true;
+      settings.device."wifi.iwd.autoconnect" = "yes";
     };
   };
 

@@ -16,6 +16,7 @@ const allNotifications = new NotifiationMap();
 export const widgets = (monitor: Gdk.Monitor) => {
     bar(monitor);
     corners(monitor);
+    console.log("New monitor connected") // todo debug me?
 };
 
 App.start({
@@ -26,7 +27,7 @@ App.start({
         notifications(App.get_monitors()[1], allNotifications);
         reminders();
         calendar();
-        //emojiPicker();
+        emojiPicker();
         launcher();
         quickSettings();
 

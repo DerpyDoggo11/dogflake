@@ -7,6 +7,7 @@
       "Super, return, exec, foot" # Terminal
       "Super, E, exec, microsoft-edge-stable" # Edge
       "Super, Period, exec, emote" # Emoji picker TODO replace w/ ags
+      "Super, Period, exec, astal -t emojiPicker" # Emoji Picker
       "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
       ",XF86PowerOff,  exec, astal -t powermenu" # Power menu
       "Super, space, exec, astal -t launcher" # App laucher
