@@ -124,7 +124,7 @@ export const screenshot = async (fullscreen: boolean) => {
 					{
 						id: '1',
 						label: 'Open Captures folder',
-						callback: () => execAsync('nemo ' + screenshotDir), // todo try msg
+						callback: () => execAsync('nemo ' + screenshotDir)
 					},
 					{
 						id: '2',

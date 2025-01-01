@@ -4,14 +4,16 @@ import { notificationItem } from './notificationitem';
 import { type Subscribable } from 'astal/binding';
 import { Variable, bind } from 'astal';
 const { TOP, RIGHT } = Astal.WindowAnchor;
+export const DND = Variable(false);
 
 export class NotifiationMap implements Subscribable {
     private map: Map<number, Gtk.Widget> = new Map();
     private var: Variable<Array<Gtk.Widget>> = new Variable([]);
 
-    private notifiy = () =>
-        this.var.set([...this.map.values()].reverse());
-
+    private notifiy = () => {
+        if (!DND.get())
+           this.var.set([...this.map.values()].reverse());
+    }
     constructor() {
         const notifd = Notifd.get_default();
 
@@ -24,8 +26,9 @@ export class NotifiationMap implements Subscribable {
         );
     };
 
+    // TODO figure out why notifications w/ different keys are being disposed & replaced
     private set(key: number, value: Gtk.Widget) {
-        this.map.get(key)?.destroy(); // If same ID then replace
+        //this.map.get(key)?.destroy(); // If same ID then replace
         this.map.set(key, value);
         this.notifiy();
     };
@@ -37,7 +40,7 @@ export class NotifiationMap implements Subscribable {
     };
 
     public clearNewestNotification() {
-        const newestNotif = [...this.map].at(-1)[0];
+        const newestNotif = [...this.map][0][0];
         this.delete(newestNotif);
     };
 

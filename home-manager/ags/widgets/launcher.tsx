@@ -6,6 +6,12 @@ const apps = new Apps.Apps()
 const text = Variable("")
 const list = text(text => apps.fuzzy_query(text).slice(0, 5)) // 5 max items
 
+// Band-aid warning suppresion about missing icon - TODO find permanent solution
+const iconSubstitute = (icon: string) =>
+    (icon == 'system-file-manager')
+        ? 'system-file-manager-symbolic'
+        : icon;
+
 const hide = () => App.toggle_window("launcher");
 
 const AppBtn = ({ app }: { app: Apps.Application }) =>
@@ -14,7 +20,7 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
         onClicked={() => { app.launch(); hide(); }}
     >
         <box>
-            <icon icon={app.iconName} />
+            <icon icon={iconSubstitute(app.iconName)}/>
             <box valign={Gtk.Align.CENTER} vertical>
                 <label
                     className="name"

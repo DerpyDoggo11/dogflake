@@ -23,7 +23,7 @@ App.start({
     css: style,
     main() {
         App.get_monitors().map(widgets);
-        notifications(App.get_monitors()[0], allNotifications);
+        //notifications(App.get_monitors()[0], allNotifications);
         notifications(App.get_monitors()[1], allNotifications);
         reminders();
         calendar();
@@ -59,6 +59,7 @@ const reminders = () => { // todo finish me
     let bodyText = "The Downloads folder is large! Clean up some unused files.";
     notifySend({
         title: 'Clear Downloads folder',
+        iconName: 'system-file-manager-symbolic', // TODO figure out why not setting a icon will glitch height?
         body: bodyText,
         actions: [
             {

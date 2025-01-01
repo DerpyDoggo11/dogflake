@@ -1,6 +1,15 @@
 import { BrightnessSlider } from "../services/brightness"
 import { VolumeSlider, SinkSelector } from '../services/sound'
 import { App, Astal } from 'astal/gtk3';
+import { DND } from './notifications/notifications';
+
+const DNDToggle = () => 
+    <button 
+        hexpand
+        onClick={() => DND.set(!DND.get())}
+    >
+        Toggle DND
+    </button>
 
 export const quickSettings = () =>
     <window
@@ -14,6 +23,7 @@ export const quickSettings = () =>
             <BrightnessSlider/>
 
             <SinkSelector/>
+            <DNDToggle/>
         </box>
     </window>
 

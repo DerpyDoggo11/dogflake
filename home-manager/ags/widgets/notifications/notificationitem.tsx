@@ -3,15 +3,9 @@ import { Gtk, Astal } from "astal/gtk3"
 import Notifd from "gi://AstalNotifd"
 const { START, CENTER, END } = Gtk.Align
 
-const isIcon = (icon: string) =>
-    !!Astal.Icon.lookup_icon(icon)
-
-const fileExists = (path: string) =>
-    GLib.file_test(path, GLib.FileTest.EXISTS)
-
-const time = (time: number) => GLib.DateTime
-    .new_from_unix_local(time)
-    .format("%H:%M")!
+const isIcon = (icon: string) => !!Astal.Icon.lookup_icon(icon)
+const fileExists = (path: string) => GLib.file_test(path, GLib.FileTest.EXISTS)
+const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%H:%M")!
 
 export const notificationItem = (n: Notifd.Notification) =>
     <box vertical vexpand className="notification">
@@ -58,9 +52,7 @@ export const notificationItem = (n: Notifd.Notification) =>
                     className="body"
                     wrap
                     useMarkup
-                    halign={START}
                     xalign={0}
-                    justifyFill
                     label={n.body}
                 />}
                 {n.get_actions().length > 0 && <box className="actions" spacing={5}>
