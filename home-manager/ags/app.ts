@@ -16,6 +16,7 @@ const allNotifications = new NotifiationMap();
 export const widgets = (monitor: Gdk.Monitor) => {
     bar(monitor);
     corners(monitor);
+    notifications(monitor, allNotifications);
     console.log("New monitor connected") // todo debug me?
 };
 
@@ -23,8 +24,6 @@ App.start({
     css: style,
     main() {
         App.get_monitors().map(widgets);
-        //notifications(App.get_monitors()[0], allNotifications);
-        notifications(App.get_monitors()[1], allNotifications);
         reminders();
         calendar();
         emojiPicker();
@@ -68,7 +67,7 @@ const reminders = () => { // todo finish me
             iconName: 'spotify-symbolic', // TODO figure out why not setting a icon will glitch height
             body: 'Sync all Spotify playlists to have the latest music',
             actions: [{
-                id: '1',
+                id: 1,
                 label: 'Sync Music',
                 callback: () => execAsync('foot -e fish -c spotify-sync')
             }]
@@ -84,7 +83,7 @@ const reminders = () => { // todo finish me
         body: bodyText,
         actions: [
             {
-                id: '1',
+                id: 1,
                 label: 'View folder',
                 callback: () => execAsync('nemo /home/alec/Downloads')
             }

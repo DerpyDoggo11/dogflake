@@ -89,12 +89,12 @@ class ScreenRec extends GObject.Object {
 			body: this.#file,
 			actions: [
 				{
-					id: '1',
+					id: 1,
 					label: 'Open Captures folder',
 					callback: () => execAsync('nemo ' + captureDir),
 				},
 				{
-					id: '2',
+					id: 2,
 					label: 'View',
 					callback: () => execAsync('xdg-open ' + this.#file)
 				}
@@ -122,12 +122,12 @@ export const screenshot = async (fullscreen: boolean) => {
 				iconName: 'image-x-generic-symbolic',
 				actions: [
 					{
-						id: '1',
+						id: 1,
 						label: 'Open Captures folder',
 						callback: () => execAsync('nemo ' + screenshotDir)
 					},
 					{
-						id: '2',
+						id: 2,
 						label: 'Edit',
 						callback: () => execAsync('swappy -f ' + file)
 					}

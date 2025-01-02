@@ -2,9 +2,6 @@
     wayland.windowManager.hyprland = {
         enable = true;
         #xwayland.enable = false; # Causes build error?
-        plugins = [
-            # TODO add hycov
-        ];
         settings = {
             monitor = [ # https://wiki.hyprland.org/Configuring/Monitors/
                 "        , preferred,     auto,     auto"
@@ -147,7 +144,6 @@
                 "copyq --start-server" # TODO replace with ags
                 "emote" # TODO replace with ags
                 "mpd" # Daemon for mpc player
-                "sleep 10 && reminders" # TODO integrate reminders script into ags
                 "desktop-widgets"
 
                 # Autostart apps
