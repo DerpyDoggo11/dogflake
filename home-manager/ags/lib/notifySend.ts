@@ -3,7 +3,7 @@
 import { subprocess } from 'astal';
 
 interface NotifyAction {
-    id: string // TODO retype id as integer
+    id: number
     label: string
     callback: () => void
 }
@@ -40,7 +40,7 @@ export const notifySend = ({
         category ? `--category=${escapeShellArg(category)}` : '',
         iconName ? `--icon=${escapeShellArg(iconName)}` : ''
     ].concat(
-        actions.map(({ id, label }) => `--action=${escapeShellArg(id)}=${escapeShellArg(label)}`),
+        actions.map(({ id, label }) => `--action=${id}=${escapeShellArg(label)}`),
     ).join(' ');
 
     subprocess(
@@ -50,7 +50,7 @@ export const notifySend = ({
                 resolve(parseInt(out));
                 printedId = true;
             } else {
-                actions.find((action) => action.id === out)?.callback();
+                actions.find((action) => String(action.id) === out)?.callback();
             }
         },
         (err) => console.log('[Notify] ' + err)

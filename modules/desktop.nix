@@ -81,7 +81,7 @@ in
 
     # Global scripts
     (writeScriptBin "data-sync" (builtins.readFile ../scripts/data-sync.fish))
-    (writeScriptBin "reminders" (builtins.readFile ../scripts/reminders.fish))
+    (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
     (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
   ];
 
