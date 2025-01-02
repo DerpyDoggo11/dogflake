@@ -13,13 +13,9 @@ const mediaBtn = () =>
 
 export const Media = () => {
     bind(mpris, "players").as((players) => {
-        console.log(players.length)
-        if (players.length < 1)
-            return <box/>; // Don't show anything if no player to control
-        
-        return mediaBtn()
+        return (players.length) ? mediaBtn() : <></>
     });
 
     // Bind doesn't run on start - fallback
-    return (mpris.players.length) ? mediaBtn() : <box/>;
+    return (mpris.players.length) ? mediaBtn() : <></>;
 };

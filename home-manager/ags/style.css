@@ -77,9 +77,10 @@ window.bar button {
     padding: 0.7rem;
 }
 
-.notification .summary { font-weight: bold; }
+.notification .summary { font-size: 1.1rem; }
 .notification .actions { padding-top: 0.7rem; }
-.notification .app-icon { padding-right: 0.2rem; }
+.notification .app-icon { padding-right: 0.4rem; }
+.notification .app-name, .notification .summary { font-family: 'Hammersmith One'; }
 
 /* Calendar */
 calendar {

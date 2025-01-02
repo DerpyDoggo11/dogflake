@@ -30,6 +30,7 @@
   networking = {
     wireless.iwd = {
       enable = true;
+      # TODO make autoconnect actually work
       #settings = {
       #  Network.EnableIPv6 = true;
       #  Settings.AutoConnect = true;

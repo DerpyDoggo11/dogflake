@@ -49,8 +49,7 @@ export const notifySend = ({
             if (!printedId) {
                 resolve(parseInt(out));
                 printedId = true;
-            }
-            else {
+            } else {
                 actions.find((action) => action.id === out)?.callback();
             }
         },

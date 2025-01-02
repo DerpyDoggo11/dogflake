@@ -10,10 +10,10 @@ export class NotifiationMap implements Subscribable {
     private map: Map<number, Gtk.Widget> = new Map();
     private var: Variable<Array<Gtk.Widget>> = new Variable([]);
 
-    private notifiy = () => {
-        if (!DND.get())
+    private notifiy = () =>
+        (!DND.get()) &&
            this.var.set([...this.map.values()].reverse());
-    }
+    
     constructor() {
         const notifd = Notifd.get_default();
 

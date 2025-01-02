@@ -42,9 +42,9 @@ export const Status = () =>
       <DNDIcon/>
       <box>{bind(bluetooth, "isPowered").as((pow) => {
         // TODO fix me breaking other icons in same box
-        if (pow)
-          return <BluetoothIcon/>
-        return <></>
+        return (pow)
+        ? <BluetoothIcon/>
+        : <></>
       })}</box>
     </FlowBox>
   </button>
