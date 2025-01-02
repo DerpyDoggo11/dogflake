@@ -21,7 +21,6 @@ export const Workspaces = (props: Omit<Widget.EventBoxProps, 'child' | 'on_scrol
     </box>
   </eventbox>
 
-
 const WorkspaceBtn = ({ id }: { id: number }) => {
   const className = Variable.derive(
     [bind(hyprland, 'workspaces'), bind(hyprland, 'focusedWorkspace')],

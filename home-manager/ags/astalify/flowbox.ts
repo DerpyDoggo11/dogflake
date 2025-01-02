@@ -1,12 +1,16 @@
 import { Gtk, astalify, type ConstructProps } from "astal/gtk3";
 import { GObject } from "astal";
 
+@GObject.registerClass
 export class FlowBox extends astalify(Gtk.FlowBox) {
-    static {
-        GObject.registerClass(this);
+    constructor(args: ConstructProps<FlowBox, Gtk.FlowBox.ConstructorProps>) {
+        super(args as any);
     };
 
-    constructor(props: ConstructProps<FlowBox, Gtk.FlowBox.ConstructorProps>) {
-        super(props as any);
+    protected getChildren(): Array<Gtk.Widget> {
+        return this.get_children()
+            .filter(ch => ch instanceof Gtk.FlowBoxChild)
+            .map(ch => ch.get_child())
+            .filter(ch => ch instanceof Gtk.Widget)
     };
 };

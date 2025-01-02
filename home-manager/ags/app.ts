@@ -1,5 +1,5 @@
 import { App, Gdk } from 'astal/gtk3';
-import { execAsync, bind } from 'astal';
+import { GLib, execAsync, exec } from 'astal';
 import style from './style.css';
 import bar from './widgets/bar';
 import corners from './widgets/corners';
@@ -55,11 +55,32 @@ App.start({
 });
 
 const reminders = () => { // todo finish me
-    //let bodyText = "Clean up some unused files to keep the system clean";
-    let bodyText = "The Downloads folder is large! Clean up some unused files.";
+    const day = GLib.DateTime.new_now_local().format("%a")!;
+    const folderSize = Number(exec(`bash -c "(du -sb /home/alec/Downloads | awk '{print $1}')"`));
+    let bodyText: string;
+
+    if (day == 'Mon') {
+        (folderSize > 10000000) // Greater than 10MB
+        bodyText = "Clean up some unused files to keep the system clean";
+    } else if (day == 'Fri') { // Send spotify cleanup message
+        notifySend({
+            title: 'Sync Spotify playlists',
+            iconName: 'spotify-symbolic', // TODO figure out why not setting a icon will glitch height
+            body: 'Sync all Spotify playlists to have the latest music',
+            actions: [{
+                id: '1',
+                label: 'Sync Music',
+                callback: () => execAsync('foot -e fish -c spotify-sync')
+            }]
+        });
+    } else if (folderSize > 100000000) { // Greater than 100MB
+        bodyText = "The Downloads folder is large! Clean up some unused files.";
+    };
+
+    (bodyText) &&
     notifySend({
         title: 'Clear Downloads folder',
-        iconName: 'system-file-manager-symbolic', // TODO figure out why not setting a icon will glitch height?
+        iconName: 'system-file-manager-symbolic', // TODO figure out why not setting a icon will glitch height
         body: bodyText,
         actions: [
             {

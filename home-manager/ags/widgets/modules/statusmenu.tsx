@@ -36,14 +36,17 @@ export const Status = () =>
     onScroll={(_, e) => (e.delta_y > 0) ? speaker.volume + 5 : speaker.volume - 5 }
   >
     {/* todo center meee */}
-    <FlowBox hexpand min_children_per_line={2} max_children_per_line={2}>
+    <FlowBox min_children_per_line={2} max_children_per_line={2}>
       <NetworkIcon/>
       <VolumeIcon/>
-      <DNDIcon/>
       <box>{bind(bluetooth, "isPowered").as((pow) => {
-        // TODO fix me breaking other icons in same box
         return (pow)
         ? <BluetoothIcon/>
+        : <></>
+      })}</box>
+      <box>{bind(DND).as((DND) => {
+        return (DND)
+        ? <DNDIcon/>
         : <></>
       })}</box>
     </FlowBox>
