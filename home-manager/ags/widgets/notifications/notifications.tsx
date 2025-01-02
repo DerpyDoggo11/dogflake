@@ -1,4 +1,4 @@
-import { App, Astal, Gtk, Gdk } from 'astal/gtk3';
+import { App, Astal, Gdk } from 'astal/gtk3';
 import Notifd from 'gi://AstalNotifd';
 import { notificationItem } from './notificationitem';
 import { type Subscribable } from 'astal/binding';
@@ -36,10 +36,9 @@ export class NotifiationMap implements Subscribable {
         this.notifiy();
     };
 
-    public clearNewestNotification() {
-        const notif = [...this.map][0][0];
-        this.delete(notif);
-    };
+    public clearNewestNotification = () =>
+        (!DND.get()) && // Force-clearing while in DND will cause issues
+            this.delete([...this.map][0][0]);
 
     get = () => this.var.get();
     

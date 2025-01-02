@@ -13,7 +13,7 @@ interface NotifySendProps {
     appName?: string
     body?: string
     category?: string
-    iconName?: string
+    iconName: string
     title: string
 }
 

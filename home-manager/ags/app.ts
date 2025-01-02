@@ -24,11 +24,11 @@ App.start({
     css: style,
     main() {
         App.get_monitors().map(widgets);
-        reminders();
         calendar();
         emojiPicker();
         launcher();
         quickSettings();
+        reminders();
 
         // Reconnect widgets when new monitor added
         App.connect('monitor-added', (_, monitor) => widgets(monitor))
@@ -36,7 +36,6 @@ App.start({
     requestHandler(req, res) {
         const reqArgs = req.split(" ");
         switch(reqArgs[0]) {
-
             case "hideNotif":
                 allNotifications.clearNewestNotification();
                 break;
@@ -53,7 +52,7 @@ App.start({
     }
 });
 
-const reminders = () => { // todo finish me
+const reminders = () => {
     const day = GLib.DateTime.new_now_local().format("%a")!;
     const folderSize = Number(exec(`bash -c "(du -sb /home/alec/Downloads | awk '{print $1}')"`));
     let bodyText: string;
@@ -64,7 +63,7 @@ const reminders = () => { // todo finish me
     } else if (day == 'Fri') { // Send spotify cleanup message
         notifySend({
             title: 'Sync Spotify playlists',
-            iconName: 'spotify-symbolic', // TODO figure out why not setting a icon will glitch height
+            iconName: 'spotify-symbolic',
             body: 'Sync all Spotify playlists to have the latest music',
             actions: [{
                 id: 1,
@@ -79,7 +78,7 @@ const reminders = () => { // todo finish me
     (bodyText) &&
     notifySend({
         title: 'Clear Downloads folder',
-        iconName: 'system-file-manager-symbolic', // TODO figure out why not setting a icon will glitch height
+        iconName: 'system-file-manager-symbolic',
         body: bodyText,
         actions: [
             {
