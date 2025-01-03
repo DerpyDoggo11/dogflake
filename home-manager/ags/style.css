@@ -2,6 +2,8 @@
   https://github.com/vinceliuice/Graphite-gtk-theme/blob/main/src/sass/gtk/_colors-public.scss
 */
 
+@define-color placeholder_text_color #fff;
+
 window { /* For rounded corners */
     background: transparent;
     border: 0;
@@ -88,15 +90,24 @@ calendar {
 /* App launcher */
 .launcher { 
     background-color: @theme_bg_color;
-    border-radius: 7px;
+    border-radius: 0.4rem;
     margin: 1rem;
     padding: 0.8rem;
 }
 
-.launcher entry { /* Search bar */
+.searchHeader { /* Search bar */
+    padding: 3rem;
+    background-image: url('../wallpapers/Nord-Generic.png');
+    background-size: cover;
     margin-bottom: 0.5rem;
+    border-radius: 0.4rem;
 }
 
+.launcher entry {
+    box-shadow: none;
+    background: transparent;
+    color: white;
+}
 .launcher button {
     padding: .5rem;
 }
