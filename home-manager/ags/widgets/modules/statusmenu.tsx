@@ -35,7 +35,6 @@ export const Status = () =>
     cursor="pointer"
     onScroll={(_, e) => (e.delta_y > 0) ? speaker.volume + 5 : speaker.volume - 5 }
   >
-    {/* todo center meee */}
     <FlowBox min_children_per_line={2} max_children_per_line={2}>
       <NetworkIcon/>
       <VolumeIcon/>

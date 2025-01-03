@@ -54,7 +54,7 @@ class ScreenRec extends GObject.Object {
 	
 	async start() {
 		// Disable blue light shader
-		exec("hyprctl keyword decoration:screen_shader '' ''"); 
+		exec("hyprctl keyword decoration:screen_shader ''"); 
 
 		this.#file = `${captureDir}/${now()}.mp4`; // Start recording
 		const audioOutput = exec("bash -c 'wpctl inspect @DEFAULT_AUDIO_SINK@ | grep node.name'")
@@ -109,7 +109,7 @@ export const screenshot = async (fullscreen: boolean) => {
 	const file = `${screenshotDir}/${now()}.png`;
 
 	// Disable blue light shader
-	exec("hyprctl keyword decoration:screen_shader '' ''"); 
+	exec("hyprctl keyword decoration:screen_shader ''"); 
 
 	const regionType = (fullscreen) ? 'screen' : 'area';
 

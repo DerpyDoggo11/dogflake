@@ -5,29 +5,27 @@ import { Status } from './modules/statusmenu'
 import { Media } from './modules/media'
 import { RecordingIndicator } from '../services/screen';
 import { BatteryWidget } from './modules/battery';
-export default function bar(gdkmonitor: Gdk.Monitor) {
-    return (
-    <window
-      className="bar"
-      gdkmonitor={gdkmonitor}
-      exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
-      application={App}
-    >
-      <box vertical hexpand>
-        <Workspaces/>
 
-        <box vertical vexpand hexpand/>
+export const Bar = (gdkmonitor: Gdk.Monitor) =>
+  <window
+    className="bar"
+    gdkmonitor={gdkmonitor}
+    exclusivity={Astal.Exclusivity.EXCLUSIVE}
+    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
+    application={App}
+  >
+    <box vertical hexpand>
+      <Workspaces/>
 
-        <Media/>
+      <box vertical vexpand hexpand/>
 
-        <box vertical vexpand hexpand/>
+      <Media/>
 
-        <RecordingIndicator/>
-        <BatteryWidget/>
-        <Time/>
-        <Status/>
-      </box>
-    </window>
-  );
-}
+      <box vertical vexpand hexpand/>
+
+      <RecordingIndicator/>
+      <BatteryWidget/>
+      <Time/>
+      <Status/>
+    </box>
+  </window>

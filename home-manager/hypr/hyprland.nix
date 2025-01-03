@@ -72,11 +72,10 @@
                     noise = 0.1;
                 };
 
-                shadow.enabled = false; # Diable shadow for better performance
+                shadow.enabled = false; # Better performance
 
                 # Blue light filter shader
-                # TODO import instead of making it hardlinked to flake
-                screen_shader = "/home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl";
+                screen_shader = "${./blue-light-filter.glsl}";
             };
 
             animations = {
@@ -153,7 +152,6 @@
 
                 #exec-once = /usr/bin/gnome-keyring-daemon --start --components=secrets &
                 #exec-once = /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-                #exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
             ];
 
             workspace = [

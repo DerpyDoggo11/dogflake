@@ -5,6 +5,7 @@
 window { /* For rounded corners */
     background: transparent;
     border: 0;
+    font-family: 'Sora';
 }
 
 window.bar {

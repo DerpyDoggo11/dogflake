@@ -2,7 +2,7 @@
 
 import { Astal, Gdk, App } from 'astal/gtk3';
 
-import RoundedCorner from './corners';
+import { Corner } from './corners';
 
 const TopLeft = (gdkmonitor: Gdk.Monitor) => (
     <window
@@ -11,7 +11,7 @@ const TopLeft = (gdkmonitor: Gdk.Monitor) => (
         anchor={ Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT }
         application={App}
     >
-        {RoundedCorner('topleft')}
+        {Corner('topleft')}
     </window>
 );
 
@@ -22,7 +22,7 @@ const TopRight = (gdkmonitor: Gdk.Monitor) => (
         anchor={ Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT }
         application={App}
     >
-        {RoundedCorner('topright')}
+        {Corner('topright')}
     </window>
 );
 
@@ -33,7 +33,7 @@ const BottomLeft = (gdkmonitor: Gdk.Monitor) => (
         anchor={ Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT }
         application={App}
     >
-        {RoundedCorner('bottomleft')}
+        {Corner('bottomleft')}
     </window>
 );
 
@@ -44,12 +44,11 @@ const BottomRight = (gdkmonitor: Gdk.Monitor) => (
         anchor={ Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT }
         application={App}
     >
-        {RoundedCorner('bottomright')}
+        {Corner('bottomright')}
     </window>
 );
 
-
-export default (gdkmonitor: Gdk.Monitor) => [
+export const Corners = (gdkmonitor: Gdk.Monitor) => [
     TopLeft(gdkmonitor),
     TopRight(gdkmonitor),
     BottomLeft(gdkmonitor),

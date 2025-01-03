@@ -1,22 +1,24 @@
 import { App, Gdk } from 'astal/gtk3';
 import { GLib, execAsync, exec } from 'astal';
 import style from './style.css';
-import bar from './widgets/bar';
-import corners from './widgets/corners';
+import { Bar } from './widgets/bar';
+import { Corners } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker';
-import { notifications, NotifiationMap } from './widgets/notifications/notifications';
+import { Notifications, NotifiationMap } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, screenRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings';
+import { OSD } from './widgets/osd';
 
 const allNotifications = new NotifiationMap();
 
 export const widgets = (monitor: Gdk.Monitor) => {
-    bar(monitor);
-    corners(monitor);
-    notifications(monitor, allNotifications);
+    Bar(monitor);
+    Corners(monitor);
+    Notifications(monitor, allNotifications);
+    OSD(monitor);
     console.log("New monitor connected") // todo debug me?
 };
 

@@ -46,7 +46,7 @@ export class NotifiationMap implements Subscribable {
         this.var.subscribe(callback);
 };
 
-export const notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscribable) =>
+export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscribable) =>
     <window
         className="Notifications"
         gdkmonitor={gdkmonitor}

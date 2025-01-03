@@ -4,7 +4,7 @@ import Cairo from 'cairo';
 
 const radius = 10;
 
-export default (place: string) => (
+export const Corner = (place: string) =>
     <box>
         <drawingarea
             setup={(widget) => {
@@ -38,4 +38,3 @@ export default (place: string) => (
             }}
         />
     </box>
-);
