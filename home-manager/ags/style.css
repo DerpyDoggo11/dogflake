@@ -4,156 +4,20 @@
 
 @define-color placeholder_text_color #fff;
 
-window { /* For rounded corners */
+window {
     background: transparent;
-    border: 0;
     font-family: 'Sora';
 }
 
-window#bar {
-    background: @theme_bg_color;
-    font-family: 'Hammersmith One';
-}
+@import url('./widgets/bar/bar.css');
+@import url('./widgets/launcher/launcher.css');
+@import url('./widgets/notifications/notifications.css');
+@import url('./widgets/osd/osd.css');
+@import url('./widgets/quicksettings/quicksettings.css');
 
-#bar button {
-    border-radius: 0;
-    padding: 0.2rem 0.5rem;
-}
+/* Misc widgets which don't require their own style files */
 
-
-/* Time bar widget */
-.time .date, .time .day {
-    font-size: 0.7rem;
-    font-family: 'Liberation Mono';
-    font-style: italic;
-    color: #81a1c1; /* Nord frost */ 
-}
-.time .day { letter-spacing: 1px; font-weight: bold; }
-.time .time {
-    font-size: 1.55rem;
-    font-family: 'WenQuanYi Zen Hei Mono';
-    font-weight: bold;
-    letter-spacing: 4px;
-    color: #81a1c1; /* Nord frost */
-}
-
-
-/* Workspace list */
-.workspaceList { padding-top: 0.3rem; }
-#bar button.workspaceBtn {
-    background-color: #3b4252; /* Nord dark */
-    border-radius: 50%;
-    transition: 0.2s;
-    margin: 0.25rem;
-}
-#bar button.workspaceBtn.active { background-color: #81a1c1;  }
-#bar button.workspaceBtn.occupied { background-color: #4c566a; }  /* Nord brighter */
-
-/* Status menu */
-.btConnected { background-color: #5e81ac; }
-
-/* Notification popups */
-
-.notification {
-    background-color: @theme_bg_color;
-    margin: 0.4rem;
-    border-radius: 4px;
-    padding: 0;
-    min-width: 15rem;
-}
-
-.notification .header {
-    background-color: #3b4252;
-    padding: 0.5rem;
-    margin: 0;
-    border-radius: 4px 4px 0 0;
-    border-bottom: 2px solid #5e81ac;
-}
-
-.notification .content {
-    margin-top: 0;
-    padding: 0.7rem;
-}
-
-.notification .summary { font-size: 1.1rem; }
-.notification .actions { padding-top: 0.7rem; }
-.notification .app-icon { padding-right: 0.4rem; }
-.notification .app-name, .notification .summary { font-family: 'Hammersmith One'; }
-
-/* Calendar */
-calendar {
+calendar { /* Calendar */
     border-radius: 5px;
     border: 0;
 }
-
-
-/* App launcher */
-.launcher { 
-    background-color: @theme_bg_color;
-    border-radius: 0.4rem;
-    margin: 1rem;
-    padding: 0.8rem;
-}
-
-.searchHeader { /* Search bar */
-    padding: 3rem;
-    background-image: url('../wallpapers/Nord-Generic.png');
-    background-size: cover;
-    margin-bottom: 0.5rem;
-    border-radius: 0.4rem;
-}
-
-.launcher entry {
-    box-shadow: none;
-    background: transparent;
-    color: white;
-}
-.launcher button {
-    padding: .5rem;
-}
-
-.launcher button icon {
-    font-size: 3em;
-    margin-right: .3rem;
-}
-
-.launcher button label.name {
-    color: #d8dee9;
-    font-weight: bold;
-}
-
-.launcher button label.description {
-    color: #d8dee9;
-}
-
-/* Recording indicator */
-.recIndicator { color: #bf616a; }
-.recIndicator icon { padding-right: 3px; }
-.recIndicator label { margin-top: 0px; }
-
-/* Quicksettings menu */
-.quickSettings {
-    min-width: 10rem;
-    background-color: @theme_bg_color;
-    border-radius: 7px;
-    padding: 0.8rem;
-}
-
-/* OSD */
-.osd { 
-    background-color: @theme_bg_color; 
-    padding: 0.5rem;
-    border-radius: 0.3rem;
-    margin: 2rem;
-}
-.osd icon {
-    margin-right: 0.3rem;
-    font-size: 1.5rem;
-}
-.osd levelbar trough { background-color: #81a1c1; border-radius: 0.2rem; }
-.osd levelbar block {
-    border-radius: 0.2rem;
-    margin: 0.2rem;
-}
-.osd levelbar trough block.filled { background-color: #81a1c1; }
-.osd levelbar trough block.empty { background-color: #d8dee9; }

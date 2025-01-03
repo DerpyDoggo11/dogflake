@@ -1,7 +1,7 @@
-import { BrightnessSlider } from "../services/brightness"
-import { VolumeSlider, SinkSelector } from '../services/sound'
+import { BrightnessSlider } from "../../services/brightness"
+import { VolumeSlider, SinkSelector } from '../../services/sound'
 import { App, Astal } from 'astal/gtk3';
-import { DND } from './notifications/notifications';
+import { DND } from '../notifications/notifications';
 
 const DNDToggle = () => 
     <button 

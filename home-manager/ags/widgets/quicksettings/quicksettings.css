@@ -1,0 +1,6 @@
+.quickSettings {
+    min-width: 10rem;
+    background-color: @theme_bg_color;
+    border-radius: 7px;
+    padding: 0.8rem;
+}

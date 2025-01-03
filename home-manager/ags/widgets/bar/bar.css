@@ -1,0 +1,47 @@
+#bar {
+    background: @theme_bg_color;
+    font-family: 'Hammersmith One';
+}
+
+#bar button {
+    border-radius: 0;
+    padding: 0.2rem 0.5rem;
+}
+
+/* Time bar widget */
+.time .date, .time .day {
+    font-size: 0.7rem;
+    font-family: 'Liberation Mono';
+    font-style: italic;
+    color: #81a1c1; /* Nord frost */ 
+}
+.time .day { letter-spacing: 1px; font-weight: bold; }
+.time .time {
+    font-size: 1.55rem;
+    font-family: 'WenQuanYi Zen Hei Mono';
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: #81a1c1; /* Nord frost */
+}
+
+
+/* Workspace list */
+.workspaceList { padding-top: 0.3rem; }
+#bar button.workspaceBtn {
+    background-color: #3b4252; /* Nord dark */
+    border-radius: 50%;
+    transition: 0.2s;
+    margin: 0.25rem;
+}
+#bar button.workspaceBtn.active { background-color: #81a1c1;  }
+#bar button.workspaceBtn.occupied { background-color: #4c566a; }  /* Nord brighter */
+
+/* Status menu */
+.btConnected { background-color: #5e81ac; }
+
+
+
+/* Recording indicator */
+.recIndicator { color: #bf616a; }
+.recIndicator icon { padding-right: 3px; }
+.recIndicator label { margin-top: 0px; }

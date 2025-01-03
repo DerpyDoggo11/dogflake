@@ -1,16 +1,16 @@
 import { App, Gdk } from 'astal/gtk3';
 import { GLib, execAsync, exec } from 'astal';
 import style from './style.css';
-import { Bar } from './widgets/bar';
+import { Bar } from './widgets/bar/bar';
 import { Corners } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker';
 import { Notifications, NotifiationMap } from './widgets/notifications/notifications';
-import { launcher } from './widgets/launcher';
+import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, screenRec } from './services/screen';
-import { quickSettings } from './widgets/quicksettings';
-import { OSD } from './widgets/osd';
+import { quickSettings } from './widgets/quicksettings/quicksettings';
+import { OSD } from './widgets/osd/osd';
 
 const allNotifications = new NotifiationMap();
 

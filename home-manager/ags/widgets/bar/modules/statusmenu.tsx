@@ -4,7 +4,7 @@ import Bluetooth from 'gi://AstalBluetooth';
 import Network from 'gi://AstalNetwork'
 import Wp from 'gi://AstalWp'
 import Battery from 'gi://AstalBattery';
-import { DND } from '../notifications/notifications';
+import { DND } from '../../notifications/notifications';
 
 const bluetooth = Bluetooth.get_default()
 const network = Network.get_default()?.wifi!; // TODO: fix This[#emitter] is null error encountered when using ethernet - check object props
@@ -13,36 +13,34 @@ const battery = Battery.get_default();
 
 const BluetoothIcon = () => 
   <icon
-    className={bind(bluetooth, "isConnected").as((isConn) => (isConn) ? "btConnected" : "")}
-    icon="bluetooth-active-symbolic"
-    visible={bind(bluetooth, "isPowered")}
+    className={bind(bluetooth, 'isConnected').as((isConn) => (isConn) ? 'btConnected' : '')}
+    icon='bluetooth-active-symbolic'
+    visible={bind(bluetooth, 'isPowered')}
   />
   
 const BatteryWidget = () =>
-    <icon
-      icon={bind(battery, 'batteryIconName')}
-    />
-    {/*<label 
-      label={bind(battery, 'percentage').as((p) => (p * 100) + '%')}
-    />*/}
+  <icon
+    tooltipText={bind(battery, 'percentage').as((p) => (p * 100) + '%')}
+    icon={bind(battery, 'batteryIconName')}
+  />
 
 const NetworkIcon = () =>
-  <icon icon={bind(network, "iconName")}/>
+  <icon icon={bind(network, 'iconName')}/>
 
 const VolumeIcon = () => 
-  <icon icon={bind(speaker, "volumeIcon")}/>
+  <icon icon={bind(speaker, 'volumeIcon')}/>
 
 const DNDIcon = () => 
-  <icon visible={bind(DND)} icon="notifications-disabled-symbolic"/>
+  <icon visible={bind(DND)} icon='notifications-disabled-symbolic'/>
 
 export const Status = () =>
   <button 
     onClicked={() => {
-      App.get_window("calendar").hide();
-      App.toggle_window("quickSettings");
+      App.get_window('calendar').hide();
+      App.toggle_window('quickSettings');
     }}
-    className="time" 
-    cursor="pointer"
+    className='time'
+    cursor='pointer'
     onScroll={(_, e) => speaker.volume = (e.delta_y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
     <box vertical spacing={5}>

@@ -1,9 +1,9 @@
-import Apps from "gi://AstalApps"
-import { App, Astal, Gdk, Gtk } from "astal/gtk3"
-import { Variable } from "astal"
+import Apps from 'gi://AstalApps'
+import { App, Astal, Gdk, Gtk } from 'astal/gtk3'
+import { Variable } from 'astal'
 
 const apps = new Apps.Apps()
-const text = Variable("")
+const text = Variable('')
 const list = text(text => apps.fuzzy_query(text).slice(0, 5)) // 5 max items
 
 // Band-aid warning suppresion about missing icon - TODO find permanent solution

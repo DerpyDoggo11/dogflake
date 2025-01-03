@@ -1,7 +1,7 @@
 import { bind, timeout, Variable } from 'astal';
 import { App, Astal, Widget } from 'astal/gtk3';
 import Wp from 'gi://AstalWp'
-import Brightness from '../services/brightness';
+import Brightness from '../../services/brightness';
 const brightness = new Brightness();
 
 let dontShow = true;

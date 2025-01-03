@@ -3,7 +3,7 @@ import { Time } from './modules/time';
 import { Workspaces } from './modules/workspaces'
 import { Status } from './modules/statusmenu'
 import { Media } from './modules/media'
-import { RecordingIndicator } from '../services/screen';
+import { RecordingIndicator } from '../../services/screen';
 
 export const Bar = (gdkmonitor: Gdk.Monitor) =>
   <window

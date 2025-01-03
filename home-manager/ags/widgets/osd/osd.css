@@ -1,0 +1,17 @@
+.osd { 
+    background-color: @theme_bg_color; 
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    margin: 2rem;
+}
+.osd icon {
+    margin-right: 0.3rem;
+    font-size: 1.5rem;
+}
+.osd levelbar trough { background-color: #81a1c1; border-radius: 0.2rem; }
+.osd levelbar block {
+    border-radius: 0.2rem;
+    margin: 0.2rem;
+}
+.osd levelbar trough block.filled { background-color: #81a1c1; }
+.osd levelbar trough block.empty { background-color: #d8dee9; }

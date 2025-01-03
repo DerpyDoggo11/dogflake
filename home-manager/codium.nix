@@ -53,6 +53,7 @@
             "workbench.editor.empty.hint" = "hidden";
             "explorer.confirmDragAndDrop" = false;
             "javascript.updateImportsOnFileMove.enabled" = "always";
+            "typescript.updateImportsOnFileMove.enabled" = "always";
             "diffEditor.ignoreTrimWhitespace" = false;
             "livePreview.serverRoot" = "public/";
             "editor.minimap.enabled" = false;
