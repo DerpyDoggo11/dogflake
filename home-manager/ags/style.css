@@ -13,7 +13,7 @@ window.bar {
     font-family: 'Hammersmith One';
 }
 
-window.bar button {
+.bar button {
     border-radius: 0;
     padding: 0.2rem 0.5rem;
 }
@@ -24,7 +24,7 @@ window.bar button {
     font-size: 0.7rem;
     font-family: 'Liberation Mono';
     font-style: italic;
-    color: #81A1C1; /* Nord greenish frost color */ 
+    color: #81a1c1; /* Nord frost */ 
 }
 .time .day { letter-spacing: 1px; font-weight: bold; }
 .time .time {
@@ -32,35 +32,29 @@ window.bar button {
     font-family: 'WenQuanYi Zen Hei Mono';
     font-weight: bold;
     letter-spacing: 4px;
-    color: #5E81AC; /* Nord frost color */
+    color: #81a1c1; /* Nord frost */
 }
 
 
 /* Workspace list */
-.workspaceBtn { /* Empty workspace */
-    color: black;
+.workspaceList { padding-top: 0.3rem; }
+button.workspaceBtn { /* Empty workspace */
+    background-color: #3b4252; /* Nord dark */
+    border-radius: 50%;
+    transition: 0.2s;
 }
-
-.workspaceBtn.active {
-    color: blue;
-}
-
-.workspaceBtn.occupied {
-    color: red;
-}
+button.workspaceBtn.active { background-color: #81a1c1;  }
+button.workspaceBtn.occupied { background-color: #4c566a; }  /* Nord brighter */
 
 /* Status menu */
-.btConnected {
-    color: blue;
-}
-
+.btConnected { background-color: #5e81ac; }
 
 /* Notification popups */
 
 .notification {
     background-color: @theme_bg_color;
     margin: 0.4rem;
-    border-radius: 4px; /* 7px */
+    border-radius: 4px;
     padding: 0;
     min-width: 15rem;
 }

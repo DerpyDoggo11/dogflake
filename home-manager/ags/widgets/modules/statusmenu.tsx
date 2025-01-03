@@ -3,18 +3,28 @@ import { bind } from 'astal';
 import Bluetooth from 'gi://AstalBluetooth';
 import Network from 'gi://AstalNetwork'
 import Wp from 'gi://AstalWp'
-import { FlowBox } from "../../astalify/flowbox";
+import Battery from 'gi://AstalBattery';
 import { DND } from '../notifications/notifications';
 
 const bluetooth = Bluetooth.get_default()
 const network = Network.get_default()?.wifi!; // TODO: fix This[#emitter] is null error encountered when using ethernet - check object props
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
+const battery = Battery.get_default();
 
 const BluetoothIcon = () => 
   <icon
     className={bind(bluetooth, "isConnected").as((isConn) => (isConn) ? "btConnected" : "")}
     icon="bluetooth-active-symbolic"
+    visible={bind(bluetooth, "isPowered")}
   />
+  
+const BatteryWidget = () =>
+    <icon
+      icon={bind(battery, 'batteryIconName')}
+    />
+    {/*<label 
+      label={bind(battery, 'percentage').as((p) => (p * 100) + '%')}
+    />*/}
 
 const NetworkIcon = () =>
   <icon icon={bind(network, "iconName")}/>
@@ -33,20 +43,13 @@ export const Status = () =>
     }}
     className="time" 
     cursor="pointer"
-    onScroll={(_, e) => speaker.volume = (e.delta_y > 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
+    onScroll={(_, e) => speaker.volume = (e.delta_y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
-    <FlowBox min_children_per_line={2} max_children_per_line={2}>
+    <box vertical spacing={5}>
       <NetworkIcon/>
       <VolumeIcon/>
-      <box>{bind(bluetooth, "isPowered").as((pow) => {
-        return (pow)
-        ? <BluetoothIcon/>
-        : <></>
-      })}</box>
-      <box>{bind(DND).as((DND) => {
-        return (DND)
-        ? <DNDIcon/>
-        : <></>
-      })}</box>
-    </FlowBox>
+      <BatteryWidget/>
+      <BluetoothIcon/>
+      <DNDIcon/>
+    </box>
   </button>
