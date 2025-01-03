@@ -8,12 +8,12 @@ window { /* For rounded corners */
     font-family: 'Sora';
 }
 
-window.bar {
+window#bar {
     background: @theme_bg_color;
     font-family: 'Hammersmith One';
 }
 
-.bar button {
+#bar button {
     border-radius: 0;
     padding: 0.2rem 0.5rem;
 }
@@ -38,13 +38,14 @@ window.bar {
 
 /* Workspace list */
 .workspaceList { padding-top: 0.3rem; }
-button.workspaceBtn { /* Empty workspace */
+#bar button.workspaceBtn {
     background-color: #3b4252; /* Nord dark */
     border-radius: 50%;
     transition: 0.2s;
+    margin: 0.25rem;
 }
-button.workspaceBtn.active { background-color: #81a1c1;  }
-button.workspaceBtn.occupied { background-color: #4c566a; }  /* Nord brighter */
+#bar button.workspaceBtn.active { background-color: #81a1c1;  }
+#bar button.workspaceBtn.occupied { background-color: #4c566a; }  /* Nord brighter */
 
 /* Status menu */
 .btConnected { background-color: #5e81ac; }
@@ -126,3 +127,22 @@ calendar {
     border-radius: 7px;
     padding: 0.8rem;
 }
+
+/* OSD */
+.osd { 
+    background-color: @theme_bg_color; 
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    margin: 2rem;
+}
+.osd icon {
+    margin-right: 0.3rem;
+    font-size: 1.5rem;
+}
+.osd levelbar trough { background-color: #81a1c1; border-radius: 0.2rem; }
+.osd levelbar block {
+    border-radius: 0.2rem;
+    margin: 0.2rem;
+}
+.osd levelbar trough block.filled { background-color: #81a1c1; }
+.osd levelbar trough block.empty { background-color: #d8dee9; }

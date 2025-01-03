@@ -9,7 +9,7 @@ let count = 0;
 const icon: Variable<string> = new Variable('');
 const val: Variable<Number> = new Variable(0);
 
-timeout(1000, () => {
+timeout(500, () => {
     dontShow = false;
 });
 
@@ -32,10 +32,9 @@ export const OSD = () =>
             });
         }}
     >
-        <box vertical>
+        <box className="osd">
             <icon icon={bind(icon)}/>
-            <levelbar value={bind(val).as(Number)} widthRequest={500}>
-            </levelbar>    
+            <levelbar value={bind(val).as(Number)} widthRequest={400}/>
         </box>
     </window>
 

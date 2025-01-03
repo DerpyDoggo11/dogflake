@@ -4,7 +4,6 @@ import { FlowBox } from "../astalify/flowbox";
 export const emojiPicker = () =>
     <window
       name="emojiPicker"
-      className="emojiPicker"
       keymode={Astal.Keymode.ON_DEMAND} 
       application={App}
       visible={false}

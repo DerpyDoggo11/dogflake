@@ -5,7 +5,7 @@ import { bind } from 'astal';
 
 const get = (args: string) => Number(exec(`brightnessctl ${args}`));
 const screen = exec(`bash -c "ls -w1 /sys/class/backlight | head -1"`);
-// todo remove screen property from brightness 
+// Refactor to remove screen property and just use Variable bindings instead of this complicated class
 
 @register({ GTypeName: "Brightness" })
 export default class Brightness extends GObject.Object {

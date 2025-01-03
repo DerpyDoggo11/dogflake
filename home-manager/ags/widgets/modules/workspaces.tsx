@@ -40,6 +40,5 @@ const WorkspaceBtn = ({ id }: { id: number }) => {
   return <button
       className={className()}
       onClick={() => hyprland.dispatch('workspace', `${id}`)}
-      border_width={2}
     />
 };

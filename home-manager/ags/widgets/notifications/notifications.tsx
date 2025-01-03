@@ -55,7 +55,7 @@ export class NotifiationMap implements Subscribable {
 
 export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscribable) =>
     <window
-        className="Notifications"
+        name="notifications"
         gdkmonitor={gdkmonitor}
         anchor={TOP | RIGHT}
         application={App}

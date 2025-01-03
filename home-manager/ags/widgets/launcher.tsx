@@ -52,29 +52,25 @@ export const launcher = () =>
                self.hide()
         }}
     >
-        <box>
-            <box hexpand={false} vertical>
-                <box widthRequest={500} className="launcher" vertical>
-                    <entry
-                        placeholderText="Search"
-                        text={text()}
-                        onChanged={self => text.set(self.text)}
-                        onActivate={() => {
-                            apps.fuzzy_query(text.get())?.[0].launch();
-                            hide();
-                        }}
-                        setup={self => { // Auto-grab focus when launched
-                            App.connect("window-toggled", () => {
-                                const win = App.get_window("launcher");
-                                if (win.visible == true)
-                                    self.grab_focus()
-                            })
-                        }}
-                    />
-                    <box spacing={6} vertical>
-                        {list.as(list => list.map(app => <AppBtn app={app}/>))}
-                    </box>
-                </box>
+        <box widthRequest={500} className="launcher" vertical>
+            <entry
+                placeholderText="Search"
+                text={text()}
+                onChanged={self => text.set(self.text)}
+                onActivate={() => {
+                    apps.fuzzy_query(text.get())?.[0].launch();
+                    hide();
+                }}
+                setup={self => { // Auto-grab focus when launched
+                    App.connect("window-toggled", () => {
+                        const win = App.get_window("launcher");
+                        if (win.visible == true)
+                            self.grab_focus()
+                    })
+                }}
+            />
+            <box spacing={6} vertical>
+                {list.as(list => list.map(app => <AppBtn app={app}/>))}
             </box>
         </box>
     </window>

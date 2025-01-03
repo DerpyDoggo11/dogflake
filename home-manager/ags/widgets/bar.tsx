@@ -7,7 +7,7 @@ import { RecordingIndicator } from '../services/screen';
 
 export const Bar = (gdkmonitor: Gdk.Monitor) =>
   <window
-    className="bar"
+    name="bar"
     gdkmonitor={gdkmonitor}
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
     anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
