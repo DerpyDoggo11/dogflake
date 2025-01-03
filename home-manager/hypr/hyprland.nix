@@ -143,7 +143,7 @@
                 "copyq --start-server" # TODO replace with ags
                 "emote" # TODO replace with ags
                 "mpd" # Daemon for mpc player
-                "desktop-shell"
+                "cd /home/alec/Projects/flake/home-manager/ags && desktop-shell"
 
                 # Autostart apps
                 "[workspace 3 silent] microsoft-edge"
