@@ -9,14 +9,6 @@ window {
     font-family: 'Sora';
 }
 
-@import url('./widgets/bar/bar.css');
-@import url('./widgets/launcher/launcher.css');
-@import url('./widgets/notifications/notifications.css');
-@import url('./widgets/osd/osd.css');
-@import url('./widgets/quicksettings/quicksettings.css');
-
-/* Misc widgets which don't require their own style files */
-
 calendar { /* Calendar */
     border-radius: 5px;
     border: 0;

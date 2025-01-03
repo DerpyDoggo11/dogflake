@@ -1,6 +1,5 @@
 import { App, Gdk } from 'astal/gtk3';
 import { GLib, execAsync, exec } from 'astal';
-import style from './style.css';
 import { Bar } from './widgets/bar/bar';
 import { Corners } from './widgets/corners';
 import { calendar } from './widgets/calendar';
@@ -12,6 +11,13 @@ import { screenshot, screenRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
 import { OSD } from './widgets/osd/osd';
 
+const defaultStyles = await import('./style.css')
+const barStyles = await import('./widgets/bar/bar.css');
+const launcherStyles = await import('./widgets/launcher/launcher.css');
+const notificationStyles = await import('./widgets/notifications/notifications.css');
+const osdStyles = await import('./widgets/osd/osd.css');
+const quicksettingsStyles = await import('./widgets/quicksettings/quicksettings.css');
+
 const allNotifications = new NotifiationMap();
 
 export const widgets = (monitor: Gdk.Monitor) => {
@@ -22,7 +28,12 @@ export const widgets = (monitor: Gdk.Monitor) => {
 };
 
 App.start({
-    css: style,
+    css: defaultStyles.default +
+         barStyles.default + 
+         launcherStyles.default + 
+         notificationStyles.default + 
+         osdStyles.default + 
+         quicksettingsStyles.default,
     main() {
         App.get_monitors().map(widgets);
         calendar();
