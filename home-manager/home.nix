@@ -38,7 +38,7 @@
       (inputs.ags.lib.bundle {
         inherit pkgs;
         src = ./ags;
-        name = "desktop-widgets"; # Executable name
+        name = "desktop-shell"; # Executable name
         entry = "app.ts";
         extraPackages = [
           inputs.ags.packages.${pkgs.system}.astal3 # Core lib
@@ -57,7 +57,7 @@
   };
 
   xdg = {
-    configFile."homepage.html" = { source = ./homepage.html; };
+    configFile."homepage.html".source = ./homepage.html;
     
     # Symlink all fonts
     dataFile."fonts" = {
@@ -68,8 +68,8 @@
     userDirs = {
       enable = true; # Allows home-manager to manage & create user dirs
       createDirectories = true; # Auto-creates all directories
-      extraConfig.XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects"; # Add Projects to xdg dirs
-      extraConfig.XDG_CAPTURES_DIR = "${config.home.homeDirectory}/Videos/Captures"; # Add Captures to xdg dirs
+      extraConfig.XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects";
+      extraConfig.XDG_CAPTURES_DIR = "${config.home.homeDirectory}/Videos/Captures";
     };
   };
 
@@ -78,28 +78,28 @@
       enable = false;
       bashrcExtra = ''
           if [ "$TERM" = "linux" ]; then
-              echo -en "\e]P0222222" #black
-              echo -en "\e]P8222222" #darkgrey
-              echo -en "\e]P1803232" #darkred
-              echo -en "\e]P9982b2b" #red
-              echo -en "\e]P25b762f" #darkgreen
-              echo -en "\e]PA89b83f" #green
-              echo -en "\e]P3aa9943" #brown
-              echo -en "\e]PBefef60" #yellow
-              echo -en "\e]P4324c80" #darkblue
-              echo -en "\e]PC2b4f98" #blue
-              echo -en "\e]P5706c9a" #darkmagenta
-              echo -en "\e]PD826ab1" #magenta
-              echo -en "\e]P692b19e" #darkcyan
-              echo -en "\e]PEa1cdcd" #cyan
-              echo -en "\e]P7ffffff" #lightgrey
-              echo -en "\e]PFdedede" #white
-              clear #for background artifacting
+              echo -en "\e]P0222222" # Black
+              echo -en "\e]P8222222" # Dark grey
+              echo -en "\e]P1803232" # Dark red
+              echo -en "\e]P9982b2b" # Red
+              echo -en "\e]P25b762f" # Dark green
+              echo -en "\e]PA89b83f" # Green
+              echo -en "\e]P3aa9943" # Brown
+              echo -en "\e]PBefef60" # Yellow
+              echo -en "\e]P4324c80" # Dark blue
+              echo -en "\e]PC2b4f98" # Blue
+              echo -en "\e]P5706c9a" # Dark magenta
+              echo -en "\e]PD826ab1" # Magenta
+              echo -en "\e]P692b19e" # Darkcyan
+              echo -en "\e]PEa1cdcd" # Cyan
+              echo -en "\e]P7ffffff" # Light grey
+              echo -en "\e]PFdedede" # White
+              clear
           fi
       '';
     };
 
-    # for postmarketos to optimize local connection
+    # For pmOS to optimize local connection
     ssh = {
       enable = true;
       extraConfig = ''

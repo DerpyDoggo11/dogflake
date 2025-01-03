@@ -1,24 +1,25 @@
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "SuperShift, R, exec, astal -q || true && desktop-widgets" # Force restart ags (TODO remove me - for debugging only)
+      "SuperShift, R, exec, astal -q || true && desktop-shell" # Force restart ags (TODO remove me - for debugging only)
 
       # Quick app access
       "Super, return, exec, foot" # Terminal
       "Super, E, exec, microsoft-edge" # Edge
+
+      # Astal widget control
       "Super, Period, exec, emote" # Emoji picker TODO replace w/ ags
       "Super, Period, exec, astal -t emojiPicker" # Emoji Picker
       "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
       ",XF86PowerOff,  exec, astal -t powermenu" # Power menu
       "Super, space, exec, astal -t launcher" # App laucher
-
       "Super, C, exec, astal hideNotif" # Hide most recent notification
 
       "Super, R, exec, astal screenrec" # Toggle screen recording
       ",Print, exec, astal 'screenshot false'" # Custom-size screenshot
       "SHIFT, Print, exec, astal 'screenshot true'" # Fullscreen screenshot
 
-      # Mpc player manipluation (Ags integration)
+      # Astal mpc player integration
       # TODO: Add Super + , (left arrow) for previous track
       # TODO: Add Super + . (right arrow) for next track
       # TODO: Add super + / to play/pause MPC

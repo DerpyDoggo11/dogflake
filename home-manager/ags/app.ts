@@ -18,7 +18,6 @@ export const widgets = (monitor: Gdk.Monitor) => {
     Bar(monitor);
     Corners(monitor);
     Notifications(monitor, allNotifications);
-    OSD(monitor);
     console.log("New monitor connected") // todo debug me?
 };
 
@@ -30,6 +29,7 @@ App.start({
         emojiPicker();
         launcher();
         quickSettings();
+        OSD();
         reminders();
 
         // Reconnect widgets when new monitor added

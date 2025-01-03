@@ -1,5 +1,6 @@
-import { App, Astal } from 'astal/gtk3';
-import { Calendar } from '../astalify/calendar';
+import { App, Astal, Gtk, astalify } from 'astal/gtk3';
+
+const Calendar = astalify(Gtk.Calendar)
 
 export const calendar = () =>
   <window

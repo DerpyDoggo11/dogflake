@@ -28,9 +28,9 @@ export const SinkSelector = () => {
 			<ComboBox
 				hexpand
 			>
-				{devices.map(SinkItem)}
+				{//devices.map(SinkItem)}
+				}
 			</ComboBox>
 		))}
 	</box>
 };
-// TODO add osd here

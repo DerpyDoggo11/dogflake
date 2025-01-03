@@ -10,8 +10,7 @@ let
     icon = "insert-text-symbolic";
     comment = "Minecraft small text converter";
   };
-in
-{
+in {
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [

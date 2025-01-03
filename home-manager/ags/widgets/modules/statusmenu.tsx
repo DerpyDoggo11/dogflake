@@ -33,7 +33,7 @@ export const Status = () =>
     }}
     className="time" 
     cursor="pointer"
-    onScroll={(_, e) => (e.delta_y > 0) ? speaker.volume + 5 : speaker.volume - 5 }
+    onScroll={(_, e) => speaker.volume = (e.delta_y > 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
     <FlowBox min_children_per_line={2} max_children_per_line={2}>
       <NetworkIcon/>

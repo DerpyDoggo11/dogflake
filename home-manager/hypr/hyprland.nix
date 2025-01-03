@@ -105,7 +105,6 @@
             ];
 
             windowrulev2 = [
-                #"suppressevent maximize, class:.*" # Buggy window blockage
                 "float,class:(copyq)$"
                 "fullscreenstate, -1, 2,title:(Minecraft 1)(.*)$" # Minecraft titlebar fix
                 "renderunfocused,title:(Minecraft 1)(.*)$" # Play Minecraft sounds even when not focused
@@ -125,7 +124,8 @@
             layerrule = [ # Ags
                 # White border outline bug when enabling blur..
                 #"blur, gtk-layer-shell"
-                #"ignorezero, gtk-layer-shell" 
+                #"ignorealpha, gtk-layer-shell"
+                #"xray on, gtk-layer-shell"
             ];
 
             env = [
@@ -143,7 +143,7 @@
                 "copyq --start-server" # TODO replace with ags
                 "emote" # TODO replace with ags
                 "mpd" # Daemon for mpc player
-                "desktop-widgets"
+                "desktop-shell"
 
                 # Autostart apps
                 "[workspace 3 silent] microsoft-edge"
@@ -172,7 +172,6 @@
         };
     };
 
-    #home.file."${config.xdg.configHome}/hypr/xdph.conf" = {
     xdg.configFile."hypr/xdph.conf" = {
         text = ''
             screencopy {

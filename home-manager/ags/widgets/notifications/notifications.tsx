@@ -11,8 +11,7 @@ export class NotifiationMap implements Subscribable {
     private var: Variable<Array<Notifd.Notification>> = new Variable([]);
 
     private notifiy = () =>
-        (!DND.get()) &&
-           this.var.set([...this.map.values()].reverse());
+        this.var.set([...this.map.values()].reverse());
     
     constructor() {
         const notifd = Notifd.get_default();
@@ -32,14 +31,22 @@ export class NotifiationMap implements Subscribable {
     };
 
     private delete(key: number) {
+        let isDND: boolean;
+        if (DND.get()) {
+            isDND = true
+            DND.set(false)
+        }
+
         this.map.delete(key);
         this.notifiy();
+
+        if (isDND)
+            DND.set(true);
     };
 
     public clearNewestNotification = () =>
-        (!DND.get()) && // Force-clearing while in DND will cause issues
-            this.delete([...this.map][0][0]);
-
+        this.delete([...this.map][0][0]);
+    
     get = () => this.var.get();
     
     subscribe = (callback: (list: Array<Notifd.Notification>) => void) => 
