@@ -1,8 +1,7 @@
 import { bind, timeout, Variable } from 'astal';
 import { App, Astal, Widget } from 'astal/gtk3';
 import Wp from 'gi://AstalWp'
-import Brightness from '../../services/brightness';
-const brightness = new Brightness();
+import { brightness } from '../../services/brightness';
 
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 let dontShow = true;
@@ -21,9 +20,9 @@ export const OSD = () =>
         application={App}
         visible={false}
         setup={(self) => {
-            self.hook(brightness, 'notify::screen', () => {
-                OSDChange('brightness', brightness.screen, self);
-            });
+            brightness.subscribe((value) =>
+                OSDChange('brightness', value, self)
+            );
         
             Variable.derive([bind(speaker, 'volume'), bind(speaker, 'mute')], (v) => {
                 OSDChange('vol', v, self);

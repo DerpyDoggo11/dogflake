@@ -1,3 +1,4 @@
+import style from './style.css';
 import { App, Gdk } from 'astal/gtk3';
 import { GLib, execAsync, exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
@@ -10,13 +11,7 @@ import { notifySend } from './lib/notifySend';
 import { screenshot, screenRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
 import { OSD } from './widgets/osd/osd';
-
-const defaultStyles = await import('./style.css')
-const barStyles = await import('./widgets/bar/bar.css');
-const launcherStyles = await import('./widgets/launcher/launcher.css');
-const notificationStyles = await import('./widgets/notifications/notifications.css');
-const osdStyles = await import('./widgets/osd/osd.css');
-const quicksettingsStyles = await import('./widgets/quicksettings/quicksettings.css');
+import { monitorBrightness } from './services/brightness';
 
 const allNotifications = new NotifiationMap();
 
@@ -28,12 +23,7 @@ export const widgets = (monitor: Gdk.Monitor) => {
 };
 
 App.start({
-    css: defaultStyles.default +
-         barStyles.default + 
-         launcherStyles.default + 
-         notificationStyles.default + 
-         osdStyles.default + 
-         quicksettingsStyles.default,
+    css: style,
     main() {
         App.get_monitors().map(widgets);
         calendar();
@@ -42,6 +32,7 @@ App.start({
         quickSettings();
         OSD();
         reminders();
+        monitorBrightness(); // Start brightness monitor for OSD subscribbable
 
         // Reconnect widgets when new monitor added
         App.connect('monitor-added', (_, monitor) => widgets(monitor))
