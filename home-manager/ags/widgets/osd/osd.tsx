@@ -4,6 +4,7 @@ import Wp from 'gi://AstalWp'
 import Brightness from '../../services/brightness';
 const brightness = new Brightness();
 
+const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 let dontShow = true;
 let count = 0;
 const icon: Variable<string> = new Variable('');
@@ -13,9 +14,6 @@ timeout(500, () => {
     dontShow = false;
 });
 
-const speaker = Wp.get_default()?.audio.defaultSpeaker!;
-
-// TODO for better performance, handle brightness service at root and pass its object thru here
 export const OSD = () => 
     <window
         name="osd"

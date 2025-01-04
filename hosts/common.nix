@@ -31,11 +31,11 @@
     wireless.iwd = {
       enable = true;
       # TODO make autoconnect actually work
-      #settings = {
-      #  Network.EnableIPv6 = true;
-      #  Settings.AutoConnect = true;
-      #  General.UseDefaultInterface = true;
-      #};
+      settings = {
+        Network.EnableIPv6 = true;
+        Settings.AutoConnect = true;
+        #General.UseDefaultInterface = true;
+      };
     };
     networkmanager = {
       enable = true; # For ags network integration

@@ -65,10 +65,10 @@
   services = {
     devmon.enable = true; # Automatically mounts/unmounts attached drives
     udisks2.enable = true; # For getting info about drives
-    gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring
+    #gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring - this might be glitching wifi autoconnect
     greetd = {
       enable = true;
-      settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks -r --theme border=lightcyan;prompt=blue;container=black;action=white;input=white; --cmd 'WLR_NO_HARDWARE_CURSORS=1 WLR_RENDERER_ALLOW_SOFTWARE=1 Hyprland'";
+      settings.default_session.command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
     };
   };
 
