@@ -1,0 +1,13 @@
+#powermenu box {
+    background-color: @theme_bg_color;
+    border-radius: 0.4rem;
+    padding: 0.8rem;
+}
+
+#powermenu icon {
+    font-size: 2rem;
+}
+
+#powermenu button {
+    margin: 0.5rem;
+}

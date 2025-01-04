@@ -11,6 +11,8 @@ import { notifySend } from './lib/notifySend';
 import { screenshot, screenRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
 import { OSD } from './widgets/osd/osd';
+import { powermenu } from './widgets/powermenu/powermenu';
+
 import { monitorBrightness } from './services/brightness';
 
 const allNotifications = new NotifiationMap();
@@ -32,6 +34,7 @@ App.start({
         quickSettings();
         OSD();
         reminders();
+        powermenu();
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
 
         // Reconnect widgets when new monitor added

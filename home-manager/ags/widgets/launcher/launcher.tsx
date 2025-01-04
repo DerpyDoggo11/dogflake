@@ -47,10 +47,10 @@ export const launcher = () =>
         application={App}
         visible={false}
         onShow={() => text.set("")}
-        onKeyPressEvent={function (self, event: Gdk.Event) {
-            if (event.get_keyval()[1] === Gdk.KEY_Escape)
-               self.hide()
-        }}
+        onKeyPressEvent={(self, event: Gdk.Event) =>
+            (event.get_keyval()[1] === Gdk.KEY_Escape)
+               && self.hide()
+        }
     >
         <box widthRequest={500} className="launcher" vertical>
             <box className="searchHeader">
