@@ -47,6 +47,7 @@
           inputs.ags.packages.${pkgs.system}.hyprland # Workspace integration
           inputs.ags.packages.${pkgs.system}.bluetooth # Bluez integration
           inputs.ags.packages.${pkgs.system}.battery # For laptop only - not used on desktop
+          inputs.ags.packages.${pkgs.system}.network # Requires networkmanager
           inputs.ags.packages.${pkgs.system}.wireplumber # Used by pipewire
           inputs.ags.packages.${pkgs.system}.notifd # Desktop notification integration
         ];

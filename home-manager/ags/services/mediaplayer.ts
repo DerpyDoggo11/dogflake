@@ -2,9 +2,9 @@ import { exec } from 'astal';
 import { Variable } from "astal";
 
 export type musicAction = 'next' | 'prev';
-const isPlaying: Variable<Boolean> = new Variable(false);
-const playlist: Variable<Number> = new Variable(1);
-const playlistName: Variable<String> = new Variable('Study');
+export const isPlaying: Variable<Boolean> = new Variable(false);
+export const playlist: Variable<Number> = new Variable(1);
+export const playlistName: Variable<String> = new Variable('Study');
 
 // These playlists match with the folder names in ~/Music/
 const playlists = ['Study', 'Focus', 'Synthwave', 'SynthAmbient', 'Ambient'];

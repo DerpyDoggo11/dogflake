@@ -26,14 +26,27 @@
     enableContainers = false;
   };
 
-  # Networking configuration using iwd
-  networking.wireless.iwd = {
-    enable = true;
-    settings = {
-      Network.EnableIPv6 = true;
-      Settings.AutoConnect = true;
-    };
-  };
+  networking.networkmanager.enable = true;
+  
+  #networking = { # TODO get this working
+  #  useDHCP = false;
+  #  useNetworkd = true;
+  #  wireless.iwd.enable = true;
+  #  networkmanager = {
+  #    enable = true;
+  #    dns = "systemd-resolved";
+  #    wifi = {
+  #      backend = "iwd";
+  #      powersave = true;
+  #    };
+  #    settings.device."wifi.iwd.autoconnect" = "yes";
+  #  };
+  #};
+  #services.resolved.enable = true;
+  #boot = { # speed up networking
+  #  kernelModules = [ "tcp_bbr" ];
+  #  kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
+  #};
 
   time.timeZone = "America/Los_Angeles"; # US West Coast
   i18n.defaultLocale = "en_US.UTF-8";

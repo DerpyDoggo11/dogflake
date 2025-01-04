@@ -137,8 +137,8 @@ in {
   };
 
   services = {
+    flatpak.enable = true; # For running Sober (Roblox)
     logrotate.enable = false; # Don't need this
-    #gvfs.enable = true; # Caching for astal mpris 
     
     # Printing support
     printing = { # CUPS

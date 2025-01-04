@@ -1,8 +1,9 @@
 import { App, Astal, Gdk } from 'astal/gtk3';
 import { Time } from './modules/time';
-import { Workspaces } from './modules/workspaces'
-import { Status } from './modules/statusmenu'
-import { Media } from './modules/media'
+import { Workspaces } from './modules/workspaces';
+import { Status } from './modules/statusmenu';
+import { Mpris } from './modules/mpris';
+import { Media } from './modules/media';
 import { RecordingIndicator } from '../../services/screen';
 
 export const Bar = (gdkmonitor: Gdk.Monitor) =>
@@ -19,6 +20,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) =>
       <box vertical vexpand hexpand/>
 
       <Media/>
+      <Mpris/>
 
       <box vertical vexpand hexpand/>
 

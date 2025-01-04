@@ -7,10 +7,11 @@
 
 .searchHeader { /* Search bar */
     padding: 3rem;
-    background-image: url('../../../wallpapers/Nord-Generic.png');
+    background-image: url('../../../wallpapers/Study.jpg');
     background-size: cover;
     margin-bottom: 0.5rem;
     border-radius: 0.4rem;
+    border: 2px solid #4c566a;
 }
 
 .launcher entry {
