@@ -1,13 +1,11 @@
 import { App } from 'astal/gtk3';
 import { bind } from 'astal';
 import Bluetooth from 'gi://AstalBluetooth';
-import Network from 'gi://AstalNetwork'
 import Wp from 'gi://AstalWp'
 import Battery from 'gi://AstalBattery';
 import { DND } from '../../notifications/notifications';
 
 const bluetooth = Bluetooth.get_default()
-const network = Network.get_default()?.wifi!; // TODO: fix This[#emitter] is null error encountered when using ethernet - check object props
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const battery = Battery.get_default();
 
@@ -25,7 +23,8 @@ const BatteryWidget = () =>
   />
 
 const NetworkIcon = () =>
-  <icon icon={bind(network, 'iconName')}/>
+  <icon/>
+  //<icon icon={bind(network, 'iconName')}/>
 
 const VolumeIcon = () => 
   <icon icon={bind(speaker, 'volumeIcon')}/>

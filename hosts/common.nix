@@ -27,21 +27,11 @@
   };
 
   # Networking configuration using iwd
-  networking = {
-    wireless.iwd = {
-      enable = true;
-      # TODO make autoconnect actually work
-      settings = {
-        Network.EnableIPv6 = true;
-        Settings.AutoConnect = true;
-        #General.UseDefaultInterface = true;
-      };
-    };
-    networkmanager = {
-      enable = true; # For ags network integration
-      wifi.backend = "iwd";
-      #wifi.powersave = true;
-      settings.device."wifi.iwd.autoconnect" = "yes";
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      Network.EnableIPv6 = true;
+      Settings.AutoConnect = true;
     };
   };
 
@@ -59,7 +49,7 @@
   
   users.users.alec = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "video" "networkmanager" ]; 
+    extraGroups = [ "wheel" "audio" "video" ]; 
   };
 
   # Random machine optimization settings

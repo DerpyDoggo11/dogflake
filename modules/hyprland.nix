@@ -65,7 +65,7 @@
   services = {
     devmon.enable = true; # Automatically mounts/unmounts attached drives
     udisks2.enable = true; # For getting info about drives
-    #gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring - this might be glitching wifi autoconnect
+    gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring - this might be glitching wifi autoconnect
     greetd = {
       enable = true;
       settings.default_session.command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
