@@ -43,7 +43,7 @@ export const SinkSelector = () =>
 			className="mainSink"
 			onClick={() => sinkVisible.set(!sinkVisible.get())}
 		>
-			<label label={bind(speaker, "description").as(nameSubstitute)}/>
+			<label label={bind(speaker, "description").as(d => nameSubstitute(d) || '')}/>
 		</button>
 		<revealer
 			revealChild={bind(sinkVisible)}
