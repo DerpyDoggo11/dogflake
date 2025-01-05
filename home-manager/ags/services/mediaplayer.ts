@@ -1,4 +1,4 @@
-import { exec } from 'astal';
+import { exec, execAsync } from 'astal';
 import { Variable } from "astal";
 
 export type musicAction = 'next' | 'prev';
@@ -14,12 +14,12 @@ export const updTrack = (direction: musicAction) => {
     exec('mpc ' + direction); // Update track
     
     // Start playing again
-    exec('mpc play');
+    execAsync('mpc play');
     isPlaying.set(true);
 };
 
 export const playPause = () => {
-    exec('mpc toggle');
+    execAsync('mpc toggle');
     isPlaying.set(!isPlaying.get());
 };
 
@@ -41,21 +41,22 @@ export const chngPlaylist = (direction: musicAction) => {
     // Update the playlist and playlist names
     playlistName.set(playlists[Number(playlist.get()) - 1]);
 
+    // Change the wallpaper
+    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow`);
+
     // Clear the current cache and add the new playlist
     exec('mpc clear');
     exec(`mpc add ${playlistName.get()}/`);
     exec('mpc shuffle'); // Shuffle current playlist
-    playPause() // Start playing song again
-
-    // Change the wallpaper
-    exec(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow`);
+    playPause(); // Start playing song again
 };
 
 export const initMedia = () => {
-    exec('mpc crossfade 2'); // Set crossfade value
+    execAsync('mpc crossfade 2'); // Set crossfade value
+    execAsync(`swww img /home/alec//wallpapers/${playlistName.get()}.jpg --transition-type grow`);
 
     // On first start, clear and load new playlist
     exec('mpc clear');
     exec(`mpc add ${playlistName.get()}/`);
-    exec(`swww img /home/alec//wallpapers/${playlistName.get()}.jpg --transition-type grow`);
+    execAsync('mpc shuffle');
 }

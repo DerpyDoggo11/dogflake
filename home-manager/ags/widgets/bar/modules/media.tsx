@@ -1,4 +1,4 @@
-import { bind } from 'astal';
+import { bind, execAsync } from 'astal';
 import { isPlaying, playlistName, playPause } from '../../../services/mediaplayer';
 
 export const Media = () =>
@@ -6,6 +6,7 @@ export const Media = () =>
         className="media"
         hexpand
         onClick={() => playPause()}
+        onScroll={(_, e) => execAsync('mpc volume ' + ((e.delta_y < 0) ? '+5' : '-5'))}
         css={bind(playlistName).as((w) => `background-image: url('./services/playlists/${w}.png');`)}
     >
         <icon icon={bind(isPlaying).as(

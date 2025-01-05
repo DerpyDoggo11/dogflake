@@ -11,7 +11,7 @@ export const Workspaces = () =>
     onScroll={(_, e) => hyprland.dispatch('workspace', (e.delta_y > 0) ? '+1' : '-1')}
   >
     <box vertical halign={Gtk.Align.CENTER} className="workspaceList">
-      {[...Array(7).keys()].map((i) => 
+      {[...Array(8).keys()].map((i) => 
         <WorkspaceBtn id={i + 1}/>
       )}
     </box>
