@@ -36,9 +36,9 @@ export const notifySend = ({
         escapeShellArg(body ?? ''),
         
         // Optional params
-        appName ? `--app-name=${escapeShellArg(appName)}` : '',
-        category ? `--category=${escapeShellArg(category)}` : '',
-        iconName ? `--icon=${escapeShellArg(iconName)}` : ''
+        appName && `--app-name=${escapeShellArg(appName)}`,
+        category && `--category=${escapeShellArg(category)}`,
+        iconName && `--icon=${escapeShellArg(iconName)}`
     ].concat(
         actions.map(({ id, label }) => `--action=${id}=${escapeShellArg(label)}`),
     ).join(' ');

@@ -15,7 +15,7 @@
     font-style: italic;
     color: #81a1c1; /* Nord frost */ 
 }
-.time .day { letter-spacing: 1px; font-weight: bold; }
+.time .day { letter-spacing: 1px; }
 .time .time {
     font-size: 1.55rem;
     font-family: 'WenQuanYi Zen Hei Mono';

@@ -4,3 +4,8 @@
     border-radius: 7px;
     padding: 0.8rem;
 }
+
+.quickSettings .active {
+    background-color: #81a1c1;
+    border: 1px solid #5e81ac;
+}
