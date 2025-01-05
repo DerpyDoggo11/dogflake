@@ -39,9 +39,15 @@
 /* Status menu */
 .btConnected { background-color: #5e81ac; }
 
-
-
 /* Recording indicator */
 .recIndicator { color: #bf616a; }
 .recIndicator icon { padding-right: 3px; }
 .recIndicator label { margin-top: 0px; }
+
+/* Media players */
+#bar .media, #bar .mpris {
+    background-size: cover;
+    margin: 3px;
+    border: 2px solid #434c5e;
+    border-radius: 5px;
+}

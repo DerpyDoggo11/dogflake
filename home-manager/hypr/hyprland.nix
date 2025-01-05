@@ -126,6 +126,7 @@
                 #"blur, gtk-layer-shell"
                 #"ignorealpha, gtk-layer-shell"
                 #"xray on, gtk-layer-shell"
+                "noanim, gtk-layer-shell"
             ];
 
             env = [

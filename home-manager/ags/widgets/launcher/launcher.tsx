@@ -1,6 +1,7 @@
 import Apps from 'gi://AstalApps'
 import { App, Astal, Gdk, Gtk } from 'astal/gtk3'
-import { Variable } from 'astal'
+import { Variable, bind } from 'astal'
+import { playlistName } from '../../services/mediaplayer';
 
 const apps = new Apps.Apps()
 const text = Variable('')
@@ -53,7 +54,10 @@ export const launcher = () =>
         }
     >
         <box widthRequest={500} className="launcher" vertical>
-            <box className="searchHeader">
+            <box 
+                className="searchHeader"
+                css={bind(playlistName).as((w) => `background-image: url('../wallpapers/${w}.jpg');`)}
+            >
                 <icon icon="system-search-symbolic"/>
                 <entry
                     placeholderText="Search"
@@ -69,7 +73,7 @@ export const launcher = () =>
                             const win = App.get_window("launcher");
                             if (win.visible == true)
                                 self.grab_focus()
-                        })
+                        });
                     }}
                 />
             </box>

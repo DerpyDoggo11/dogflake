@@ -78,6 +78,17 @@ in {
       patches = [ ../overlays/microfetch/Microfetch.patch ];
     }))
 
+    (pkgs.makeDesktopItem { # Roblox w/ Sober
+      desktopName = "Roblox";
+      exec =  "flatpak run org.vinegarhq.Sober";
+      icon = "grapejuice-roblox-player-symbolic";
+      name = "roblox";
+      startupNotify = true;
+      startupWMClass = "roblox";
+      terminal = false;
+      type = "Application";
+    })
+
     # Global scripts
     (writeScriptBin "data-sync" (builtins.readFile ../scripts/data-sync.fish))
     (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))

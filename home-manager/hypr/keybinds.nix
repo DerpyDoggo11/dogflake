@@ -21,9 +21,11 @@
       "SHIFT, Print, exec, astal 'screenshot true'" # Fullscreen screenshot
 
       # Astal mpc player integration
-      # TODO: Add Super + , (left arrow) for previous track
-      # TODO: Add Super + . (right arrow) for next track
-      # TODO: Add super + / to play/pause MPC
+      "ControlSuper, Period, exec, astal 'media next'" # Next track
+      "ControlSuper, Comma, exec, astal 'media prev'" # Prev track
+      "SuperShift, Period, exec, astal 'media nextPlaylist'" # Next playlist
+      "SuperShift, Comma, exec, astal 'media prevPlaylist'" # Prev playlist
+      "Super, Slash, exec, astal 'media toggle'" # Toggle play/pause
 
       # Widow positioning
       "SuperShift, left, movewindow, l"

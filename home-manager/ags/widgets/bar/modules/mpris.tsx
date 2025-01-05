@@ -5,6 +5,7 @@ const mpris = MprisService.get_default();
 
 const mprisBtn = () => 
     <button
+        className="mpris"
         onClick={() => mpris.players[0].play_pause()}
         onScroll={(_, e) => (e.delta_y > 0) ? mpris.players[0].next() : mpris.players[0].previous()}
         hexpand 

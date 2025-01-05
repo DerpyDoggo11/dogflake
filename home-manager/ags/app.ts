@@ -14,6 +14,7 @@ import { OSD } from './widgets/osd/osd';
 import { powermenu } from './widgets/powermenu/powermenu';
 
 import { monitorBrightness } from './services/brightness';
+import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaplayer';
 
 const allNotifications = new NotifiationMap();
 
@@ -36,6 +37,7 @@ App.start({
         reminders();
         powermenu();
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
+        initMedia();
 
         // Reconnect widgets when new monitor added
         App.connect('monitor-added', (_, monitor) => widgets(monitor))
@@ -53,6 +55,25 @@ App.start({
                 break;
             case "screenrec":
                 screenRec.toggle();
+                break;
+            case "media":
+                switch (reqArgs[1]) {
+                    case "next":
+                        updTrack('next');
+                        break;
+                    case "prev":
+                        updTrack('prev');
+                        break;
+                    case "toggle":
+                        playPause();
+                        break;
+                    case "nextPlaylist":
+                        chngPlaylist('next');
+                        break;
+                    case "prevPlaylist":
+                        chngPlaylist('prev');
+                        break;
+                };
                 break;
         };
         res("Request handled successfully");
