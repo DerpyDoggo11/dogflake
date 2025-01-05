@@ -39,11 +39,11 @@ export const Status = () =>
       App.get_window('calendar').hide();
       App.toggle_window('quickSettings');
     }}
-    className='time'
-    cursor='pointer'
+    className="time"
+    cursor="pointer"
     onScroll={(_, e) => speaker.volume = (e.delta_y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
-    <box vertical spacing={5}>
+    <box vertical spacing={5} className="statusMenu">
       <NetworkIcon/>
       <VolumeIcon/>
       <BatteryWidget/>

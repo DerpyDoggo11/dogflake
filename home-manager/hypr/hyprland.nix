@@ -121,13 +121,8 @@
                 "rounding 0, floating:0, onworkspace:f[1]"
             ];
 
-            layerrule = [ # Ags
-                # White border outline bug when enabling blur..
-                #"blur, gtk-layer-shell"
-                #"ignorealpha, gtk-layer-shell"
-                #"xray on, gtk-layer-shell"
-                "noanim, gtk-layer-shell"
-            ];
+            # No glitchy shell animations
+            layerrule = [ "noanim, gtk-layer-shell" ];
 
             env = [
                 "GDK_BACKEND,wayland,x11"

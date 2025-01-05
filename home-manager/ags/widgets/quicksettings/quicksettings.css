@@ -10,4 +10,8 @@
     border: 1px solid #5e81ac;
 }
 
-button.dnd { font-size: 1.5rem; }
+button.dnd { font-size: 1.5rem; background-color: #434c5e; }
+
+.sinkSelector .mainSink { border-radius: 5px 5px 0 0; background-color: #434c5e; }
+.sinkSelector button { border-radius: 0; margin-top: 0.2rem; background-color: #4c566a; }
+.sinkSelector { border-radius: 1rem; }

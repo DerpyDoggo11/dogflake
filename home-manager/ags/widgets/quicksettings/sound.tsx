@@ -37,10 +37,13 @@ const SinkItem = (stream: Wp.Endpoint) =>
 		<label label={nameSubstitute(stream.description)}/>
 	</button>
 
-export const SinkSelector = () => 
-	<box vertical>
-		<button onClick={() => sinkVisible.set(!sinkVisible.get())}>
-			<label label={bind(speaker, "description").as(nameSubstitute)}/> 
+export const SinkSelector = () =>
+	<box className="sinkSelector" vertical>
+		<button
+			className="mainSink"
+			onClick={() => sinkVisible.set(!sinkVisible.get())}
+		>
+			<label label={bind(speaker, "description").as(nameSubstitute)}/>
 		</button>
 		<revealer
 			revealChild={bind(sinkVisible)}

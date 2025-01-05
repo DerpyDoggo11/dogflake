@@ -21,7 +21,7 @@ export const quickSettings = () =>
         visible={false}
     >
         <box widthRequest={400} className="quickSettings" vertical>
-            <box marginBottom={10}>
+            <box marginBottom={5}>
                 <box vertical>
                     <VolumeSlider/>
                     <BrightnessSlider/>
