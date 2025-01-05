@@ -1,5 +1,5 @@
 import Wp from "gi://AstalWp"
-import { bind, Variable, exec } from "astal";
+import { bind, Variable } from "astal";
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const audio = Wp.get_default()?.audio!;
 
@@ -29,9 +29,10 @@ const nameSubstitute = (name: string) => {
 	};
 };
 
-const SinkItem = (stream: Wp.Endpoint) => 
+const SinkItem = (stream: Wp.Endpoint) =>
 	<button
-		onClick={() => exec(`wpctl set-default ${stream.id}`)}
+		onClick={() => stream.isDefault = true}
+		visible={bind(stream, "isDefault").as((def) => (!def))}
 	>
 		<label label={nameSubstitute(stream.description)}/>
 	</button>
@@ -45,11 +46,7 @@ export const SinkSelector = () =>
 			revealChild={bind(sinkVisible)}
 		>
 			<box vertical>
-				{bind(audio, "speakers")
-					.as((devices) => 
-						devices
-						.filter((dev) => !dev.isDefault)
-						.map(SinkItem))}
+				{bind(audio, 'speakers').as((s) => s.map(SinkItem))}
 			</box>
 		</revealer>
 	</box>

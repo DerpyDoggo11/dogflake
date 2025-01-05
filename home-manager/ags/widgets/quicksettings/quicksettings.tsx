@@ -6,9 +6,9 @@ import { DND } from '../notifications/notifications';
 
 const DNDToggle = () => 
     <button
-        hexpand
+        widthRequest={60}
         onClick={() => DND.set(!DND.get())}
-        className={bind(DND).as((dnd) => (dnd) ? 'active' : '')}
+        className={bind(DND).as((dnd) => (dnd) ? 'dnd active' : 'dnd')}
     >
         <icon icon="notifications-disabled-symbolic"/>
     </button>
@@ -20,8 +20,8 @@ export const quickSettings = () =>
         application={App}
         visible={false}
     >
-        <box widthRequest={500} className="quickSettings" vertical>
-            <box>
+        <box widthRequest={400} className="quickSettings" vertical>
+            <box marginBottom={10}>
                 <box vertical>
                     <VolumeSlider/>
                     <BrightnessSlider/>

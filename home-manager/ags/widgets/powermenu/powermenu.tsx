@@ -1,24 +1,24 @@
 import { Astal, App, Gdk } from 'astal/gtk3';
 import { execAsync } from 'astal';
 
-export const powermenu = () => 
+export const powermenu = () =>
    <window
       name="powermenu"
       application={App}
       visible={false}
-      keymode={Astal.Keymode.ON_DEMAND}
+      keymode={Astal.Keymode.ON_DEMAND} 
       
       onKeyPressEvent={(self, event) => {
          self.hide();
          switch (event.get_keyval()[1]) {
-            case Gdk.KEY_Q:
+            case 113: // Q
                execAsync('systemctl suspend')
                break;
-            case Gdk.KEY_S:
-               execAsync('shutdown now');
+            case 114: // R
+               execAsync('systemctl reboot');
                break;
-            case Gdk.KEY_R:
-               execAsync('reboot');
+            case 115: // S
+               execAsync('systemctl poweroff');
                break;
          };
       }}
