@@ -14,15 +14,15 @@ export const Bar = (gdkmonitor: Gdk.Monitor) =>
     anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
     application={App}
   >
-    <box vertical hexpand>
+    <box vertical>
       <Workspaces/>
 
-      <box vertical vexpand hexpand/>
+      <box vexpand/>
 
       <Media/>
       <Mpris/>
 
-      <box vertical vexpand hexpand/>
+      <box vexpand/>
 
       <RecordingIndicator/>
       <Time/>

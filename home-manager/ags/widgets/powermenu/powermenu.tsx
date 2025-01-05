@@ -8,7 +8,7 @@ export const powermenu = () =>
       visible={false}
       keymode={Astal.Keymode.ON_DEMAND}
       
-      onKeyPressEvent={(self, event: Gdk.Event) => {
+      onKeyPressEvent={(self, event) => {
          self.hide();
          switch (event.get_keyval()[1]) {
             case Gdk.KEY_Q:

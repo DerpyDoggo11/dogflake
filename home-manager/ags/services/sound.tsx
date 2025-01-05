@@ -1,8 +1,7 @@
 import Wp from "gi://AstalWp"
-import { Gtk } from "astal/gtk3";
-import { bind } from "astal";
-import { ComboBox } from "../astalify/combobox";
+import { bind, Variable, exec } from "astal";
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
+const audio = Wp.get_default()?.audio!;
 
 export const VolumeSlider = () =>
     <box>
@@ -17,20 +16,25 @@ export const VolumeSlider = () =>
         />
     </box>
 
-export const SinkSelector = () => {
-	const audio = Wp.get_default()?.audio!;
+const sinkVisible = new Variable(false);
 
-	const SinkItem = (stream: Wp.Device) => 
-		<label name={stream.description} label={stream.description}/>
+const SinkItem = (stream: Wp.Endpoint) => 
+	<button
+		onClick={() => exec(`wpctl set-default ${stream.id}`)}
+	>
+		<label label={stream.description}/>
+	</button>
 
-	return <box>
-		{bind(audio, "devices").as((devices) => (
-			<ComboBox
-				hexpand
-			>
-				{//devices.map(SinkItem)}
-				}
-			</ComboBox>
-		))}
+export const SinkSelector = () => 
+	<box vertical>
+		<button onClick={() => sinkVisible.set(!sinkVisible.get())}>
+			<label label={bind(speaker, "description")}/> 
+		</button>
+		<revealer
+			revealChild={bind(sinkVisible)}
+		>
+			<box vertical>
+				{bind(audio, "speakers").as((devices) => devices.map(SinkItem))}
+			</box>
+		</revealer>
 	</box>
-};

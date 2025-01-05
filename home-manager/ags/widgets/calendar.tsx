@@ -7,7 +7,7 @@ export const calendar = () =>
     name="calendar"
     anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
     application={App}
-    visible={false} // Not visible by default
+    visible={false}
   >
     <Calendar/>
   </window>

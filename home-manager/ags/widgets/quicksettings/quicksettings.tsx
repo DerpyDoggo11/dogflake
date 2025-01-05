@@ -16,7 +16,7 @@ export const quickSettings = () =>
         name="quickSettings"
         anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
         application={App}
-        visible={false} // Not visible by default
+        visible={false}
     >
         <box widthRequest={500} className="quickSettings" vertical>
             <VolumeSlider/>

@@ -9,9 +9,7 @@ let count = 0;
 const icon: Variable<string> = new Variable('');
 const val: Variable<Number> = new Variable(0);
 
-timeout(500, () => {
-    dontShow = false;
-});
+timeout(1000, () => dontShow = false);
 
 export const OSD = () => 
     <window
