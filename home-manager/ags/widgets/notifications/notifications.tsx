@@ -11,7 +11,8 @@ export class NotifiationMap implements Subscribable {
     private var: Variable<Array<Notifd.Notification>> = new Variable([]);
 
     private notifiy = () =>
-        this.var.set([...this.map.values()].reverse());
+        (!DND.get()) &&
+            this.var.set([...this.map.values()].reverse());
     
     constructor() {
         const notifd = Notifd.get_default();

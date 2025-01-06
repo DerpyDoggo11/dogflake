@@ -43,7 +43,7 @@ export const Status = () =>
     cursor="pointer"
     onScroll={(_, e) => speaker.volume = (e.delta_y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
-    <box vertical spacing={5} className="statusMenu">
+    <box vertical spacing={6} className="statusMenu">
       <NetworkIcon/>
       <VolumeIcon/>
       <BatteryWidget/>

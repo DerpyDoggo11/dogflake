@@ -12,13 +12,13 @@ export const powermenu = () =>
          self.hide();
          switch (event.get_keyval()[1]) {
             case 113: // Q
-               execAsync('systemctl suspend')
+               execAsync('systemctl poweroff')
                break;
             case 114: // R
                execAsync('systemctl reboot');
                break;
             case 115: // S
-               execAsync('systemctl poweroff');
+               execAsync('systemctl suspend');
                break;
          };
       }}

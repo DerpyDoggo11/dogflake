@@ -10,7 +10,7 @@
     background-size: cover;
     margin-bottom: 0.5rem;
     border-radius: 0.4rem;
-    border: 2px solid #4c566a;
+    border: 2px solid @darkest4;
 }
 
 .launcher entry {
@@ -28,10 +28,10 @@
 }
 
 .launcher button label.name {
-    color: #d8dee9;
+    color: @lightest3;
     font-weight: bold;
 }
 
 .launcher button label.description {
-    color: #d8dee9;
+    color: @lightest3;
 }

@@ -13,7 +13,7 @@
     font-size: 0.7rem;
     font-family: 'Liberation Mono';
     font-style: italic;
-    color: #81a1c1; /* Nord frost */ 
+    color: @blue2; 
 }
 .time .day { letter-spacing: 1px; }
 .time .time {
@@ -21,23 +21,23 @@
     font-family: 'WenQuanYi Zen Hei Mono';
     font-weight: bold;
     letter-spacing: 4px;
-    color: #81a1c1; /* Nord frost */
+    color: @blue2;
 }
 
 
 /* Workspace list */
 .workspaceList { padding-top: 0.3rem; }
 #bar button.workspaceBtn {
-    background-color: #3b4252; /* Nord dark */
+    background-color: @darkest2;
     border-radius: 50%;
     transition: 0.2s;
     margin: 0.25rem;
 }
-#bar button.workspaceBtn.active { background-color: #81a1c1;  }
-#bar button.workspaceBtn.occupied { background-color: #4c566a; }  /* Nord brighter */
+#bar button.workspaceBtn.active { background-color: @blue2; }
+#bar button.workspaceBtn.occupied { background-color: @darkest4; }
 
 /* Status menu */
-.btConnected { background-color: #5e81ac; }
+.btConnected { background-color: @blue3; }
 
 /* Recording indicator */
 .recIndicator { color: #bf616a; }
@@ -48,7 +48,7 @@
 #bar .media, #bar .mpris {
     background-size: cover;
     margin: 3px;
-    border: 2px solid #434c5e;
+    border: 2px solid @darkest3;
     border-radius: 5px;
 }
 

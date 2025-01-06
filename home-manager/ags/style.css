@@ -11,6 +11,29 @@
 
 @define-color placeholder_text_color #fff;
 
+@define-color darkest1 #2e3440;
+@define-color darkest2 #3b4252;
+@define-color darkest3 #434c5e;
+@define-color darkest4 #4c566a;
+
+/* Snow Storm colors */
+@define-color lightest1 #eceff4;
+@define-color lightest2 #e5e9f0;
+@define-color lightest3 #d8dee9;
+
+/* Nord Aurora misc colors */
+@define-color red #bf616a;
+@define-color orange #d08770;
+@define-color yellow #ebcb8b;
+@define-color green #a3be8c;
+@define-color purple #b48ead;
+
+/* Frost */
+@define-color blue1 #b5d2d9;
+@define-color blue2 #81a1c1;
+@define-color blue3 #5e81ac;
+
+
 window {
   background: transparent;
   font-family: 'Sora';
