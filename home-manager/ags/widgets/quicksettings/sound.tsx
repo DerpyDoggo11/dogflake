@@ -8,7 +8,7 @@ export const VolumeSlider = () =>
         <image iconName={bind(speaker, "volumeIcon")}/>
         <slider
             hexpand
-            onDragged={({ value }) => {
+            onNotifyValue={({ value }) => {
                 speaker.volume = value;
                 speaker.mute = false;
             }}

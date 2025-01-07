@@ -1,4 +1,11 @@
 import style from './style.css';
+import lancherStyle from './widgets/launcher/launcher.css';
+import barStyle from './widgets/bar/bar.css';
+import notificationStyle from './widgets/notifications/notifications.css';
+import osdStyle from './widgets/osd/osd.css';
+import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
+import powermenuStyle from './widgets/powermenu/powermenu.css';
+
 import { App, Gdk, Gtk } from 'astal/gtk4';
 import { GLib, exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
@@ -30,14 +37,14 @@ export const widgets = (monitor: Gdk.Monitor) => [
 ];
 
 App.start({
-    css: style,
+    css: style + lancherStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
     main() {
         App.get_monitors().map((monitor) => widgetMap.set(monitor, widgets(monitor)));
 
         calendar();
         emojiPicker();
         launcher();
-        //quickSettings();
+        //quickSettings(); dont uncomment or this will crash
         OSD();
         reminders();
         powermenu();

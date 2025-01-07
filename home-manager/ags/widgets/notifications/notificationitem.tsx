@@ -1,9 +1,9 @@
 import { GLib } from 'astal';
-import { Gtk, Astal, Widget, Gdk } from 'astal/gtk4';
+import { Gtk } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
+import Pango from 'gi://Pango';
 const { START, CENTER, END } = Gtk.Align
 
-const isIcon = (icon: string) => Gtk.Image.lookup_icon(icon) // todo fix me
 const fileExists = (path: string) => GLib.file_test(path, GLib.FileTest.EXISTS);
 const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%H:%M")!;
 
@@ -18,7 +18,7 @@ export const notificationItem = (n: Notifd.Notification) =>
             <label
                 cssClasses={["app-name"]}
                 halign={START}
-                //truncate todo add me
+                ellipsize={Pango.EllipsizeMode.END}
                 label={n.appName || "Unknown"}
             />
             <label
@@ -32,9 +32,9 @@ export const notificationItem = (n: Notifd.Notification) =>
             {n.image && fileExists(n.image) && <box
                 valign={START}
                 cssClasses={["image"]}
-                //css={`background-image: url('${n.image}')`} todo add me
-            />}
-            {n.image && isIcon(n.image) && <box
+            ><image iconName={n.image}/></box>}
+            {/* todo test if we can add images to this */}
+            {n.image && <box
                 hexpand={false}
                 vexpand={false}
                 valign={START}

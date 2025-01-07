@@ -56,7 +56,11 @@ export const launcher = () =>
         <box widthRequest={500} cssClasses={["launcher"]} vertical>
             <box 
                 cssClasses={["searchHeader"]} // todo fix css below
-                //css={bind(playlistName).as((w) => `background-image: url('../wallpapers/${w}.jpg');`)}
+                setup={() =>
+                    bind(playlistName).as((w) =>
+                        App.apply_css(`background-image: url('../wallpapers/${w}.jpg');`)
+                    )
+                }
             >
                 <image iconName="system-search-symbolic"/>
                 <entry
