@@ -37,7 +37,7 @@
 #bar button.workspaceBtn.occupied { background-color: @darkest4; }
 
 /* Status menu */
-.btConnected { background-color: @blue3; }
+.btConnected { color: @blue3; }
 
 /* Recording indicator */
 .recIndicator { color: #bf616a; }

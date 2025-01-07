@@ -1,6 +1,4 @@
-/* Graphite Nord theme colors:
-  https://github.com/vinceliuice/Graphite-gtk-theme/blob/main/src/sass/gtk/_colors-public.scss
-*/
+/* Graphite Nord theme colors: https://github.com/vinceliuice/Graphite-gtk-theme/blob/main/src/sass/gtk/_colors-public.scss */
 
 @import url('./widgets/bar/bar.css');
 @import url('./widgets/launcher/launcher.css');
@@ -9,8 +7,10 @@
 @import url('./widgets/quicksettings/quicksettings.css');
 @import url('./widgets/powermenu/powermenu.css');
 
+/* For text input placeholders */
 @define-color placeholder_text_color #fff;
 
+/* Polar Night colors */
 @define-color darkest1 #2e3440;
 @define-color darkest2 #3b4252;
 @define-color darkest3 #434c5e;
@@ -21,7 +21,7 @@
 @define-color lightest2 #e5e9f0;
 @define-color lightest3 #d8dee9;
 
-/* Nord Aurora misc colors */
+/* Nord Aurora colors */
 @define-color red #bf616a;
 @define-color orange #d08770;
 @define-color yellow #ebcb8b;
@@ -39,7 +39,7 @@ window {
   font-family: 'Sora';
 }
 
-calendar { /* Calendar */
-  border-radius: 5px;
+calendar, .quickSettings { 
   border: 0;
+  border-radius: 0 5px 0 0;
 }

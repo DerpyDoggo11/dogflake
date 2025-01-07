@@ -24,35 +24,29 @@
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest; # Use the latest Linux kernel version
     enableContainers = false;
-  };
 
-  networking.networkmanager.enable = true;
+    # Speed up networking
+    kernelModules = [ "tcp_bbr" ];
+    kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
+  };
   
-  #networking = { # TODO get this working
-  #  useDHCP = false;
-  #  useNetworkd = true;
-  #  wireless.iwd.enable = true;
-  #  networkmanager = {
-  #    enable = true;
-  #    dns = "systemd-resolved";
-  #    wifi = {
-  #      backend = "iwd";
-  #      powersave = true;
-  #    };
-  #    settings.device."wifi.iwd.autoconnect" = "yes";
-  #  };
-  #};
-  #services.resolved.enable = true;
-  #boot = { # speed up networking
-  #  kernelModules = [ "tcp_bbr" ];
-  #  kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
-  #};
+  networking = { # TODO get autoconnect functioning
+    useNetworkd = true;
+    wireless.iwd.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi = {
+        backend = "iwd";
+        powersave = true;
+      };
+      settings.device."wifi.iwd.autoconnect" = "yes";
+    };
+  };
 
   time.timeZone = "America/Los_Angeles"; # US West Coast
   i18n.defaultLocale = "en_US.UTF-8";
 
   nixpkgs.config.allowUnfree = true; # Allow installing of non open-source applications
-  programs.dconf.enable = true;
   services.logrotate.enable = false; # Don't need this
   nix.settings = {
     experimental-features = "nix-command flakes";
@@ -62,7 +56,7 @@
   
   users.users.alec = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "video" ]; 
+    extraGroups = [ "wheel" "audio" "video" ];
   };
 
   # Random machine optimization settings
@@ -83,8 +77,6 @@
   environment.defaultPackages = []; # Remove all default packages
   programs.command-not-found.enable = false; # Don't show recommendations when a package is missing
 
-  # Even if the latest NixOS version is newer than this, we don't need to update.
-  # To maintain compatibility, this version should stay the same.
-  system.stateVersion = "24.05"; # Shouldn't change this value
+  system.stateVersion = "24.05";
 }
 

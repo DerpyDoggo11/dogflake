@@ -1,8 +1,8 @@
 import style from './style.css';
-import { App, Gdk } from 'astal/gtk3';
+import { App, Gdk, Gtk } from 'astal/gtk3';
 import { GLib, execAsync, exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
-import { Corners } from './widgets/corners';
+import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker';
 import { Notifications, NotifiationMap } from './widgets/notifications/notifications';
@@ -17,18 +17,23 @@ import { monitorBrightness } from './services/brightness';
 import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaplayer';
 
 const allNotifications = new NotifiationMap();
+const widgetMap: Map<Gdk.Monitor, Gtk.Widget[]> = new Map();
 
-export const widgets = (monitor: Gdk.Monitor) => {
-    Bar(monitor);
-    Corners(monitor);
-    Notifications(monitor, allNotifications);
-    console.log("New monitor connected") // todo debug me?
-};
+// Per-monitor widgets
+export const widgets = (monitor: Gdk.Monitor) => [
+    Bar(monitor),
+    TopLeft(monitor),
+    TopRight(monitor),
+    BottomLeft(monitor),
+    BottomRight(monitor),
+    Notifications(monitor, allNotifications)
+];
 
 App.start({
     css: style,
     main() {
-        App.get_monitors().map(widgets);
+        App.get_monitors().map((monitor) => widgetMap.set(monitor, widgets(monitor)));
+
         calendar();
         emojiPicker();
         launcher();
@@ -37,10 +42,17 @@ App.start({
         reminders();
         powermenu();
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
-        initMedia();
+        initMedia(); // Mpd player
 
-        // Reconnect widgets when new monitor added
-        App.connect('monitor-added', (_, monitor) => widgets(monitor))
+        // Automatically disconnect & reconnect widgets on monitor change
+        App.connect('monitor-added', (_, monitor) => {
+            console.log('monitor conncted', monitor);
+            widgetMap.set(monitor, widgets(monitor))});
+        App.connect('monitor-removed', (_, monitor) => {
+            console.log('monitor removed', monitor)
+            widgetMap.get(monitor).forEach((w) => w.destroy);
+            widgetMap.delete(monitor);
+        });
     },
     requestHandler(req, res) {
         const reqArgs = req.split(" ");
@@ -49,9 +61,7 @@ App.start({
                 allNotifications.clearNewestNotification();
                 break;
             case "screenshot":
-                (reqArgs[1] == "true")
-                ? screenshot(true)
-                : screenshot(false)
+                screenshot((reqArgs[1] == 'true'))
                 break;
             case "screenrec":
                 screenRec.toggle();
@@ -103,17 +113,14 @@ const reminders = () => {
         bodyText = "The Downloads folder is large! Clean up some unused files.";
     };
 
-    (bodyText) &&
-    notifySend({
+    (bodyText) && notifySend({
         title: 'Clear Downloads folder',
         iconName: 'system-file-manager-symbolic',
         body: bodyText,
-        actions: [
-            {
-                id: 1,
-                label: 'View folder',
-                callback: () => execAsync('nemo /home/alec/Downloads')
-            }
-        ]
+        actions: [{
+            id: 1,
+            label: 'View folder',
+            callback: () => execAsync('nemo /home/alec/Downloads')
+        }]
     });
 };

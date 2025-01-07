@@ -3,7 +3,7 @@
 import { Astal, Gdk, App } from 'astal/gtk3';
 import { Corner } from './corners';
 
-const TopLeft = (gdkmonitor: Gdk.Monitor) => (
+export const TopLeft = (gdkmonitor: Gdk.Monitor) => (
     <window
         name="cornertl"
         gdkmonitor={gdkmonitor}
@@ -14,7 +14,7 @@ const TopLeft = (gdkmonitor: Gdk.Monitor) => (
     </window>
 );
 
-const TopRight = (gdkmonitor: Gdk.Monitor) => (
+export const TopRight = (gdkmonitor: Gdk.Monitor) => (
     <window
         name="cornertr"
         gdkmonitor={gdkmonitor}
@@ -25,7 +25,7 @@ const TopRight = (gdkmonitor: Gdk.Monitor) => (
     </window>
 );
 
-const BottomLeft = (gdkmonitor: Gdk.Monitor) => (
+export const BottomLeft = (gdkmonitor: Gdk.Monitor) => (
     <window
         name="cornerbl"
         gdkmonitor={gdkmonitor}
@@ -36,7 +36,7 @@ const BottomLeft = (gdkmonitor: Gdk.Monitor) => (
     </window>
 );
 
-const BottomRight = (gdkmonitor: Gdk.Monitor) => (
+export const BottomRight = (gdkmonitor: Gdk.Monitor) => (
     <window
         name="cornerbr"
         gdkmonitor={gdkmonitor}
@@ -46,10 +46,3 @@ const BottomRight = (gdkmonitor: Gdk.Monitor) => (
         {Corner('bottomright')}
     </window>
 );
-
-export const Corners = (gdkmonitor: Gdk.Monitor) => [
-    TopLeft(gdkmonitor),
-    TopRight(gdkmonitor),
-    BottomLeft(gdkmonitor),
-    BottomRight(gdkmonitor),
-];
