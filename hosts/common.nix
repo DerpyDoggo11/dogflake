@@ -1,22 +1,12 @@
 { lib, inputs, config, pkgs, modulesPath, ... }: {
 
-  home-manager = {
-    backupFileExtension = "backup";
-    extraSpecialArgs = { inherit inputs; };
-    users.alec = {
-      home.username = "alec";
-      home.homeDirectory = "/home/alec";
-      imports = [ ../home-manager/home.nix ];
-    };
-  };
-
   # Optimized bootloader settings
   boot = {
     loader = {
       systemd-boot = {
-        enable = lib.mkDefault true; # Systemd boot - vm ignores this option
-        configurationLimit = 3; # Save space in the /boot partition
-        editor = false; # For faster boot
+        enable = lib.mkDefault true; # VMs ignore this option
+        configurationLimit = 3; # Save space in the boot partition
+        editor = false; # As recommended by the Nix option description
       };
       efi.canTouchEfiVariables = true;
       timeout = 0; # Hold down space on boot to access menu
@@ -31,17 +21,21 @@
   };
   
   networking = { # TODO get autoconnect functioning
+    useDHCP = false;
     useNetworkd = true;
     wireless.iwd.enable = true;
     networkmanager = {
       enable = true;
+      dns = "systemd-resolved";
       wifi = {
         backend = "iwd";
+        macAddress = "random";
         powersave = true;
       };
       settings.device."wifi.iwd.autoconnect" = "yes";
     };
   };
+  services.resolved.enable = true;
 
   time.timeZone = "America/Los_Angeles"; # US West Coast
   i18n.defaultLocale = "en_US.UTF-8";
@@ -52,11 +46,6 @@
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
     warn-dirty = false;
-  };
-  
-  users.users.alec = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "video" ];
   };
 
   # Random machine optimization settings
