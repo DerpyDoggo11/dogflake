@@ -1,4 +1,4 @@
-import { Astal, App, Gdk } from 'astal/gtk4';
+import { Astal, App } from 'astal/gtk4';
 import { execAsync } from 'astal';
 
 export const powermenu = () =>
@@ -8,9 +8,9 @@ export const powermenu = () =>
       visible={false}
       keymode={Astal.Keymode.ON_DEMAND} 
       
-      onKeyPressEvent={(self, event) => {
+      onKeyPressed={(self, key) => {
          self.hide();
-         switch (event.get_keyval()[1]) {
+         switch (key) {
             case 113: // Q
                execAsync('systemctl poweroff')
                break;

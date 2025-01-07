@@ -48,8 +48,8 @@ export const launcher = () =>
         application={App}
         visible={false}
         onShow={() => text.set("")}
-        onKeyPressEvent={(self, event: Gdk.Event) =>
-            (event.get_keyval()[1] === Gdk.KEY_Escape)
+        onKeyPressed={(self, key) =>
+            (key === Gdk.KEY_Escape)
                && self.hide()
         }
     >

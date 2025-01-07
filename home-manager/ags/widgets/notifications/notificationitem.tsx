@@ -1,9 +1,9 @@
 import { GLib } from 'astal';
-import { Gtk, Astal } from 'astal/gtk4';
+import { Gtk, Astal, Widget, Gdk } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
 const { START, CENTER, END } = Gtk.Align
 
-const isIcon = (icon: string) => !!Astal.Icon.lookup_icon(icon);
+const isIcon = (icon: string) => Gtk.Image.lookup_icon(icon) // todo fix me
 const fileExists = (path: string) => GLib.file_test(path, GLib.FileTest.EXISTS);
 const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%H:%M")!;
 

@@ -37,7 +37,7 @@ App.start({
         calendar();
         emojiPicker();
         launcher();
-        quickSettings();
+        //quickSettings();
         OSD();
         reminders();
         powermenu();
@@ -45,11 +45,11 @@ App.start({
         initMedia(); // Mpd player
 
         // Automatically disconnect & reconnect widgets on monitor change
-        App.connect('monitor-added', (_, monitor) => widgetMap.set(monitor, widgets(monitor)));
+        /*App.connect('monitor-added', (_, monitor) => widgetMap.set(monitor, widgets(monitor)));
         App.connect('monitor-removed', (_, monitor) => {
             widgetMap.get(monitor)?.forEach((w) => w.disconnect);
             widgetMap.delete(monitor);
-        });
+        });*/
     },
     requestHandler(req, res) {
         const reqArgs = req.split(" ");
