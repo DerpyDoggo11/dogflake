@@ -91,12 +91,12 @@ class ScreenRec extends GObject.Object {
 				{
 					id: 1,
 					label: 'Open Captures folder',
-					callback: () => execAsync('nemo ' + captureDir),
+					command: 'nemo ' + captureDir,
 				},
 				{
 					id: 2,
 					label: 'View',
-					callback: () => execAsync('xdg-open ' + this.#file)
+					command: 'xdg-open ' + this.#file
 				}
 			]
 		});
@@ -116,7 +116,7 @@ export const screenshot = async (fullscreen: boolean) => {
 	subprocess(
 		`bash -c 'grimblast --freeze copysave ${regionType} ${file}'`, // Run copy command
 		(file) => {
-			exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
+			execAsync("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
 			notifySend({
 				title: 'Screenshot Saved',
 				iconName: 'image-x-generic-symbolic',
@@ -124,19 +124,19 @@ export const screenshot = async (fullscreen: boolean) => {
 					{
 						id: 1,
 						label: 'Open Captures folder',
-						callback: () => execAsync('nemo ' + screenshotDir)
+						command: 'nemo ' + screenshotDir
 					},
 					{
 						id: 2,
 						label: 'Edit',
-						callback: () => execAsync('swappy -f ' + file)
+						command: 'swappy -f ' + file
 					}
 				]
 			});
 		},
 		() => { 
 			console.log("Selection was cancelled") 
-			exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
+			execAsync("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
 		}
 	);
 };

@@ -18,12 +18,15 @@ export const Workspaces = () =>
   </eventbox>
 
 const WorkspaceBtn = ({ id }: { id: number }) => {
+
+  // TODO can we clean this up by removing an unused bind?
   const className = Variable.derive(
     [bind(hyprland, 'workspaces'), bind(hyprland, 'focusedWorkspace')],
     (workspaces, focused) => {
       const workspace = workspaces.find((w) => w.id === id);
 
-      if (!workspace) // Empty workspace
+      // Empty workspace or monitor was reconnected
+      if (!workspace || !focused)
         return 'workspaceBtn';
 
       const isOccupied = workspace.get_clients().length > 0;

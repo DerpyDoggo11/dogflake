@@ -1,19 +1,19 @@
 // Stolen from https://github.com/matt1432/nixos-configs/blob/master/modules/ags/config/lib/notify.ts
 
-import { subprocess } from 'astal';
+import { subprocess, execAsync } from 'astal';
 
 interface NotifyAction {
-    id: number
-    label: string
-    callback: () => void
+    id: number,
+    label: string,
+    command: string
 }
 
 interface NotifySendProps {
-    actions?: NotifyAction[]
-    appName?: string
-    body?: string
-    category?: string
-    iconName: string
+    actions?: NotifyAction[],
+    appName?: string,
+    body?: string,
+    category?: string,
+    iconName: string,
     title: string
 }
 
@@ -25,7 +25,7 @@ export const notifySend = ({
     body,
     category,
     iconName,
-    title,
+    title
 }: NotifySendProps) => new Promise<number>((resolve) => {
     let printedId = false;
 
@@ -50,7 +50,7 @@ export const notifySend = ({
                 resolve(parseInt(out));
                 printedId = true;
             } else {
-                actions.find((action) => String(action.id) === out)?.callback();
+                execAsync(actions.find((action) => String(action.id) === out).command);
             }
         },
         (err) => console.log('[Notify] ' + err)

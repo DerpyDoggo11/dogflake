@@ -41,7 +41,7 @@ export class NotifiationMap implements Subscribable {
         this.map.delete(key);
         this.notifiy();
 
-        if (isDND)
+        (isDND) &&
             DND.set(true);
     };
 

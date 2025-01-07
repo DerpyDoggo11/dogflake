@@ -45,11 +45,8 @@ App.start({
         initMedia(); // Mpd player
 
         // Automatically disconnect & reconnect widgets on monitor change
-        App.connect('monitor-added', (_, monitor) => {
-            console.log('monitor conncted', monitor);
-            widgetMap.set(monitor, widgets(monitor))});
+        App.connect('monitor-added', (_, monitor) => widgetMap.set(monitor, widgets(monitor)));
         App.connect('monitor-removed', (_, monitor) => {
-            console.log('monitor removed', monitor)
             widgetMap.get(monitor).forEach((w) => w.destroy);
             widgetMap.delete(monitor);
         });
@@ -106,7 +103,7 @@ const reminders = () => {
             actions: [{
                 id: 1,
                 label: 'Sync Music',
-                callback: () => execAsync('foot -e fish -c spotify-sync')
+                command: 'foot -e fish -c spotify-sync'
             }]
         });
     } else if (folderSize > 100000000) { // Greater than 100MB
@@ -120,7 +117,7 @@ const reminders = () => {
         actions: [{
             id: 1,
             label: 'View folder',
-            callback: () => execAsync('nemo /home/alec/Downloads')
+            command: 'nemo /home/alec/Downloads'
         }]
     });
 };
