@@ -1,8 +1,8 @@
 import style from './style.css';
-import { App, Gdk, Gtk } from 'astal/gtk3';
-import { GLib, execAsync, exec } from 'astal';
+import { App, Gdk, Gtk } from 'astal/gtk4';
+import { GLib, exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
-import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
+//import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker';
 import { Notifications, NotifiationMap } from './widgets/notifications/notifications';
@@ -21,12 +21,12 @@ const widgetMap: Map<Gdk.Monitor, Gtk.Widget[]> = new Map();
 
 // Per-monitor widgets
 export const widgets = (monitor: Gdk.Monitor) => [
-    Bar(monitor),
-    TopLeft(monitor),
-    TopRight(monitor),
-    BottomLeft(monitor),
-    BottomRight(monitor),
-    Notifications(monitor, allNotifications)
+    //Bar(monitor),
+    //TopLeft(monitor),
+    //TopRight(monitor),
+    //BottomLeft(monitor),
+    //BottomRight(monitor),
+    //Notifications(monitor, allNotifications)
 ];
 
 App.start({
@@ -47,7 +47,7 @@ App.start({
         // Automatically disconnect & reconnect widgets on monitor change
         App.connect('monitor-added', (_, monitor) => widgetMap.set(monitor, widgets(monitor)));
         App.connect('monitor-removed', (_, monitor) => {
-            widgetMap.get(monitor).forEach((w) => w.destroy);
+            widgetMap.get(monitor)?.forEach((w) => w.disconnect);
             widgetMap.delete(monitor);
         });
     },
@@ -90,7 +90,7 @@ App.start({
 const reminders = () => {
     const day = GLib.DateTime.new_now_local().format("%a")!;
     const folderSize = Number(exec(`bash -c "(du -sb /home/alec/Downloads | awk '{print $1}')"`));
-    let bodyText: string;
+    let bodyText;
 
     if (day == 'Mon') {
         (folderSize > 10000000) // Greater than 10MB

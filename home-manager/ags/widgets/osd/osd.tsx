@@ -1,5 +1,5 @@
 import { bind, timeout, Variable } from 'astal';
-import { App, Astal, Widget } from 'astal/gtk3';
+import { App, Astal, Widget, Gtk } from 'astal/gtk4';
 import Wp from 'gi://AstalWp'
 import { brightness } from '../../services/brightness';
 
@@ -27,13 +27,13 @@ export const OSD = () =>
             });
         }}
     >
-        <box className="osd">
-            <icon icon={bind(icon)}/>
+        <box cssClasses={["osd"]}>
+            <image iconName={bind(icon)}/>
             <levelbar value={bind(val).as(Number)} widthRequest={400}/>
         </box>
     </window>
 
-const OSDChange = (type: string, value: Number, osd: Widget.Window) => {
+const OSDChange = (type: string, value: Number, osd: Gtk.Window) => {
     if (dontShow)
         return;
 

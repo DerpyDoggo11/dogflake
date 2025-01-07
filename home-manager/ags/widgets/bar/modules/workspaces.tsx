@@ -1,22 +1,23 @@
 // Stolen from https://github.com/rice-cracker-dev/nixos-config/blob/main/modules/extends/candy/home/desktop/shell/ags/config/widgets/HyprlandWidget/index.tsx
-import { Gtk } from 'astal/gtk3';
+import { Gtk } from 'astal/gtk4';
 import { bind, Variable } from 'astal';
 import AstalHyprland from 'gi://AstalHyprland';
 
 const hyprland = AstalHyprland.get_default();
 
 export const Workspaces = () =>
-  <eventbox
+  <box 
     hexpand
-    onScroll={(_, e) => hyprland.dispatch('workspace', (e.delta_y > 0) ? '+1' : '-1')}
+    vertical
+    halign={Gtk.Align.CENTER}
+    cssClasses={["workspaceList"]}
+    onScroll={(_, __, y) => hyprland.dispatch('workspace', (y > 0) ? '+1' : '-1')}
   >
-    <box vertical halign={Gtk.Align.CENTER} className="workspaceList">
-      {[...Array(8).keys()].map((i) => 
-        <WorkspaceBtn id={i + 1}/>
-      )}
-    </box>
-  </eventbox>
-
+    {[...Array(8).keys()].map((i) => 
+      <WorkspaceBtn id={i + 1}/>
+    )}
+  </box>
+  
 const WorkspaceBtn = ({ id }: { id: number }) => {
 
   // TODO can we clean this up by removing an unused bind?
@@ -27,21 +28,21 @@ const WorkspaceBtn = ({ id }: { id: number }) => {
 
       // Empty workspace or monitor was reconnected
       if (!workspace || !focused)
-        return 'workspaceBtn';
+        return ['workspaceBtn'];
 
       const isOccupied = workspace.get_clients().length > 0;
       const active = focused.id == id;
 
-      return `workspaceBtn ${
-        (active)
-          ? 'active'
-          : isOccupied && 'occupied'
-      }`;
-    }
-  );
+      return ['workspaceBtn', 
+        //(active) TODO add me
+        //  ? 'active'
+        //  : isOccupied && 'occupied'
+      ]}
+  )
+    
 
   return <button
-      className={className()}
+    cssClasses={className()}
       onClick={() => hyprland.dispatch('workspace', `${id}`)}
     />
 };

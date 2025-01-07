@@ -1,4 +1,4 @@
-import { Astal, App, Gdk } from 'astal/gtk3';
+import { Astal, App, Gdk } from 'astal/gtk4';
 import { execAsync } from 'astal';
 
 export const powermenu = () =>
@@ -25,13 +25,13 @@ export const powermenu = () =>
    >
       <box>
          <button>
-            <icon icon="weather-clear-night-symbolic"/>
+            <image iconName="weather-clear-night-symbolic"/>
          </button>
          <button>
-            <icon icon="system-shutdown-symbolic"/>
+            <image iconName="system-shutdown-symbolic"/>
          </button>
          <button>
-            <icon icon="system-reboot-symbolic"/>
+            <image iconName="system-reboot-symbolic"/>
          </button>
       </box>
    </window>

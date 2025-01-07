@@ -1,6 +1,6 @@
 import { BrightnessSlider } from "../../services/brightness"
 import { VolumeSlider, SinkSelector } from './sound'
-import { App, Astal } from 'astal/gtk3';
+import { App, Astal } from 'astal/gtk4';
 import { bind } from 'astal';
 import { DND } from '../notifications/notifications';
 
@@ -8,9 +8,9 @@ const DNDToggle = () =>
     <button
         widthRequest={60}
         onClick={() => DND.set(!DND.get())}
-        className={bind(DND).as((dnd) => (dnd) ? 'dnd active' : 'dnd')}
+        cssClasses={bind(DND).as((dnd) => (dnd) ? ['dnd', 'active'] : ['dnd'])}
     >
-        <icon icon="notifications-disabled-symbolic"/>
+        <image iconName="notifications-disabled-symbolic"/>
     </button>
 
 export const quickSettings = () =>
@@ -20,7 +20,7 @@ export const quickSettings = () =>
         application={App}
         visible={false}
     >
-        <box widthRequest={400} className="quickSettings" vertical>
+        <box widthRequest={400} cssClasses={["quickSettings"]} vertical>
             <box marginBottom={5}>
                 <box vertical>
                     <VolumeSlider/>

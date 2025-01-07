@@ -1,4 +1,4 @@
-import { App } from 'astal/gtk3';
+import { App } from 'astal/gtk4';
 import { bind } from 'astal';
 import { DND } from '../../notifications/notifications';
 import Bluetooth from 'gi://AstalBluetooth';
@@ -12,38 +12,38 @@ const battery = Battery.get_default();
 const network = Network.get_default()?.wifi!; // TODO: fix This[#emitter] is null error encountered when using ethernet - check object props
 
 const BluetoothIcon = () => 
-  <icon
-    className={bind(bluetooth, 'isConnected').as((isConn) => (isConn) ? 'btConnected' : '')}
-    icon='bluetooth-active-symbolic'
+  <image
+    cssClasses={bind(bluetooth, 'isConnected').as((isConn) => (isConn) ? ['btConnected'] : [''])}
+    iconName='bluetooth-active-symbolic'
     visible={bind(bluetooth, 'isPowered')}
   />
   
 const BatteryWidget = () =>
-  <icon
+  <image
     tooltipText={bind(battery, 'percentage').as((p) => (p * 100) + '%')}
-    icon={bind(battery, 'batteryIconName')}
+    iconName={bind(battery, 'batteryIconName')}
   />
 
 const NetworkIcon = () =>
-  <icon icon={bind(network, 'iconName')}/>
+  <image iconName={bind(network, 'iconName')}/>
 
 const VolumeIcon = () => 
-  <icon icon={bind(speaker, 'volumeIcon')}/>
+  <image iconName={bind(speaker, 'volumeIcon')}/>
 
 const DNDIcon = () => 
-  <icon visible={bind(DND)} icon='notifications-disabled-symbolic'/>
+  <image visible={bind(DND)} iconName='notifications-disabled-symbolic'/>
 
 export const Status = () =>
   <button 
     onClicked={() => {
-      App.get_window('calendar').hide();
+      App.get_window('calendar')?.hide();
       App.toggle_window('quickSettings');
     }}
-    className="time"
-    cursor="pointer"
-    onScroll={(_, e) => speaker.volume = (e.delta_y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
+    cssClasses={["time"]}
+    //cursor="pointer" todo add me back
+    onScroll={(_, __, y) => speaker.volume = (y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
-    <box vertical spacing={6} className="statusMenu">
+    <box vertical spacing={6} cssClasses={["statusMenu"]}>
       <NetworkIcon/>
       <VolumeIcon/>
       <BatteryWidget/>

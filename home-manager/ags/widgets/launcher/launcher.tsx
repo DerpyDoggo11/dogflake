@@ -1,5 +1,5 @@
 import Apps from 'gi://AstalApps'
-import { App, Astal, Gdk, Gtk } from 'astal/gtk3'
+import { App, Astal, Gdk, Gtk } from 'astal/gtk4'
 import { Variable, bind } from 'astal'
 import { playlistName } from '../../services/mediaplayer';
 
@@ -17,20 +17,20 @@ const hide = () => App.toggle_window("launcher");
 
 const AppBtn = ({ app }: { app: Apps.Application }) =>
     <button
-        className="AppBtn"
+        cssClasses={["AppBtn"]}
         onClicked={() => { app.launch(); hide(); }}
     >
         <box>
-            <icon icon={iconSubstitute(app.iconName)}/>
+            <image iconName={iconSubstitute(app.iconName)}/>
             <box valign={Gtk.Align.CENTER} vertical>
                 <label
-                    className="name"
-                    truncate
+                    cssClasses={["name"]}
+                    //truncate todo add me back
                     xalign={0}
                     label={app.name}
                 />
                 {app.description && <label
-                    className="description"
+                    cssClasses={["description"]}
                     wrap
                     xalign={0}
                     label={app.description}
@@ -53,12 +53,12 @@ export const launcher = () =>
                && self.hide()
         }
     >
-        <box widthRequest={500} className="launcher" vertical>
+        <box widthRequest={500} cssClasses={["launcher"]} vertical>
             <box 
-                className="searchHeader"
-                css={bind(playlistName).as((w) => `background-image: url('../wallpapers/${w}.jpg');`)}
+                cssClasses={["searchHeader"]} // todo fix css below
+                //css={bind(playlistName).as((w) => `background-image: url('../wallpapers/${w}.jpg');`)}
             >
-                <icon icon="system-search-symbolic"/>
+                <image iconName="system-search-symbolic"/>
                 <entry
                     placeholderText="Search"
                     text={text()}
@@ -71,7 +71,7 @@ export const launcher = () =>
                     setup={self => { // Auto-grab focus when launched
                         App.connect("window-toggled", () => {
                             const win = App.get_window("launcher");
-                            if (win.visible == true)
+                            if (win?.visible == true)
                                 self.grab_focus()
                         });
                     }}

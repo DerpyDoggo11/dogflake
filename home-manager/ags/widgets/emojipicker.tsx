@@ -1,5 +1,4 @@
-import { App, Astal } from 'astal/gtk3';
-import { FlowBox } from "../astalify/flowbox";
+import { App, Astal, Gtk } from 'astal/gtk4';
 
 export const emojiPicker = () =>
   <window
@@ -8,7 +7,7 @@ export const emojiPicker = () =>
     application={App}
     visible={false}
   >
-    <FlowBox hexpand min_children_per_line={10} max_children_per_line={10}>
-    </FlowBox>
+    <Gtk.FlowBox hexpand min_children_per_line={10} max_children_per_line={10}>
+    </Gtk.FlowBox>
   </window>
 // TODO finish me

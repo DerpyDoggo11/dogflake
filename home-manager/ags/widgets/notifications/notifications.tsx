@@ -1,4 +1,4 @@
-import { App, Astal, Gdk } from 'astal/gtk3';
+import { App, Astal, Gdk } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
 import { notificationItem } from './notificationitem';
 import { type Subscribable } from 'astal/binding';
@@ -32,7 +32,7 @@ export class NotifiationMap implements Subscribable {
     };
 
     private delete(key: number) {
-        let isDND: boolean;
+        let isDND;
         if (DND.get()) {
             isDND = true
             DND.set(false)
@@ -62,8 +62,8 @@ export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscri
         application={App}
     >
         <box vertical>
-            {bind(allNotifications).as((notifs: Array<Notifd.Notification>) => {
-                return notifs.map(notificationItem);
-            })}
+            {bind(allNotifications).as((notifs: Array<Notifd.Notification>) =>
+                notifs.map(notificationItem)
+            )}
         </box>
     </window>

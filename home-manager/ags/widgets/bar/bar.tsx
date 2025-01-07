@@ -1,4 +1,4 @@
-import { App, Astal, Gdk } from 'astal/gtk3';
+import { App, Astal, Gdk } from 'astal/gtk4';
 import { Time } from './modules/time';
 import { Workspaces } from './modules/workspaces';
 import { Status } from './modules/statusmenu';

@@ -5,7 +5,7 @@ const audio = Wp.get_default()?.audio!;
 
 export const VolumeSlider = () =>
     <box>
-        <icon icon={bind(speaker, "volumeIcon")}/>
+        <image iconName={bind(speaker, "volumeIcon")}/>
         <slider
             hexpand
             onDragged={({ value }) => {
@@ -38,9 +38,9 @@ const SinkItem = (stream: Wp.Endpoint) =>
 	</button>
 
 export const SinkSelector = () =>
-	<box className="sinkSelector" vertical>
+	<box cssClasses={["sinkSelector"]} vertical>
 		<button
-			className="mainSink"
+			cssClasses={["mainSink"]}
 			onClick={() => sinkVisible.set(!sinkVisible.get())}
 		>
 			<label label={bind(speaker, "description").as(d => nameSubstitute(d) || '')}/>

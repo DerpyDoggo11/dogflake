@@ -1,7 +1,7 @@
 
 import GObject from 'astal/gobject';
 import { AstalIO, exec, execAsync, GLib, subprocess, interval, bind } from 'astal';
-import { Gtk } from 'astal/gtk3'
+import { Gtk } from 'astal/gtk4'
 import { notifySend } from '../lib/notifySend';
 import hypr from 'gi://AstalHyprland?version=0.1';
 
@@ -16,9 +16,9 @@ export const RecordingIndicator = () =>
 		hexpand
 		visible={bind(screenRec, "recording").as(Boolean)}
 		halign={Gtk.Align.CENTER}
-		className="recIndicator"
+		cssClasses={["recIndicator"]}
 	>
-		<icon icon="media-record-symbolic"/>
+		<image iconName="media-record-symbolic"/>
 		<label label={bind(screenRec, "timer").as((t) => t + "s")}/>
 	</box>
 
