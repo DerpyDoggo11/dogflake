@@ -84,6 +84,16 @@ in {
     (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
   ];
 
+  home-manager = {
+    backupFileExtension = "backup";
+    extraSpecialArgs = { inherit inputs; };
+    users.alec = {
+      imports = [ ../home-manager/home.nix ];
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+    };
+  };
+
   programs = {
     git = {
       enable = true;

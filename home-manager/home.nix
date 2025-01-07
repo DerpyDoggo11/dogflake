@@ -18,6 +18,9 @@
   systemd.user.startServices = "sd-switch"; # Better system unit reloads
   home = {
     stateVersion = "23.05";
+    username = "alec";
+    homeDirectory = "/home/alec";
+
 
     # Symlink all wallpapers
     file."wallpapers" = {
