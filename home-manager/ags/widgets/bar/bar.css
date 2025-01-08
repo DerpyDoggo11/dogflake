@@ -27,14 +27,14 @@
 
 /* Workspace list */
 .workspaceList { padding-top: 0.3rem; }
-#bar button.workspaceBtn {
+#bar .workspaceBtn {
     background-color: @darkest2;
     border-radius: 50%;
     transition: 0.2s;
     margin: 0.25rem;
 }
-#bar button.workspaceBtn.active { background-color: @blue2; }
-#bar button.workspaceBtn.occupied { background-color: @darkest4; }
+#bar .workspaceBtn.active { background-color: @blue2; }
+#bar .workspaceBtn.occupied { background-color: @darkest4; }
 
 /* Status menu */
 .btConnected { color: @blue3; }

@@ -9,7 +9,6 @@ export const Workspaces = () =>
   <box 
     hexpand
     vertical
-    halign={Gtk.Align.CENTER}
     cssClasses={["workspaceList"]}
     onScroll={(_, __, y) => hyprland.dispatch('workspace', (y > 0) ? '+1' : '-1')}
   >
@@ -32,7 +31,7 @@ const WorkspaceBtn = ({ id }: { id: number }) => {
 
       const isOccupied = workspace.get_clients().length > 0;
       const active = focused.id == id;
-
+      
       return (active) 
           ? ['workspaceBtn', 'active']
           : isOccupied ? ['workspaceBtn', 'occupied']
@@ -40,5 +39,5 @@ const WorkspaceBtn = ({ id }: { id: number }) => {
       }
   );
 
-  return <box cssClasses={className()}/>
+  return <box hexpand vexpand cssClasses={className()}/>
 };

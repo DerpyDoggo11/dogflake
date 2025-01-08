@@ -27,7 +27,7 @@
 @define-color blue2 #81a1c1;
 @define-color blue3 #5e81ac;
 
-
+button:focus { outline: none; }
 window {
   background: transparent;
   font-family: 'Sora';
@@ -36,4 +36,5 @@ window {
 calendar, .quickSettings { 
   border: 0;
   border-radius: 0 5px 0 0;
+  background-color: @darkest2;
 }
