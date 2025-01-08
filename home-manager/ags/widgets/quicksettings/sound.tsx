@@ -8,7 +8,7 @@ export const VolumeSlider = () =>
         <image iconName={bind(speaker, "volumeIcon")}/>
         <slider
             hexpand
-            onNotifyValue={({ value }) => {
+            onChangeValue={({ value }) => {
                 speaker.volume = value;
                 speaker.mute = false;
             }}
@@ -31,7 +31,7 @@ const nameSubstitute = (name: string) => {
 
 const SinkItem = (stream: Wp.Endpoint) =>
 	<button
-		onClick={() => stream.isDefault = true}
+		onButtonPressed={() => stream.isDefault = true}
 		visible={bind(stream, "isDefault").as((def) => (!def))}
 	>
 		<label label={nameSubstitute(stream.description)}/>
@@ -41,7 +41,7 @@ export const SinkSelector = () =>
 	<box cssClasses={["sinkSelector"]} vertical>
 		<button
 			cssClasses={["mainSink"]}
-			onClick={() => sinkVisible.set(!sinkVisible.get())}
+			onButtonPressed={() => sinkVisible.set(!sinkVisible.get())}
 		>
 			<label label={bind(speaker, "description").as(d => nameSubstitute(d) || '')}/>
 		</button>

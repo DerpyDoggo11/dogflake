@@ -35,6 +35,6 @@ export const BrightnessSlider = () =>
         <slider
             hexpand
             value={bind(brightness)}
-            onNotifyValue={({ value }) => setBrightness(value)}
+            onChangeValue={({ value }) => setBrightness(value)}
         />
     </box>

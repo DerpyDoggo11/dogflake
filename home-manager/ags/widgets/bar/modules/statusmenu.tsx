@@ -35,7 +35,7 @@ const DNDIcon = () =>
 
 export const Status = () =>
   <button 
-    onClicked={() => {
+    onButtonPressed={() => {
       App.get_window('calendar')?.hide();
       App.toggle_window('quickSettings');
     }}

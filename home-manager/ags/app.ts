@@ -33,7 +33,7 @@ export const widgets = (monitor: Gdk.Monitor) => [
     //TopRight(monitor),
     //BottomLeft(monitor),
     //BottomRight(monitor),
-    //Notifications(monitor, allNotifications)
+    Notifications(monitor, allNotifications)
 ];
 
 App.start({
@@ -44,7 +44,7 @@ App.start({
         calendar();
         emojiPicker();
         launcher();
-        //quickSettings(); dont uncomment or this will crash
+        quickSettings();
         OSD();
         reminders();
         powermenu();

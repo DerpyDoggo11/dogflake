@@ -9,7 +9,7 @@ const time = Variable<string>('').poll(1000,
 
 export const Time = () => 
   <button 
-    onClicked={() => {
+    onButtonPressed={() => {
       App.get_window("quickSettings")?.hide();
       App.toggle_window("calendar");
     }} 

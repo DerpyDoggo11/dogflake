@@ -54,7 +54,7 @@ export class NotifiationMap implements Subscribable {
         this.var.subscribe(callback);
 };
 
-export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscribable) =>
+export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscribable<Array<Notifd.Notification>>) =>
     <window
         name="notifications"
         gdkmonitor={gdkmonitor}
@@ -62,8 +62,6 @@ export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscri
         application={App}
     >
         <box vertical>
-            {bind(allNotifications).as((notifs: Array<Notifd.Notification>) =>
-                notifs.map(notificationItem)
-            )}
+            {bind(allNotifications).as((n) => n.map(notificationItem))}
         </box>
     </window>

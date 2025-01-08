@@ -33,16 +33,12 @@ const WorkspaceBtn = ({ id }: { id: number }) => {
       const isOccupied = workspace.get_clients().length > 0;
       const active = focused.id == id;
 
-      return ['workspaceBtn', 
-        //(active) TODO add me
-        //  ? 'active'
-        //  : isOccupied && 'occupied'
-      ]}
-  )
-    
+      return (active) 
+          ? ['workspaceBtn', 'active']
+          : isOccupied ? ['workspaceBtn', 'occupied']
+          : ['workspaceBtn']
+      }
+  );
 
-  return <button
-    cssClasses={className()}
-      onClick={() => hyprland.dispatch('workspace', `${id}`)}
-    />
+  return <box cssClasses={className()}/>
 };

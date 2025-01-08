@@ -5,7 +5,7 @@ export const Media = () =>
     <button
         cssClasses={["media"]}
         hexpand
-        onClick={() => playPause()}
+        onButtonPressed={() => playPause()}
         onScroll={(_, __, y) => execAsync('mpc volume ' + ((y < 0) ? '+5' : '-5'))}
         // todo make css global
         //css={bind(playlistName).as((w) => `background-image: url('./services/playlists/${w}.png');`)}

@@ -1,11 +1,10 @@
 import Apps from 'gi://AstalApps'
-import { App, Astal, Gdk, Gtk } from 'astal/gtk4'
-import { Variable, bind } from 'astal'
+import { App, Astal, Gtk } from 'astal/gtk4'
+import { bind } from 'astal'
 import { playlistName } from '../../services/mediaplayer';
 
 const apps = new Apps.Apps()
-const text = Variable('')
-const list = text(text => apps.fuzzy_query(text).slice(0, 5)) // 5 max items
+let text: Gtk.Entry;
 
 // Band-aid warning suppresion about missing icon - TODO find permanent solution
 const iconSubstitute = (icon: string) =>
@@ -18,7 +17,7 @@ const hide = () => App.toggle_window("launcher");
 const AppBtn = ({ app }: { app: Apps.Application }) =>
     <button
         cssClasses={["AppBtn"]}
-        onClicked={() => { app.launch(); hide(); }}
+        onButtonPressed={() => { app.launch(); hide(); }}
     >
         <box>
             <image iconName={iconSubstitute(app.iconName)}/>
@@ -47,9 +46,9 @@ export const launcher = () =>
         keymode={Astal.Keymode.ON_DEMAND}
         application={App}
         visible={false}
-        onShow={() => text.set("")}
+        onShow={() => text.text = ''}
         onKeyPressed={(self, key) =>
-            (key === Gdk.KEY_Escape)
+            (key == 65307) // Gdk.KEY_Escape
                && self.hide()
         }
     >
@@ -57,22 +56,22 @@ export const launcher = () =>
             <box 
                 cssClasses={["searchHeader"]} // todo fix css below
                 setup={() =>
-                    bind(playlistName).as((w) =>
+                    bind(playlistName).as((w) => {
+                        console.log(`background-image: url('../wallpapers/${w}.jpg');`)
                         App.apply_css(`background-image: url('../wallpapers/${w}.jpg');`)
-                    )
+                    })
                 }
             >
                 <image iconName="system-search-symbolic"/>
                 <entry
                     placeholderText="Search"
-                    text={text()}
                     hexpand
-                    onChanged={self => text.set(self.text)}
                     onActivate={() => {
-                        apps.fuzzy_query(text.get())?.[0].launch();
+                        apps.fuzzy_query(text.text)?.[0].launch();
                         hide();
                     }}
                     setup={self => { // Auto-grab focus when launched
+                        text = self;
                         App.connect("window-toggled", () => {
                             const win = App.get_window("launcher");
                             if (win?.visible == true)
@@ -82,7 +81,10 @@ export const launcher = () =>
                 />
             </box>
             <box spacing={6} vertical>
-                {list.as(list => list.map(app => <AppBtn app={app}/>))}
+                {bind(text, 'text').as(text =>
+                    apps.fuzzy_query(text).slice(0, 5)
+                    .map((app: Apps.Application) => <AppBtn app={app}/>)
+                )}
             </box>
         </box>
     </window>

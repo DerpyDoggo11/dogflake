@@ -1,11 +1,5 @@
 /* Graphite Nord theme colors: https://github.com/vinceliuice/Graphite-gtk-theme/blob/main/src/sass/gtk/_colors-public.scss */
 
-@import url('./widgets/bar/bar.css');
-@import url('./widgets/launcher/launcher.css');
-@import url('./widgets/notifications/notifications.css');
-@import url('./widgets/osd/osd.css');
-@import url('./widgets/quicksettings/quicksettings.css');
-@import url('./widgets/powermenu/powermenu.css');
 
 /* For text input placeholders */
 @define-color placeholder_text_color #fff;

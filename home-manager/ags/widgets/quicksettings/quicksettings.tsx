@@ -7,7 +7,7 @@ import { DND } from '../notifications/notifications';
 const DNDToggle = () => 
     <button
         widthRequest={60}
-        onClick={() => DND.set(!DND.get())}
+        onButtonPressed={() => DND.set(!DND.get())}
         cssClasses={bind(DND).as((dnd) => (dnd) ? ['dnd', 'active'] : ['dnd'])}
     >
         <image iconName="notifications-disabled-symbolic"/>
