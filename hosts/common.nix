@@ -1,4 +1,8 @@
 { lib, inputs, config, pkgs, modulesPath, ... }: {
+  users.users.alec = { # Default user
+    isNormalUser = true;
+    extraGroups = [ "wheel" "audio" "video" ];
+  };
 
   # Optimized bootloader settings
   boot = {

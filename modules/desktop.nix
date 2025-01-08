@@ -87,11 +87,7 @@ in {
   home-manager = {
     backupFileExtension = "backup";
     extraSpecialArgs = { inherit inputs; };
-    users.alec = {
-      imports = [ ../home-manager/home.nix ];
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-    };
+    users.alec.imports = [ ../home-manager/home.nix ];
   };
 
   programs = {
