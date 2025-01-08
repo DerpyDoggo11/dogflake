@@ -24,13 +24,13 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
             <box valign={Gtk.Align.CENTER} vertical>
                 <label
                     cssClasses={["name"]}
-                    //truncate todo add me back
                     xalign={0}
                     label={app.name}
                 />
                 {app.description && <label
                     cssClasses={["description"]}
                     wrap
+                    maxWidthChars={1} // Literally any value prevents this expanding for some reason
                     xalign={0}
                     label={app.description}
                 />}
@@ -52,38 +52,39 @@ export const launcher = () =>
                && self.hide()
         }
     >
-        <box widthRequest={500} cssClasses={["launcher"]} vertical>
-            <box 
-                cssClasses={["searchHeader"]} // todo make this update instantly on start below
-                setup={() =>
-                    playlistName.subscribe((w) =>
-                        App.apply_css(`.searchHeader { background-image: url("file:///home/alec/Projects/flake/home-manager/wallpapers/${w}.jpg"); }`)
-                    )
-                }
-            >
-                <image iconName="system-search-symbolic"/>
-                <entry
-                    placeholderText="Search"
-                    hexpand
-                    onActivate={() => {
-                        apps.fuzzy_query(text.text)?.[0].launch();
-                        hide();
-                    }}
-                    setup={self => { // Auto-grab focus when launched
-                        text = self;
-                        App.connect("window-toggled", () => {
-                            const win = App.get_window("launcher");
-                            if (win?.visible == true)
-                                self.grab_focus()
-                        });
-                    }}
-                />
-            </box>
-            <box spacing={6} vertical>
-                {bind(text, 'text').as(text =>
-                    apps.fuzzy_query(text).slice(0, 5)
-                    .map((app: Apps.Application) => <AppBtn app={app}/>)
-                )}
+        <box heightRequest={700}> {/* Allocate enough height to prevent resizing bug */}
+            <box widthRequest={500} cssClasses={["launcher"]} vertical valign={Gtk.Align.START}>
+                <box 
+                    cssClasses={["searchHeader"]}
+                    setup={() =>
+                        playlistName.subscribe((w) =>
+                            App.apply_css(`.searchHeader { background-image: url("file:///home/alec/Projects/flake/home-manager/wallpapers/${w}.jpg"); }`)
+                        )
+                    } 
+                >
+                    <image iconName="system-search-symbolic"/>
+                    <entry
+                        placeholderText="Search"
+                        hexpand
+                        onActivate={() => {
+                            apps.fuzzy_query(text.text)?.[0].launch();
+                            hide();
+                        }}
+                        setup={self => { // Auto-grab focus when launched
+                            text = self;
+                            App.connect("window-toggled", () =>
+                                (App.get_window("launcher")?.visible == true)
+                                    && self.grab_focus()
+                            );
+                        }}
+                    />
+                </box>
+                <box spacing={6} vertical>
+                    {bind(text, 'text').as(text =>
+                        apps.fuzzy_query(text).slice(0, 5)
+                        .map((app: Apps.Application) => <AppBtn app={app}/>)
+                    )}
+                </box>
             </box>
         </box>
     </window>

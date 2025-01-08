@@ -7,24 +7,24 @@
 
 .searchHeader { /* Search bar */
     padding: 3rem;
-    background-size: fill;
+    background-position: center;
     margin-bottom: 0.5rem;
     border-radius: 0.4rem;
     border: 2px solid @darkest4;
 }
 
 .launcher entry {
-    box-shadow: none;
     background: transparent;
     color: white;
+    outline: none;
 }
 .launcher button {
-    padding: .5rem;
+    padding: 0.5rem;
 }
 
 .launcher button image {
     -gtk-icon-size: 2rem;
-    margin-right: .3rem;
+    margin-right: 0.3rem;
 }
 
 .launcher button label.name {
