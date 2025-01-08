@@ -3,7 +3,7 @@
 import Cairo from 'cairo';
 const radius = 10;
 
-// TODO see if we can combine all the different corners into one cairo widget
+// todo find an alternative since we cant use drawingarea from Cairo anymore
 
 export const Corner = (place: string) =>
     <drawingarea

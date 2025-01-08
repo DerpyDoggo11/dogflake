@@ -54,11 +54,11 @@ export const launcher = () =>
     >
         <box widthRequest={500} cssClasses={["launcher"]} vertical>
             <box 
-                cssClasses={["searchHeader"]} // todo fix css below
+                cssClasses={["searchHeader"]} // todo make this update instantly on start below
                 setup={() =>
-                    playlistName.subscribe((w) => {
-                        App.apply_css(`.searchHeader { background-image: url('/home/alec/Projects/flake/wallpapers/${w}.jpg');`, false)
-                    })
+                    playlistName.subscribe((w) =>
+                        App.apply_css(`.searchHeader { background-image: url("file:///home/alec/Projects/flake/home-manager/wallpapers/${w}.jpg"); }`)
+                    )
                 }
             >
                 <image iconName="system-search-symbolic"/>

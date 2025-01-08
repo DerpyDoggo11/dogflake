@@ -7,7 +7,7 @@
 
 .searchHeader { /* Search bar */
     padding: 3rem;
-    background-size: cover;
+    background-size: fill;
     margin-bottom: 0.5rem;
     border-radius: 0.4rem;
     border: 2px solid @darkest4;
@@ -22,8 +22,8 @@
     padding: .5rem;
 }
 
-.launcher button icon {
-    font-size: 3em;
+.launcher button image {
+    -gtk-icon-size: 2rem;
     margin-right: .3rem;
 }
 
