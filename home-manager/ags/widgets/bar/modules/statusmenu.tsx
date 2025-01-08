@@ -40,7 +40,7 @@ export const Status = () =>
       App.toggle_window('quickSettings');
     }}
     cssClasses={["time"]} // todo why is this class here
-    cursor={Gdk.Cursor.new_from_name('pointer')}
+    //cursor={Gdk.Cursor.new_from_name('pointer')} // todo add me back after fixing error
     onScroll={(_, __, y) => speaker.volume = (y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
     <box vertical spacing={6} cssClasses={["statusMenu"]}>

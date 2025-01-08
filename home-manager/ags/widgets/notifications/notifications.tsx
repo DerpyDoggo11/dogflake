@@ -60,6 +60,7 @@ export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscri
         gdkmonitor={gdkmonitor}
         anchor={TOP | RIGHT}
         application={App}
+        visible={true}
     >
         <box vertical>
             {bind(allNotifications).as((n) => n.map(notificationItem))}

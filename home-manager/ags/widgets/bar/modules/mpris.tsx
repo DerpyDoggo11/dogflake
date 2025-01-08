@@ -11,7 +11,7 @@ export const Mpris = () =>
         onScroll={(_, __, y) => (y > 0) ? mpris.players[0].next() : mpris.players[0].previous()}
         hexpand 
         visible={bind(mpris, 'players').as((players) => (players.length > 0))}
-        cursor={Gdk.Cursor.new_from_name('pointer')}
+        //cursor={Gdk.Cursor.new_from_name('pointer')} // todo add me back after fixing error
     >
         <image iconName='emblem-music-symbolic'/>
     </button>

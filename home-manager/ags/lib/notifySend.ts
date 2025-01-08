@@ -50,8 +50,8 @@ export const notifySend = ({
                 resolve(parseInt(out));
                 printedId = true;
             } else {
-                execAsync(actions.find((action) => String(action.id) === out).command);
-            }
+                execAsync(actions.find((a) => String(a.id) == out)?.command ?? '');
+            };
         },
         (err) => console.log('[Notify] ' + err)
     );

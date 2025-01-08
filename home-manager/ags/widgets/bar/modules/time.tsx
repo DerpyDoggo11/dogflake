@@ -14,7 +14,7 @@ export const Time = () =>
       App.toggle_window("calendar");
     }} 
     cssClasses={["time"]}
-    cursor={Gdk.Cursor.new_from_name('pointer')}
+    //cursor={Gdk.Cursor.new_from_name('pointer')}     cursor={Gdk.Cursor.new_from_name('pointer')}
   >
     <box vertical hexpand>
       <label cssClasses={["date"]} label={date}/>

@@ -13,6 +13,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) =>
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
     anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
     application={App}
+    visible={true}
   >
     <box vertical>
       <Workspaces/>
