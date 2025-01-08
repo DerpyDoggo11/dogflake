@@ -1,5 +1,4 @@
 // Stolen from https://github.com/rice-cracker-dev/nixos-config/blob/main/modules/extends/candy/home/desktop/shell/ags/config/widgets/HyprlandWidget/index.tsx
-import { Gtk } from 'astal/gtk4';
 import { bind, Variable } from 'astal';
 import AstalHyprland from 'gi://AstalHyprland';
 
@@ -12,7 +11,7 @@ export const Workspaces = () =>
     cssClasses={["workspaceList"]}
     onScroll={(_, __, y) => hyprland.dispatch('workspace', (y > 0) ? '+1' : '-1')}
   >
-    {[...Array(8).keys()].map((i) => 
+    {[...Array(8).keys()].map((i) =>
       <WorkspaceBtn id={i + 1}/>
     )}
   </box>

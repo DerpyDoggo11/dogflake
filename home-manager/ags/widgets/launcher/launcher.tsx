@@ -56,9 +56,8 @@ export const launcher = () =>
             <box 
                 cssClasses={["searchHeader"]} // todo fix css below
                 setup={() =>
-                    bind(playlistName).as((w) => {
-                        console.log(`background-image: url('../wallpapers/${w}.jpg');`)
-                        App.apply_css(`background-image: url('../wallpapers/${w}.jpg');`)
+                    playlistName.subscribe((w) => {
+                        App.apply_css(`.searchHeader { background-image: url('/home/alec/Projects/flake/wallpapers/${w}.jpg');`, false)
                     })
                 }
             >

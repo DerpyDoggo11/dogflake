@@ -72,7 +72,7 @@ class ScreenRec extends GObject.Object {
 	};
 
 	async stop() {
-		this.#recorder.signal(15); // Request wl-screenrec to finish gracefully
+		this.#recorder?.signal(15); // Request wl-screenrec to finish gracefully
 		this.#recorder = null;
 		this.notify("recording");
 

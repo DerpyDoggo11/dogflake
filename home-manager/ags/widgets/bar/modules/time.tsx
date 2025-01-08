@@ -13,7 +13,7 @@ export const Time = () =>
       App.get_window("quickSettings")?.hide();
       App.toggle_window("calendar");
     }} 
-    cssClasses={["time"]}
+    cssClasses={["time", "timeBtn"]}
     //cursor={Gdk.Cursor.new_from_name('pointer')}     cursor={Gdk.Cursor.new_from_name('pointer')}
   >
     <box vertical hexpand>
