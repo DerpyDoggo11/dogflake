@@ -57,14 +57,14 @@ export const notificationItem = (n: Notifd.Notification) =>
                     label={n.body}
                 />}
                 {n.get_actions().length > 0 && <box cssClasses={["actions"]} spacing={5}>
-                    {n.get_actions().map(({ label, id }) => (
+                    {n.get_actions().map(({ label, id }) =>
                         <button
                             hexpand
                             onButtonPressed={() => { n.invoke(id); n.dismiss(); }}
                         >
                             <label label={label} halign={CENTER}/>
                         </button>
-                    ))}
+                    )}
                 </box>}
             </box>
         </box>

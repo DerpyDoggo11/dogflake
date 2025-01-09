@@ -2,7 +2,7 @@ import { App, Astal, Gdk } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
 import { notificationItem } from './notificationitem';
 import { type Subscribable } from 'astal/binding';
-import { Variable, bind } from 'astal';
+import { Variable, bind, idle } from 'astal';
 const { TOP, RIGHT } = Astal.WindowAnchor;
 export const DND = Variable(false);
 
@@ -34,9 +34,9 @@ export class NotifiationMap implements Subscribable {
     private delete(key: number) {
         let isDND;
         if (DND.get()) {
-            isDND = true
-            DND.set(false)
-        }
+            isDND = true;
+            DND.set(false);
+        };
 
         this.map.delete(key);
         this.notifiy();
@@ -54,15 +54,27 @@ export class NotifiationMap implements Subscribable {
         this.var.subscribe(callback);
 };
 
+let notif: Astal.Window;
+
 export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscribable<Array<Notifd.Notification>>) =>
     <window
         name="notifications"
         gdkmonitor={gdkmonitor}
         anchor={TOP | RIGHT}
         application={App}
-        visible={true}
+        visible={false}
+        setup={(self) => notif = self}
+        // todo make clicks go through this
     >
         <box vertical>
-            {bind(allNotifications).as((n) => n.map(notificationItem))}
+            {bind(allNotifications).as((n) => {
+                if (notif)
+                    (n.length == 0)
+                        ? notif.hide()
+                        : notif.show()
+
+                return n.map(notificationItem)}
+            )}
+            
         </box>
     </window>
