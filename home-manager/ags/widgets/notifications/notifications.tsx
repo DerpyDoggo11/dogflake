@@ -2,7 +2,7 @@ import { App, Astal, Gdk } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
 import { notificationItem } from './notificationitem';
 import { type Subscribable } from 'astal/binding';
-import { Variable, bind, idle } from 'astal';
+import { Variable, bind } from 'astal';
 const { TOP, RIGHT } = Astal.WindowAnchor;
 export const DND = Variable(false);
 
@@ -64,7 +64,6 @@ export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscri
         application={App}
         visible={false}
         setup={(self) => notif = self}
-        // todo make clicks go through this
     >
         <box vertical>
             {bind(allNotifications).as((n) => {

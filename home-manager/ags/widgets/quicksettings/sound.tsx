@@ -1,5 +1,6 @@
 import Wp from "gi://AstalWp"
 import { bind, Variable } from "astal";
+import { Gdk } from 'astal/gtk4'; 
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const audio = Wp.get_default()?.audio!;
 
@@ -33,6 +34,7 @@ const SinkItem = (stream: Wp.Endpoint) =>
 	<button
 		onButtonPressed={() => stream.isDefault = true}
 		visible={bind(stream, "isDefault").as((def) => (!def))}
+		cursor={Gdk.Cursor.new_from_name('pointer', null)}
 	>
 		<label label={nameSubstitute(stream.description)}/>
 	</button>
@@ -42,6 +44,7 @@ export const SinkSelector = () =>
 		<button
 			cssClasses={["mainSink"]}
 			onButtonPressed={() => sinkVisible.set(!sinkVisible.get())}
+			cursor={Gdk.Cursor.new_from_name('pointer', null)}
 		>
 			<label label={bind(speaker, "description").as(d => nameSubstitute(d) || '')}/>
 		</button>

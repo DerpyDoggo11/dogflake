@@ -1,6 +1,6 @@
 import { BrightnessSlider } from "../../services/brightness"
 import { VolumeSlider, SinkSelector } from './sound'
-import { App, Astal } from 'astal/gtk4';
+import { App, Astal, Gdk } from 'astal/gtk4';
 import { bind } from 'astal';
 import { DND } from '../notifications/notifications';
 
@@ -9,6 +9,7 @@ const DNDToggle = () =>
         widthRequest={60}
         onButtonPressed={() => DND.set(!DND.get())}
         cssClasses={bind(DND).as((dnd) => (dnd) ? ['dnd', 'active'] : ['dnd'])}
+        cursor={Gdk.Cursor.new_from_name('pointer', null)}
     >
         <image iconName="notifications-disabled-symbolic"/>
     </button>

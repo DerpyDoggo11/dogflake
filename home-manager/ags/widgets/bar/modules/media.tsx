@@ -1,4 +1,4 @@
-import { App } from 'astal/gtk4';
+import { App, Gdk } from 'astal/gtk4';
 import { bind, execAsync } from 'astal';
 import { isPlaying, playlistName, playPause } from '../../../services/mediaplayer';
 
@@ -13,6 +13,7 @@ export const Media = () =>
                 App.apply_css(`#bar .media { background-image: url("file:///home/alec/Projects/flake/home-manager/ags/services/playlists/${w}.png"); }`)
             )
         }
+        cursor={Gdk.Cursor.new_from_name('pointer', null)}
     >
         <image iconName={bind(isPlaying).as(
             (v) => (v) ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic')

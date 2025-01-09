@@ -39,8 +39,7 @@ export const Status = () =>
       App.get_window('calendar')?.hide();
       App.toggle_window('quickSettings');
     }}
-    cssClasses={["time"]} // todo why is this class here
-    //cursor={Gdk.Cursor.new_from_name('pointer')} // todo add me back after fixing error
+    cursor={Gdk.Cursor.new_from_name('pointer', null)}
     onScroll={(_, __, y) => speaker.volume = (y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
     <box vertical spacing={6} cssClasses={["statusMenu"]}>

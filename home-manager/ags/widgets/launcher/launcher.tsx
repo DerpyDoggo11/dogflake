@@ -35,7 +35,7 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
                 {app.description && <label
                     cssClasses={["description"]}
                     wrap
-                    maxWidthChars={1} // Literally any value prevents this expanding for some reason
+                    maxWidthChars={1} // Literally any value forces wrap for some reason
                     xalign={0}
                     label={app.description}
                 />}

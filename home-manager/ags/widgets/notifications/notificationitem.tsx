@@ -1,5 +1,5 @@
 import { GLib } from 'astal';
-import { Gtk } from 'astal/gtk4';
+import { Gtk, Gdk } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
 import Pango from 'gi://Pango';
 const { START, CENTER, END } = Gtk.Align
@@ -45,9 +45,10 @@ export const notificationItem = (n: Notifd.Notification) =>
                 <label
                     cssClasses={["summary"]}
                     halign={START}
+                    wrap
                     xalign={0}
                     label={n.summary}
-                    //truncate todo add me
+                    maxWidthChars={1} // Literally any value forces wrap for some reason
                 />
                 {n.body && <label
                     cssClasses={["body"]}
@@ -55,11 +56,13 @@ export const notificationItem = (n: Notifd.Notification) =>
                     useMarkup
                     xalign={0}
                     label={n.body}
+                    maxWidthChars={1} // Literally any value forces wrap for some reason
                 />}
                 {n.get_actions().length > 0 && <box cssClasses={["actions"]} spacing={5}>
                     {n.get_actions().map(({ label, id }) =>
                         <button
                             hexpand
+                            cursor={Gdk.Cursor.new_from_name('pointer', null)}
                             onButtonPressed={() => { n.invoke(id); n.dismiss(); }}
                         >
                             <label label={label} halign={CENTER}/>
