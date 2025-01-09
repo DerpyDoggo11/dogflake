@@ -3,20 +3,28 @@
     border-radius: 0.4rem;
     margin: 1rem;
     padding: 0.8rem;
+    line-height: 1.2rem;
 }
 
-.searchHeader { /* Search bar */
+.searchBg { /* Search bar */
     padding: 3rem;
     background-position: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     border-radius: 0.4rem;
-    border: 2px solid @darkest4;
+    filter: blur(3px);
+    min-height: 2rem;
+}
+
+.launcher entry:focus ~ .searchBg {
+    background: black;
+    border: 5px solid black;
 }
 
 .launcher entry {
     background: transparent;
     color: white;
     outline: none;
+    margin-left: 2rem;
 }
 
 .launcher button {
