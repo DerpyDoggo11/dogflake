@@ -1,5 +1,5 @@
 import Apps from 'gi://AstalApps'
-import { App, Astal, Gtk } from 'astal/gtk4'
+import { App, Astal, Gtk, Gdk } from 'astal/gtk4'
 import { bind } from 'astal'
 import { playlistName } from '../../services/mediaplayer';
 
@@ -17,7 +17,12 @@ const hide = () => App.toggle_window("launcher");
 const AppBtn = ({ app }: { app: Apps.Application }) =>
     <button
         cssClasses={["AppBtn"]}
-        onButtonPressed={() => { app.launch(); hide(); }}
+        onKeyPressed={(_, key) => {
+            if (key == Gdk.KEY_Return) {
+                app.launch(); 
+                hide();
+            }
+        }}
     >
         <box>
             <image iconName={iconSubstitute(app.iconName)}/>
@@ -47,9 +52,9 @@ export const launcher = () =>
         application={App}
         visible={false}
         onShow={() => text.text = ''}
-        onKeyPressed={(self, key) =>
+        onKeyPressed={(_, key) =>
             (key == 65307) // Gdk.KEY_Escape
-               && self.hide()
+               && hide()
         }
     >
         <box heightRequest={700}> {/* Allocate enough height to prevent resizing bug */}

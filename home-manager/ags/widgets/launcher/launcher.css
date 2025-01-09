@@ -18,13 +18,21 @@
     color: white;
     outline: none;
 }
+
 .launcher button {
     padding: 0.5rem;
+    border: 1px solid @darkest4;
+}
+
+.launcher button:focus {
+    background-color: @blue2;
+    border: 1px solid @blue1;
+    transform: translateY(-2px) scale(1.01);
 }
 
 .launcher button image {
     -gtk-icon-size: 2rem;
-    margin-right: 0.3rem;
+    margin-right: 0.5rem;
 }
 
 .launcher button label.name {

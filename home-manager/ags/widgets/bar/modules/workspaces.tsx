@@ -17,26 +17,21 @@ export const Workspaces = () =>
   </box>
   
 const WorkspaceBtn = ({ id }: { id: number }) => {
+  const className = bind(hyprland, 'focusedWorkspace').as((focused) => {
+    const workspace = hyprland.workspaces.find((w) => w.id === id);
 
-  // TODO can we clean this up by removing an unused bind?
-  const className = Variable.derive(
-    [bind(hyprland, 'workspaces'), bind(hyprland, 'focusedWorkspace')],
-    (workspaces, focused) => {
-      const workspace = workspaces.find((w) => w.id === id);
+    // Empty workspace or monitor was reconnected
+    if (!workspace || !focused)
+      return ['workspaceBtn'];
 
-      // Empty workspace or monitor was reconnected
-      if (!workspace || !focused)
-        return ['workspaceBtn'];
+    const isOccupied = workspace.get_clients().length > 0;
+    const active = focused.id == id;
+    
+    return (active) 
+        ? ['workspaceBtn', 'active']
+        : isOccupied ? ['workspaceBtn', 'occupied']
+        : ['workspaceBtn']
+  })
 
-      const isOccupied = workspace.get_clients().length > 0;
-      const active = focused.id == id;
-      
-      return (active) 
-          ? ['workspaceBtn', 'active']
-          : isOccupied ? ['workspaceBtn', 'occupied']
-          : ['workspaceBtn']
-      }
-  );
-
-  return <box hexpand vexpand cssClasses={className()}/>
+  return <box hexpand vexpand cssClasses={className}/>
 };
