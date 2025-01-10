@@ -1,6 +1,6 @@
 import Apps from 'gi://AstalApps'
-import { App, Astal, Gtk, Gdk } from 'astal/gtk4'
-import { bind } from 'astal'
+import { App, Astal, Gtk, Gdk } from 'astal/gtk4';
+import { bind } from 'astal';
 import { playlistName } from '../../services/mediaplayer';
 
 const apps = new Apps.Apps()

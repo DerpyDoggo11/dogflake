@@ -23,6 +23,9 @@ import { powermenu } from './widgets/powermenu/powermenu';
 import { monitorBrightness } from './services/brightness';
 import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaplayer';
 
+// Temporary app launcher fix (already fixed upstream)
+GLib.setenv("LD_PRELOAD", "", true)
+
 const allNotifications = new NotifiationMap();
 const widgetMap: Map<Gdk.Monitor, Gtk.Widget[]> = new Map();
 
