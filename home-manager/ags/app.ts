@@ -29,10 +29,10 @@ const widgetMap: Map<Gdk.Monitor, Gtk.Widget[]> = new Map();
 // Per-monitor widgets
 export const widgets = (monitor: Gdk.Monitor) => [
     Bar(monitor),
-    TopLeft(monitor),
-    TopRight(monitor),
-    BottomLeft(monitor),
-    BottomRight(monitor),
+    //TopLeft(monitor),
+    //TopRight(monitor),
+    //BottomLeft(monitor),
+    //BottomRight(monitor),
     Notifications(monitor, allNotifications)
 ];
 
