@@ -43,11 +43,9 @@
         inherit pkgs;
         src = ./ags;
         name = "desktop-shell"; # Executable name
+        gtk4 = true;
         entry = "app.ts";
         extraPackages = with inputs.ags.packages.${pkgs.system}; [
-          astal3
-          astal4
-          agsFull # Core gtk4 lib
           apps # App launcher
           mpris # Media controls
           hyprland # Workspace integration
@@ -61,16 +59,6 @@
       inputs.ags.packages.${pkgs.system}.io # Expose Astal CLI for keybinds
     ];
   };
-
-  programs.ags = {
-    enable = true;
-    configDir = ./ags;
-    package = inputs.ags.packages.${pkgs.system}.agsFull;
-
-    extraPackages = [ ];
-  };
-
-
 
   xdg = {
     configFile."homepage.html".source = ./homepage.html;
