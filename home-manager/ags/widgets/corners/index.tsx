@@ -1,6 +1,6 @@
 // Stolen from https://github.com/matt1432/nixos-configs/blob/master/modules/ags/config/widgets/corners/index.tsx
 
-import { Astal, Gdk, App } from 'astal/gtk3';
+import { Astal, Gdk, App } from 'astal/gtk4';
 import { Corner } from './corners';
 
 export const TopLeft = (gdkmonitor: Gdk.Monitor) => (

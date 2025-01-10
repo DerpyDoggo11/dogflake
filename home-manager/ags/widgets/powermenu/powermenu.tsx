@@ -1,4 +1,4 @@
-import { Astal, App, Gdk } from 'astal/gtk3';
+import { Astal, App } from 'astal/gtk4';
 import { execAsync } from 'astal';
 
 export const powermenu = () =>
@@ -8,9 +8,9 @@ export const powermenu = () =>
       visible={false}
       keymode={Astal.Keymode.ON_DEMAND} 
       
-      onKeyPressEvent={(self, event) => {
+      onKeyPressed={(self, key) => {
          self.hide();
-         switch (event.get_keyval()[1]) {
+         switch (key) {
             case 113: // Q
                execAsync('systemctl poweroff')
                break;
@@ -25,13 +25,13 @@ export const powermenu = () =>
    >
       <box>
          <button>
-            <icon icon="weather-clear-night-symbolic"/>
+            <image iconName="weather-clear-night-symbolic"/>
          </button>
          <button>
-            <icon icon="system-shutdown-symbolic"/>
+            <image iconName="system-shutdown-symbolic"/>
          </button>
          <button>
-            <icon icon="system-reboot-symbolic"/>
+            <image iconName="system-reboot-symbolic"/>
          </button>
       </box>
    </window>

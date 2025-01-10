@@ -1,4 +1,4 @@
-import { App, Astal, Gdk } from 'astal/gtk3';
+import { App, Astal, Gdk } from 'astal/gtk4';
 import { Time } from './modules/time';
 import { Workspaces } from './modules/workspaces';
 import { Status } from './modules/statusmenu';
@@ -13,6 +13,7 @@ export const Bar = (gdkmonitor: Gdk.Monitor) =>
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
     anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
     application={App}
+    visible={true}
   >
     <box vertical>
       <Workspaces/>

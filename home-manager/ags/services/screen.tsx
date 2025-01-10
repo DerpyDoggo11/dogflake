@@ -1,7 +1,7 @@
 
 import GObject from 'astal/gobject';
 import { AstalIO, exec, execAsync, GLib, subprocess, interval, bind } from 'astal';
-import { Gtk } from 'astal/gtk3'
+import { Gtk } from 'astal/gtk4'
 import { notifySend } from '../lib/notifySend';
 import hypr from 'gi://AstalHyprland?version=0.1';
 
@@ -16,9 +16,9 @@ export const RecordingIndicator = () =>
 		hexpand
 		visible={bind(screenRec, "recording").as(Boolean)}
 		halign={Gtk.Align.CENTER}
-		className="recIndicator"
+		cssClasses={["recIndicator"]}
 	>
-		<icon icon="media-record-symbolic"/>
+		<image iconName="media-record-symbolic"/>
 		<label label={bind(screenRec, "timer").as((t) => t + "s")}/>
 	</box>
 
@@ -72,7 +72,7 @@ class ScreenRec extends GObject.Object {
 	};
 
 	async stop() {
-		this.#recorder.signal(15); // Request wl-screenrec to finish gracefully
+		this.#recorder?.signal(15); // Request wl-screenrec to finish gracefully
 		this.#recorder = null;
 		this.notify("recording");
 
@@ -86,6 +86,7 @@ class ScreenRec extends GObject.Object {
 		notifySend({
 			title: 'Screenrecord',
 			iconName: 'emblem-videos-symbolic',
+			image: this.#file,
 			body: this.#file,
 			actions: [
 				{
@@ -120,6 +121,7 @@ export const screenshot = async (fullscreen: boolean) => {
 			notifySend({
 				title: 'Screenshot Saved',
 				iconName: 'image-x-generic-symbolic',
+				image: file,
 				actions: [
 					{
 						id: 1,

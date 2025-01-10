@@ -4,7 +4,7 @@ import { Variable } from "astal";
 export type musicAction = 'next' | 'prev';
 export const isPlaying: Variable<Boolean> = new Variable(false);
 export const playlist: Variable<Number> = new Variable(1);
-export const playlistName: Variable<String> = new Variable('Study');
+export const playlistName: Variable<String> = new Variable('');
 
 // These playlists match with the folder names in ~/Music/
 const playlists = ['Study', 'Focus', 'Synthwave', 'SynthAmbient', 'Ambient'];
@@ -52,6 +52,7 @@ export const chngPlaylist = (direction: musicAction) => {
 };
 
 export const initMedia = () => {
+    playlistName.set('Study'); // Default playlist
     execAsync('mpc crossfade 2'); // Set crossfade value
     execAsync(`swww img /home/alec//wallpapers/${playlistName.get()}.jpg --transition-type grow`);
 

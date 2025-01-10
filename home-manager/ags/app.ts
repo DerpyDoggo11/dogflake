@@ -1,6 +1,13 @@
 import style from './style.css';
-import { App, Gdk, Gtk } from 'astal/gtk3';
-import { GLib, execAsync, exec } from 'astal';
+import lancherStyle from './widgets/launcher/launcher.css';
+import barStyle from './widgets/bar/bar.css';
+import notificationStyle from './widgets/notifications/notifications.css';
+import osdStyle from './widgets/osd/osd.css';
+import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
+import powermenuStyle from './widgets/powermenu/powermenu.css';
+
+import { App, Gdk, Gtk } from 'astal/gtk4';
+import { GLib, exec, bind } from 'astal';
 import { Bar } from './widgets/bar/bar';
 import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
@@ -22,15 +29,15 @@ const widgetMap: Map<Gdk.Monitor, Gtk.Widget[]> = new Map();
 // Per-monitor widgets
 export const widgets = (monitor: Gdk.Monitor) => [
     Bar(monitor),
-    TopLeft(monitor),
-    TopRight(monitor),
-    BottomLeft(monitor),
-    BottomRight(monitor),
+    //TopLeft(monitor),
+    //TopRight(monitor),
+    //BottomLeft(monitor),
+    //BottomRight(monitor),
     Notifications(monitor, allNotifications)
 ];
 
 App.start({
-    css: style,
+    css: style + lancherStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
     main() {
         App.get_monitors().map((monitor) => widgetMap.set(monitor, widgets(monitor)));
 
@@ -44,12 +51,18 @@ App.start({
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
         initMedia(); // Mpd player
 
-        // Automatically disconnect & reconnect widgets on monitor change
-        App.connect('monitor-added', (_, monitor) => widgetMap.set(monitor, widgets(monitor)));
+        // Automatically reconnect widgets on monitor change
+        bind(App, 'monitors').as(monitors =>
+            monitors.forEach((monitor =>
+                (!widgetMap.get(monitor))
+                    && widgetMap.set(monitor, widgets(monitor))
+            ))
+        );
+        /*App.connect('monitor-added', (_, monitor) => widgetMap.set(monitor, widgets(monitor)));
         App.connect('monitor-removed', (_, monitor) => {
-            widgetMap.get(monitor).forEach((w) => w.destroy);
+            widgetMap.get(monitor)?.forEach((w) => w.disconnect);
             widgetMap.delete(monitor);
-        });
+        });*/
     },
     requestHandler(req, res) {
         const reqArgs = req.split(" ");
@@ -90,7 +103,7 @@ App.start({
 const reminders = () => {
     const day = GLib.DateTime.new_now_local().format("%a")!;
     const folderSize = Number(exec(`bash -c "(du -sb /home/alec/Downloads | awk '{print $1}')"`));
-    let bodyText: string;
+    let bodyText;
 
     if (day == 'Mon') {
         (folderSize > 10000000) // Greater than 10MB

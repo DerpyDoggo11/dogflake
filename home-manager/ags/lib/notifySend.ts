@@ -14,7 +14,8 @@ interface NotifySendProps {
     body?: string,
     category?: string,
     iconName: string,
-    title: string
+    title: string,
+    image?: string
 }
 
 const escapeShellArg = (arg: string): string => `'${arg?.replace(/'/g, '\'\\\'\'')}'`;
@@ -25,7 +26,8 @@ export const notifySend = ({
     body,
     category,
     iconName,
-    title
+    title,
+    image
 }: NotifySendProps) => new Promise<number>((resolve) => {
     let printedId = false;
 
@@ -38,7 +40,8 @@ export const notifySend = ({
         // Optional params
         appName && `--app-name=${escapeShellArg(appName)}`,
         category && `--category=${escapeShellArg(category)}`,
-        iconName && `--icon=${escapeShellArg(iconName)}`
+        iconName && `--icon=${escapeShellArg(iconName)}`,
+        image && `--hint=string:image-path:${escapeShellArg(image)}`
     ].concat(
         actions.map(({ id, label }) => `--action=${id}=${escapeShellArg(label)}`),
     ).join(' ');
@@ -50,8 +53,8 @@ export const notifySend = ({
                 resolve(parseInt(out));
                 printedId = true;
             } else {
-                execAsync(actions.find((action) => String(action.id) === out).command);
-            }
+                execAsync(actions.find((a) => String(a.id) == out)?.command ?? '');
+            };
         },
         (err) => console.log('[Notify] ' + err)
     );

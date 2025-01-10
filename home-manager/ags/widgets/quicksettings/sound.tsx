@@ -1,14 +1,15 @@
 import Wp from "gi://AstalWp"
 import { bind, Variable } from "astal";
+import { Gdk } from 'astal/gtk4'; 
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const audio = Wp.get_default()?.audio!;
 
 export const VolumeSlider = () =>
     <box>
-        <icon icon={bind(speaker, "volumeIcon")}/>
+        <image iconName={bind(speaker, "volumeIcon")}/>
         <slider
             hexpand
-            onDragged={({ value }) => {
+            onChangeValue={({ value }) => {
                 speaker.volume = value;
                 speaker.mute = false;
             }}
@@ -31,17 +32,19 @@ const nameSubstitute = (name: string) => {
 
 const SinkItem = (stream: Wp.Endpoint) =>
 	<button
-		onClick={() => stream.isDefault = true}
+		onButtonPressed={() => stream.isDefault = true}
 		visible={bind(stream, "isDefault").as((def) => (!def))}
+		cursor={Gdk.Cursor.new_from_name('pointer', null)}
 	>
 		<label label={nameSubstitute(stream.description)}/>
 	</button>
 
 export const SinkSelector = () =>
-	<box className="sinkSelector" vertical>
+	<box cssClasses={["sinkSelector"]} vertical>
 		<button
-			className="mainSink"
-			onClick={() => sinkVisible.set(!sinkVisible.get())}
+			cssClasses={["mainSink"]}
+			onButtonPressed={() => sinkVisible.set(!sinkVisible.get())}
+			cursor={Gdk.Cursor.new_from_name('pointer', null)}
 		>
 			<label label={bind(speaker, "description").as(d => nameSubstitute(d) || '')}/>
 		</button>

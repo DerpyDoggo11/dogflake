@@ -1,69 +1,69 @@
-import { GLib } from "astal"
-import { Gtk, Astal } from "astal/gtk3"
-import Notifd from "gi://AstalNotifd"
+import { GLib } from 'astal';
+import { Gtk, Gdk } from 'astal/gtk4';
+import Notifd from 'gi://AstalNotifd';
+import Pango from 'gi://Pango';
 const { START, CENTER, END } = Gtk.Align
 
-const isIcon = (icon: string) => !!Astal.Icon.lookup_icon(icon)
-const fileExists = (path: string) => GLib.file_test(path, GLib.FileTest.EXISTS)
-const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%H:%M")!
+const fileExists = (path: string) => GLib.file_test(path, GLib.FileTest.EXISTS);
+const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%H:%M")!;
 
 export const notificationItem = (n: Notifd.Notification) =>
-    <box vertical vexpand className="notification">
-        <box className="header">
-            {(n.appIcon || n.desktopEntry) && <icon
-                className="app-icon"
-                visible={Boolean(n.appIcon || n.desktopEntry)}
-                icon={n.appIcon || n.desktopEntry}
+    <box vertical cssClasses={["notification"]}>
+        <box cssClasses={["header"]}>
+            {(n.appIcon || n.desktopEntry) && <image
+                cssClasses={["app-icon"]}
+                iconName={n.appIcon || n.desktopEntry}
             />}
             <label
-                className="app-name"
+                cssClasses={["app-name"]}
                 halign={START}
-                truncate
+                ellipsize={Pango.EllipsizeMode.END}
                 label={n.appName || "Unknown"}
             />
             <label
-                className="time"
+                cssClasses={["time"]}
                 hexpand
                 halign={END}
                 label={time(n.time)}
             />
         </box>
-        <box className="content">
-            {n.image && fileExists(n.image) && <box
-                valign={START}
-                className="image"
-                css={`background-image: url('${n.image}')`}
+        <box cssClasses={["content"]}>
+            {n.image && fileExists(n.image) && <image
+                file={n.image}
+                hexpand
+                vexpand
+                valign={CENTER}
+                halign={CENTER}
+                cssClasses={["image"]}
             />}
-            {n.image && isIcon(n.image) && <box
-                expand={false}
-                valign={START}
-                className="icon-image">
-                <icon icon={n.image} expand halign={CENTER} valign={CENTER} />
-            </box>}
+            {/* todo test if we can add images to this */}
             <box vertical>
                 <label
-                    className="summary"
+                    cssClasses={["summary"]}
                     halign={START}
+                    wrap
                     xalign={0}
                     label={n.summary}
-                    truncate
+                    maxWidthChars={1} // Literally any value forces wrap for some reason
                 />
                 {n.body && <label
-                    className="body"
+                    cssClasses={["body"]}
                     wrap
                     useMarkup
                     xalign={0}
                     label={n.body}
+                    maxWidthChars={1} // Literally any value forces wrap for some reason
                 />}
-                {n.get_actions().length > 0 && <box className="actions" spacing={5}>
-                    {n.get_actions().map(({ label, id }) => (
+                {n.get_actions().length > 0 && <box cssClasses={["actions"]} spacing={5}>
+                    {n.get_actions().map(({ label, id }) =>
                         <button
                             hexpand
-                            onClicked={() => { n.invoke(id); n.dismiss(); }}
+                            cursor={Gdk.Cursor.new_from_name('pointer', null)}
+                            onButtonPressed={() => { n.invoke(id); n.dismiss(); }}
                         >
                             <label label={label} halign={CENTER}/>
                         </button>
-                    ))}
+                    )}
                 </box>}
             </box>
         </box>

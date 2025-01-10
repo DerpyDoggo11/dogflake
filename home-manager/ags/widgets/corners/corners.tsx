@@ -1,12 +1,13 @@
 // Stolen from https://github.com/matt1432/nixos-configs/blob/master/modules/ags/config/widgets/corners/screen-corners.tsx
 
+import { Gtk, astalify } from "astal/gtk4"
 import Cairo from 'cairo';
 const radius = 10;
 
-// TODO see if we can combine all the different corners into one cairo widget
+const DrawingArea = astalify<Gtk.DrawingArea, Gtk.DrawingArea.ConstructorProps>(Gtk.DrawingArea)
 
 export const Corner = (place: string) =>
-    <drawingarea
+    <DrawingArea
         setup={(widget) => {
             widget.connect('draw', (_, cairoContext: Cairo.Context) => {
                 widget.set_size_request(radius, radius);

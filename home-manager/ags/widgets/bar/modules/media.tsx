@@ -1,16 +1,21 @@
+import { App, Gdk } from 'astal/gtk4';
 import { bind, execAsync } from 'astal';
 import { isPlaying, playlistName, playPause } from '../../../services/mediaplayer';
 
 export const Media = () =>
     <button
-        className="media"
+        cssClasses={["media"]}
         hexpand
-        onClick={() => playPause()}
-        onScroll={(_, e) => execAsync('mpc volume ' + ((e.delta_y < 0) ? '+5' : '-5'))}
-        cursor="pointer"
-        css={bind(playlistName).as((w) => `background-image: url('./services/playlists/${w}.png');`)}
+        onButtonPressed={() => playPause()}
+        onScroll={(_, __, y) => execAsync('mpc volume ' + ((y < 0) ? '+5' : '-5'))}
+        setup={() =>
+            playlistName.subscribe((w) =>
+                App.apply_css(`#bar .media { background-image: url("file:///home/alec/Projects/flake/home-manager/ags/services/playlists/${w}.png"); }`)
+            )
+        }
+        cursor={Gdk.Cursor.new_from_name('pointer', null)}
     >
-        <icon icon={bind(isPlaying).as(
+        <image iconName={bind(isPlaying).as(
             (v) => (v) ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic')
         }/>
     </button>

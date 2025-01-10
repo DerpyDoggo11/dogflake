@@ -31,10 +31,10 @@ export const monitorBrightness = () => {
 
 export const BrightnessSlider = () => 
     <box>
-        <icon icon="display-brightness-symbolic"/>
+        <image iconName="display-brightness-symbolic"/>
         <slider
             hexpand
             value={bind(brightness)}
-            onDragged={({ value }) => setBrightness(value)}
+            onChangeValue={({ value }) => setBrightness(value)}
         />
     </box>
