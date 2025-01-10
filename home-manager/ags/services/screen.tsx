@@ -86,6 +86,7 @@ class ScreenRec extends GObject.Object {
 		notifySend({
 			title: 'Screenrecord',
 			iconName: 'emblem-videos-symbolic',
+			image: this.#file,
 			body: this.#file,
 			actions: [
 				{
@@ -120,6 +121,7 @@ export const screenshot = async (fullscreen: boolean) => {
 			notifySend({
 				title: 'Screenshot Saved',
 				iconName: 'image-x-generic-symbolic',
+				image: file,
 				actions: [
 					{
 						id: 1,

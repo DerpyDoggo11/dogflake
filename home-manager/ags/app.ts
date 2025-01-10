@@ -7,9 +7,9 @@ import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
 
 import { App, Gdk, Gtk } from 'astal/gtk4';
-import { GLib, exec } from 'astal';
+import { GLib, exec, bind } from 'astal';
 import { Bar } from './widgets/bar/bar';
-//import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
+import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker';
 import { Notifications, NotifiationMap } from './widgets/notifications/notifications';
@@ -29,10 +29,10 @@ const widgetMap: Map<Gdk.Monitor, Gtk.Widget[]> = new Map();
 // Per-monitor widgets
 export const widgets = (monitor: Gdk.Monitor) => [
     Bar(monitor),
-    //TopLeft(monitor),
-    //TopRight(monitor),
-    //BottomLeft(monitor),
-    //BottomRight(monitor),
+    TopLeft(monitor),
+    TopRight(monitor),
+    BottomLeft(monitor),
+    BottomRight(monitor),
     Notifications(monitor, allNotifications)
 ];
 
@@ -51,7 +51,13 @@ App.start({
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
         initMedia(); // Mpd player
 
-        // Automatically disconnect & reconnect widgets on monitor change
+        // Automatically reconnect widgets on monitor change
+        bind(App, 'monitors').as(monitors =>
+            monitors.forEach((monitor =>
+                (!widgetMap.get(monitor))
+                    && widgetMap.set(monitor, widgets(monitor))
+            ))
+        );
         /*App.connect('monitor-added', (_, monitor) => widgetMap.set(monitor, widgets(monitor)));
         App.connect('monitor-removed', (_, monitor) => {
             widgetMap.get(monitor)?.forEach((w) => w.disconnect);

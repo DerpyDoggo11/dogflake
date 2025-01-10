@@ -69,16 +69,12 @@ in {
     # Wayland MC w/ key modifiers patch
     (prismlauncher.override {
       glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {
-        patches = [ ../overlays/glfw/Key-Modifiers-Fix.patch ];
+        patches = [ ../overlays/glfw-Key-Modifiers-Fix.patch ];
       });
     })
 
-    # Patched microfetch program using its flake
-    (inputs.microfetch.packages.x86_64-linux.default.overrideAttrs ({ patches, ... }: {
-      patches = [ ../overlays/microfetch/Microfetch.patch ];
-    }))
-
     # Global scripts
+    (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
     (writeScriptBin "data-sync" (builtins.readFile ../scripts/data-sync.fish))
     (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
     (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))

@@ -8,11 +8,10 @@ const fileExists = (path: string) => GLib.file_test(path, GLib.FileTest.EXISTS);
 const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%H:%M")!;
 
 export const notificationItem = (n: Notifd.Notification) =>
-    <box vertical vexpand cssClasses={["notification"]}>
+    <box vertical cssClasses={["notification"]}>
         <box cssClasses={["header"]}>
             {(n.appIcon || n.desktopEntry) && <image
                 cssClasses={["app-icon"]}
-                visible={Boolean(n.appIcon || n.desktopEntry)}
                 iconName={n.appIcon || n.desktopEntry}
             />}
             <label
@@ -29,18 +28,15 @@ export const notificationItem = (n: Notifd.Notification) =>
             />
         </box>
         <box cssClasses={["content"]}>
-            {n.image && fileExists(n.image) && <box
-                valign={START}
+            {n.image && fileExists(n.image) && <image
+                file={n.image}
+                hexpand
+                vexpand
+                valign={CENTER}
+                halign={CENTER}
                 cssClasses={["image"]}
-            ><image iconName={n.image}/></box>}
+            />}
             {/* todo test if we can add images to this */}
-            {n.image && <box
-                hexpand={false}
-                vexpand={false}
-                valign={START}
-                cssClasses={["icon-image"]}>
-                <image iconName={n.image} hexpand vexpand halign={CENTER} valign={CENTER} />
-            </box>}
             <box vertical>
                 <label
                     cssClasses={["summary"]}
