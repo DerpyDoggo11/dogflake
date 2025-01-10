@@ -44,21 +44,33 @@
         src = ./ags;
         name = "desktop-shell"; # Executable name
         entry = "app.ts";
-        extraPackages = [
-          inputs.ags.packages.${pkgs.system}.astal3 # Core lib
-          inputs.ags.packages.${pkgs.system}.apps # App launcher
-          inputs.ags.packages.${pkgs.system}.mpris # Media controls
-          inputs.ags.packages.${pkgs.system}.hyprland # Workspace integration
-          inputs.ags.packages.${pkgs.system}.bluetooth # Bluez integration
-          inputs.ags.packages.${pkgs.system}.battery # For laptop only - not used on desktop
-          inputs.ags.packages.${pkgs.system}.network # Requires networkmanager
-          inputs.ags.packages.${pkgs.system}.wireplumber # Used by pipewire
-          inputs.ags.packages.${pkgs.system}.notifd # Desktop notification integration
+        extraPackages = with inputs.ags.packages.${pkgs.system}; [
+          astal3
+          astal4
+          agsFull # Core gtk4 lib
+          apps # App launcher
+          mpris # Media controls
+          hyprland # Workspace integration
+          bluetooth # Bluez integration
+          battery # For laptop only - not used on desktop
+          network # Requires networkmanager
+          wireplumber # Used by pipewire
+          notifd # Desktop notification integration
         ];
       })
       inputs.ags.packages.${pkgs.system}.io # Expose Astal CLI for keybinds
     ];
   };
+
+  programs.ags = {
+    enable = true;
+    configDir = ./ags;
+    package = inputs.ags.packages.${pkgs.system}.agsFull;
+
+    extraPackages = [ ];
+  };
+
+
 
   xdg = {
     configFile."homepage.html".source = ./homepage.html;
