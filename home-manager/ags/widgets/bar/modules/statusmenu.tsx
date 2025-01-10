@@ -9,7 +9,7 @@ import Network from 'gi://AstalNetwork'
 const bluetooth = Bluetooth.get_default()
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const battery = Battery.get_default();
-const network = Network.get_default()?.wifi!; // TODO: fix This[#emitter] is null error encountered when using ethernet - check object props
+const network = Network.get_default()?.wifi;
 
 const BluetoothIcon = () => 
   <image

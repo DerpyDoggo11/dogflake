@@ -6,12 +6,6 @@ import { playlistName } from '../../services/mediaplayer';
 const apps = new Apps.Apps()
 let text: Gtk.Entry;
 
-// Band-aid warning suppresion about missing icon - TODO find permanent solution
-const iconSubstitute = (icon: string) =>
-    (icon == 'system-file-manager')
-        ? 'system-file-manager-symbolic'
-        : icon;
-
 const hide = () => App.toggle_window("launcher");
 
 const AppBtn = ({ app }: { app: Apps.Application }) =>
@@ -25,7 +19,7 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
         }}
     >
         <box>
-            <image iconName={iconSubstitute(app.iconName)}/>
+            <image iconName={app.iconName}/>
             <box valign={Gtk.Align.CENTER} vertical>
                 <label
                     cssClasses={["name"]}
