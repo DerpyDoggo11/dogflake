@@ -9,13 +9,13 @@ set -l memory (free -h --si | awk -v cyan="$cyan" -v white="$white" '/Mem/ {u=$3
 
 # Since Nix doesn't use procps by default, we have to improvise
 set -l uptime (uptime | awk -F 'up  ' '{print $2}' | awk -F'[,:]' '{print $1, $2}');
-set -l hours (echo $uptime | awk '{print $1}');
+set hours (echo $uptime | awk '{print $1}'); # Not -l since this var can be empty
 set -l minutes (echo $uptime | awk '{print $2}');
 
 if test $hours -gt 0 # If there are 0 hours then we can simply set this to null
-    set -l hours "$hours"hr;
+    set hours "$hours"hr ; # Additional space is necessary 
 else
-    set -l hours "";
+    set hours '';
 end
 
 if test $minutes -le 10 # If there is only 1 digit in $minutes then we should remove the leading 0
@@ -27,6 +27,6 @@ echo -e "$blue  ▗▄   $cyan▗▄ ▄▖     $white┌───────�
 echo -e "$blue ▄▄🬸█▄▄▄$cyan🬸█▛ $blue▃";
 echo -e "$cyan   ▟▛    ▜$blue▃▟🬕     $cyan Disk:$white $disk";
 echo -e "$cyan🬋🬋🬫█      $blue█🬛🬋🬋    $cyan Memory:$white $memory";
-echo -e "$cyan 🬷▛🮃$blue▙    ▟▛       $cyan Uptime:$white $hours "$minutes"min";
+echo -e "$cyan 🬷▛🮃$blue▙    ▟▛       $cyan Uptime:$white $hours"$minutes"min";
 echo -e "$cyan 🮃$blue ▟█🬴$cyan▀▀▀█🬴▀▀";
 echo -e "$blue  ▝▀ ▀▘   $cyan▀▘     $white└─────────────────────────────┘";
