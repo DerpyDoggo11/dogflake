@@ -114,6 +114,7 @@ const reminders = () => {
         bodyText = "Clean up some unused files to keep the system clean";
     } else if (day == 'Fri') { // Send spotify cleanup message
         notifySend({
+            appName: 'Spotify Sync',
             title: 'Sync Spotify playlists',
             iconName: 'spotify-symbolic',
             body: 'Sync all Spotify playlists to have the latest music',
@@ -128,6 +129,7 @@ const reminders = () => {
     };
 
     (bodyText) && notifySend({
+        appName: 'System Cleanup',
         title: 'Clear Downloads folder',
         iconName: 'system-file-manager-symbolic',
         body: bodyText,

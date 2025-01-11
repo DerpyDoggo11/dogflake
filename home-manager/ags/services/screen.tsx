@@ -84,10 +84,10 @@ class ScreenRec extends GObject.Object {
 		exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
 		
 		notifySend({
-			title: 'Screenrecord',
+			appName: 'Screen Recording',
+			title: 'Screen Recording Saved',
 			iconName: 'emblem-videos-symbolic',
 			image: this.#file,
-			body: this.#file,
 			actions: [
 				{
 					id: 1,
@@ -119,13 +119,14 @@ export const screenshot = async (fullscreen: boolean) => {
 		(file) => {
 			execAsync("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
 			notifySend({
+				appName: 'Screenshot',
 				title: 'Screenshot Saved',
 				iconName: 'image-x-generic-symbolic',
 				image: file,
 				actions: [
 					{
 						id: 1,
-						label: 'Open Captures folder',
+						label: 'Open Screenshots folder',
 						command: 'nemo ' + screenshotDir
 					},
 					{
