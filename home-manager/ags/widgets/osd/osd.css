@@ -6,7 +6,7 @@
 }
 .osd image {
     margin-right: 0.3rem;
-    font-size: 1.5rem;
+    -gtk-icon-size: 1.5rem;
 }
 .osd levelbar trough { background-color: @blue2; border-radius: 0.2rem; }
 .osd levelbar block {

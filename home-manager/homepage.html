@@ -1,9 +1,9 @@
-<!doctype html>
-<!-- Original source code from tilde: https://github.com/xvvvyz/tilde (public domain) -->
-<meta charset="utf-8" />
-<meta name="color-scheme" content="dark light" />
-<meta name="robots" content="noindex" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!DOCTYPE html>
+<!-- Code modified from https://github.com/xvvvyz/tilde (public domain) -->
+<meta charset="utf-8"/>
+<meta name="color-scheme" content="dark light"/>
+<meta name="robots" content="noindex"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>New tab</title>
 
 <style>
@@ -15,15 +15,15 @@
     --space: 1rem;
 
     /* Polar Night colors */
-    --darkest1: #2e3440;
-    --darkest2: #3b4252;
-    --darkest3: #434c5e;
-    --darkest4: #4c566a;
+    --dark1: #2e3440;
+    --dark2: #3b4252;
+    --dark3: #434c5e;
+    --dark4: #4c566a;
 
     /* Snow Storm colors */
-    --lightest1: #eceff4;
-    --lightest2: #e5e9f0;
-    --lightest3: #d8dee9;
+    --light1: #eceff4;
+    --light2: #e5e9f0;
+    --light3: #d8dee9;
 
     /* Nord Aurora misc colors */
     --red: #bf616a;
@@ -37,17 +37,12 @@
     --blue2: #81a1c1;
     --blue3: #5e81ac;
 
-    /* Fonts */
-    --headerFont: 'Hammersmith One', Roboto, Helvetica, Arial, sans-serif;
-    --primaryFont: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
-      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-
     --ease: cubic-bezier(0, 0.6, 0.3, 1);
   }
 </style>
 
 <script>
-  const CONFIG = {
+  const config = {
     commandPathDelimiter: '/',
     commandSearchDelimiter: ' ',
     defaultSearchTemplate: 'https://www.bing.com/search?q={}',
@@ -55,7 +50,7 @@
     suggestionLimit: 4,
   };
 
-  const COMMANDS = new Map([
+  const commands = new Map([
     ['g', { 
       name: 'GitHub', 
       url: 'https://github.com',
@@ -94,11 +89,11 @@
       padding: var(--space);
       position: relative;
       text-decoration: none;
-      background: var(--darkest2);
+      background: var(--dark2);
     }
 
     .command::after {
-      background: var(--lightest1);
+      background: var(--light1);
       content: ' ';
       inset: 4px;
       opacity: 0.05;
@@ -112,19 +107,20 @@
     }
 
     .key {
-      color: var(--lightest1);
+      color: var(--light1);
       display: inline-block;
       text-align: center;
       width: 3ch;
+      font-style: italic;
     }
 
     .name {
-      color: var(--lightest3);
+      color: var(--light3);
       transition: color .2s var(--ease);
     }
 
     .command:where(:focus, :hover) .name {
-      color: var(--lightest1);
+      color: var(--light1);
     }
 
     @media (min-width: 500px) {
@@ -162,18 +158,18 @@
       this.attachShadow({ mode: 'open' });
       const template = document.getElementById('commands-template');
       const clone = template.content.cloneNode(true);
-      const commands = clone.querySelector('.commands');
+      const commandElements = clone.querySelector('.commands');
       const commandTemplate = document.getElementById('command-template');
 
-      for (const [key, { name, url }] of COMMANDS.entries()) {
+      for (const [key, { name, url }] of commands.entries()) {
         if (!name || !url) continue;
         const clone = commandTemplate.content.cloneNode(true);
         const command = clone.querySelector('.command');
         command.href = url;
-        if (CONFIG.openLinksInNewTab) command.target = '_blank';
+        if (config.openLinksInNewTab) command.target = '_blank';
         clone.querySelector('.key').innerText = key;
         clone.querySelector('.name').innerText = name;
-        commands.append(clone);
+        commandElements.append(clone);
       }
 
       this.shadowRoot.append(clone);
@@ -195,7 +191,7 @@
 
     .dialog {
       align-items: center;
-      background: var(--darkest1);
+      background: var(--dark1);
       border: none;
       display: none;
       flex-direction: column;
@@ -216,7 +212,7 @@
     }
 
     .input {
-      color: var(--lightest1);
+      color: var(--light1);
       font-size: 3rem;
       font-weight: var(--font-weight-bold);
       padding: 0;
@@ -237,7 +233,7 @@
     }
 
     .suggestion {
-      color: var(--lightest1);
+      color: var(--light1);
       cursor: pointer;
       font-size: 1rem;
       padding: var(--space);
@@ -248,11 +244,11 @@
     }
 
     .suggestion:where(:focus, :hover) {
-      color: var(--darkest1);
+      color: var(--dark1);
     }
 
     .suggestion::before {
-      background-color: var(--lightest1);
+      background-color: var(--light1);
       border-radius: calc(var(--border-radius) / 5);
       content: ' ';
       inset: calc(var(--space) / 1.5) calc(var(--space) / 3);
@@ -269,12 +265,12 @@
     }
 
     .match {
-      color: var(--lightest3);
+      color: var(--light3);
       transition: color .2s var(--ease);
     }
 
     .suggestion:where(:focus, :hover) .match {
-      color: var(--darkest1);
+      color: var(--dark1);
     }
 
     @media (min-width: 700px) {
@@ -372,32 +368,32 @@
         return { query, url };
       }
 
-      if (COMMANDS.has(query)) {
-        const { command, key, url } = COMMANDS.get(query);
+      if (commands.has(query)) {
+        const { command, key, url } = commands.get(query);
         return command ? Search.#parseQuery(command) : { key, query, url };
       }
 
-      let splitBy = CONFIG.commandSearchDelimiter;
+      let splitBy = config.commandSearchDelimiter;
       const [searchKey, rawSearch] = query.split(new RegExp(`${splitBy}(.*)`));
 
-      if (COMMANDS.has(searchKey)) {
-        const { searchTemplate, url: base } = COMMANDS.get(searchKey);
+      if (commands.has(searchKey)) {
+        const { searchTemplate, url: base } = commands.get(searchKey);
         const search = rawSearch.trim();
         const url = Search.#formatSearchUrl(base, searchTemplate, search);
         return { key: searchKey, query, search, splitBy, url };
       }
 
-      splitBy = CONFIG.commandPathDelimiter;
+      splitBy = config.commandPathDelimiter;
       const [pathKey, path] = query.split(new RegExp(`${splitBy}(.*)`));
 
-      if (COMMANDS.has(pathKey)) {
-        const { url: base } = COMMANDS.get(pathKey);
+      if (commands.has(pathKey)) {
+        const { url: base } = commands.get(pathKey);
         const [baseUrl] = Search.#splitUrl(base);
         const url = `${baseUrl}/${path}`;
         return { key: pathKey, path, query, splitBy, url };
       }
 
-      const [baseUrl, rest] = Search.#splitUrl(CONFIG.defaultSearchTemplate);
+      const [baseUrl, rest] = Search.#splitUrl(config.defaultSearchTemplate);
       const url = Search.#formatSearchUrl(baseUrl, rest, query);
       return { query, search: query, url };
     };
@@ -419,7 +415,7 @@
 
     #execute(query) {
       const { url } = Search.#parseQuery(query);
-      const target = CONFIG.openLinksInNewTab ? '_blank' : '_self';
+      const target = config.openLinksInNewTab ? '_blank' : '_self';
       window.open(url, target, 'noopener noreferrer');
       this.#close();
     }
@@ -448,9 +444,9 @@
         return;
       }
 
-      let suggestions = COMMANDS.get(oq.query)?.suggestions ?? [];
+      let suggestions = commands.get(oq.query)?.suggestions ?? [];
 
-      if (oq.search && suggestions.length < CONFIG.suggestionLimit) {
+      if (oq.search && suggestions.length < config.suggestionLimit) {
         const res = await Search.#fetchDuckDuckGoSuggestions(oq.search);
 
         suggestions = suggestions.concat(
@@ -514,7 +510,7 @@
 
     #renderSuggestions(suggestions, query) {
       this.#suggestions.innerHTML = '';
-      const sliced = suggestions.slice(0, CONFIG.suggestionLimit);
+      const sliced = suggestions.slice(0, config.suggestionLimit);
       const template = document.getElementById('suggestion-template');
 
       for (const [index, suggestion] of sliced.entries()) {
@@ -549,8 +545,8 @@
 
 <style>
   html {
-    background-color: var(--darkest1);
-    font-family: var(--primaryFont);
+    background-color: var(--dark1);
+    font-family: 'Sora';
     font-size: var(--font-size);
     line-height: 1.4;
   }
