@@ -13,7 +13,7 @@ set hours (echo $uptime | awk '{print $1}'); # Not -l since this var can be empt
 set -l minutes (echo $uptime | awk '{print $2}');
 
 if test $hours -gt 0 # If there are 0 hours then we can simply set this to null
-    set hours "$hours"hr ; # Additional space is necessary 
+    set hours "$hours"hr '';
 else
     set hours '';
 end
