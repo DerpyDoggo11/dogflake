@@ -1,16 +1,6 @@
 { inputs, config, lib, pkgs, makeDesktopItem, ... }:
 
-let
-  makeWebappLib = import ../lib/makeWebapp.nix { inherit pkgs; };
-  makeWebapp = makeWebappLib.makeWebapp;
-
-  textConvert = makeWebappLib.makeWebapp {
-    name = "Text Converter";
-    url = "amazinaxel.com/tools/textconverter";
-    icon = "insert-text-symbolic";
-    comment = "Minecraft small text converter";
-  };
-in {
+{
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
@@ -50,7 +40,7 @@ in {
     })
 
     # Normal user apps
-    microsoft-edge # Web browser
+    microsoft-edge # Web browser TODO remove me
     vscodium # Best IDE
     discord-canary # Voice & video chat app
     libsForQt5.kdenlive # Video editor
@@ -60,7 +50,6 @@ in {
     thunderbird # Best email & IRC client
     gnome-system-monitor # Task manager
     gnome-sound-recorder # Voice recording app
-    textConvert # AmazinAxel.com small text converter
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline

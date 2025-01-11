@@ -4,7 +4,7 @@ import { bind } from 'astal';
 import { playlistName } from '../../services/mediaplayer';
 
 const apps = new Apps.Apps()
-let text: Gtk.Entry;
+let textBox: Gtk.Entry;
 
 const hide = () => App.toggle_window("launcher");
 
@@ -45,7 +45,7 @@ export const launcher = () =>
         keymode={Astal.Keymode.ON_DEMAND}
         application={App}
         visible={false}
-        onShow={() => text.text = ''}
+        onShow={() => textBox.text = ''}
         onKeyPressed={(_, key) =>
             (key == 65307) // Gdk.KEY_Escape
                && hide()
@@ -67,11 +67,11 @@ export const launcher = () =>
                         primaryIconName="system-search-symbolic"
                         placeholderText="Search"
                         onActivate={() => {
-                            apps.fuzzy_query(text.text)?.[0].launch();
+                            apps.fuzzy_query(textBox.text)?.[0].launch();
                             hide();
                         }}
                         setup={self => { // Auto-grab focus when launched
-                            text = self;
+                            textBox = self;
                             App.connect("window-toggled", () =>
                                 (App.get_window("launcher")?.visible == true)
                                     && self.grab_focus()
@@ -80,7 +80,7 @@ export const launcher = () =>
                     />
                 </overlay>
                 <box spacing={6} vertical>
-                    {bind(text, 'text').as(text =>
+                    {bind(textBox, 'text').as(text =>
                         apps.fuzzy_query(text).slice(0, 5)
                         .map((app: Apps.Application) => <AppBtn app={app}/>)
                     )}

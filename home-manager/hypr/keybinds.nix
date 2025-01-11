@@ -5,7 +5,7 @@
 
       # Quick app access
       "Super, return, exec, foot" # Terminal
-      "Super, E, exec, microsoft-edge" # Edge
+      "Super, E, exec, librewolf" # Browser
 
       # Astal widget control
       "Super, Period, exec, emote" # Emoji picker TODO replace w/ ags
