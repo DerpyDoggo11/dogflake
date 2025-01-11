@@ -45,6 +45,7 @@
         name = "desktop-shell"; # Executable name
         gtk4 = true;
         entry = "app.ts";
+        
         extraPackages = with inputs.ags.packages.${pkgs.system}; [
           apps # App launcher
           mpris # Media controls
@@ -56,13 +57,11 @@
           notifd # Desktop notification integration
         ];
       })
-      inputs.ags.packages.${pkgs.system}.io # Expose Astal CLI for keybinds
+      inputs.ags.packages.${pkgs.system}.io # Astal CLI for keybinds
     ];
   };
 
-  xdg = {
-    configFile."homepage.html".source = ./homepage.html;
-    
+  xdg = {    
     # Symlink all fonts
     dataFile."fonts" = {
       target = "./fonts";

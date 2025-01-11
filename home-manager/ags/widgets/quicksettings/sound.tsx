@@ -20,14 +20,15 @@ export const VolumeSlider = () =>
 const sinkVisible = new Variable(false);
 
 const nameSubstitute = (name: string) => {
-	switch (name) {
-		case "Family 17h/19h HD Audio Controller Analog Stereo":
-			return "Default Output";
-		case "Rembrandt Radeon High Definition Audio Controller Digital Stereo (HDMI)":
-			return "Monitor Output";
-		default:
-			return name;
+	if (!name) return '' // Fix undefined bug?
+	
+	if (name.includes('Family 17h/19h HD Audio Controller')) {
+		return String(name.split(' ').slice(5, 6));
+	} else if (name.includes('Rembrandt Radeon High Definition Audio Controller')) {
+		return "Monitor Output"; // Laptop connected to monitor w/ speaker
 	};
+	
+	return name;
 };
 
 const SinkItem = (stream: Wp.Endpoint) =>
