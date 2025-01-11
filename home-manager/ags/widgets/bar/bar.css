@@ -36,14 +36,14 @@
     min-height: 15rem; /* Combined height of workspace buttons */
 }
 #bar .workspaceBtn {
-    background-color: @darkest2;
+    background-color: @dark2;
     min-height: 1.1rem;
     border-radius: 5px;
     transition: 0.2s;
     margin: 0.25rem;
 }
 #bar .workspaceBtn.active { background-color: @blue2; min-height: 1.6rem; }
-#bar .workspaceBtn.occupied { background-color: @darkest4; min-height: 1.4rem; }
+#bar .workspaceBtn.occupied { background-color: @dark4; min-height: 1.4rem; }
 
 /* Status menu misc */
 .btConnected { color: @blue3; }
@@ -57,6 +57,6 @@
 #bar .media, #bar .mpris {
     background-size: cover;
     margin: 3px;
-    border: 2px solid @darkest3;
+    border: 2px solid @dark3;
     border-radius: 5px;
 }

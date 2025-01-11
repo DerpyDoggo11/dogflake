@@ -24,14 +24,8 @@ export const powermenu = () =>
       }}
    >
       <box>
-         <button>
-            <image iconName="weather-clear-night-symbolic"/>
-         </button>
-         <button>
-            <image iconName="system-shutdown-symbolic"/>
-         </button>
-         <button>
-            <image iconName="system-reboot-symbolic"/>
-         </button>
+         <image cssClasses={['sleep']} iconName="weather-clear-night-symbolic"/>
+         <image cssClasses={['shutdown']} iconName="system-shutdown-symbolic"/>
+         <image cssClasses={['reboot']} iconName="system-reboot-symbolic"/>
       </box>
    </window>

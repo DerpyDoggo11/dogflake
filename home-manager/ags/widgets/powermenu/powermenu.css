@@ -1,13 +1,22 @@
 #powermenu box {
     background-color: @theme_bg_color;
     border-radius: 0.4rem;
-    padding: 0.8rem;
+    padding: 1rem;
 }
 
 #powermenu image {
-    -gtk-icon-size: 2rem;
+    -gtk-icon-size: 4rem;
+    margin: 0.5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    color: @white3;
 }
 
-#powermenu button {
-    margin: 0.5rem;
+#powermenu .sleep, #powermenu .reboot { 
+    background-color: @blue2;
+    box-shadow: 0 0 7px @blue2;
+}
+#powermenu .shutdown {
+    background-color: @blue3;
+    box-shadow: 0 0 12px @blue3;
 }

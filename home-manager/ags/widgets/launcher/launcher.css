@@ -23,7 +23,7 @@
 
 .launcher entry {
     background: transparent;
-    color: @lightest3;
+    color: @light3;
     outline: none;
     padding-left: 2rem;
     outline-offset: -3px;
@@ -36,7 +36,7 @@
 
 .launcher button {
     padding: 0.5rem;
-    border: 1px solid @darkest4;
+    border: 1px solid @dark4;
 }
 
 .launcher button:focus {
@@ -51,10 +51,7 @@
 }
 
 .launcher button label.name {
-    color: @lightest3;
+    color: @light3;
     font-weight: bold;
 }
-
-.launcher button label.description {
-    color: @lightest3;
-}
+.launcher button label.description { color: @light3; }

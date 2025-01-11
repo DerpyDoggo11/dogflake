@@ -5,15 +5,15 @@
 @define-color placeholder_text_color #fff;
 
 /* Polar Night colors */
-@define-color darkest1 #2e3440;
-@define-color darkest2 #3b4252;
-@define-color darkest3 #434c5e;
-@define-color darkest4 #4c566a;
+@define-color dark1 #2e3440;
+@define-color dark2 #3b4252;
+@define-color dark3 #434c5e;
+@define-color dark4 #4c566a;
 
 /* Snow Storm colors */
-@define-color lightest1 #eceff4;
-@define-color lightest2 #e5e9f0;
-@define-color lightest3 #d8dee9;
+@define-color light1 #eceff4;
+@define-color light2 #e5e9f0;
+@define-color light3 #d8dee9;
 
 /* Nord Aurora colors */
 @define-color red #bf616a;
@@ -26,6 +26,7 @@
 @define-color blue1 #b5d2d9;
 @define-color blue2 #81a1c1;
 @define-color blue3 #5e81ac;
+@define-color blue4 #8fbcbb;
 
 button:focus { outline: none; }
 window {
@@ -36,5 +37,5 @@ window {
 calendar, .quickSettings { 
   border: 0;
   border-radius: 0 5px 0 0;
-  background-color: @darkest2;
+  background-color: @dark2;
 }
