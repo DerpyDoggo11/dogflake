@@ -7,12 +7,13 @@
 }
 
 .searchBg { /* Search bar */
-    padding: 3rem;
+    padding: 3rem 3rem 3rem 0;
     background-position: center;
-    margin-bottom: 1rem;
+    background-size: cover;
     border-radius: 0.4rem;
     filter: blur(3px);
     min-height: 2rem;
+    transition-duration: 0.5s;
 }
 
 .launcher entry:focus ~ .searchBg {
@@ -22,10 +23,16 @@
 
 .launcher entry {
     background: transparent;
-    color: white;
+    color: @lightest3;
     outline: none;
-    margin-left: 2rem;
+    padding-left: 2rem;
+    outline-offset: -3px;
+    outline: 2px solid #ffffff1c;
+    font-family: 'Hammersmith One';
+    font-size: 1.3rem;
 }
+
+.launcher overlay { padding-bottom: 1rem; }
 
 .launcher button {
     padding: 0.5rem;

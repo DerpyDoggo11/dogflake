@@ -36,6 +36,7 @@ export const notifySend = ({
         '--print-id',
         escapeShellArg(title),
         escapeShellArg(body ?? ''),
+        '--hint=boolean:internal:true', // For internal-only images
         
         // Optional params
         appName && `--app-name=${escapeShellArg(appName)}`,
