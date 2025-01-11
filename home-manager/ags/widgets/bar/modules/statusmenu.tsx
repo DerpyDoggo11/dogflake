@@ -42,7 +42,7 @@ export const Status = () =>
     cursor={Gdk.Cursor.new_from_name('pointer', null)}
     onScroll={(_, __, y) => speaker.volume = (y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
-    <box vertical spacing={6} cssClasses={["statusMenu"]}>
+    <box vertical spacing={7} cssClasses={["statusMenu"]}>
       <NetworkIcon/>
       <VolumeIcon/>
       <BatteryWidget/>

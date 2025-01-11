@@ -8,7 +8,7 @@
     border: 2px solid @blue3;
 }
 
-button.dnd { font-size: 1.5rem; background-color: @darkest3; }
+button.dnd { -gtk-icon-size: 1.5rem; background-color: @darkest3; }
 
 .sinkSelector .mainSink { border-radius: 5px 5px 0 0; background-color: @darkest3; }
 .sinkSelector button { border-radius: 0; margin-top: 0.2rem; background-color: @darkest4; }

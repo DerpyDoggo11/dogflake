@@ -8,36 +8,44 @@
     padding: 0.2rem 0.5rem;
 }
 
-/* Time bar widget */
+.statusMenu { padding: 0.5rem 0 0.5rem 0; }
+.statusMenu image { -gtk-icon-size: 0.9rem; }
+.timeBtn { margin-bottom: 0.2rem; padding: 0.4rem 0; }
+
+/* Time/date module */
 .time .date, .time .day {
     font-size: 0.7rem;
     font-family: 'Liberation Mono';
     font-style: italic;
     color: @blue2; 
 }
-.time .day { letter-spacing: 1px; }
+.time .date { font-size: 0.6rem; }
 .time .time {
-    font-size: 1.55rem;
+    font-size: 1.45rem;
     font-family: 'WenQuanYi Zen Hei Mono';
     font-weight: bold;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     color: @blue2;
 }
 
 
 /* Workspace list */
-.workspaceList { padding-top: 0.2rem; margin: 0.3rem; }
+.workspaceList { 
+    padding-top: 0.2rem; 
+    margin: 0.3rem; 
+    min-height: 15rem; /* Combined height of workspace buttons */
+}
 #bar .workspaceBtn {
     background-color: @darkest2;
-    min-height: 2rem;
-    border-radius: 50%;
+    min-height: 1.1rem;
+    border-radius: 5px;
     transition: 0.2s;
     margin: 0.25rem;
 }
-#bar .workspaceBtn.active { background-color: @blue2; }
-#bar .workspaceBtn.occupied { background-color: @darkest4; }
+#bar .workspaceBtn.active { background-color: @blue2; min-height: 1.6rem; }
+#bar .workspaceBtn.occupied { background-color: @darkest4; min-height: 1.4rem; }
 
-/* Status menu */
+/* Status menu misc */
 .btConnected { color: @blue3; }
 
 /* Recording indicator */
@@ -52,6 +60,3 @@
     border: 2px solid @darkest3;
     border-radius: 5px;
 }
-
-.statusMenu { padding: 0.5rem 0 0.5rem 0; }
-.timeBtn { margin-bottom: 0.2rem; }
