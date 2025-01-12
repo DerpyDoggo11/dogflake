@@ -10,7 +10,6 @@
     mpd # Music daemon for the Ags music player
     mpc # CLI for the Ags music player
     copyq # Clipboard manager (TODO: replace with Ags clipboard system)
-    emote # Emoji picker (TODO: replace with Ags emoji picker)
     swww # Background manager w/ cool transitions
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars

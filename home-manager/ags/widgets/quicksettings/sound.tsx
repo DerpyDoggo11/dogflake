@@ -1,5 +1,5 @@
 import Wp from "gi://AstalWp"
-import { bind, Variable } from "astal";
+import { bind, Gio, GLib } from "astal";
 import { Gdk } from 'astal/gtk4'; 
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const audio = Wp.get_default()?.audio!;
@@ -17,8 +17,6 @@ export const VolumeSlider = () =>
         />
     </box>
 
-const sinkVisible = new Variable(false);
-
 const nameSubstitute = (name: string) => {
 	if (!name) return '' // Fix undefined bug?
 	
@@ -31,29 +29,35 @@ const nameSubstitute = (name: string) => {
 	return name;
 };
 
-const SinkItem = (stream: Wp.Endpoint) =>
-	<button
-		onButtonPressed={() => stream.isDefault = true}
-		visible={bind(stream, "isDefault").as((def) => (!def))}
-		cursor={Gdk.Cursor.new_from_name('pointer', null)}
-	>
-		<label label={nameSubstitute(stream.description)}/>
-	</button>
-
 export const SinkSelector = () =>
-	<box cssClasses={["sinkSelector"]} vertical>
-		<button
-			cssClasses={["mainSink"]}
-			onButtonPressed={() => sinkVisible.set(!sinkVisible.get())}
+	bind(audio, 'speakers').as((speakers) => {
+		const menu = new Gio.Menu();
+
+		speakers.forEach((speaker) => {
+			const radioItem = new Gio.MenuItem();
+			radioItem.set_label(nameSubstitute(speaker.description));
+			radioItem.set_action_and_target_value('custom-menu.radio', GLib.Variant.new_string(speaker.description));
+			menu.append_item(radioItem);
+		})
+		
+		const actionGroup = new Gio.SimpleActionGroup();
+	
+		const radioAction = Gio.SimpleAction.new_stateful('radio', new GLib.VariantType("s"), GLib.Variant.new_string("first"))
+		radioAction.activate(GLib.Variant.new_string(String(audio.get_default_speaker()?.description)))
+		radioAction.connect("notify::state", (action: Gio.Action) => {
+			let selSpeaker = action.get_state()?.unpack();
+			speakers.forEach((speaker) => {
+				if (selSpeaker == speaker.description) speaker.set_is_default(true);
+			})
+		});
+
+		actionGroup.add_action(radioAction)
+	
+		const button = <menubutton 
+			menu_model={menu}
+			label="Select Audio Output"
 			cursor={Gdk.Cursor.new_from_name('pointer', null)}
-		>
-			<label label={bind(speaker, "description").as(d => nameSubstitute(d) || '')}/>
-		</button>
-		<revealer
-			revealChild={bind(sinkVisible)}
-		>
-			<box vertical>
-				{bind(audio, 'speakers').as((s) => s.map(SinkItem))}
-			</box>
-		</revealer>
-	</box>
+		/>
+		button.insert_action_group("custom-menu", actionGroup)
+		return button;
+	});

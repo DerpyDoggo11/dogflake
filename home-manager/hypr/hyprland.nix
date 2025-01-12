@@ -100,8 +100,7 @@
                 (t "Library")
                 (c "com.github.Aylur.ags")
 
-                "size 20% 90%,^(copyq)$" # CopyQ autosize
-                "size 50% 68%,^(emote)$" # Emote autosize
+                "size 20% 90%,^(copyq)$" # CopyQ autosize TODO remove me
             ];
 
             windowrulev2 = [
@@ -137,7 +136,6 @@
                 "fcitx5 -d" # Chinese support
                 "swww-daemon" # Wallpaper service
                 "copyq --start-server" # TODO replace with ags
-                "emote" # TODO replace with ags
                 "mpd" # Daemon for mpc player
                 "cd /home/alec/Projects/flake/home-manager/ags && desktop-shell"
 

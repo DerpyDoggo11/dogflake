@@ -8,7 +8,6 @@
       "Super, E, exec, librewolf" # Browser
 
       # Astal widget control
-      "Super, Period, exec, emote" # Emoji picker TODO replace w/ ags
       "Super, Period, exec, astal -t emojiPicker" # Emoji Picker
       "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
       ",XF86PowerOff, exec, astal -t powermenu" # Handle power button press
