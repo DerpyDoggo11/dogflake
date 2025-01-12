@@ -41,10 +41,10 @@
   };
   services.resolved.enable = true;
 
-  time.timeZone = "America/Los_Angeles"; # US West Coast
+  time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  nixpkgs.config.allowUnfree = true; # Allow installing of non open-source applications
+  nixpkgs.config.allowUnfree = true;
   services.logrotate.enable = false; # Don't need this
   nix.settings = {
     experimental-features = "nix-command flakes";
@@ -66,8 +66,7 @@
     man.man-db.enable = false;
   };
 
-  # Remove even more useless stuff 
-  environment.defaultPackages = []; # Remove all default packages
+  environment.defaultPackages = []; # Remove unnecessary default packages
   programs.command-not-found.enable = false; # Don't show recommendations when a package is missing
 
   system.stateVersion = "24.05";

@@ -36,7 +36,7 @@ export const SinkSelector = () =>
 		speakers.forEach((speaker) => {
 			const radioItem = new Gio.MenuItem();
 			radioItem.set_label(nameSubstitute(speaker.description));
-			radioItem.set_action_and_target_value('custom-menu.radio', GLib.Variant.new_string(speaker.description));
+			radioItem.set_action_and_target_value('speakers.radio', GLib.Variant.new_string(speaker.description));
 			menu.append_item(radioItem);
 		})
 		
@@ -46,10 +46,12 @@ export const SinkSelector = () =>
 		radioAction.activate(GLib.Variant.new_string(String(audio.get_default_speaker()?.description)))
 		radioAction.connect("notify::state", (action: Gio.Action) => {
 			let selSpeaker = action.get_state()?.unpack();
-			speakers.forEach((speaker) => {
-				if (selSpeaker == speaker.description) speaker.set_is_default(true);
-			})
+			speakers.forEach((speaker) =>
+				(selSpeaker == speaker.description) && speaker.set_is_default(true)
+			)
 		});
+
+		//bind(speaker, 'description').as((s) => (s) && radioAction.set_state(GLib.Variant.new_string(s)))
 
 		actionGroup.add_action(radioAction)
 	
@@ -58,6 +60,6 @@ export const SinkSelector = () =>
 			label="Select Audio Output"
 			cursor={Gdk.Cursor.new_from_name('pointer', null)}
 		/>
-		button.insert_action_group("custom-menu", actionGroup)
+		button.insert_action_group('speakers', actionGroup)
 		return button;
 	});

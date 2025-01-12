@@ -68,7 +68,7 @@
     gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring & polkit
     greetd = {
       enable = true;
-      settings.default_session.command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+      settings.default_session.command = "Hyprland";
     };
   };
 

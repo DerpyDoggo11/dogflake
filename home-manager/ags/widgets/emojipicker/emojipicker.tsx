@@ -1,13 +1,12 @@
 import { App, Astal, astalify, Gtk } from 'astal/gtk4';
 import { execAsync } from 'astal';
 
-let textbox: Gtk.Text;
+let textbox: Gtk.Entry;
 const hide = () => { 
   textbox.text = '';
   App.get_window("emojiPicker")?.hide(); 
 }
 
-const Text = astalify<Gtk.Text, Gtk.Text.ConstructorProps>(Gtk.Text)
 
 export const emojiPicker = () =>
   <window
@@ -16,18 +15,18 @@ export const emojiPicker = () =>
     application={App}
     visible={false}
   >
-    <Text
-      enableEmojiCompletion={true}
+    <entry
       text=' '
+      enableEmojiCompletion={true}
       setup={(self) => {
         textbox = self
         self.connect('activate', async () => 
           await execAsync('wl-copy ' + textbox.text) && hide())
-        self.connect('delete-from-cursor', (self) => console.log(self))
+        self.connect('icon-release', (self) => console.log(self))
 
         App.connect("window-toggled", () =>
           (App.get_window("emojiPicker")?.visible == true)
-              && self.grab_focus() && self.emit('insert-at-cursor', ':')
+              && self.grab_focus() && self.emit('icon-release', 'e')
         );
       }}
       onKeyPressed={(_, key) =>

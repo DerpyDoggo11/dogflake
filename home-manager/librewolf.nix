@@ -8,7 +8,7 @@
 
         try {
           Cu.import("resource:///modules/AboutNewTab.jsm");
-          AboutNewTab.newTabURL = "file:///home/alec/Projects/flake/home-manager/homepage.html";
+          AboutNewTab.newTabURL = "file:///home/alec/Projects/flake/etc/homepage.html";
         } catch(e) { Cu.reportError(e); }
       '';
     };

@@ -5,13 +5,14 @@ import notificationStyle from './widgets/notifications/notifications.css';
 import osdStyle from './widgets/osd/osd.css';
 import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
+import emojipickerStyle from './widgets/emojipicker/emojipicker.css';
 
 import { App, Gdk, Gtk } from 'astal/gtk4';
 import { GLib, exec, bind } from 'astal';
 import { Bar } from './widgets/bar/bar';
 import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
-import { emojiPicker } from './widgets/emojipicker';
+import { emojiPicker } from './widgets/emojipicker/emojipicker';
 import { Notifications, NotifiationMap } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './lib/notifySend';
@@ -41,7 +42,7 @@ export const widgets = (monitor: Gdk.Monitor) => [
 ];
 
 App.start({
-    css: style + lancherStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
+    css: style + lancherStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle + emojipickerStyle,
     main() {
         App.get_monitors().map((monitor) => widgetMap.set(monitor, widgets(monitor)));
 
