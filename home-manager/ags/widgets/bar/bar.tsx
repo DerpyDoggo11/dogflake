@@ -6,7 +6,7 @@ import { Mpris } from './modules/mpris';
 import { Media } from './modules/media';
 import { RecordingIndicator } from '../../services/screen';
 
-export const Bar = (monitor = 0) =>
+export const Bar = (monitor: number) =>
   <window
     name="bar"
     monitor={monitor}

@@ -9,3 +9,6 @@
 }
 
 button.dnd { -gtk-icon-size: 1.5rem; background-color: @dark3; }
+
+/* Sink selector */
+popover { min-width: 20rem; }

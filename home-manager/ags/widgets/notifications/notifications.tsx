@@ -1,4 +1,4 @@
-import { App, Astal, Gdk } from 'astal/gtk4';
+import { App, Astal } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
 import { notificationItem } from './notificationitem';
 import { type Subscribable } from 'astal/binding';
@@ -6,7 +6,7 @@ import { Variable, bind } from 'astal';
 const { TOP, RIGHT } = Astal.WindowAnchor;
 export const DND = Variable(false);
 
-export class NotifiationMap implements Subscribable {
+class NotifiationMap implements Subscribable {
     private map: Map<number, Notifd.Notification> = new Map();
     private var: Variable<Array<Notifd.Notification>> = new Variable([]);
 
@@ -55,11 +55,11 @@ export class NotifiationMap implements Subscribable {
 };
 
 let notif: Astal.Window;
+const allNotifications = new NotifiationMap();
 
-export const Notifications = (monitor = 0, allNotifications: Subscribable<Array<Notifd.Notification>>) =>
+export const Notifications = () =>
     <window
         name="notifications"
-        monitor={monitor}
         anchor={TOP | RIGHT}
         application={App}
         visible={false}

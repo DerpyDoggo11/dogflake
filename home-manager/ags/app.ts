@@ -13,7 +13,7 @@ import { Bar } from './widgets/bar/bar';
 import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker/emojipicker';
-import { Notifications, NotifiationMap } from './widgets/notifications/notifications';
+import { Notifications } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, screenRec } from './services/screen';
@@ -29,7 +29,6 @@ import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediapl
 // Temporary app launcher fix (already fixed upstream)
 GLib.setenv("LD_PRELOAD", "", true)
 
-const allNotifications = new NotifiationMap();
 const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 
 // Per-monitor widgets
@@ -39,8 +38,7 @@ export const widgets = (monitor: number) => [
     //TopLeft(monitor),
     //TopRight(monitor),
     //BottomLeft(monitor),
-    //BottomRight(monitor),
-    Notifications(monitor, allNotifications)
+    //BottomRight(monitor)
 ];
 
 App.start({
@@ -55,6 +53,7 @@ App.start({
         OSD();
         reminders();
         powermenu();
+        Notifications();
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
         initMedia(); // Mpd player
 

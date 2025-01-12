@@ -1,5 +1,5 @@
 import { bind, timeout, Variable } from 'astal';
-import { App, Astal, Widget, Gtk } from 'astal/gtk4';
+import { App, Astal, Gtk } from 'astal/gtk4';
 import Wp from 'gi://AstalWp'
 import { brightness } from '../../services/brightness';
 
@@ -11,7 +11,7 @@ const val: Variable<Number> = new Variable(0);
 
 timeout(1000, () => dontShow = false);
 
-export const OSD = () => 
+export const OSD = () =>
     <window
         name="osd"
         anchor={Astal.WindowAnchor.BOTTOM}

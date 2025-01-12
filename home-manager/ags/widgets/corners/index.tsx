@@ -3,7 +3,7 @@
 import { Astal, Gdk, App } from 'astal/gtk4';
 import { Corner } from './corners';
 
-export const TopLeft = (monitor = 0) => (
+export const TopLeft = (monitor: number) => (
     <window
         name="cornertl"
         monitor={monitor}
@@ -14,7 +14,7 @@ export const TopLeft = (monitor = 0) => (
     </window>
 );
 
-export const TopRight = (monitor = 0) => (
+export const TopRight = (monitor: number) => (
     <window
         name="cornertr"
         monitor={monitor}
@@ -25,7 +25,7 @@ export const TopRight = (monitor = 0) => (
     </window>
 );
 
-export const BottomLeft = (monitor = 0) => (
+export const BottomLeft = (monitor: number) => (
     <window
         name="cornerbl"
         monitor={monitor}
@@ -36,7 +36,7 @@ export const BottomLeft = (monitor = 0) => (
     </window>
 );
 
-export const BottomRight = (monitor = 0) => (
+export const BottomRight = (monitor: number) => (
     <window
         name="cornerbr"
         monitor={monitor}

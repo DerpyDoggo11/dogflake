@@ -45,7 +45,6 @@ export const notificationItem = (n: Notifd.Notification) =>
                 {n.body && <label
                     cssClasses={["body"]}
                     wrap
-                    useMarkup
                     xalign={0}
                     label={n.body}
                     maxWidthChars={1} // Literally any value forces wrap for some reason

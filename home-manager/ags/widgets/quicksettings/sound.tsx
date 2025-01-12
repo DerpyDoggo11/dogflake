@@ -42,7 +42,7 @@ export const SinkSelector = () =>
 		
 		const actionGroup = new Gio.SimpleActionGroup();
 	
-		const radioAction = Gio.SimpleAction.new_stateful('radio', new GLib.VariantType("s"), GLib.Variant.new_string("first"))
+		const radioAction = Gio.SimpleAction.new_stateful('radio', new GLib.VariantType('s'), GLib.Variant.new_string('speakers'))
 		radioAction.activate(GLib.Variant.new_string(String(audio.get_default_speaker()?.description)))
 		radioAction.connect("notify::state", (action: Gio.Action) => {
 			let selSpeaker = action.get_state()?.unpack();
@@ -51,8 +51,9 @@ export const SinkSelector = () =>
 			)
 		});
 
-		//bind(speaker, 'description').as((s) => (s) && radioAction.set_state(GLib.Variant.new_string(s)))
-
+		speaker.connect('notify', (source) => 
+			(source.description) && (source.isDefault) && radioAction.set_state(GLib.Variant.new_string(source.description)
+		))
 		actionGroup.add_action(radioAction)
 	
 		const button = <menubutton 
