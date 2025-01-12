@@ -56,10 +56,10 @@ export class NotifiationMap implements Subscribable {
 
 let notif: Astal.Window;
 
-export const Notifications = (gdkmonitor: Gdk.Monitor, allNotifications: Subscribable<Array<Notifd.Notification>>) =>
+export const Notifications = (monitor = 0, allNotifications: Subscribable<Array<Notifd.Notification>>) =>
     <window
         name="notifications"
-        gdkmonitor={gdkmonitor}
+        monitor={monitor}
         anchor={TOP | RIGHT}
         application={App}
         visible={false}

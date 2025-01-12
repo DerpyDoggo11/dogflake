@@ -7,8 +7,8 @@ import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
 import emojipickerStyle from './widgets/emojipicker/emojipicker.css';
 
-import { App, Gdk, Gtk } from 'astal/gtk4';
-import { GLib, exec, bind } from 'astal';
+import { App, Gtk } from 'astal/gtk4';
+import { GLib, exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
 import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
@@ -20,6 +20,8 @@ import { screenshot, screenRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
 import { OSD } from './widgets/osd/osd';
 import { powermenu } from './widgets/powermenu/powermenu';
+import Hyprland from 'gi://AstalHyprland?version=0.1';
+const hypr = Hyprland.get_default();
 
 import { monitorBrightness } from './services/brightness';
 import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaplayer';
@@ -28,10 +30,10 @@ import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediapl
 GLib.setenv("LD_PRELOAD", "", true)
 
 const allNotifications = new NotifiationMap();
-const widgetMap: Map<Gdk.Monitor, Gtk.Widget[]> = new Map();
+const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 
 // Per-monitor widgets
-export const widgets = (monitor: Gdk.Monitor) => [
+export const widgets = (monitor: number) => [
     Bar(monitor),
     // TODO add back corners
     //TopLeft(monitor),
@@ -44,7 +46,7 @@ export const widgets = (monitor: Gdk.Monitor) => [
 App.start({
     css: style + lancherStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle + emojipickerStyle,
     main() {
-        App.get_monitors().map((monitor) => widgetMap.set(monitor, widgets(monitor)));
+        hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 
         calendar();
         emojiPicker();
@@ -56,18 +58,14 @@ App.start({
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
         initMedia(); // Mpd player
 
-        // Automatically reconnect widgets on monitor change
-        bind(App, 'monitors').as(monitors =>
-            monitors.forEach((monitor =>
-                (!widgetMap.get(monitor))
-                    && widgetMap.set(monitor, widgets(monitor))
-            ))
+        // Monitor reactivity
+        hypr.connect('monitor-added', (_, monitor) =>
+            widgetMap.set(monitor.id, widgets(monitor.id))
         );
-        /*App.connect('monitor-added', (_, monitor) => widgetMap.set(monitor, widgets(monitor)));
-        App.connect('monitor-removed', (_, monitor) => {
-            widgetMap.get(monitor)?.forEach((w) => w.disconnect);
-            widgetMap.delete(monitor);
-        });*/
+        hypr.connect('monitor-removed', (_, id) => {
+            widgetMap.get(id)?.forEach((w) => w.disconnect);
+            widgetMap.delete(id);
+        });
     },
     requestHandler(req, res) {
         const reqArgs = req.split(" ");
