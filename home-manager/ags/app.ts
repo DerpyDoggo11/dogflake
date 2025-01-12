@@ -13,7 +13,7 @@ import { Bar } from './widgets/bar/bar';
 import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker/emojipicker';
-import { Notifications } from './widgets/notifications/notifications';
+import { Notifications, clearNewestNotification } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, screenRec } from './services/screen';
@@ -70,7 +70,7 @@ App.start({
         const reqArgs = req.split(" ");
         switch(reqArgs[0]) {
             case "hideNotif":
-                allNotifications.clearNewestNotification();
+                clearNewestNotification();
                 break;
             case "screenshot":
                 screenshot((reqArgs[1] == 'true'))

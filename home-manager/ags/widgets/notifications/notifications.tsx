@@ -6,13 +6,14 @@ import { Variable, bind } from 'astal';
 const { TOP, RIGHT } = Astal.WindowAnchor;
 export const DND = Variable(false);
 
-class NotifiationMap implements Subscribable {
-    private map: Map<number, Notifd.Notification> = new Map();
-    private var: Variable<Array<Notifd.Notification>> = new Variable([]);
+const map: Map<number, Notifd.Notification> = new Map();
+const notifications: Variable<Array<Notifd.Notification>> = new Variable([]);
+let notif: Astal.Window;
 
+class NotifiationMap implements Subscribable {
     private notifiy = () =>
         (!DND.get()) &&
-            this.var.set([...this.map.values()].reverse());
+            notifications.set([...map.values()].reverse());
     
     constructor() {
         const notifd = Notifd.get_default();
@@ -27,34 +28,29 @@ class NotifiationMap implements Subscribable {
     };
 
     private set(key: number, value: Notifd.Notification) {
-        this.map.set(key, value);
+        map.set(key, value);
         this.notifiy();
     };
 
-    private delete(key: number) {
+    public delete(key: number) {
         let isDND;
         if (DND.get()) {
             isDND = true;
             DND.set(false);
         };
 
-        this.map.delete(key);
+        map.delete(key);
         this.notifiy();
 
         (isDND) &&
             DND.set(true);
     };
-
-    public clearNewestNotification = () =>
-        this.delete([...this.map][0][0]);
     
-    get = () => this.var.get();
+    get = () => notifications.get();
     
     subscribe = (callback: (list: Array<Notifd.Notification>) => void) => 
-        this.var.subscribe(callback);
+        notifications.subscribe(callback);
 };
-
-let notif: Astal.Window;
 const allNotifications = new NotifiationMap();
 
 export const Notifications = () =>
@@ -77,3 +73,6 @@ export const Notifications = () =>
             
         </box>
     </window>
+
+export const clearNewestNotification = () =>
+    allNotifications.delete([...map][0][0]);
