@@ -1,6 +1,6 @@
 // Stolen from https://github.com/matt1432/nixos-configs/blob/master/modules/ags/config/widgets/corners/index.tsx
 
-import { Astal, Gdk, App } from 'astal/gtk4';
+import { Astal, App } from 'astal/gtk4';
 import { Corner } from './corners';
 
 export const TopLeft = (monitor: number) => (
@@ -9,6 +9,7 @@ export const TopLeft = (monitor: number) => (
         monitor={monitor}
         anchor={ Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT }
         application={App}
+        visible={true}
     >
         {Corner('topleft')}
     </window>
@@ -20,6 +21,7 @@ export const TopRight = (monitor: number) => (
         monitor={monitor}
         anchor={ Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT }
         application={App}
+        visible={true}
     >
         {Corner('topright')}
     </window>
@@ -31,6 +33,7 @@ export const BottomLeft = (monitor: number) => (
         monitor={monitor}
         anchor={ Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT }
         application={App}
+        visible={true}
     >
         {Corner('bottomleft')}
     </window>
@@ -42,6 +45,7 @@ export const BottomRight = (monitor: number) => (
         monitor={monitor}
         anchor={ Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT }
         application={App}
+        visible={true}
     >
         {Corner('bottomright')}
     </window>

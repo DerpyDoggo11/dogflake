@@ -34,11 +34,10 @@ const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 // Per-monitor widgets
 export const widgets = (monitor: number) => [
     Bar(monitor),
-    // TODO add back corners
-    //TopLeft(monitor),
-    //TopRight(monitor),
-    //BottomLeft(monitor),
-    //BottomRight(monitor)
+    TopLeft(monitor),
+    TopRight(monitor),
+    BottomLeft(monitor),
+    BottomRight(monitor)
 ];
 
 App.start({
