@@ -15,7 +15,7 @@
     jdk23 # Java JDK version 23 for compling & running jars
     brightnessctl # Control laptop brightness
     wl-screenrec # Efficient screen recorder
-    grimblast # Screenshotting tool (TODO: replace with Grim)
+    grimblast # Screenshotting tool (TODO: replace with Grim - use wayfreeze)
     slurp # Screen selection tool for screenshots & screenrecording
     swappy # Quick screenshot editor
     wl-clipboard # Wayland clipboard utils

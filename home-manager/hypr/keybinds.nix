@@ -64,7 +64,7 @@
       "ControlSuperShift, mouse_up, movetoworkspace, +1"
       "ControlSuperShift, mouse_down, movetoworkspace, -1"
       
-      "Super, F, workspaceopt, allfloat" # Makes a workspace floating TODO change to just window floating status
+      "Super, F, togglefloating, activewindow" # Makes a window floating
     ];
 
     bindle = [
