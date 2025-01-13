@@ -1,6 +1,6 @@
 #bar {
     background: @theme_bg_color;
-    font-family: 'Hammersmith One';
+    font-family: 'Sora';
 }
 
 #bar button {
@@ -51,7 +51,7 @@
 /* Recording indicator */
 .recIndicator { color: #bf616a; }
 .recIndicator image { -gtk-icon-size: 0.7rem; padding-right: 3px; }
-.recIndicator label { font-size: 0.9rem; }
+.recIndicator label { font-size: 0.9rem; margin-top: -1px; }
 
 /* Media players */
 #bar .media, #bar .mpris {
