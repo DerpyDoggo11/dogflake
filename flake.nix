@@ -40,23 +40,34 @@
         ];
       };
 
-      # Desktop config TODO add me
-      /*"alecspc" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        #extraSpecialArgs = { inherit inputs; }; # Should be put in hm config
-        modules = [
-          #./hosts/raspi/default.nix
-          #./nixos/alecslaptop/common.nix
-          #home-manager.nixosModules.home-manager
-        ];
-      };*/
-
-      # Raspberry Pi
-      /*"alecpi" = nixpkgs.lib.nixosSystem {
+      # Desktop config
+      /*"alecpc" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/raspi/default.nix
+          ./hosts/alecpc/default.nix
+          ./modules/desktop.nix
+          home-manager.nixosModules.home-manager
+        ];
+      };
+
+      # Old laptop config
+      "alecolaptop" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/alecolaptop/default.nix
+          ./modules/desktop.nix
+          home-manager.nixosModules.home-manager
+        ];
+      };
+
+      # Raspberry Pi
+      "alecpi" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/alecpi/default.nix
           ./hosts/common.nix
           home-manager.nixosModules.home-manager
         ];

@@ -84,10 +84,9 @@ class ScreenRec extends GObject.Object {
 		exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
 		
 		notifySend({
-			appName: 'Screen Recording',
+			appName: 'Screenrec',
 			title: 'Screen Recording Saved',
 			iconName: 'emblem-videos-symbolic',
-			image: this.#file,
 			actions: [
 				{
 					id: 1,

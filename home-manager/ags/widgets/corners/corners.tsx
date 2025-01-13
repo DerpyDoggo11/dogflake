@@ -31,6 +31,6 @@ export const Corner = (place: string) => {
         };
         cairoContext.setSourceRGB(0.19215686274509805, 0.21568627450980393, 0.26666666666666666); // #2E3440
         cairoContext.fill();
-    })
+    });
     return drawingArea;
 };

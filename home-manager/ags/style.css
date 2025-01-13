@@ -39,3 +39,8 @@ calendar, .quickSettings {
   border-radius: 0 5px 0 0;
   background-color: @dark2;
 }
+
+#emojiPicker entry {
+  background-color: @dark3;
+  border-radius: 7px 7px 0 0;
+}

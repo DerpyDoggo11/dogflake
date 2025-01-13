@@ -5,14 +5,13 @@ import notificationStyle from './widgets/notifications/notifications.css';
 import osdStyle from './widgets/osd/osd.css';
 import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
-import emojipickerStyle from './widgets/emojipicker/emojipicker.css';
 
 import { App, Gtk } from 'astal/gtk4';
 import { GLib, exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
 import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
-import { emojiPicker } from './widgets/emojipicker/emojipicker';
+import { emojiPicker } from './widgets/emojipicker';
 import { Notifications, clearNewestNotification } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './lib/notifySend';
@@ -41,7 +40,7 @@ export const widgets = (monitor: number) => [
 ];
 
 App.start({
-    css: style + lancherStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle + emojipickerStyle,
+    css: style + lancherStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
     main() {
         hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 

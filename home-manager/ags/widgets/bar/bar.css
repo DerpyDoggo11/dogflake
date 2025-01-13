@@ -50,8 +50,8 @@
 
 /* Recording indicator */
 .recIndicator { color: #bf616a; }
-.recIndicator icon { padding-right: 3px; }
-.recIndicator label { margin-top: 0px; }
+.recIndicator image { -gtk-icon-size: 0.7rem; padding-right: 3px; }
+.recIndicator label { font-size: 0.9rem; }
 
 /* Media players */
 #bar .media, #bar .mpris {
