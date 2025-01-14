@@ -26,7 +26,7 @@ export const playPause = () => {
 export const chngPlaylist = (direction: musicAction) => {
     if (direction == 'next') {
         (playlist.get() == playlists.length) 
-        ? (playlist.set(1)) 
+        ? (playlist.set(1)) // Go to first
         : (playlist.set(Number(playlist.get()) + 1));
     } else if (direction == 'prev') {
         (playlist.get() == 1) 
@@ -35,14 +35,14 @@ export const chngPlaylist = (direction: musicAction) => {
     }
 
     // Stop playing music
-    exec('mpc pause'); // Not really needed, but kept to prevent potential issues
+    exec('mpc pause');
     isPlaying.set(false);
-    
+
     // Update the playlist and playlist names
     playlistName.set(playlists[Number(playlist.get()) - 1]);
 
     // Change the wallpaper
-    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90 --transition-bezier 0.01,.6,.3,1 --transition-duration 4`);
+    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90`);
 
     // Clear the current cache and add the new playlist
     exec('mpc clear');
@@ -54,7 +54,7 @@ export const chngPlaylist = (direction: musicAction) => {
 export const initMedia = () => {
     playlistName.set('Study'); // Default playlist
     execAsync('mpc crossfade 2'); // Set crossfade value
-    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90 --transition-bezier 0.01,.6,.3,1 --transition-duration 4`);
+    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90`);
 
     // On first start, clear and load new playlist
     exec('mpc clear');

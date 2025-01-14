@@ -8,26 +8,22 @@ const screen = exec(`bash -c "ls -w1 /sys/class/backlight | head -1"`);
 const screenMax = get("max");
 export const brightness: Variable<number> = new Variable(get("get") / (screenMax || 1));
 
-export const setBrightness = (percent: number) => {
+const setBrightness = (percent: number) => {
     if (percent < 0)
         percent = 0;
 
     if (percent > 1)
         percent = 1;
 
-    execAsync(`brightnessctl set ${Math.floor(percent * 100)}% -q`).then(() => 
-        brightness.set(percent)
-    );
+    execAsync(`brightnessctl set ${Math.floor(percent * 100)}% -q`)
+    .then(() => brightness.set(percent));
 };
 
-export const monitorBrightness = () => {
-    const screenPath = `/sys/class/backlight/${screen}/brightness`;
-
-    monitorFile(screenPath, async () => {
-        const v = await readFileAsync(screenPath);
+export const monitorBrightness = () =>
+    monitorFile(`/sys/class/backlight/${screen}/brightness`, async (file) => {
+        const v = await readFileAsync(file);
         brightness.set(Number(v) / screenMax);
     });
-};
 
 export const BrightnessSlider = () => 
     <box>

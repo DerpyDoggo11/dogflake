@@ -15,7 +15,7 @@ import { emojiPicker } from './widgets/emojipicker';
 import { Notifications, clearOldestNotification } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './lib/notifySend';
-import { screenshot, screenRec } from './services/screen';
+import { screenshot, toggleRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
 import { OSD } from './widgets/osd/osd';
 import { powermenu } from './widgets/powermenu/powermenu';
@@ -31,7 +31,7 @@ GLib.setenv("LD_PRELOAD", "", true)
 const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 
 // Per-monitor widgets
-export const widgets = (monitor: number) => [
+const widgets = (monitor: number) => [
     Bar(monitor),
     TopLeft(monitor),
     TopRight(monitor),
@@ -74,7 +74,7 @@ App.start({
                 screenshot((reqArgs[1] == 'true'))
                 break;
             case "screenrec":
-                screenRec.toggle();
+                toggleRec();
                 break;
             case "media":
                 switch (reqArgs[1]) {
