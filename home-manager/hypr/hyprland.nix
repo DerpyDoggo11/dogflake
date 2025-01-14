@@ -1,7 +1,6 @@
 { pkgs, ...}: {
     wayland.windowManager.hyprland = {
         enable = true;
-        #xwayland.enable = false; # Causes build error?
         settings = {
             monitor = [ # https://wiki.hyprland.org/Configuring/Monitors/
                 "        , preferred,     auto,     auto"
@@ -125,7 +124,6 @@
 
             env = [
                 "GDK_BACKEND,wayland,x11"
-                "T_QPA_PLATFORM,xcb" # FCITX
                 
                 # Some legacy apps still use xcursor
                 "XCURSOR_THEME,Bibata-Modern-Ice"
@@ -137,15 +135,12 @@
                 "swww-daemon" # Wallpaper service
                 "copyq --start-server" # TODO replace with ags
                 "mpd" # Daemon for mpc player
-                "cd /home/alec/Projects/flake/home-manager/ags && desktop-shell"
+                "desktop-shell"
 
                 # Autostart apps
                 "[workspace 3 silent] librewolf"
                 "[workspace 4 silent] teams-for-linux"
                 "[workspace 6 silent] thunderbird"
-
-                #exec-once = /usr/bin/gnome-keyring-daemon --start --components=secrets &
-                #exec-once = /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
             ];
 
             workspace = [

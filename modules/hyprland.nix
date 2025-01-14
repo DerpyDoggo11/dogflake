@@ -7,7 +7,6 @@
     icon-library
     font-awesome # For Swappy
 
-    polkit_gnome
     gsettings-desktop-schemas
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
@@ -43,25 +42,8 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
 
-
   security.polkit.enable = true;
-
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-  };
-
+  
   services = {
     devmon.enable = true; # Automatically mounts/unmounts attached drives
     udisks2.enable = true; # For getting info about drives
@@ -73,10 +55,5 @@
         user = "alec";
       };
     };
-  };
-
-  environment.sessionVariables = {
-    POLKIT_AUTH_AGENT = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-    GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
   };
 }
