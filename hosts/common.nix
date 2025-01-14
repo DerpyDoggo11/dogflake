@@ -23,12 +23,9 @@
     kernelModules = [ "tcp_bbr" ];
     kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
   };
-  
-  networking.wireless.iwd = {
-    enable = true;
-    #Settings.AutoConnect = true; # TODO remove me if this is unnecessary
-  };
-  services.resolved.enable = true;
+
+  # Networking w/ pure iwd
+  networking.wireless.iwd.enable = true;
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
