@@ -74,5 +74,5 @@ export const Notifications = () =>
         </box>
     </window>
 
-export const clearNewestNotification = () =>
+export const clearOldestNotification = () =>
     allNotifications.delete([...map][0][0]);

@@ -1,7 +1,7 @@
 import { App, Astal, Gtk } from 'astal/gtk4';
 import { execAsync } from 'astal';
 
-const hide = () => App.get_window("emojiPicker")?.hide();
+const hide = () => App.get_window('emojiPicker')?.hide();
 
 export const emojiPicker = () =>
   <window

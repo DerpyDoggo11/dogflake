@@ -1,14 +1,15 @@
 #powermenu box {
     background-color: @theme_bg_color;
-    border-radius: 0.4rem;
+    border-radius: 1rem;
     padding: 1rem;
 }
 
 #powermenu image {
     -gtk-icon-size: 4rem;
+    -gtk-icon-shadow: 0 0 1rem @light1;
     margin: 0.5rem;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     color: @white3;
 }
 

@@ -9,7 +9,11 @@
 }
 
 .statusMenu { padding: 0.5rem 0 0.5rem 0; }
-.statusMenu image { -gtk-icon-size: 0.9rem; }
+.statusMenu image {
+    -gtk-icon-size: 0.9rem;
+    -gtk-icon-shadow: 0 0 12px @light3;
+    color: @light3;
+}
 .timeBtn { margin-bottom: 0.2rem; padding: 0.4rem 0; }
 
 /* Time/date module */
@@ -17,7 +21,8 @@
     font-size: 0.7rem;
     font-family: 'Liberation Mono';
     font-style: italic;
-    color: @blue2; 
+    color: @blue2;
+    text-shadow: 0 0 3px @blue3;
 }
 .time .date { font-size: 0.6rem; }
 .time .time {
@@ -26,6 +31,7 @@
     font-weight: bold;
     letter-spacing: 2px;
     color: @blue2;
+    text-shadow: 0 0 5px @blue3;
 }
 
 
@@ -42,11 +48,15 @@
     transition: 0.2s;
     margin: 0.25rem;
 }
-#bar .workspaceBtn.active { background-color: @blue2; min-height: 1.6rem; }
+#bar .workspaceBtn.active {
+    background-color: @blue2;
+    box-shadow: 0 0 5px @blue3;
+    min-height: 1.6rem;
+}
 #bar .workspaceBtn.occupied { background-color: @dark4; min-height: 1.4rem; }
 
 /* Status menu misc */
-.btConnected { color: @blue3; }
+.btConnected { color: @blue3; -gtk-icon-shadow: 0 0 2px @blue3; }
 
 /* Recording indicator */
 .recIndicator { color: #bf616a; }

@@ -7,13 +7,13 @@
       "Super, return, exec, foot" # Terminal
       "Super, E, exec, librewolf" # Browser
 
-      # Astal widget control
+      # Desktop shell control
       "Super, Period, exec, astal -t emojiPicker" # Emoji Picker
       "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
-      ",XF86PowerOff, exec, astal -t powermenu" # Handle power button press
       "SuperShift, S, exec, astal -t powermenu" # Power menu
+      ",XF86PowerOff, exec, astal -t powermenu" # Power button opens power menu
       "Super, space, exec, astal -t launcher" # App laucher
-      "Super, C, exec, astal hideNotif" # Hide most recent notification
+      "Super, C, exec, astal hideNotif" # Hide oldest notification
 
       "Super, R, exec, astal screenrec" # Toggle screen recording
       ",Print, exec, astal 'screenshot false'" # Custom-size screenshot
@@ -31,11 +31,6 @@
       "SuperShift, right, movewindow, r"
       "SuperShift, up, movewindow, u"
       "SuperShift, down, movewindow, d"
-
-      # Keybinds to commonly used workspaces
-      #"Super, d, workspace, 1"
-      #"Super, f, workspace, 2"
-      #"Super, g, workspace, 3"
 
       # Workspace, window, tab manipulation
       "ControlSuper, right, workspace, +1"

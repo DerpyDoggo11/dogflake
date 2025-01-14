@@ -42,7 +42,7 @@ export const chngPlaylist = (direction: musicAction) => {
     playlistName.set(playlists[Number(playlist.get()) - 1]);
 
     // Change the wallpaper
-    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow`);
+    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90 --transition-bezier 0.01,.6,.3,1 --transition-duration 4`);
 
     // Clear the current cache and add the new playlist
     exec('mpc clear');
@@ -54,7 +54,7 @@ export const chngPlaylist = (direction: musicAction) => {
 export const initMedia = () => {
     playlistName.set('Study'); // Default playlist
     execAsync('mpc crossfade 2'); // Set crossfade value
-    execAsync(`swww img /home/alec//wallpapers/${playlistName.get()}.jpg --transition-type grow`);
+    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90 --transition-bezier 0.01,.6,.3,1 --transition-duration 4`);
 
     // On first start, clear and load new playlist
     exec('mpc clear');
