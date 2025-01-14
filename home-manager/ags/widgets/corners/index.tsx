@@ -9,7 +9,7 @@ export const TopLeft = (monitor: number) => (
         monitor={monitor}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
         application={App}
-        visible={true}
+        visible
     >
         {Corner('topleft')}
     </window>
@@ -21,7 +21,7 @@ export const TopRight = (monitor: number) => (
         monitor={monitor}
         anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
         application={App}
-        visible={true}
+        visible
     >
         {Corner('topright')}
     </window>
@@ -33,7 +33,7 @@ export const BottomLeft = (monitor: number) => (
         monitor={monitor}
         anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
         application={App}
-        visible={true}
+        visible
     >
         {Corner('bottomleft')}
     </window>
@@ -45,7 +45,7 @@ export const BottomRight = (monitor: number) => (
         monitor={monitor}
         anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT}
         application={App}
-        visible={true}
+        visible
     >
         {Corner('bottomright')}
     </window>

@@ -39,7 +39,6 @@
     })
 
     # Normal user apps
-    microsoft-edge # Web browser TODO remove me
     vscodium # Best IDE
     discord-canary # Voice & video chat app
     libsForQt5.kdenlive # Video editor

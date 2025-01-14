@@ -13,7 +13,7 @@ export const Bar = (monitor: number) =>
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
     anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
     application={App}
-    visible={true}
+    visible
   >
     <box vertical>
       <Workspaces/>

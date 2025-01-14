@@ -12,13 +12,13 @@ export const emojiPicker = () =>
     visible={false}
   >
     <entry
-      enableEmojiCompletion={true}
+      enableEmojiCompletion
+      showEmojiIcon
       halign={Gtk.Align.CENTER}
       valign={Gtk.Align.CENTER}
-
       setup={(self) => {
-        App.connect("window-toggled", () => {
-          if (App.get_window("emojiPicker")?.visible == true) {
+        App.connect('window-toggled', () => {
+          if (App.get_window('emojiPicker')?.visible == true) {
             self.grab_focus();
             self.text = '';
           };
