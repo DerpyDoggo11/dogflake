@@ -24,20 +24,9 @@
     kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
   };
   
-  networking = { # TODO get autoconnect functioning
-    useDHCP = false;
-    useNetworkd = true;
-    wireless.iwd.enable = true;
-    networkmanager = {
-      enable = true;
-      dns = "systemd-resolved";
-      wifi = {
-        backend = "iwd";
-        macAddress = "random";
-        powersave = true;
-      };
-      settings.device."wifi.iwd.autoconnect" = "yes";
-    };
+  networking.wireless.iwd = {
+    enable = true;
+    #Settings.AutoConnect = true; # TODO remove me if this is unnecessary
   };
   services.resolved.enable = true;
 

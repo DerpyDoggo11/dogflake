@@ -37,7 +37,7 @@
       gtk.enable = true;
     };
 
-    # Ags + Astal shell
+    # Astal desktop shell
     packages = [
       (inputs.ags.lib.bundle {
         inherit pkgs;
@@ -52,7 +52,6 @@
           hyprland # Workspace integration
           bluetooth # Bluez integration
           battery # For laptop only - not used on desktop
-          network # Requires networkmanager
           wireplumber # Used by pipewire
           notifd # Desktop notification integration
         ];

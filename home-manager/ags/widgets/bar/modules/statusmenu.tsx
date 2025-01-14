@@ -4,12 +4,10 @@ import { DND } from '../../notifications/notifications';
 import Bluetooth from 'gi://AstalBluetooth';
 import Wp from 'gi://AstalWp'
 import Battery from 'gi://AstalBattery';
-import Network from 'gi://AstalNetwork'
 
 const bluetooth = Bluetooth.get_default()
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const battery = Battery.get_default();
-const network = Network.get_default()?.wifi;
 
 const BluetoothIcon = () => 
   <image
@@ -23,9 +21,6 @@ const BatteryWidget = () =>
     tooltipText={bind(battery, 'percentage').as((p) => (p * 100) + '%')}
     iconName={bind(battery, 'batteryIconName')}
   />
-
-const NetworkIcon = () =>
-  <image iconName={bind(network, 'iconName')}/>
 
 const VolumeIcon = () => 
   <image iconName={bind(speaker, 'volumeIcon')}/>
@@ -43,7 +38,6 @@ export const Status = () =>
     onScroll={(_, __, y) => speaker.volume = (y < 0) ? speaker.volume + 0.05 : speaker.volume - 0.05 }
   >
     <box vertical spacing={7} cssClasses={["statusMenu"]}>
-      <NetworkIcon/>
       <VolumeIcon/>
       <BatteryWidget/>
       <BluetoothIcon/>
