@@ -6,17 +6,12 @@
     ../common.nix
   ];
 
-  networking.hostName = "alecslaptop"; # Hostname
+  networking.hostName = "alecolaptop"; # Hostname
   
-  # Bootloader settings
-  boot = {
-    # Sea Islands Radeon support for Vulkan
-    kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
-    
-    initrd = { # AMD GPU support
-      kernelModules = [ "amdgpu" ];
-      includeDefaultModules = false;
-    };
+  # Bootloader settings (AMD GPU support)
+  boot.initrd = {
+    kernelModules = [ "amdgpu" ];
+    includeDefaultModules = false;
   };
 
   hardware = { # OpenCL drivers for better hardware acceleration
@@ -25,7 +20,7 @@
   };
 
   services = {
-    upower.enable = true; # Battery level support (used by astal shell)
+    upower.enable = true; # For getting battery level (used by astal shell)
     power-profiles-daemon.enable = false; # No power-profiles!
     tlp = { # Better battery life
       enable = true;
