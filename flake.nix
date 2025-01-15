@@ -56,7 +56,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [ #
-          ./hosts/alecolaptop/hardware-configuration.nix
+          ./hosts/alecolaptop/default.nix
           ./modules/desktop.nix
           home-manager.nixosModules.home-manager
         ];
