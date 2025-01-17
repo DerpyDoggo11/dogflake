@@ -51,7 +51,7 @@
     greetd = {
       enable = true;
       settings.default_session = {
-        command = "Hyprland -q";
+        command = "Hyprland";
         user = "alec";
       };
     };

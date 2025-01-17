@@ -170,6 +170,9 @@
     };
     xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5
   };
+
+  # For arduino development
+  users.users.alec.extraGroups = [ "dialout" ];
   
   # Bluetooth support
   hardware.bluetooth.enable = true;

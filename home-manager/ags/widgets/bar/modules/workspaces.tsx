@@ -1,3 +1,4 @@
+import { Gtk } from 'astal/gtk4';
 import { bind } from 'astal';
 import AstalHyprland from 'gi://AstalHyprland';
 
@@ -6,8 +7,16 @@ const hyprland = AstalHyprland.get_default();
 export const Workspaces = () =>
   <box 
     vertical
-    cssClasses={["workspaceList"]}
-    onScroll={(_, __, y) => hyprland.dispatch('workspace', (y > 0) ? '+1' : '-1')}
+    cssClasses={["workspaceList"]}    
+    setup={(self) => {
+      const scrollController = new Gtk.EventControllerScroll();
+      scrollController.set_flags(Gtk.EventControllerScrollFlags.BOTH_AXES);
+      scrollController.connect("scroll", (_, __, y) =>
+        hyprland.dispatch('workspace', (y > 0) ? '+1' : '-1')
+      );
+
+      self.add_controller(scrollController)
+    }}
   >
     {[...Array(8).keys()].map((id) => id + 1).map((id) =>
       <box cssClasses={bind(hyprland, 'focusedWorkspace').as((focused) => {
