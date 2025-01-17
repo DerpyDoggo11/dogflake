@@ -11,7 +11,7 @@
     };
 
     ags = { # Desktop shell
-      url = "github:aylur/ags";
+      url = "github:amazinaxel/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
