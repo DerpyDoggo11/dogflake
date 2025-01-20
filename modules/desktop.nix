@@ -15,12 +15,13 @@
     jdk23 # Java JDK version 23 for compling & running jars
     brightnessctl # Control laptop brightness
     wl-screenrec # Efficient screen recorder
-    grimblast # Screenshotting tool (TODO: replace with Grim - use wayfreeze)
+    grimblast # Screenshotting tool
     slurp # Screen selection tool for screenshots & screenrecording
     swappy # Quick screenshot editor
     wl-clipboard # Wayland clipboard utils
     celluloid # Fast, simple GTK video player using mpv
     gnome-text-editor # Clean, tabbed, GTK text editor
+    gthumb # Image viewer & lightweight editor
     amberol # Lightweight GTK music player
     nemo-with-extensions # Simple file manager
     nemo-fileroller # File manager archive feature
@@ -40,7 +41,7 @@
 
     # Normal user apps
     vscodium # Best IDE
-    discord-canary # Voice & video chat app
+    discord # Voice & video chat app
     libsForQt5.kdenlive # Video editor
     lunar-client # PvP Minecraft client
     blockbench-electron # Minecraft 3D modeling app
