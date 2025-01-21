@@ -133,9 +133,9 @@
             exec-once = [
                 "fcitx5 -d" # Chinese support
                 "swww-daemon" # Wallpaper service
+                "desktop-shell"
                 "copyq --start-server" # TODO replace with ags
                 "mpd" # Daemon for mpc player
-                "desktop-shell"
 
                 # Autostart apps
                 "[workspace 3 silent] librewolf"

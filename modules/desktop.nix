@@ -53,13 +53,7 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     spotdl # Download Spotify playlists
-
-    # Wayland MC w/ key modifiers patch
-    (prismlauncher.override {
-      glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {
-        patches = [ ../overlays/glfw-Key-Modifiers-Fix.patch ];
-      });
-    })
+    prismlauncher
 
     # Global scripts
     (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
