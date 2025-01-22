@@ -1,2 +1,7 @@
+# `Ags types -pd .` to generate the following
+
 @girs/
 node_modules/
+
+# Package.json contains a pointer to the Nix store and therefore should not be commited
+package.json
