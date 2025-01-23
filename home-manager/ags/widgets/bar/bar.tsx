@@ -3,7 +3,7 @@ import { Time } from './modules/time';
 import { Workspaces } from './modules/workspaces';
 import { Status } from './modules/statusmenu';
 import { Mpris } from './modules/mpris';
-import { Media } from './modules/media';
+import { Media } from '../../services/mediaplayer';
 import { RecordingIndicator } from '../../services/screen';
 
 export const Bar = (monitor: number) =>

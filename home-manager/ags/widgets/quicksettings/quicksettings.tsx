@@ -1,5 +1,5 @@
-import { BrightnessSlider } from "../../services/brightness"
-import { VolumeSlider, SinkSelector } from './sound'
+import { BrightnessSlider } from '../../services/brightness';
+import { VolumeSlider, SinkSelector } from './sound';
 import { App, Astal, Gdk } from 'astal/gtk4';
 import { bind } from 'astal';
 import { DND } from '../notifications/notifications';

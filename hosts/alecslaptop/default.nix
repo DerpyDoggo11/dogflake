@@ -2,10 +2,16 @@
 
 {
   imports = [ 
-    ./hardware-configuration.nix 
+    ./hardware-configuration.nix
     ../common.nix
   ];
 
+  # Packages to only be installed on this host
+  environment.systemPackages = with pkgs; [
+    flashprint # Flashforge 3D printer software
+    freecad-wayland # CAD 3D modeling software
+  ];
+  
   networking.hostName = "alecslaptop"; # Hostname
   
   # Bootloader settings

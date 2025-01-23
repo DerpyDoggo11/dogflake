@@ -40,10 +40,11 @@
     })
 
     # Normal user apps
-    vscodium # Best IDE
+    vscodium # Fork of VSCode,,
     discord # Voice & video chat app
     libsForQt5.kdenlive # Video editor
     lunar-client # PvP Minecraft client
+    microsoft-edge # Chromium browser for better development and WebUSB support
     blockbench-electron # Minecraft 3D modeling app
     jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email & IRC client
@@ -53,7 +54,7 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     spotdl # Download Spotify playlists
-    prismlauncher
+    prismlauncher # Minecraft launcher
 
     # Global scripts
     (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))

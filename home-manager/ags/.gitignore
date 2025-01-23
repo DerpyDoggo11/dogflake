@@ -1,4 +1,4 @@
-# `Ags types -pd .` to generate the following
+# `ags types -pd .` to generate the following
 
 @girs/
 node_modules/

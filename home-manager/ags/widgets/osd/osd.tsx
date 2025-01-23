@@ -1,6 +1,6 @@
 import { bind, timeout, Variable } from 'astal';
 import { App, Astal, Gtk } from 'astal/gtk4';
-import Wp from 'gi://AstalWp'
+import Wp from 'gi://AstalWp';
 import { brightness } from '../../services/brightness';
 
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;

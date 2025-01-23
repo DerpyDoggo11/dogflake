@@ -1,4 +1,3 @@
-import { Gtk } from 'astal/gtk4';
 import { bind } from 'astal';
 import AstalHyprland from 'gi://AstalHyprland';
 

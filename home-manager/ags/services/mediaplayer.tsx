@@ -1,13 +1,14 @@
-import { exec, execAsync } from 'astal';
-import { Variable } from "astal";
+import { App, Gdk } from 'astal/gtk4';
+import { exec, execAsync, Variable, bind } from 'astal';
 
 export type musicAction = 'next' | 'prev';
-export const isPlaying: Variable<Boolean> = new Variable(false);
+export const isPlaying: Variable<Boolean> = new Variable(false); // TODO stop using capital types like Boolean
 export const playlist: Variable<Number> = new Variable(1);
-export const playlistName: Variable<String> = new Variable('');
+export const playlistName: Variable<string> = new Variable('');
 
 // These playlists match with the folder names in ~/Music/
-const playlists = ['Study', 'Focus', 'Synthwave', 'SynthAmbient', 'Ambient'];
+const playlists =      ['Study',  'Focus',  'Synthwave', 'SynthAmbient', 'Ambient'];
+const playlistColors = ['E2891B', '47A2EC', 'BF4CE0',    '8632D4',       '4870EB']
 
 export const updTrack = (direction: musicAction) => {
     exec('mpc pause'); // Pause to prevent bugs
@@ -61,3 +62,22 @@ export const initMedia = () => {
     exec(`mpc add ${playlistName.get()}/`);
     execAsync('mpc shuffle');
 }
+
+
+export const Media = () =>
+    <button
+        cssClasses={['media']} // TODO change occurances of double-quotes to single quotes inside all widget properties (such as cssClasses)
+        hexpand
+        onButtonPressed={() => playPause()}
+        onScroll={(_, __, y) => execAsync('mpc volume ' + ((y < 0) ? '+5' : '-5'))}
+        setup={() =>
+            playlistName.subscribe((w) =>
+                App.apply_css(`#bar .media { background-color: #${playlistColors[playlists.indexOf(w)]}; }`) // TODO add blur to make this look good like the launcher
+            )
+        }
+        cursor={Gdk.Cursor.new_from_name('pointer', null)}
+    >
+        <image iconName={bind(isPlaying).as(
+            (v) => (v) ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic')
+        }/>
+    </button>

@@ -2,7 +2,7 @@ import { App, Gdk } from 'astal/gtk4';
 import { bind } from 'astal';
 import { DND } from '../../notifications/notifications';
 import Bluetooth from 'gi://AstalBluetooth';
-import Wp from 'gi://AstalWp'
+import Wp from 'gi://AstalWp';
 import Battery from 'gi://AstalBattery';
 
 const bluetooth = Bluetooth.get_default()

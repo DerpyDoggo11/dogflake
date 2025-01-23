@@ -1,6 +1,6 @@
 import { bind } from 'astal';
 import { Gdk } from 'astal/gtk4';
-import MprisService from 'gi://AstalMpris'
+import MprisService from 'gi://AstalMpris';
 
 const mpris = MprisService.get_default();
 
