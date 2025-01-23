@@ -13,12 +13,12 @@ export const Time = () =>
       App.get_window("quickSettings")?.hide();
       App.toggle_window("calendar");
     }} 
-    cssClasses={["time", "timeBtn"]}
+    cssClasses={['time', 'timeBtn']}
     cursor={Gdk.Cursor.new_from_name('pointer', null)}
   >
     <box vertical hexpand>
-      <label cssClasses={["date"]} label={date}/>
-      <label cssClasses={["time"]} label={time()}/>
-      <label cssClasses={["day"]} label={day}/>
+      <label cssClasses={['date']} label={date}/>
+      <label cssClasses={['time']} label={time()}/>
+      <label cssClasses={['day']} label={day}/>
     </box>
   </button>

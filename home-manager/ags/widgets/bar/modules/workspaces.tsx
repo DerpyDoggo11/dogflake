@@ -6,7 +6,7 @@ const hyprland = AstalHyprland.get_default();
 export const Workspaces = () =>
   <box 
     vertical
-    cssClasses={["workspaceList"]}
+    cssClasses={['workspaceList']}
     onScroll={(_, __, y) => hyprland.dispatch('workspace', (y > 0) ? '+1' : '-1')}
   >
     {[...Array(8).keys()].map((id) => id + 1).map((id) =>

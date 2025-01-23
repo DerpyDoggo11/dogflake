@@ -10,7 +10,7 @@ const screenshotDir = '/home/alec/Pictures/Screenshots';
 
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S');
 
-const isRec: Variable<Boolean> = new Variable(false);
+const isRec: Variable<boolean> = new Variable(false);
 const recTimer: Variable<number> = new Variable(0);
 
 let rec: AstalIO.Process | null = null;
@@ -22,7 +22,7 @@ export const RecordingIndicator = () =>
 		hexpand
 		visible={bind(isRec).as(Boolean)}
 		halign={Gtk.Align.CENTER}
-		cssClasses={["recIndicator"]}
+		cssClasses={['recIndicator']}
 	>
 		<image iconName="media-record-symbolic"/>
 		<label label={bind(recTimer).as((t) => t + "s")}/>

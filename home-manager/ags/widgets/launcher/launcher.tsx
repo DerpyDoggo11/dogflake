@@ -10,7 +10,6 @@ const hide = () => App.toggle_window("launcher");
 
 const AppBtn = ({ app }: { app: Apps.Application }) =>
     <button
-        cssClasses={["AppBtn"]}
         onKeyPressed={(_, key) => {
             if (key == Gdk.KEY_Return) {
                 app.launch(); 
@@ -22,12 +21,12 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
             <image iconName={app.iconName}/>
             <box valign={Gtk.Align.CENTER} vertical>
                 <label
-                    cssClasses={["name"]}
+                    cssClasses={['name']}
                     xalign={0}
                     label={app.name}
                 />
                 {app.description && <label
-                    cssClasses={["description"]}
+                    cssClasses={['description']}
                     wrap
                     maxWidthChars={1} // Literally any value forces wrap for some reason
                     xalign={0}
@@ -52,10 +51,10 @@ export const launcher = () =>
         }
     >
         <box heightRequest={700}> {/* Allocate enough height to prevent resizing bug */}
-            <box widthRequest={500} cssClasses={["launcher"]} vertical valign={Gtk.Align.START}>
+            <box widthRequest={500} cssClasses={['launcher']} vertical valign={Gtk.Align.START}>
                 <overlay>
                     <box
-                        cssClasses={["searchBg"]}
+                        cssClasses={['searchBg']}
                         setup={() =>
                             playlistName.subscribe((w) =>
                                 App.apply_css(`.searchBg { background-image: url("file:///home/alec/Projects/flake/home-manager/wallpapers/${w}.jpg"); }`)

@@ -7,7 +7,7 @@ const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 let dontShow = true;
 let count = 0;
 const icon: Variable<string> = new Variable('');
-const val: Variable<Number> = new Variable(0);
+const val: Variable<number> = new Variable(0);
 
 timeout(1000, () => dontShow = false);
 
@@ -27,13 +27,13 @@ export const OSD = () =>
             });
         }}
     >
-        <box cssClasses={["osd"]}>
+        <box cssClasses={['osd']}>
             <image iconName={bind(icon)}/>
             <levelbar value={bind(val).as(Number)} widthRequest={400}/>
         </box>
     </window>
 
-const OSDChange = (type: string, value: Number, osd: Gtk.Window) => {
+const OSDChange = (type: string, value: number, osd: Gtk.Window) => {
     if (dontShow)
         return;
 

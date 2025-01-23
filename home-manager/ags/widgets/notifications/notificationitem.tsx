@@ -7,29 +7,29 @@ const { START, CENTER, END } = Gtk.Align
 const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%H:%M")!;
 
 export const notificationItem = (n: Notifd.Notification) =>
-    <box vertical cssClasses={["notification"]}>
-        <box cssClasses={["header"]}>
+    <box vertical cssClasses={['notification']}>
+        <box cssClasses={['header']}>
             {(n.appIcon || n.desktopEntry) && <image
-                cssClasses={["app-icon"]}
+                cssClasses={['app-icon']}
                 iconName={n.appIcon || n.desktopEntry}
             />}
             <label
-                cssClasses={["app-name"]}
+                cssClasses={['app-name']}
                 halign={START}
                 ellipsize={Pango.EllipsizeMode.END}
-                label={n.appName || "Unknown"}
+                label={n.appName || 'Unknown'}
             />
             <label
-                cssClasses={["time"]}
+                cssClasses={['time']}
                 hexpand
                 halign={END}
                 label={time(n.time)}
             />
         </box>
-        <box cssClasses={["content"]}>
+        <box cssClasses={['content']}>
             <box vertical>
                 <label
-                    cssClasses={["summary"]}
+                    cssClasses={['summary']}
                     halign={START}
                     wrap
                     xalign={0}
@@ -40,16 +40,16 @@ export const notificationItem = (n: Notifd.Notification) =>
                     file={n.image}
                     heightRequest={100}
                     widthRequest={100}
-                    cssClasses={["image"]}
+                    cssClasses={['image']}
                 />}
                 {n.body && <label
-                    cssClasses={["body"]}
+                    cssClasses={['body']}
                     wrap
                     xalign={0}
                     label={n.body}
                     maxWidthChars={1} // Literally any value forces wrap for some reason
                 />}
-                {n.get_actions().length > 0 && <box cssClasses={["actions"]} spacing={5}>
+                {n.get_actions().length > 0 && <box cssClasses={['actions']} spacing={5}>
                     {n.get_actions().map(({ label, id }) =>
                         <button
                             hexpand

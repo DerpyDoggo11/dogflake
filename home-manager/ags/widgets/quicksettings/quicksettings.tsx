@@ -21,7 +21,7 @@ export const quickSettings = () =>
         application={App}
         visible={false}
     >
-        <box widthRequest={400} cssClasses={["quickSettings"]} vertical>
+        <box widthRequest={400} cssClasses={['quickSettings']} vertical>
             <box marginBottom={5}>
                 <box vertical>
                     <VolumeSlider/>
