@@ -5,7 +5,7 @@
 
       # Quick app access
       "Super, return, exec, foot" # Terminal
-      "Super, E, exec, librewolf" # Browser
+      "Super, E, exec, microsoft-edge" # Browser
 
       # Desktop shell control
       "Super, Period, exec, astal -t emojiPicker" # Emoji Picker

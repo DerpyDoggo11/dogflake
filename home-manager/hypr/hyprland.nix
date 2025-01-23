@@ -108,7 +108,7 @@
                 "renderunfocused,title:(Minecraft 1)(.*)$" # Play Minecraft sounds even when not focused
 
                 # Window organization
-                "workspace 3,class:^librewolf$" # Firefox on Workspace 3
+                "workspace 3,class:^microsoft-edge$" # Edge on Workspace 3
                 "workspace 4,class:^teams-for-linux$" # Teams on Workspace 4
                 "workspace 6,class:thunderbird" # Thunderbird on Workspace 6
                 
@@ -138,7 +138,7 @@
                 "mpd" # Daemon for mpc player
 
                 # Autostart apps
-                "[workspace 3 silent] librewolf"
+                "[workspace 3 silent] microsoft-edge"
                 "[workspace 4 silent] teams-for-linux"
                 "[workspace 6 silent] thunderbird"
             ];

@@ -30,6 +30,15 @@
     amdgpu.opencl.enable = true;
   };
 
+  # Micro:bit WebUSB support
+  # Get failed device ID from chrome://device-log
+  # Run sudo chmod a+rwx -R /dev/bus/usb/007/005 (replace device ID)
+  #services.udev.extraRules = ''
+  #  SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", MODE="0664", GROUP="plugdev"
+  #'';
+  # For arduino & micro:bit development
+  users.users.alec.extraGroups = [ "dialout" ]; # "plugdev"
+
   services = {
     upower.enable = true; # Battery level support (used by astal shell)
     power-profiles-daemon.enable = false; # No power-profiles!

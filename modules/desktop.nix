@@ -40,11 +40,11 @@
     })
 
     # Normal user apps
-    vscodium # Fork of VSCode,,
+    vscodium # Fork of VSCode
     discord # Voice & video chat app
     libsForQt5.kdenlive # Video editor
     lunar-client # PvP Minecraft client
-    microsoft-edge # Chromium browser for better development and WebUSB support
+    microsoft-edge # Chromium browser
     blockbench-electron # Minecraft 3D modeling app
     jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email & IRC client
@@ -166,9 +166,6 @@
     };
     xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5
   };
-
-  # For arduino development
-  users.users.alec.extraGroups = [ "dialout" ];
   
   # Bluetooth support
   hardware.bluetooth.enable = true;
