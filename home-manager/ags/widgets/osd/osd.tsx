@@ -9,9 +9,9 @@ let count = 0;
 const icon: Variable<string> = new Variable('');
 const val: Variable<number> = new Variable(0);
 
-timeout(1000, () => dontShow = false);
+timeout(3000, () => dontShow = false);
 
-export const OSD = () =>
+export const osd = () =>
     <window
         name="osd"
         anchor={Astal.WindowAnchor.BOTTOM}
@@ -19,11 +19,11 @@ export const OSD = () =>
         visible={false}
         setup={(self) => {
             brightness.subscribe((value) =>
-                OSDChange('brightness', value, self)
+                osdChange('brightness', value, self)
             );
         
             Variable.derive([bind(speaker, 'volume'), bind(speaker, 'mute')], (v) => {
-                OSDChange('vol', v, self);
+                osdChange('vol', v, self);
             });
         }}
     >
@@ -33,7 +33,7 @@ export const OSD = () =>
         </box>
     </window>
 
-const OSDChange = (type: string, value: number, osd: Gtk.Window) => {
+const osdChange = (type: string, value: number, osd: Gtk.Window) => {
     if (dontShow)
         return;
 
@@ -42,7 +42,7 @@ const OSDChange = (type: string, value: number, osd: Gtk.Window) => {
     osd.visible = true;
 
     count++;
-    timeout(3000, () => { // 3 second hide time
+    timeout(2000, () => { // 2 second hide time
         count--;
 
         if (count === 0)

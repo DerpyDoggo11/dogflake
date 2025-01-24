@@ -54,7 +54,7 @@ export const notificationItem = (n: Notifd.Notification) =>
                         <button
                             hexpand
                             cursor={Gdk.Cursor.new_from_name('pointer', null)}
-                            onButtonPressed={() => { n.invoke(id); n.dismiss(); }}
+                            onButtonPressed={() => { n.invoke(id); n.dismiss(); }} // TODO find work-around for null pointer error
                         >
                             <label label={label} halign={CENTER}/>
                         </button>

@@ -9,15 +9,15 @@ import powermenuStyle from './widgets/powermenu/powermenu.css';
 import { App, Gtk } from 'astal/gtk4';
 import { GLib, exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
-import { TopLeft, TopRight, BottomLeft, BottomRight } from './widgets/corners';
+import { topLeft, topRight, bottomLeft, bottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker';
-import { Notifications, clearOldestNotification } from './widgets/notifications/notifications';
+import { notifications, clearOldestNotification } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './lib/notifySend';
 import { screenshot, toggleRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
-import { OSD } from './widgets/osd/osd';
+import { osd } from './widgets/osd/osd';
 import { powermenu } from './widgets/powermenu/powermenu';
 import Hyprland from 'gi://AstalHyprland?version=0.1';
 const hypr = Hyprland.get_default();
@@ -33,10 +33,10 @@ const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 // Per-monitor widgets
 const widgets = (monitor: number) => [
     Bar(monitor),
-    TopLeft(monitor),
-    TopRight(monitor),
-    BottomLeft(monitor),
-    BottomRight(monitor)
+    topLeft(monitor),
+    topRight(monitor),
+    bottomLeft(monitor),
+    bottomRight(monitor)
 ];
 
 App.start({
@@ -48,12 +48,12 @@ App.start({
         emojiPicker();
         launcher();
         quickSettings();
-        OSD();
-        reminders();
+        osd();
         powermenu();
-        Notifications();
+        notifications();
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
         initMedia(); // Mpd player
+        reminders();
 
         // Monitor reactivity
         hypr.connect('monitor-added', (_, monitor) =>
