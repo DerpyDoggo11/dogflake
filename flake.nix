@@ -63,15 +63,14 @@
       };
 
       # Raspberry Pi
-      /*"alecpi" = nixpkgs.lib.nixosSystem {
+      "alecpi" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/alecpi/default.nix
-          ./hosts/common.nix
           home-manager.nixosModules.home-manager
         ];
-      };*/
+      };
     };
   };
 }
