@@ -43,7 +43,6 @@
     vscodium # Fork of VSCode
     discord # Voice & video chat app
     libsForQt5.kdenlive # Video editor
-    lunar-client # PvP Minecraft client
     microsoft-edge # Chromium browser
     blockbench-electron # Minecraft 3D modeling app
     jetbrains.idea-community # Jetbrains IDEA

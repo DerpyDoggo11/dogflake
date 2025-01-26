@@ -44,15 +44,15 @@ App.start({
     main() {
         hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 
+        notifications();
+        launcher();
+        monitorBrightness(); // Start brightness monitor for OSD subscribbable
+        initMedia(); // Mpd player
         calendar();
         emojiPicker();
-        launcher();
         quickSettings();
         osd();
         powermenu();
-        notifications();
-        monitorBrightness(); // Start brightness monitor for OSD subscribbable
-        initMedia(); // Mpd player
         reminders();
 
         // Monitor reactivity
