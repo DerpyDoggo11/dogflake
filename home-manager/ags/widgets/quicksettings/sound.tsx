@@ -18,12 +18,12 @@ export const VolumeSlider = () =>
     </box>
 
 const nameSubstitute = (name: string) => {
-	if (!name) return '' // Fix undefined bug?
+	if (!name) return '';
 	
-	if (name.includes('Family 17h/19h HD Audio Controller')) {
-		return String(name.split(' ').slice(5, 6));
+	if (name.includes('HD Audio Controller')) {
+		return String(name.split(' ').pop()); // Returns 'Speaker' or 'Headphones'
 	} else if (name.includes('Rembrandt Radeon High Definition Audio Controller')) {
-		return "Monitor Output"; // Laptop connected to monitor w/ speaker
+		return "Monitor Output"; // Monitor has a speaker
 	};
 	
 	return name;

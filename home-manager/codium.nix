@@ -33,6 +33,7 @@
             "git.confirmSync" = false;
             "git.autofetch" = true;
             "workbench.startupEditor" = "fish";
+            "editor.wordWrap" = "on";
 
             "terminal.integrated.profiles.linux" = {
                 fish = {
