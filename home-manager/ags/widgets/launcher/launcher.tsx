@@ -16,6 +16,7 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
                 hide();
             }
         }}
+        onClicked={() => { app.launch(); hide(); }}
     >
         <box>
             <image iconName={app.iconName}/>

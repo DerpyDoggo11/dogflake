@@ -39,9 +39,7 @@ export const SinkSelector = () =>
 			radioItem.set_action_and_target_value('speakers.radio', GLib.Variant.new_string(speaker.description));
 			menu.append_item(radioItem);
 		})
-		
-		const actionGroup = new Gio.SimpleActionGroup();
-	
+
 		const radioAction = Gio.SimpleAction.new_stateful('radio', new GLib.VariantType('s'), GLib.Variant.new_string('speakers'))
 		radioAction.activate(GLib.Variant.new_string(String(audio.get_default_speaker()?.description)))
 		radioAction.connect("notify::state", (action: Gio.Action) => {
@@ -53,14 +51,15 @@ export const SinkSelector = () =>
 
 		speaker.connect('notify', (source) => 
 			(source.description) && (source.isDefault) && radioAction.set_state(GLib.Variant.new_string(source.description)
-		))
-		actionGroup.add_action(radioAction)
+		));
+		const actionGroup = new Gio.SimpleActionGroup();
+		actionGroup.add_action(radioAction);
 	
 		const button = <menubutton 
-			menu_model={menu}
+			menuModel={menu}
 			label="Select Audio Output"
 			cursor={Gdk.Cursor.new_from_name('pointer', null)}
-		/>
-		button.insert_action_group('speakers', actionGroup)
+		/>;
+		button.insert_action_group('speakers', actionGroup);
 		return button;
 	})
