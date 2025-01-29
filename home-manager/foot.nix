@@ -1,4 +1,3 @@
-# Foot terminal configuration
 {
   programs.foot = {
     enable = true;

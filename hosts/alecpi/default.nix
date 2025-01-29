@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix # Hardware-specific settings
     ../common.nix

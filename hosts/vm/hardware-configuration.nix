@@ -1,10 +1,9 @@
-{ lib, modulesPath, pkgs, ... }:
-
-{
+{ lib, modulesPath, pkgs, ... }: {
   imports = [ 
     (modulesPath + "/profiles/qemu-guest.nix")
     ../common.nix
   ];
+  
   networking.hostName = "vm"; # Hostname
 
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];

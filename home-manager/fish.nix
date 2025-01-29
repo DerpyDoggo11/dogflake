@@ -1,4 +1,3 @@
-# Fish terminal
 {
 	programs.fish = {
 		enable = true;

@@ -1,6 +1,4 @@
-{ inputs, pkgs, ... }:
-
-{
+{ inputs, pkgs, ... }: {
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
@@ -53,7 +51,13 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     spotdl # Download Spotify playlists
-    prismlauncher # Minecraft launcher
+
+    # Wayland MC w/ key modifiers patch
+    (prismlauncher.override {
+      glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {
+        patches = [ ../overlays/glfw-key-modifiers.patch ];
+      });
+    })
 
     # Global scripts
     (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
