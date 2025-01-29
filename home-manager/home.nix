@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     ./hypr/hyprland.nix
     ./hypr/keybinds.nix
@@ -69,50 +69,24 @@
     userDirs = {
       enable = true; # Allows home-manager to manage & create user dirs
       createDirectories = true; # Auto-creates all directories
-      extraConfig.XDG_PROJECTS_DIR = "${config.home.homeDirectory}/Projects";
-      extraConfig.XDG_CAPTURES_DIR = "${config.home.homeDirectory}/Videos/Captures";
+      extraConfig.XDG_PROJECTS_DIR = "/home/alec/Projects";
+      extraConfig.XDG_CAPTURES_DIR = "/home/alec/Videos/Captures";
+      extraConfig.XDG_MODELS_DIR = "/home/alec/Models";
     };
   };
 
-  programs = {
-    bash = { # Custom tty colors
-      enable = false;
-      bashrcExtra = ''
-          if [ "$TERM" = "linux" ]; then
-              echo -en "\e]P0222222" # Black
-              echo -en "\e]P8222222" # Dark grey
-              echo -en "\e]P1803232" # Dark red
-              echo -en "\e]P9982b2b" # Red
-              echo -en "\e]P25b762f" # Dark green
-              echo -en "\e]PA89b83f" # Green
-              echo -en "\e]P3aa9943" # Brown
-              echo -en "\e]PBefef60" # Yellow
-              echo -en "\e]P4324c80" # Dark blue
-              echo -en "\e]PC2b4f98" # Blue
-              echo -en "\e]P5706c9a" # Dark magenta
-              echo -en "\e]PD826ab1" # Magenta
-              echo -en "\e]P692b19e" # Darkcyan
-              echo -en "\e]PEa1cdcd" # Cyan
-              echo -en "\e]P7ffffff" # Light grey
-              echo -en "\e]PFdedede" # White
-              clear
-          fi
-      '';
-    };
-
-    # For pmOS to optimize local connection
-    ssh = {
-      enable = true;
-      extraConfig = ''
-        Host 172.16.42.1 pmos
-          HostName 172.16.42.1
-          User user
-          StrictHostKeyChecking no
-          UserKnownHostsFile=/dev/null
-          ConnectTimeout 5
-          ServerAliveInterval 1
-          ServerAliveCountMax 5
-      '';
-    };
+  # For pmOS to optimize local connection
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host 172.16.42.1 pmos
+        HostName 172.16.42.1
+        User user
+        StrictHostKeyChecking no
+        UserKnownHostsFile=/dev/null
+        ConnectTimeout 5
+        ServerAliveInterval 1
+        ServerAliveCountMax 5
+    '';
   };
 }

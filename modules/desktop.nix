@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, makeDesktopItem, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
@@ -82,6 +82,7 @@
         push.autoSetupRemote = true;
       };
     };
+    kdeconnect.enable = true; # Device integration
   };
 
   # Keyboard layout & language (with Chinese support)

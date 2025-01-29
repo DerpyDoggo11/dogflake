@@ -1,8 +1,8 @@
-{ config, ...}: {
+{
   services.mpd = {
     enable = true;
-    musicDirectory = "${config.home.homeDirectory}/Music";
-    playlistDirectory = "${config.home.homeDirectory}/Music";
+    musicDirectory = "/home/alec/Music";
+    playlistDirectory = "/home/alec/Music";
 
     # Audio output declaration is required for volume control
     extraConfig = ''

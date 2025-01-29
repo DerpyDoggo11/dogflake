@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -6,8 +6,8 @@
     ../common.nix
   ];
 
-  environment.systemPackages = [
-    pkgs.git
+  environment.systemPackages = with pkgs; [
+    git
   ];
 
   networking.hostName = "alecpi"; # Hostname

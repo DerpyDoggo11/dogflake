@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }: {
     gtk = {
         enable = true;
         gtk3.bookmarks = [
@@ -6,6 +6,7 @@
             "file:///home/alec/Downloads"
             "file:///home/alec/Documents"
             "file:///home/alec/Music"
+            "file:///home/alec/Models"
             "file:///home/alec/Pictures"
             "file:///home/alec/Projects"
             "file:///home/alec/Videos"

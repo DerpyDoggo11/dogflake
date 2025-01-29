@@ -1,4 +1,4 @@
-{ lib, inputs, config, pkgs, modulesPath, ... }: {
+{ lib, pkgs, ... }: {
   users.users.alec = { # Default user
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "video" ];

@@ -1,5 +1,5 @@
 # Fish terminal
-{ pkgs, ...}: {
+{
 	programs.fish = {
 		enable = true;
 		generateCompletions = false; # Fix build error
