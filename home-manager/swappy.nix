@@ -6,7 +6,7 @@
     show_panel=false
     line_size=10
     text_size=20
-    text_font=Iosevka
+    text_font=Sora
     paint_mode=brush
     early_exit=true
     fill_shape=false

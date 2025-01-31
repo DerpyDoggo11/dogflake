@@ -1,26 +1,8 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    # Icon packs
-    morewaita-icon-theme
-    icon-library
-    font-awesome # For Swappy
-
-    gsettings-desktop-schemas
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-wlr
-    adwaita-icon-theme # Icon theme
-    gnome-bluetooth # Bluetooth service
-  ];
-
-  # Enable custom fonts
-  fonts.fontconfig.enable = true;
+  # Custom fonts
   fonts.packages = with pkgs; [ 
-    corefonts
     iosevka # Best coding font
-    minecraftia # Awesome Minecraft font
-    morewaita-icon-theme
-    font-awesome
+    font-awesome # For swappy
     wqy_zenhei # Chinese font for generally cleaner chars
   ];
   
@@ -38,8 +20,6 @@
 
   # Set all Electron apps to use Wayland by default 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
-
   security.polkit.enable = true;
   
   services = {

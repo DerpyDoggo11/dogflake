@@ -18,6 +18,7 @@
     swappy # Quick screenshot editor
     wl-clipboard # Wayland clipboard utils
     celluloid # Fast, simple GTK video player using mpv
+    adwaita-icon-theme # Astal icons
     gnome-text-editor # Clean, tabbed, GTK text editor
     gthumb # Image viewer & lightweight editor
     amberol # Lightweight GTK music player
@@ -51,6 +52,7 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     spotdl # Download Spotify playlists
+    plasticity # CAD modeling software
 
     # Wayland MC w/ key modifiers patch
     (prismlauncher.override {
