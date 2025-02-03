@@ -21,7 +21,6 @@
     username = "alec";
     homeDirectory = "/home/alec";
 
-
     # Symlink all wallpapers
     file."wallpapers" = {
       target = "./wallpapers";

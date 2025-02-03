@@ -23,7 +23,7 @@
   security.polkit.enable = true;
   
   services = {
-    devmon.enable = true; # Automatically mounts/unmounts attached drives
+    devmon.enable = true; # Automatically mounts/unmounts drives
     udisks2.enable = true; # For getting info about drives
     gnome.gnome-keyring.enable = true; # TODO learn how to properly set up keyring & polkit
     greetd = {

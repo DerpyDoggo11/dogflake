@@ -29,7 +29,6 @@
   # Enable SSH support
   services.openssh = {
     enable = true;
-    banner = "Alec's Raspberry Pi - development connections with permission only";
     startWhenNeeded = true;
   };
 }

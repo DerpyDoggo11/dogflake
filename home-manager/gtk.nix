@@ -34,7 +34,7 @@
     dconf = {
         enable = true;
 
-        # Force dark mode on all apps - including Edge
+        # Force dark mode on all apps
         settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
     };
 }

@@ -1,8 +1,6 @@
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "SuperShift, R, exec, astal -q || true && desktop-shell" # Force restart ags (TODO remove me - for debugging only)
-
       # Quick app access
       "Super, return, exec, foot" # Terminal
       "Super, E, exec, microsoft-edge" # Browser
