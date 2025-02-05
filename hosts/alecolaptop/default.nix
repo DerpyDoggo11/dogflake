@@ -6,16 +6,13 @@
 
   networking.hostName = "alecolaptop"; # Hostname
   
-  # Bootloader settings (AMD GPU support)
+  # Bootloader settings (w/ AMD GPU support)
   boot.initrd = {
     kernelModules = [ "amdgpu" ];
     includeDefaultModules = false;
   };
 
-  hardware = { # OpenCL drivers for better hardware acceleration
-    graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
-    amdgpu.opencl.enable = true;
-  };
+  users.users.alec.extraGroups = [ "dialout" ]; # Arduino development
 
   services = {
     upower.enable = true; # For getting battery level (used by astal shell)

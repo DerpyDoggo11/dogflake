@@ -8,9 +8,9 @@
   boot = {
     loader = {
       systemd-boot = {
-        enable = lib.mkDefault true; # VMs ignore this option
+        enable = lib.mkDefault true; # VM ignore this option
         configurationLimit = 3; # Save space in the boot partition
-        editor = false; # As recommended by the Nix option description
+        editor = false;
       };
       efi.canTouchEfiVariables = true;
       timeout = 0; # Hold down space on boot to access menu
@@ -43,13 +43,7 @@
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ]; # Optimize SSD trim
 
   # Disable all documentation
-  documentation = {
-    enable = false;
-    doc.enable = false;
-    info.enable = false;
-    man.enable = false;
-    nixos.enable = false;
-    man.man-db.enable = false;
+  documentation.enable = false;
   };
 
   environment.defaultPackages = []; # Remove unnecessary default packages

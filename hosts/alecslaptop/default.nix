@@ -16,7 +16,7 @@
   boot = {
     # Sea Islands Radeon support for Vulkan
     kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
-    
+
     initrd = { # AMD GPU support
       kernelModules = [ "amdgpu" ];
       includeDefaultModules = false;

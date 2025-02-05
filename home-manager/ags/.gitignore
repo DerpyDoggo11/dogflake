@@ -2,6 +2,7 @@
 
 @girs/
 node_modules/
+package-lock.json
 
 # Package.json contains a pointer to the Nix store and therefore should not be commited
 package.json
