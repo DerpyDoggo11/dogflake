@@ -31,14 +31,13 @@
 
   # Not really hardware-specific but enable spice agent for VM only
   services.spice-vdagentd.enable = true;
-  systemd.user.services.spice-vdagent-client = {
-    description = "spice-vdagent client";
-    wantedBy = [ "graphical-session.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.spice-vdagent}/bin/spice-vdagent -x";
-      Restart = "on-failure";
-      RestartSec = "5";
-    };
-  };
-  systemd.user.services.spice-vdagent-client.enable = true;
+  #systemd.user.services.spice-vdagent-client = {
+  #  description = "spice-vdagent client";
+  #  wantedBy = [ "graphical-session.target" ];
+  #  serviceConfig = {
+  #    ExecStart = "${pkgs.spice-vdagent}/bin/spice-vdagent -x";
+  #    Restart = "on-failure";
+  #    RestartSec = "5";
+  #  };
+  #};
 }

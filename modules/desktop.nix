@@ -31,13 +31,6 @@
     fish # Better shell
     starship # Fish prompt theme
 
-    # Theme in hm-managed gtk will not apply - so add it here
-    (pkgs.graphite-gtk-theme.override {
-      tweaks = [ "nord" ];
-      themeVariants = [ "default" ];
-      colorVariants = [ "dark" ];
-    })
-
     # Normal user apps
     vscodium # Fork of VSCode
     discord # Voice & video chat app
