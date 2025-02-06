@@ -8,7 +8,6 @@
   environment.systemPackages = with pkgs; [
     flashprint # Flashforge 3D printer software
     freecad-wayland # CAD 3D modeling software
-    gnome-boxes # Android wm development
   ];
   
   networking.hostName = "alecslaptop"; # Hostname
@@ -33,10 +32,6 @@
   # Run sudo chmod a+rwx -R /dev/bus/usb/007/005 (replace device ID)
   # For arduino development
   users.users.alec.extraGroups = [ "dialout" ];
-
-  # VM development
-  virtualisation.libvirtd.enable = true;
-
 
   services = {
     upower.enable = true; # Battery level support (used by astal shell)
