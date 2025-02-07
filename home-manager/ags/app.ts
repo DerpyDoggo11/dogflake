@@ -51,10 +51,9 @@ App.start({
             powermenu();
             emojiPicker();
             reminders();
-        }, 1000); // 1 second delay on toggleable widgets to fix single-monitor bug
-
-        monitorBrightness(); // Start brightness monitor for OSD subscribbable
-        initMedia(); // Mpd player
+            initMedia(); // Mpd player
+            monitorBrightness(); // Start brightness monitor for OSD subscribbable
+        }, 1000); // 1 second delay to fix bug on slow devices
 
         // Monitor reactivity
         hypr.connect('monitor-added', (_, monitor) =>
