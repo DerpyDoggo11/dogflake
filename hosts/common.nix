@@ -44,7 +44,6 @@
 
   # Disable all documentation
   documentation.enable = false;
-  };
 
   environment.defaultPackages = []; # Remove unnecessary default packages
   programs.command-not-found.enable = false; # Don't show recommendations when a package is missing
