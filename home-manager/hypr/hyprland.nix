@@ -108,7 +108,6 @@
                 "renderunfocused,title:(Minecraft 1)(.*)$" # Play Minecraft sounds even when not focused
 
                 # Window organization
-                "workspace 3,class:^microsoft-edge$" # Edge on Workspace 3
                 "workspace 4,class:^teams-for-linux$" # Teams on Workspace 4
                 "workspace 6,class:thunderbird" # Thunderbird on Workspace 6
                 
@@ -122,11 +121,7 @@
             # No glitchy shell animations
             layerrule = [ "noanim, gtk-layer-shell" ];
 
-            env = [
-                #"GDK_BACKEND,wayland,x11" # TODO may not be necessary - check shell on hidpi monitor
-                #"GTK_THEME,Graphite-Dark-nord" # Potential fix?
-                
-                # Some legacy apps still use xcursor
+            env = [ # Some legacy apps still use xcursor
                 "XCURSOR_THEME,Bibata-Modern-Ice"
                 "XCURSOR_SIZE,24"
             ];

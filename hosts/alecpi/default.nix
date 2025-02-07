@@ -4,6 +4,7 @@
     ../common.nix
   ];
 
+  # Host-specific packages
   environment.systemPackages = with pkgs; [
     git
   ];

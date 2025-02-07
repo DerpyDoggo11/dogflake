@@ -8,7 +8,7 @@ export const playlistName: Variable<string> = new Variable('');
 
 // These playlists match with the folder names in ~/Music/
 const playlists =      ['Study',  'Focus',  'Synthwave', 'SynthAmbient', 'Ambient'];
-const playlistColors = ['E2891B', '47A2EC', 'BF4CE0',    '8169E5',       '4870EB']
+const playlistColors = ['CC7F1F', '649FEC', 'C363C7',    '8169E5',       '1A47D0']
 
 export const updTrack = (direction: musicAction) => {
     exec('mpc pause'); // Pause to prevent bugs
@@ -65,19 +65,26 @@ export const initMedia = () => {
 
 
 export const Media = () =>
-    <button
-        cssClasses={['media']}
-        hexpand
-        onButtonPressed={() => playPause()}
-        onScroll={(_, __, y) => execAsync('mpc volume ' + ((y < 0) ? '+5' : '-5'))}
-        setup={() =>
-            playlistName.subscribe((w) =>
-                App.apply_css(`#bar .media { background-color: #${playlistColors[playlists.indexOf(w)]}; }`) // TODO add blur to make this look good like the launcher
-            )
-        }
-        cursor={Gdk.Cursor.new_from_name('pointer', null)}
-    >
-        <image iconName={bind(isPlaying).as(
-            (v) => (v) ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic')
-        }/>
-    </button>
+    <box heightRequest={35} marginBottom={1}> 
+        <overlay>
+            <box
+                cssClasses={['mediaBg']}
+                hexpand
+                setup={() =>
+                    playlistName.subscribe((w) =>
+                        App.apply_css(`#bar .mediaBg { background-color: #${playlistColors[playlists.indexOf(w)]}; }`)
+                )}
+            />
+            <button
+                cssClasses={['media']}
+                type="overlay"
+                onButtonPressed={() => playPause()}
+                onScroll={(_, __, y) => execAsync('mpc volume ' + ((y < 0) ? '+5' : '-5'))}
+                cursor={Gdk.Cursor.new_from_name('pointer', null)}
+            >
+                <image iconName={bind(isPlaying).as(
+                    (v) => (v) ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic')
+                }/>
+            </button>
+        </overlay>
+    </box>

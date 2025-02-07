@@ -25,8 +25,6 @@ const hypr = Hyprland.get_default();
 import { monitorBrightness } from './services/brightness';
 import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaplayer';
 
-// Temporary app launcher fix (already fixed upstream)
-GLib.setenv("LD_PRELOAD", "", true)
 
 const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 
@@ -44,17 +42,19 @@ App.start({
     main() {
         hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 
-        hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, [
-            notifications(),
-            launcher(),
-            calendar(),
-            quickSettings(),
-            osd(),
-            powermenu()
-        ]));
+        setTimeout(() => {
+            notifications();
+            launcher();
+            calendar();
+            quickSettings();
+            osd();
+            powermenu();
+            emojiPicker();
+            reminders();
+        }, 1000); // 1 second delay on toggleable widgets to fix single-monitor bug
+
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
         initMedia(); // Mpd player
-        reminders();
 
         // Monitor reactivity
         hypr.connect('monitor-added', (_, monitor) =>
