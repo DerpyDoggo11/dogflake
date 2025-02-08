@@ -1,4 +1,4 @@
-{
+{ lib, ...}: {
     wayland.windowManager.hyprland = {
         enable = true;
         settings = {
@@ -44,8 +44,8 @@
             };
 
             misc = {
-                vfr = true; # Better power usage
-                vrr = 1; # Always sync to monitor refresh rate, even when not fullscreened
+                vfr = lib.mkDefault true; # Better power usage
+                vrr = lib.mkDefault 1; # Always sync to monitor refresh rate, even when not fullscreened
                 focus_on_activate = true;
                 animate_manual_resizes = false;
                 force_default_wallpaper = 0;

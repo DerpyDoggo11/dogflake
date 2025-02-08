@@ -41,7 +41,7 @@
       };
 
       # Desktop config
-      /*"alecpc" = nixpkgs.lib.nixosSystem {
+      "alecpc" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
@@ -49,7 +49,7 @@
           ./modules/desktop.nix
           home-manager.nixosModules.home-manager
         ];
-      };*/
+      };
 
       # Old laptop config
       "alecolaptop" = nixpkgs.lib.nixosSystem {
