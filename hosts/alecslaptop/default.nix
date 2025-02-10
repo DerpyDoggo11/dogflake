@@ -11,6 +11,9 @@
   ];
   
   networking.hostName = "alecslaptop"; # Hostname
+
+  # TODO add me
+  #home-manager.users.alec.imports = [ ./hm.nix ];
   
   # Bootloader settings
   boot = {

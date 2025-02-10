@@ -14,7 +14,7 @@ import { calendar } from './widgets/calendar';
 import { emojiPicker } from './widgets/emojipicker';
 import { notifications, clearOldestNotification } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
-import { notifySend } from './lib/notifySend';
+import { notifySend } from './services/notifySend';
 import { screenshot, toggleRec } from './services/screen';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
 import { osd } from './widgets/osd/osd';
@@ -24,7 +24,6 @@ const hypr = Hyprland.get_default();
 
 import { monitorBrightness } from './services/brightness';
 import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaplayer';
-
 
 const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 
@@ -52,8 +51,9 @@ App.start({
             emojiPicker();
             reminders();
             initMedia(); // Mpd player
-            monitorBrightness(); // Start brightness monitor for OSD subscribbable
-        }, 1000); // 1 second delay to fix bug on slow devices
+        }, 500); // Delay to fix widgets on slow devices
+
+        monitorBrightness(); // Start brightness monitor for OSD subscribbable
 
         // Monitor reactivity
         hypr.connect('monitor-added', (_, monitor) =>
@@ -126,7 +126,7 @@ const reminders = () => {
 
     (bodyText) && notifySend({
         appName: 'System Cleanup',
-        title: 'Clear Downloads folder',
+        title: 'Clean Downloads folder',
         iconName: 'system-file-manager-symbolic',
         body: bodyText,
         actions: [{

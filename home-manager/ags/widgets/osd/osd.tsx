@@ -18,12 +18,12 @@ export const osd = () =>
         application={App}
         visible={false}
         setup={(self) => {
-            brightness.subscribe((value) =>
-                osdChange('brightness', value, self)
+            brightness.subscribe((v) =>
+                osdChange('display-brightness-symbolic', v, self)
             );
         
             Variable.derive([bind(speaker, 'volume'), bind(speaker, 'mute')], (v) => {
-                osdChange('vol', v, self);
+                osdChange(speaker.volume_icon, v, self);
             });
         }}
     >
@@ -33,11 +33,11 @@ export const osd = () =>
         </box>
     </window>
 
-const osdChange = (type: string, value: number, osd: Gtk.Window) => {
+const osdChange = (iconType: string, value: number, osd: Gtk.Window) => {
     if (dontShow)
         return;
 
-    icon.set((type == 'vol') ? speaker.volume_icon : 'display-brightness-symbolic');
+    icon.set(iconType);
     val.set(value);
     osd.visible = true;
 

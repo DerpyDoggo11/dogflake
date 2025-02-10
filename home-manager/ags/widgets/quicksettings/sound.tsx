@@ -29,8 +29,9 @@ const nameSubstitute = (name: string) => {
 	return name;
 };
 
+// Wrapped in a box to fix LSP error
 export const SinkSelector = () =>
-	bind(audio, 'speakers').as((speakers) => {
+	<box>{bind(audio, 'speakers').as((speakers) => {
 		const menu = new Gio.Menu();
 
 		speakers.forEach((speaker) => {
@@ -59,7 +60,8 @@ export const SinkSelector = () =>
 			menuModel={menu}
 			label="Select Audio Output"
 			cursor={Gdk.Cursor.new_from_name('pointer', null)}
+			hexpand
 		/>;
 		button.insert_action_group('speakers', actionGroup);
 		return button;
-	})
+	})}</box>
