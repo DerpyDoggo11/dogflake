@@ -70,10 +70,13 @@
     border-radius: 5px;
 }
 
-#bar .media { transition: background-color 1s; }
+#bar .media { transition-duration: 0.1s; }
 
 #bar .mediaBg {
-    margin: 5px;
+    margin: 7px;
     filter: blur(5px);
     transition-duration: 0.5s;
 }
+#bar .mediaBg.playing { margin: 4px; }
+#bar .media:hover { outline-offset: -3px; }
+#bar .media:active { outline-offset: -4px; }

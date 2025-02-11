@@ -6,13 +6,13 @@ export const isPlaying: Variable<boolean> = new Variable(false);
 export const playlist: Variable<number> = new Variable(1);
 export const playlistName: Variable<string> = new Variable('');
 
-// These playlists match with the folder names in ~/Music/
+// These playlists match with the folder names in ~/Music
 const playlists =      ['Study',  'Focus',  'Synthwave', 'SynthAmbient', 'Ambient'];
 const playlistColors = ['CC7F1F', '649FEC', 'C363C7',    '8169E5',       '1A47D0']
 
 export const updTrack = (direction: musicAction) => {
-    exec('mpc pause'); // Pause to prevent bugs
-    exec('mpc ' + direction); // Update track
+    exec('mpc pause');
+    exec('mpc ' + direction);
     
     // Start playing again
     execAsync('mpc play');
@@ -39,25 +39,22 @@ export const chngPlaylist = (direction: musicAction) => {
     exec('mpc pause');
     isPlaying.set(false);
 
-    // Update the playlist and playlist names
     playlistName.set(playlists[Number(playlist.get()) - 1]);
-
-    // Change the wallpaper
     execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90`);
 
     // Clear the current cache and add the new playlist
     exec('mpc clear');
     exec(`mpc add ${playlistName.get()}/`);
-    exec('mpc shuffle'); // Shuffle current playlist
-    playPause(); // Start playing song again
+    exec('mpc shuffle');
+    playPause(); // Start playing
 };
 
 export const initMedia = () => {
-    playlistName.set('Study'); // Default playlist
-    execAsync('mpc crossfade 2'); // Set crossfade value
-    execAsync(`swww img /home/alec/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90`);
+    playlistName.set('Study'); // Must set to invoke binds
 
-    // On first start, clear and load new playlist
+    execAsync('mpc crossfade 2');
+    execAsync(`swww img /home/alec/wallpapers/Study.jpg --transition-type grow --transition-fps 90`);
+
     exec('mpc clear');
     exec(`mpc add ${playlistName.get()}/`);
     execAsync('mpc shuffle');
@@ -68,7 +65,7 @@ export const Media = () =>
     <box heightRequest={35} marginBottom={1}> 
         <overlay>
             <box
-                cssClasses={['mediaBg']}
+                cssClasses={bind(isPlaying).as((v) => (v) ? ['playing', 'mediaBg'] : ['mediaBg'])}
                 hexpand
                 setup={() =>
                     playlistName.subscribe((w) =>

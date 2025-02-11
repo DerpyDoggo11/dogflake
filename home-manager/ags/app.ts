@@ -27,6 +27,8 @@ import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediapl
 
 const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 
+GLib.setenv("LD_PRELOAD", "", true)
+
 // Per-monitor widgets
 const widgets = (monitor: number) => [
     Bar(monitor),

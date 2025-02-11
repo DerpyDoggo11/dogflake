@@ -19,7 +19,7 @@ const setKey = (key: number, value: Notifd.Notification) => {
 
 const deleteKey = (key: number) => {
 	map.delete(key);
-	notifiy(true); // Force-delete notification even if DND is enabled
+	notifiy(true); // Force delete notification even if DND is enabled
 };
 	
 export const notifications = () =>
