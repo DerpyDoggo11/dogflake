@@ -7,7 +7,7 @@
   # Packages to only be installed on this host
   environment.systemPackages = with pkgs; [
     flashprint # Flashforge 3D printer
-    plasticity # CAD modeling software (TODO let hm manage Plasticity config)
+    #plasticity # CAD modeling software (TODO let hm manage Plasticity config and uncomment me)
     arduino-ide # Arduino & m:b development  
   ];
   
@@ -32,10 +32,16 @@
     amdgpu.opencl.enable = true;
   };
 
-  # Micro:bit WebUSB support: Get failed device ID from edge://device-log
-  # Run sudo chmod a+rwx -R /dev/bus/usb/007/005 (replace device ID)
-  # For arduino development
-  users.users.alec.extraGroups = [ "dialout" ];
+  # micro:bit workaround
+  services.udev.packages = [
+    (pkgs.writeTextFile {
+      name = "microbit_udev";
+      text = ''
+        SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", MODE="0664", TAG+="uaccess"
+      '';
+      destination = "/etc/udev/rules.d/50-microbit.rules";
+    })
+  ];
 
   services = {
     upower.enable = true; # Battery level support (used by astal shell)

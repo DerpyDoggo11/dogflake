@@ -1,7 +1,7 @@
 { lib, pkgs, ... }: {
   users.users.alec = { # Default user
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "video" ];
+    extraGroups = [ "wheel" "audio" "video" "dialout" ];
   };
 
   # Optimized bootloader settings

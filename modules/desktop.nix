@@ -27,7 +27,7 @@
     file-roller # File manager archive feature part 2
     nodejs_22 # Slow JS runtime
     steam-run # Used for running some games
-    wrangler # Local Workers development
+    #wrangler # Local Workers development TODO uncomment when build fixed upstream
     fish # Better shell
     starship # Fish prompt theme
 

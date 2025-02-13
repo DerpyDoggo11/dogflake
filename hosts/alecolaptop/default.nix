@@ -12,8 +12,6 @@
     includeDefaultModules = false;
   };
 
-  users.users.alec.extraGroups = [ "dialout" ]; # Arduino development
-
   services = {
     upower.enable = true; # For getting battery level (used by astal shell)
     power-profiles-daemon.enable = false; # No power-profiles!
