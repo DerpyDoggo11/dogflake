@@ -7,7 +7,7 @@
   # Packages to only be installed on this host
   environment.systemPackages = with pkgs; [
     flashprint # Flashforge 3D printer
-    #plasticity # CAD modeling software (TODO let hm manage Plasticity config and uncomment me)
+    plasticity # CAD modeling software (TODO let hm manage Plasticity config)
     arduino-ide # Arduino & m:b development  
   ];
   

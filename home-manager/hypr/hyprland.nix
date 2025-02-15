@@ -56,6 +56,7 @@
                 disable_hyprland_qtutils_check = true; # Hide annoying qtutils popup
             };
             binds.scroll_event_delay = 0;
+            ecosystem.no_update_news = true;
 
             decoration = {
                 rounding = 5;
