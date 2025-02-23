@@ -113,10 +113,10 @@
                 "workspace 6,class:thunderbird" # Thunderbird on Workspace 6
                 
                 # No gaps when only window in workspace
-                "bordersize 0, floating:0, onworkspace:w[tv1]"
-                "rounding 0, floating:0, onworkspace:w[tv1]"
-                "bordersize 0, floating:0, onworkspace:f[1]"
-                "rounding 0, floating:0, onworkspace:f[1]"
+                "prop bordersize 0, floating:0, onworkspace:w[tv1]"
+                "prop rounding 0, floating:0, onworkspace:w[tv1]"
+                "prop bordersize 0, floating:0, onworkspace:f[1]"
+                "prop rounding 0, floating:0, onworkspace:f[1]"
             ];
 
             # No glitchy shell animations

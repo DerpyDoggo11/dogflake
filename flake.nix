@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs - always pull from unstable
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "/home/alec/Projects/nixpkgs";
 
     home-manager = { # Manage user home
       url = "github:nix-community/home-manager";

@@ -2,7 +2,6 @@
     gtk = {
         enable = true;
         gtk3.bookmarks = [
-            "file:///home/alec/Desktop"
             "file:///home/alec/Downloads"
             "file:///home/alec/Documents"
             "file:///home/alec/Music"
