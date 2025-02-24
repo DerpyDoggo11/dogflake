@@ -2,6 +2,7 @@
   imports = [ 
     (modulesPath + "/profiles/qemu-guest.nix")
     ../common.nix
+    ../../modules/desktop.nix
   ];
   
   networking.hostName = "vm"; # Hostname

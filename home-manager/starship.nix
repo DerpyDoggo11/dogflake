@@ -10,7 +10,6 @@
         "$directory"
         "[](fg:#769ff0 bg:#394260)"
         "$git_branch"
-        "$git_status"
         "[](fg:#394260 bg:#212736)"
         "$nodejs"
         "$rust"
@@ -36,11 +35,6 @@
         symbol = "";
         style = "bg:#394260";
         format = "[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)";
-      };
-
-      git_status = {
-        style = "bg:#394260";
-        format = "[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)";
       };
 
       nodejs = {

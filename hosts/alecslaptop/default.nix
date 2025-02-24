@@ -2,19 +2,30 @@
   imports = [ 
     ./hardware-configuration.nix
     ../common.nix
+    ../../modules/desktop.nix
+    ../../modules/printing.nix
   ];
+  
+  networking.hostName = "alecslaptop"; # Hostname
 
   # Packages to only be installed on this host
   environment.systemPackages = with pkgs; [
     flashprint # Flashforge 3D printer
     plasticity # CAD modeling software (TODO let hm manage Plasticity config)
     arduino-ide # Arduino & m:b development  
-  ];
-  
-  networking.hostName = "alecslaptop"; # Hostname
 
-  # TODO add me
-  #home-manager.users.alec.imports = [ ./hm.nix ];
+    libsForQt5.kdenlive # Video editor
+    blockbench-electron # Minecraft 3D modeling app
+    thunderbird # Best email & IRC client
+    gimp # GNU image manipulation program
+    teams-for-linux # Unoffical MS Teams client
+    libreoffice # Preview Word documents and Excel sheets offline
+    gnome-sound-recorder # Voice recording app
+  ];
+
+  programs.kdeconnect.enable = true; # Device integration
+
+  home-manager.users.alec.imports = [ ./hm.nix ];
   
   # Bootloader settings
   boot = {

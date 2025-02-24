@@ -9,8 +9,21 @@
       vrr = 0; # Always sync to monitor refresh rate, even when not fullscreened
     };
 
-    cursor.no_hardware_cursors = true; # Nvidia fix
+    cursor = { # Nvidia fix
+      no_hardware_cursors = true;
+      allow_dumb_copy = true;
+    };
 
-    env = [ "LIBVA_DRIVER_NAME,nvidia" ];
+    env = [ 
+      "LIBVA_DRIVER_NAME,nvidia"
+      "GBM_BACKEND,nvidia-drm"
+      "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+      "WLR_NO_HARDWARE_CURSORS=1"
+    ];
+
+    exec-once = [ # Autostart apps
+      "[workspace 3 silent] microsoft-edge"
+      "[workspace 2 silent] discord"
+    ];
   };
 }

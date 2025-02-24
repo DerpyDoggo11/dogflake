@@ -2,6 +2,7 @@
   imports = [ 
     ./hardware-configuration.nix 
     ../common.nix
+    ../../modules/desktop.nix
   ];
 
   networking.hostName = "alecolaptop"; # Hostname

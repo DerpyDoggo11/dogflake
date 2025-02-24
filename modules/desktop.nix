@@ -34,16 +34,8 @@
     # Normal user apps
     vscodium # Fork of VSCode
     discord # Voice & video chat app
-    libsForQt5.kdenlive # Video editor
     microsoft-edge # Chromium browser
-    blockbench-electron # Minecraft 3D modeling app
-    jetbrains.idea-community # Jetbrains IDEA
-    thunderbird # Best email & IRC client
     gnome-system-monitor # Task manager
-    gnome-sound-recorder # Voice recording app
-    gimp # GNU image manipulation program
-    teams-for-linux # Unoffical MS Teams client
-    libreoffice # Preview Word documents and Excel sheets offline
     spotdl # Download Spotify playlists
 
     # Wayland MC w/ key modifiers patch
@@ -80,7 +72,6 @@
         push.autoSetupRemote = true;
       };
     };
-    kdeconnect.enable = true; # Device integration
   };
 
   # Keyboard layout & language (with Chinese support)
@@ -123,26 +114,6 @@
     flatpak.enable = true; # For running Sober (Roblox)
     logrotate.enable = false; # Don't need this
     gvfs.enable = true; # For nemo trash support
-    
-    # Printing support
-    printing = { # CUPS
-      enable = true;
-      drivers = with pkgs; [ hplip ]; # HP
-      listenAddresses = [ "*:631" ];
-      allowFrom = [ "all" ];
-      browsing = true;
-      defaultShared = true;
-      openFirewall = true;
-    };
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-      publish = {
-        enable = true;
-        userServices = true;
-      };
-    };
 
     # Sound support 
     pipewire = {
@@ -152,15 +123,8 @@
       pulse.enable = true;
       wireplumber = {
         enable = true;
-
         # Fix unnecessary power drain issue
-        extraConfig = {
-          "10-disable-camera" = {
-            "wireplumber.profiles" = {
-              main."monitor.libcamera" = "disabled";
-            };
-          };
-        };
+        extraConfig."10-disable-camera"."wireplumber.profiles".main."monitor.libcamera" = "disabled";
       };
     };
     xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5

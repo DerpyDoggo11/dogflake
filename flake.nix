@@ -24,7 +24,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/alecslaptop/default.nix
-          ./modules/desktop.nix
           home-manager.nixosModules.home-manager
         ];
       };
@@ -35,7 +34,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/vm/hardware-configuration.nix
-          ./modules/desktop.nix
           home-manager.nixosModules.home-manager
         ];
       };
@@ -46,7 +44,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/alecpc/default.nix
-          ./modules/desktop.nix
           home-manager.nixosModules.home-manager
         ];
       };
@@ -57,7 +54,6 @@
         specialArgs = { inherit inputs; };
         modules = [ #
           ./hosts/alecolaptop/default.nix
-          ./modules/desktop.nix
           home-manager.nixosModules.home-manager
         ];
       };
