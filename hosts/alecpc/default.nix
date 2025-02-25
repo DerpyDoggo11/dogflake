@@ -26,44 +26,36 @@
     nodejs_22 # Slow JS runtime
     steam-run # Used for running some games
   ];
-  
-  networking.hostName = "alecpc"; # Hostname
-  
-  # Nvidia options
-  hardware.graphics.enable = true;
-  
 
+  networking.hostName = "alecpc"; # Hostname
+
+  # Nvidia options --
+  hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  
-  # Use grub since systemd-boot takes up too much space for my tiny esp partition
+
   boot = {
+    # Use grub since systemd-boot takes up too much space for my tiny esp partition
     loader = {
       systemd-boot.enable = false;
       grub = {
         enable = true;
         configurationLimit = 2; # Save space in the boot partition
-        #efiSupport = true;
         device = "nodev";
       };
     };
-    kernelModules = [ "uinput" "nvidia" ]; #"v4l2loopback"
+
+    # Nvidia kernel support
+    kernelModules = [ "uinput" "nvidia" "v4l2loopback" ];
     initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
     extraModprobeConfig = "options nvidia_drm modeset=1 fbdev=1";
-    
-    #extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   };
 
   hardware.nvidia = {
     modesetting.enable = true;
-
-    # Enable if issues with sleeping
     powerManagement.enable = false;
-
-    # GPU architecture is older than Turing so we set this to false
-    open = false;
-
+    open = false; # GPU architecture is older than Turing so we set this to false
     nvidiaSettings = true;
-
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 }
