@@ -36,19 +36,7 @@
   };
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  # sudo nix-env --delete-generations +1 -p /nix/var/nix/profiles/system
-  # sudo rm -rf /boot/kernels/*
   boot = {
-    # Use grub since systemd-boot takes up too much space for my tiny esp partition
-    loader = {
-      systemd-boot.enable = false;
-      grub = {
-        enable = true;
-        configurationLimit = 2; # Save space in the boot partition
-        device = "nodev";
-      };
-    };
-
     # Nvidia kernel support
     kernelModules = [ "uinput" "nvidia" "v4l2loopback" ];
     initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
