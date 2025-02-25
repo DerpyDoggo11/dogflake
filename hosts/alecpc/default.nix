@@ -33,22 +33,22 @@
   hardware.graphics.enable = true;
   
 
-  #services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
   
-  # Use grub since systemd-boot takes up too much space for nvidia kernel entry
-  boot = { # todo add me?
+  # Use grub since systemd-boot takes up too much space for my tiny esp partition
+  boot = {
     loader = {
       systemd-boot.enable = false;
       grub = {
         enable = true;
         configurationLimit = 2; # Save space in the boot partition
-        efiSupport = true;
+        #efiSupport = true;
         device = "nodev";
       };
     };
-    #kernelModules = [ "uinput" "nvidia" ]; #"v4l2loopback"
-    #initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-    #extraModprobeConfig = "options nvidia_drm modeset=1 fbdev=1";
+    kernelModules = [ "uinput" "nvidia" ]; #"v4l2loopback"
+    initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    extraModprobeConfig = "options nvidia_drm modeset=1 fbdev=1";
     
     #extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   };
