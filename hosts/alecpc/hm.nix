@@ -12,19 +12,18 @@
     # Nvidia fix
     cursor.no_hardware_cursors = true;
 
-    #debug.disable-logs = false;
-
-
     env = [ 
       "LIBVA_DRIVER_NAME,nvidia"
       "GBM_BACKEND,nvidia-drm"
+      "NVD_BACKEND,direct" # For VAAPI
+
+      # may not be necessary - remove if bugs with discord ss
       "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-      "WLR_NO_HARDWARE_CURSORS=1"
     ];
 
-    #exec-once = [ # Autostart apps
-    #  "[workspace 3 silent] microsoft-edge"
-    #  "[workspace 2 silent] discord"
-    #];
+    exec-once = [ # Autostart apps
+      "[workspace 3 silent] microsoft-edge"
+      "[workspace 2 silent] discord"
+    ];
   };
 }

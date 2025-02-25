@@ -2,11 +2,6 @@
     wayland.windowManager.hyprland = {
         enable = true;
         settings = {
-            monitor = [ # https://wiki.hyprland.org/Configuring/Monitors/
-                "        , preferred,     auto,     auto"
-                "HDMI-A-1, 1920x1080@144, auto-left,  auto"
-            ];
-
             input = {
                 # Keyboard settings
                 kb_layout = "us";
@@ -104,7 +99,7 @@
             ];
 
             windowrulev2 = [
-                "float,class:(copyq)$"
+                "float,class:(copyq)$" # TODO remove me
                 "fullscreenstate, -1, 2,title:(Minecraft 1)(.*)$" # Minecraft titlebar fix
                 "renderunfocused,title:(Minecraft 1)(.*)$" # Play Minecraft sounds even when not focused
 
@@ -133,25 +128,9 @@
                 "desktop-shell"
                 "copyq --start-server" # TODO replace with ags
                 "mpd" # Daemon for mpc player
-
-                # Autostart apps
-                "[workspace 3 silent] microsoft-edge"
-                "[workspace 4 silent] teams-for-linux"
-                "[workspace 6 silent] thunderbird"
             ];
 
-            workspace = [
-                # Monitor handling (supports up to two monitors: main screen on left/above, laptop screen on right/bottom)
-                "1, monitor:HDMI-A-1"
-                "2, monitor:HDMI-A-1"
-                "3, monitor:HDMI-A-1"
-                "4, monitor:HDMI-A-1"
-                "5, monitor:DP-1"
-                #"6, monitor:DP-1"
-                #"7, monitor:DP-1"
-                #"8, monitor:DP-1"
-                
-                # No gaps when only window in workspace
+            workspace = [ # No gaps when only window in workspace
                 "w[tv1], gapsout:0, gapsin:0"
                 "f[1], gapsout:0, gapsin:0"
             ];

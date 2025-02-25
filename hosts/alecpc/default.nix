@@ -30,7 +30,10 @@
   networking.hostName = "alecpc"; # Hostname
 
   # Nvidia options --
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+  };
   services.xserver.videoDrivers = [ "nvidia" ];
 
   boot = {
@@ -47,7 +50,9 @@
     # Nvidia kernel support
     kernelModules = [ "uinput" "nvidia" "v4l2loopback" ];
     initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-    extraModprobeConfig = "options nvidia_drm modeset=1 fbdev=1";
+    extraModprobeConfig = ''
+      options nvidia_drm modeset=1 fbdev=1
+    '';
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   };
 
