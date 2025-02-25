@@ -9,7 +9,7 @@
     loader = {
       systemd-boot = {
         enable = lib.mkDefault true; # VM ignore this option
-        configurationLimit = 3; # Save space in the boot partition
+        configurationLimit = 2; # Save space in the boot partition
         editor = false;
       };
       efi.canTouchEfiVariables = true;

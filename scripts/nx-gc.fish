@@ -1,9 +1,9 @@
 #!/usr/bin/env fish
 
-sudo nix-collect-garbage -d --delete-older-than 1d
+sudo nix-collect-garbage -d
 
 # Run without sudo to clear user-collected garbage
-nix-collect-garbage -d --delete-older-than 1d
+nix-collect-garbage -d
 
 sudo nix-store --optimise
 

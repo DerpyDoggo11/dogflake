@@ -1,7 +1,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "HDMI-A-1, 1920x1080@60, auto,  auto"
+      "DP-1, 1920x1080@60, auto,  auto"
     ];
 
     misc = {
@@ -9,10 +9,11 @@
       vrr = 0; # Always sync to monitor refresh rate, even when not fullscreened
     };
 
-    cursor = { # Nvidia fix
-      no_hardware_cursors = true;
-      allow_dumb_copy = true;
-    };
+    # Nvidia fix
+    cursor.no_hardware_cursors = true;
+
+    #debug.disable-logs = false;
+
 
     env = [ 
       "LIBVA_DRIVER_NAME,nvidia"
@@ -21,9 +22,9 @@
       "WLR_NO_HARDWARE_CURSORS=1"
     ];
 
-    exec-once = [ # Autostart apps
-      "[workspace 3 silent] microsoft-edge"
-      "[workspace 2 silent] discord"
-    ];
+    #exec-once = [ # Autostart apps
+    #  "[workspace 3 silent] microsoft-edge"
+    #  "[workspace 2 silent] discord"
+    #];
   };
 }

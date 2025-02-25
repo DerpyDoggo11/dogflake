@@ -21,6 +21,14 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
+
+    # todo clean me up
+    bun # Fast all-in-one JS toolkit 
+    wrangler # Local Workers development
+    jre # For Minecraft - uses the latest stable Java runtime version
+    jdk23 # Java JDK version 23 for compling & running jars
+    nodejs_22 # Slow JS runtime
+    steam-run # Used for running some games
   ];
 
   programs.kdeconnect.enable = true; # Device integration

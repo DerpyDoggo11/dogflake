@@ -2,42 +2,40 @@
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
+
+    # Desktop programs
     foot # Terminal
     libnotify # For ags internal notifications
-    bun # Fast all-in-one JS toolkit 
     mpd # Music daemon for the Ags music player
     mpc # CLI for the Ags music player
     copyq # Clipboard manager (TODO: replace with Ags clipboard system)
     swww # Background manager w/ cool transitions
-    jre # For Minecraft - uses the latest stable Java runtime version
-    jdk23 # Java JDK version 23 for compling & running jars
     brightnessctl # Control laptop brightness
     wl-screenrec # Efficient screen recorder
     grimblast # Screenshotting tool
-    slurp # Screen selection tool for screenshots & screenrecording
+    #slurp # Screen selection tool for screenshots & screenrecording
     swappy # Quick screenshot editor
     wl-clipboard # Wayland clipboard utils
     celluloid # Fast, simple GTK video player using mpv
     adwaita-icon-theme # Astal icons
+    
+    # Desktop applications
     gnome-text-editor # Clean, tabbed, GTK text editor
     gthumb # Image viewer & lightweight editor
     amberol # Lightweight GTK music player
     nemo-with-extensions # Simple file manager
     nemo-fileroller # File manager archive feature
     file-roller # File manager archive feature part 2
-    nodejs_22 # Slow JS runtime
-    steam-run # Used for running some games
-    wrangler # Local Workers development
     fish # Better shell
     starship # Fish prompt theme
-
-    # Normal user apps
+    gnome-system-monitor # Task manager
+    
+    # Non-host-specific programs
     vscodium # Fork of VSCode
     discord # Voice & video chat app
     microsoft-edge # Chromium browser
-    gnome-system-monitor # Task manager
     spotdl # Download Spotify playlists
-
+    
     # Wayland MC w/ key modifiers patch
     (prismlauncher.override {
       glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {
@@ -45,7 +43,7 @@
       });
     })
 
-    # Global scripts
+    # Scripts
     (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
     (writeScriptBin "data-sync" (builtins.readFile ../scripts/data-sync.fish))
     (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
