@@ -13,8 +13,7 @@
     fsType = "ext4";
   };
 
-  # !!! If this file is regenerated, change me to /boot/efi
-  fileSystems."/boot/efi" = {
+  fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/0AF2-1360";
     fsType = "vfat";
   };

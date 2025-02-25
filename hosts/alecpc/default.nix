@@ -36,6 +36,8 @@
   };
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # sudo nix-env --delete-generations +1 -p /nix/var/nix/profiles/system
+  # sudo rm -rf /boot/kernels/*
   boot = {
     # Use grub since systemd-boot takes up too much space for my tiny esp partition
     loader = {
