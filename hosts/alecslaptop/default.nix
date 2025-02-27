@@ -51,17 +51,6 @@
     amdgpu.opencl.enable = true;
   };
 
-  # micro:bit workaround
-  services.udev.packages = [
-    (pkgs.writeTextFile {
-      name = "microbit_udev";
-      text = ''
-        SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", MODE="0664", TAG+="uaccess"
-      '';
-      destination = "/etc/udev/rules.d/50-microbit.rules";
-    })
-  ];
-
   services = {
     upower.enable = true; # Battery level support (used by astal shell)
     power-profiles-daemon.enable = false; # No power-profiles!
@@ -75,5 +64,16 @@
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       };
     };
+
+    # micro:bit workaround
+    udev.packages = [
+      (pkgs.writeTextFile {
+        name = "microbit_udev";
+        text = ''
+          SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", MODE="0664", TAG+="uaccess"
+        '';
+        destination = "/etc/udev/rules.d/50-microbit.rules";
+      })
+    ];
   };
 }

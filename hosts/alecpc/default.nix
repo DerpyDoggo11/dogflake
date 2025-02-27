@@ -38,8 +38,12 @@
 
   boot = {
     # Nvidia kernel support
+    initrd = {
+      kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+      includeDefaultModules = false;
+    };
+    kernelParams = [ "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
     kernelModules = [ "uinput" "nvidia" "v4l2loopback" ];
-    initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
     extraModprobeConfig = ''
       options nvidia_drm modeset=1 fbdev=1
     '';
@@ -49,8 +53,10 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
-    open = false; # GPU architecture is older than Turing so we set this to false
+    open = false; # GPU architecture is older than Turing
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    # Won't boot hyprland on stable - use beta package for now
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 }

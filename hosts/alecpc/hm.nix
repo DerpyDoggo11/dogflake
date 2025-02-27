@@ -15,10 +15,11 @@
     env = [ 
       "LIBVA_DRIVER_NAME,nvidia"
       "GBM_BACKEND,nvidia-drm"
-      "NVD_BACKEND,direct" # For VAAPI
 
       # may not be necessary - remove if bugs with discord ss
       "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+
+      "NVD_BACKEND,direct" # For VAAPI
     ];
 
     exec-once = [ # Autostart apps
