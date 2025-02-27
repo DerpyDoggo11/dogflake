@@ -2,8 +2,8 @@ import { monitorFile, readFileAsync } from 'astal/file';
 import { exec, execAsync } from 'astal/process';
 import { bind, Variable } from 'astal';
 
-const get = (args: string) => Number(exec(`brightnessctl ${args}`));
-const screen = exec(`bash -c "ls -w1 /sys/class/backlight | head -1"`);
+const get = (args: string) => Number(exec('brightnessctl ' + args));
+const screen = exec('bash -c "ls -w1 /sys/class/backlight | head -1"');
 
 const screenMax = get("max");
 export const brightness: Variable<number> = new Variable(get("get") / (screenMax || 1));

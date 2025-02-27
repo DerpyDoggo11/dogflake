@@ -53,7 +53,7 @@ export const initMedia = () => {
     playlistName.set('Study'); // Must set to invoke binds
 
     execAsync('mpc crossfade 2');
-    execAsync(`swww img /home/alec/wallpapers/Study.jpg --transition-type grow --transition-fps 90`);
+    execAsync('swww img /home/alec/wallpapers/Study.jpg --transition-type grow --transition-fps 90');
 
     exec('mpc clear');
     exec(`mpc add ${playlistName.get()}/`);

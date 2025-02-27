@@ -37,6 +37,7 @@
                 preserve_split = true;
                 force_split = 2;
             };
+            debug.disable_logs = false;
 
             misc = {
                 vfr = lib.mkDefault true; # Better power usage

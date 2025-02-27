@@ -39,10 +39,10 @@ export const notifySend = ({
         '--hint=boolean:internal:true', // For internal-only images
         
         // Optional params
-        appName && `--app-name=${escapeShellArg(appName)}`,
-        category && `--category=${escapeShellArg(category)}`,
-        iconName && `--icon=${escapeShellArg(iconName)}`,
-        image && `--hint=string:image-path:${escapeShellArg(image)}`
+        appName && '--app-name=' + escapeShellArg(appName),
+        category && '--category=' + escapeShellArg(category),
+        iconName && '--icon=' + escapeShellArg(iconName),
+        image && '--hint=string:image-path:' + escapeShellArg(image)
     ].concat(
         actions.map(({ id, label }) => `--action=${id}=${escapeShellArg(label)}`),
     ).join(' ');
