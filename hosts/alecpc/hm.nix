@@ -1,24 +1,13 @@
 {
   wayland.windowManager.hyprland.settings = {
-    monitor = [
-      "DP-1, 1920x1080@60, auto, auto"
-    ];
-
-    misc = {
-      vfr = false; # Better power usage
-      vrr = 0; # Always sync to monitor refresh rate, even when not fullscreened
-    };
-
     # Nvidia fix
     cursor.no_hardware_cursors = true;
 
+    # Set __GL_THREADED_OPTIMIZATIONS to 0 on prism launcher 
     env = [ 
       "LIBVA_DRIVER_NAME,nvidia"
       "GBM_BACKEND,nvidia-drm"
-
-      # may not be necessary - remove if bugs with discord ss
-      "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-
+      "__GLX_VENDOR_LIBRARY_NAME,nvidia" # Remove if ss issues
       "NVD_BACKEND,direct" # For VAAPI
     ];
 

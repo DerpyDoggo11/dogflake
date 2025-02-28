@@ -22,7 +22,6 @@
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
 
-    # todo clean me up
     bun # Fast all-in-one JS toolkit 
     wrangler # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version

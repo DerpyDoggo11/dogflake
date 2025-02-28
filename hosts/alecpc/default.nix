@@ -17,8 +17,8 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
+    #(microsoft-edge.override { commandLineArgs = "--disable-gpu"; })
 
-    # todo clean me up
     bun # Fast all-in-one JS toolkit 
     #wrangler # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version
@@ -32,6 +32,7 @@
   # Nvidia options --
   hardware.graphics = {
     enable = true;
+    #enable32Bit = true;
     extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   };
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -43,20 +44,18 @@
       includeDefaultModules = false;
     };
     kernelParams = [ "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-    kernelModules = [ "uinput" "nvidia" "v4l2loopback" ];
     extraModprobeConfig = ''
       options nvidia_drm modeset=1 fbdev=1
+      options nvidia NVreg_RegistryDwords="PowerMizerEnable=0x1; PerfLevelSrc=0x2222; PowerMizerLevel=0x3; PowerMizerDefault=0x3; PowerMizerDefaultAC=0x3"
     '';
-    extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   };
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     open = false; # GPU architecture is older than Turing
-    nvidiaSettings = true;
 
-    # Won't boot hyprland on stable - use beta package for now
+    # Won't boot hyprland on stable, latest or production package
     package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 }

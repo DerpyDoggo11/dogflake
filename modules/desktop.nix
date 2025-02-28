@@ -112,7 +112,6 @@
     flatpak.enable = true; # For running Sober (Roblox)
     logrotate.enable = false; # Don't need this
     gvfs.enable = true; # For nemo trash support
-    thermald.enable = true; # Protect against overheating
 
     # Sound support 
     pipewire = {
