@@ -13,7 +13,6 @@
     brightnessctl # Control laptop brightness
     wl-screenrec # Efficient screen recorder
     grimblast # Screenshotting tool
-    #slurp # Screen selection tool for screenshots & screenrecording
     swappy # Quick screenshot editor
     wl-clipboard # Wayland clipboard utils
     celluloid # Fast, simple GTK video player using mpv
@@ -33,7 +32,6 @@
     # Non-host-specific programs
     vscodium # Fork of VSCode
     discord # Voice & video chat app
-    microsoft-edge # Chromium browser
     spotdl # Download Spotify playlists
     
     # Wayland MC w/ key modifiers patch

@@ -17,7 +17,7 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
-    #(microsoft-edge.override { commandLineArgs = "--disable-gpu"; })
+    (microsoft-edge.override { commandLineArgs = "--disable-gpu"; })
 
     bun # Fast all-in-one JS toolkit 
     #wrangler # Local Workers development
@@ -32,7 +32,6 @@
   # Nvidia options --
   hardware.graphics = {
     enable = true;
-    #enable32Bit = true;
     extraPackages = with pkgs; [ nvidia-vaapi-driver ];
   };
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -44,10 +43,7 @@
       includeDefaultModules = false;
     };
     kernelParams = [ "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-    extraModprobeConfig = ''
-      options nvidia_drm modeset=1 fbdev=1
-      options nvidia NVreg_RegistryDwords="PowerMizerEnable=0x1; PerfLevelSrc=0x2222; PowerMizerLevel=0x3; PowerMizerDefault=0x3; PowerMizerDefaultAC=0x3"
-    '';
+    extraModprobeConfig = "options nvidia_drm modeset=1 fbdev=1";
   };
 
   hardware.nvidia = {

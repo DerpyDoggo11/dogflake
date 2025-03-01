@@ -6,6 +6,10 @@
   ];
 
   networking.hostName = "alecolaptop"; # Hostname
+
+  environment.systemPackages = with pkgs; [
+    microsoft-edge # Browser
+  ];
   
   # Bootloader settings (w/ AMD GPU support)
   boot.initrd = {

@@ -28,6 +28,7 @@
     jdk23 # Java JDK version 23 for compling & running jars
     nodejs_22 # Slow JS runtime
     steam-run # Used for running some games
+    microsoft-edge # Browser
   ];
 
   programs.kdeconnect.enable = true; # Device integration
