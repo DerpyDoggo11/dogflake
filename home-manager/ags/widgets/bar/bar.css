@@ -77,6 +77,6 @@
     filter: blur(5px);
     transition-duration: 0.5s;
 }
-#bar .mediaBg.playing { margin: 4px; }
+#bar .mediaBg.playing { margin: 6px; }
 #bar .media:hover { outline-offset: -3px; }
 #bar .media:active { outline-offset: -4px; }

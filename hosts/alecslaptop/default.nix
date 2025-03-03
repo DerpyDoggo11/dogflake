@@ -11,7 +11,7 @@
   # Packages to only be installed on this host
   environment.systemPackages = with pkgs; [
     flashprint # Flashforge 3D printer
-    plasticity # CAD modeling software (TODO let hm manage Plasticity config)
+    freecad # CAD modeling software (TODO let hm manage freecad config)
     arduino-ide # Arduino & m:b development  
 
     libsForQt5.kdenlive # Video editor
@@ -23,7 +23,7 @@
     gnome-sound-recorder # Voice recording app
 
     bun # Fast all-in-one JS toolkit 
-    wrangler # Local Workers development
+    #wrangler # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars
     nodejs_22 # Slow JS runtime
