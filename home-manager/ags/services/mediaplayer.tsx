@@ -58,7 +58,7 @@ export const initMedia = () => {
     exec('mpc clear');
     exec(`mpc add ${playlistName.get()}/`);
     execAsync('mpc shuffle');
-}
+};
 
 
 export const Media = () =>

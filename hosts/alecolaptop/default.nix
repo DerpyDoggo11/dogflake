@@ -8,8 +8,14 @@
   networking.hostName = "alecolaptop"; # Hostname
 
   environment.systemPackages = with pkgs; [
+    thunderbird # Best email & IRC client
+    gimp # GNU image manipulation program
+    teams-for-linux # Unoffical MS Teams client
+    libreoffice # Preview Word documents and Excel sheets offline
     microsoft-edge # Browser
   ];
+
+  home-manager.users.alec.imports = [ ./hm.nix ];
   
   # Bootloader settings (w/ AMD GPU support)
   boot.initrd = {
