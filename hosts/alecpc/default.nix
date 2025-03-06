@@ -11,7 +11,7 @@
   environment.systemPackages = with pkgs; [
     libsForQt5.kdenlive # Video editor
     blockbench-electron # Minecraft 3D modeling app
-    jetbrains.idea-community # Jetbrains IDEA
+    #jetbrains.idea-community # Jetbrains IDEA
     thunderbird # Best email & IRC client
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
@@ -36,12 +36,8 @@
   };
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  boot = {
-    # Nvidia kernel support
-    initrd = {
-      kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-      includeDefaultModules = false;
-    };
+  boot = { # Nvidia kernel support
+    initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
     kernelParams = [ "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
     extraModprobeConfig = "options nvidia_drm modeset=1 fbdev=1";
   };
@@ -50,8 +46,6 @@
     modesetting.enable = true;
     powerManagement.enable = true;
     open = false; # GPU architecture is older than Turing
-
-    # Won't boot hyprland on stable, latest or production package
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 }
