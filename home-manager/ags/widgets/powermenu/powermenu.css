@@ -17,7 +17,7 @@
     background-color: @blue2;
     box-shadow: 0 0 7px @blue2;
 }
-#powermenu .shutdown {
+#powermenu .shutdown, #powermenu .lock {
     background-color: @blue3;
     box-shadow: 0 0 12px @blue3;
 }

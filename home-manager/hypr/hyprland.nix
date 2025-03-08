@@ -126,9 +126,10 @@
             exec-once = [
                 "fcitx5 -d" # Chinese support
                 "swww-daemon" # Wallpaper service
-                "desktop-shell"
+                "desktop-shell" # Custom Astal shell
                 "copyq --start-server" # TODO replace with ags
                 "mpd" # Daemon for mpc player
+                "hyprlock" # Lockscreen
             ];
 
             workspace = [ # No gaps when only window in workspace

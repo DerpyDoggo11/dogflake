@@ -11,14 +11,18 @@ export const powermenu = () =>
       onKeyPressed={(self, key) => {
          self.hide();
          switch (key) {
+            case 115: // S
+               execAsync('hyprlock');
+               execAsync('systemctl suspend');
+               break;
             case 113: // Q
                execAsync('systemctl poweroff')
                break;
+            case 108: // L
+               execAsync('hyprlock');
+               break;
             case 114: // R
                execAsync('systemctl reboot');
-               break;
-            case 115: // S
-               execAsync('hyprlock && systemctl suspend');
                break;
          };
       }}
@@ -26,6 +30,7 @@ export const powermenu = () =>
       <box>
          <image cssClasses={['sleep']} iconName="weather-clear-night-symbolic"/>
          <image cssClasses={['shutdown']} iconName="system-shutdown-symbolic"/>
+         <image cssClasses={['lock']} iconName="system-lock-screen-symbolic"/>
          <image cssClasses={['reboot']} iconName="system-reboot-symbolic"/>
       </box>
    </window>
