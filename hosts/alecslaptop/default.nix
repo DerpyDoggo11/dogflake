@@ -29,6 +29,7 @@
     nodejs_22 # Slow JS runtime
     steam-run # Used for running some games
     microsoft-edge # Browser
+    vscodium # Better VSCode fork
   ];
 
   programs.kdeconnect.enable = true; # Device integration

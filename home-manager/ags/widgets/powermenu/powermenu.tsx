@@ -18,7 +18,7 @@ export const powermenu = () =>
                execAsync('systemctl reboot');
                break;
             case 115: // S
-               execAsync('systemctl suspend');
+               execAsync('hyprlock && systemctl suspend');
                break;
          };
       }}

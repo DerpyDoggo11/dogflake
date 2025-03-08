@@ -13,6 +13,7 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     microsoft-edge # Browser
+    vscodium # Better VSCode fork
   ];
 
   home-manager.users.alec.imports = [ ./hm.nix ];

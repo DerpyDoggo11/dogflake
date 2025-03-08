@@ -2,6 +2,7 @@
   imports = [
     ./hypr/hyprland.nix
     ./hypr/keybinds.nix
+    ./hypr/hyprlock.nix
 
     ./codium.nix
     ./fish.nix

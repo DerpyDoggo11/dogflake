@@ -30,7 +30,6 @@
     gnome-system-monitor # Task manager
     
     # Non-host-specific programs
-    vscodium # Fork of VSCode
     discord # Voice & video chat app
     spotdl # Download Spotify playlists
     

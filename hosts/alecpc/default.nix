@@ -18,6 +18,7 @@
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
     (microsoft-edge.override { commandLineArgs = "--disable-gpu"; })
+    (vscodium.override { commandLineArgs = "--disable-gpu"; })
 
     bun # Fast all-in-one JS toolkit 
     #wrangler # Local Workers development
