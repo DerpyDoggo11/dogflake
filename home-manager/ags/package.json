@@ -1,0 +1,7 @@
+{
+    "dependencies": {
+        "astal": "https://gitpkg.vercel.app/Aylur/astal/lang/gjs/src?main",
+        "fzf": "0.5.2"
+    },
+    "name": "astal-shell"
+}

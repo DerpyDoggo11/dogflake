@@ -1,8 +1,5 @@
-# 'ags types -pd .' to generate the following
+# 'ags types -pd .' and 'bun i' used to generate & install the following
 
 @girs/
 node_modules/
 package-lock.json
-
-# Package.json contains a pointer to the Nix store and therefore should not be commited
-package.json

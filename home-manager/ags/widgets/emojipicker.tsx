@@ -1,5 +1,6 @@
 import { App, Astal, Gtk } from 'astal/gtk4';
 import { execAsync } from 'astal';
+import centerCursor from '../services/centerCursor';
 
 const hide = () => App.get_window('emojiPicker')?.hide();
 
@@ -9,6 +10,7 @@ export const emojiPicker = () =>
     keymode={Astal.Keymode.ON_DEMAND}
     anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
     application={App}
+    onShow={centerCursor}
     visible={false}
   >
     <entry

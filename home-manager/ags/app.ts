@@ -11,6 +11,7 @@ import { GLib, exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
 import { topLeft, topRight, bottomLeft, bottomRight } from './widgets/corners';
 import { calendar } from './widgets/calendar';
+import clipboard from './widgets/clipboard/clipboard';
 import { emojiPicker } from './widgets/emojipicker';
 import { notifications, clearOldestNotification } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
@@ -53,6 +54,7 @@ App.start({
             emojiPicker();
             reminders();
             initMedia(); // Mpd player
+            clipboard();
         }, 500); // Delay to fix widgets on slow devices
 
         monitorBrightness(); // Start brightness monitor for OSD subscribbable

@@ -1,12 +1,14 @@
 import { Astal, App } from 'astal/gtk4';
 import { execAsync } from 'astal';
+import centerCursor from '../../services/centerCursor';
 
 export const powermenu = () =>
    <window
       name="powermenu"
       application={App}
       visible={false}
-      keymode={Astal.Keymode.ON_DEMAND} 
+      keymode={Astal.Keymode.ON_DEMAND}
+      onShow={centerCursor}
       
       onKeyPressed={(self, key) => {
          self.hide();

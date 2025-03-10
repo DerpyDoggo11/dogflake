@@ -9,6 +9,7 @@
     mpd # Music daemon for the Ags music player
     mpc # CLI for the Ags music player
     copyq # Clipboard manager (TODO: replace with Ags clipboard system)
+    cliphist # Clipboard history for astal
     swww # Background manager w/ cool transitions
     brightnessctl # Control laptop brightness
     wl-screenrec # Efficient screen recorder
