@@ -1,5 +1,6 @@
 import style from './style.css';
 import lancherStyle from './widgets/launcher/launcher.css';
+import clipboardStyle from './widgets/clipboard/clipboard.css';
 import barStyle from './widgets/bar/bar.css';
 import notificationStyle from './widgets/notifications/notifications.css';
 import osdStyle from './widgets/osd/osd.css';
@@ -28,8 +29,6 @@ import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediapl
 
 const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 
-GLib.setenv("LD_PRELOAD", "", true)
-
 // Per-monitor widgets
 const widgets = (monitor: number) => [
     Bar(monitor),
@@ -40,7 +39,7 @@ const widgets = (monitor: number) => [
 ];
 
 App.start({
-    css: style + lancherStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
+    css: style + lancherStyle + clipboardStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
     main() {
         hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 
@@ -48,13 +47,13 @@ App.start({
             notifications();
             launcher();
             calendar();
+            clipboard();
             quickSettings();
             osd();
             powermenu();
             emojiPicker();
             reminders();
             initMedia(); // Mpd player
-            clipboard();
         }, 500); // Delay to fix widgets on slow devices
 
         monitorBrightness(); // Start brightness monitor for OSD subscribbable

@@ -3,12 +3,6 @@
 import { execAsync } from 'astal';
 import { Gtk } from 'astal/gtk4';
 
-export interface EntryObject {
-    id: number
-    content: string
-    entry: string
-}
-
 const SCALE = 150;
 const BINARY_DATA = /\[\[ binary data (\d+) (KiB|MiB) (\w+) (\d+)x(\d+) \]\]/;
 

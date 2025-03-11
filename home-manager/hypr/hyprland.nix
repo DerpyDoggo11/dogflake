@@ -128,7 +128,7 @@
                 "swww-daemon" # Wallpaper service
                 "desktop-shell" # Custom Astal shell
                 "copyq --start-server" # TODO replace with ags
-                "wl-paste --watch cliphist store" # Astal clipboard service
+                "wl-paste --watch cliphist store -preview-width=200 -max-items=100 -max-dedupe-search=10" # Astal clipboard service
                 "mpd" # Daemon for mpc player
                 "hyprlock" # Lockscreen
             ];

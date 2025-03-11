@@ -59,20 +59,6 @@
     ];
   };
 
-  nixpkgs.overlays = [ # Remove when package updated in upstream nixpkgs
-    (final: prev: {
-      gtk4-layer-shell = prev.gtk4-layer-shell.overrideAttrs (o: rec {
-        version = "1.1.0";
-        src = pkgs.fetchFromGitHub {
-          owner = "wmww";
-          repo = "gtk4-layer-shell";
-          rev = "v${version}";
-          hash = "sha256-UGhFeaBBIfC4ToWdyoX+oUzLlqJsjF++9U7mtszE0y0=";
-        };
-      });
-    })
-  ];
-
   xdg = {    
     # Symlink all fonts
     dataFile."fonts" = {

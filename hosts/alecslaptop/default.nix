@@ -11,7 +11,6 @@
   # Packages to only be installed on this host
   environment.systemPackages = with pkgs; [
     flashprint # Flashforge 3D printer
-    freecad # CAD modeling software (TODO let hm manage freecad config)
     arduino-ide # Arduino & m:b development  
 
     libsForQt5.kdenlive # Video editor
@@ -21,6 +20,15 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
+    
+    # Last free Plasticity version 
+    (pkgs.plasticity.overrideAttrs (oldAttrs: {
+      dontCheckForBrokenSymlinks = true;
+      src = fetchurl {
+        url = "https://github.com/nkallen/plasticity/releases/download/v0.6.28/plasticity-0.6.28-1.x86_64.rpm";
+        hash = "sha256-msY2tchhG1ln7LeM3ZN3nWkfDIC9cftw1/hzuJNMcDM=";
+      };
+    }))
 
     bun # Fast all-in-one JS toolkit 
     #wrangler # Local Workers development
