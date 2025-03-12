@@ -1,6 +1,6 @@
 // Mostly stolen from https://github.com/matt1432/nixos-configs/blob/2f5cb5b4a01a91b8564c72cf10403fca47825572/modules/ags/config/widgets/clipboard/clip-item.tsx
 
-import { execAsync, GLib, exec } from 'astal';
+import { GLib, exec } from 'astal';
 import { App, Gtk } from 'astal/gtk4';
 
 const SCALE = 150;
@@ -10,7 +10,7 @@ export const ClipItem = (id: number, content: string): Gtk.Widget => {
     function show_image(file: string, width: number, height: number) {
         const maxWidth = 400;
         const widthPx = (width / height) * SCALE;
-
+        // todo refactor me and center-align
         let css = `._${id} { background-image: url("file://${file}");`;
 
         if (widthPx > maxWidth) {
@@ -35,9 +35,8 @@ export const ClipItem = (id: number, content: string): Gtk.Widget => {
             const path = `/tmp/ags/cliphist/${id}.png`;
             if (!GLib.file_test(path, GLib.FileTest.EXISTS)) {
                 exec('mkdir -p "/tmp/ags/cliphist/"')
-                exec(`cliphist decode ${id} > "${path}"`);
-            }
-
+                exec(`bash -c 'cliphist decode ${id} > "${path}"'`);
+            };
             return show_image(path, Number(width), Number(height));
         };
     };

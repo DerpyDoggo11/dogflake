@@ -1,6 +1,6 @@
 // Mostly stolen from https://github.com/matt1432/nixos-configs/blob/2f5cb5b4a01a91b8564c72cf10403fca47825572/modules/ags/config/widgets/clipboard/index.tsx
 
-import { execAsync, idle, monitorFile, Gio } from 'astal';
+import { execAsync, monitorFile, Gio } from 'astal';
 import { App, Gtk, Astal } from 'astal/gtk4';
 import { ClipItem } from './clipitem';
 import centerCursor from '../../services/centerCursor';
@@ -23,15 +23,15 @@ list.set_sort_func((a, b) => {
     return row2id - row1id;
 });
 
-monitorFile(`/home/alec/.cache/cliphist/db`, (_, event) => {
-    if (event == Gio.FileMonitorEvent.CHANGES_DONE_HINT) refreshItems();
-});  
+monitorFile(`/home/alec/.cache/cliphist/db`, (_, event) =>
+    (event == Gio.FileMonitorEvent.CHANGES_DONE_HINT) && refreshItems()
+);
 
-const refreshItems = () => idle(async() => {
+// Use astal idle util if laggy
+const refreshItems = async () => {
     // Delete items that don't exist anymore
     const new_list = await execAsync('cliphist list')
     .then((str) => str.split('\n')
-        .filter((line) => line.trim() !== '')
         .map((entry) => {
             const [id, ...content] = entry.split('\t');
             return { id: parseInt(id.trim()), content: content.join(' ').trim(), entry };
@@ -40,23 +40,36 @@ const refreshItems = () => idle(async() => {
 
     // Wipe the list
     list.remove_all();
-    
+
     // Add all the items
     new_list.forEach((item) => {
         const itemWidget = ClipItem(item.id, item.content);
         list.insert(itemWidget, -1);
     });
-});
+};
 
 export default () => <window
     name="clipboard"
     keymode={Astal.Keymode.ON_DEMAND}
     setup={() => refreshItems()}
-    onShow={() => centerCursor()}
-    onKeyPressed={(_, key) =>
-        (key == 65307) // Gdk.KEY_Escape
-           && App.toggle_window("clipboard")
-    }
+    onShow={() => {
+        centerCursor()
+        list.get_first_child()?.grab_focus();
+    }}
+    onKeyPressed={(self, key) => {
+        switch (key) {
+            // todo finish me
+            case 114: // R - normalize most recent text
+                break;
+            case 99: // C - copy 2nd recent entry
+                list.get_row_at_index(1)?.activate()
+                break;
+            case 114: // E - open image in Swappy
+                break;
+            default:
+                self.hide()
+        }
+    }}
     application={App}
     visible={false}
     >
@@ -64,8 +77,8 @@ export default () => <window
             cssClasses={["list"]}
             hscrollbarPolicy={Gtk.PolicyType.NEVER}
             vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}
-            heightRequest={700}
-            widthRequest={500}
+            heightRequest={500}
+            widthRequest={400}
         >
             {list}
         </Gtk.ScrolledWindow>
