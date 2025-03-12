@@ -94,13 +94,9 @@
                 (t "Select a File")
                 (t "Save As")
                 (t "Library")
-                (c "com.github.Aylur.ags")
-
-                "size 20% 90%,^(copyq)$" # CopyQ autosize TODO remove me
             ];
 
             windowrulev2 = [
-                "float,class:(copyq)$" # TODO remove me
                 "fullscreenstate, -1, 2,title:(Minecraft 1)(.*)$" # Minecraft titlebar fix
                 "renderunfocused,title:(Minecraft 1)(.*)$" # Play Minecraft sounds even when not focused
 
@@ -127,7 +123,6 @@
                 "fcitx5 -d" # Chinese support
                 "swww-daemon" # Wallpaper service
                 "desktop-shell" # Custom Astal shell
-                "copyq --start-server" # TODO replace with ags
                 "mpd" # Daemon for mpc player
                 "hyprlock" # Lockscreen
             ];
