@@ -7,7 +7,7 @@
 
       # Desktop shell control
       "Super, Period, exec, astal -t emojiPicker" # Emoji Picker
-      "Super, V, exec, copyq toggle" # Clipboard TODO replace w/ ags
+      "Super, V, exec, astal -t clipboard" # Clipboard
       "SuperShift, S, exec, astal -t powermenu" # Power menu
       ",XF86PowerOff, exec, astal -t powermenu" # Power button opens power menu
       "Super, space, exec, astal -t launcher" # App laucher

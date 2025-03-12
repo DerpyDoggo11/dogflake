@@ -2,7 +2,6 @@ import Apps from 'gi://AstalApps'
 import { App, Astal, Gtk, Gdk } from 'astal/gtk4';
 import { bind } from 'astal';
 import { playlistName } from '../../services/mediaplayer';
-import centerCursor from '../../services/centerCursor';
 
 const apps = new Apps.Apps()
 let textBox: Gtk.Entry;
@@ -46,7 +45,7 @@ export const launcher = () =>
         keymode={Astal.Keymode.ON_DEMAND}
         application={App}
         visible={false}
-        onShow={() => { textBox.text = ''; centerCursor(); }}
+        onShow={() => textBox.text = ''}
         onKeyPressed={(_, key) =>
             (key == 65307) // Gdk.KEY_Escape
                && hide()

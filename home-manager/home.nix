@@ -59,6 +59,12 @@
     ];
   };
 
+  # Astal clipboard management
+  services.cliphist = {
+    enable = true;
+    extraOptions = [ "-preview-width" "200" "-max-items" "10" "-max-dedupe-search" "10" ];
+  };
+
   xdg = {    
     # Symlink all fonts
     dataFile."fonts" = {
