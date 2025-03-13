@@ -13,7 +13,7 @@ list.connect('row-activated', async (_, row) => {
     App.get_window('clipboard')?.set_visible(false);
 
     const xargs = (row.child.name == 'image') ? '' : '| xargs';
-    await execAsync(`bash -c 'cliphist decode "${id}" ${xargs} | wl-copy'`);
+    await execAsync(`bash -c 'cliphist decode ${id} ${xargs} | wl-copy'`);
 });
 
 list.set_sort_func((a, b) => {
@@ -55,6 +55,9 @@ export default () => <window
     }}
     onKeyPressed={async (self, key) => {
         switch (key) {
+            case 65293: // Enter - pass event to selection
+                list.get_selected_row()?.activate();
+                break;
             case 114: // R - reset/normalize most recent text
                 list.get_row_at_index(0)?.activate()
                 break;
@@ -71,8 +74,8 @@ export default () => <window
                 self.hide();
                 await execAsync('swappy -f ' + path);
                 break;
-            default: // Hide if enter key not pressed
-                (key != 65293) && self.hide()
+            default: // Hide
+                self.hide()
         };
     }}
     application={App}
