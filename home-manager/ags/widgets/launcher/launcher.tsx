@@ -17,6 +17,7 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
             }
         }}
         onClicked={() => { app.launch(); hide(); }}
+        cssClasses={['button']}
     >
         <box>
             <image iconName={app.iconName}/>

@@ -1,51 +1,12 @@
-#clipboard {
-    border-radius: 0.4rem;
-}
+#clipboard { border-radius: 0.4rem; }
+list { padding: 1rem; }
 
 /* Clipboard item */
-list {
-    padding: 1rem;
-    background-color: @theme_bg_color;
-}
-
 list row {
     padding: 0.5rem;
     border: 1px solid @dark4;
     background: @dark2;
-    background-position: center;
-    background-size: cover;
+    background-size: contain;
     border-radius: 0.4rem;
     margin-bottom: 0.5rem;
 }
-
-/* TODO combine with launcher styling */
-list row:hover, list row:focus {
-    background-color: @blue2;
-    box-shadow: 0 0 5px 3px @blue3;
-    border: 1px solid @blue1;
-    transform: translateY(-2px) scale(1.01);
-}
-
-/* Search bar */
-.clipitemBg {
-    padding: 3rem 3rem 3rem 0;
-    background-position: center;
-    background-size: cover;
-    border-radius: 0.4rem;
-    filter: blur(3px);
-    min-height: 2rem;
-    transition-duration: 0.5s;
-}
-
-.clipboard entry {
-    background: transparent;
-    color: @light3;
-    outline: none;
-    padding-left: 2rem;
-    outline-offset: -3px;
-    outline: 2px solid #ffffff1c;
-    font-family: 'Hammersmith One';
-    font-size: 1.3rem;
-}
-
-.clipboard overlay { padding-bottom: 1rem; }

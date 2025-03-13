@@ -38,7 +38,7 @@
 /* Workspace list */
 .workspaceList { 
     padding-top: 0.3rem; 
-    min-height: 15rem; /* Combined height of workspace buttons */
+    min-height: 17rem; /* Combined height of workspace buttons */
 }
 #bar .workspaceBtn {
     background-color: @dark2;

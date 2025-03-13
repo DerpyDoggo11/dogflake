@@ -44,3 +44,10 @@ calendar, .quickSettings {
   background-color: @dark3;
   border-radius: 7px 7px 0 0;
 }
+
+.button:focus, .button:hover, list row:focus, list row:hover {
+  background-color: @blue2;
+  box-shadow: 0 0 5px 3px @blue3;
+  border: 1px solid @blue1;
+  transform: translateY(-2px) scale(1.01);
+}

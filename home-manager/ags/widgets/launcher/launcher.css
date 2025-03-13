@@ -39,13 +39,6 @@
     border: 1px solid @dark4;
 }
 
-.launcher button:focus {
-    background-color: @blue2;
-    box-shadow: 0 0 5px 3px @blue3;
-    border: 1px solid @blue1;
-    transform: translateY(-2px) scale(1.01);
-}
-
 .launcher button image {
     -gtk-icon-size: 2rem;
     margin-right: 0.5rem;

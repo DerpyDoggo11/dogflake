@@ -9,7 +9,7 @@ export const Workspaces = () =>
     cssClasses={['workspaceList']}
     onScroll={(_, __, y) => hyprland.dispatch('workspace', (y > 0) ? '+1' : '-1')}
   >
-    {[...Array(8).keys()].map((id) => id + 1).map((id) =>
+    {[...Array(9).keys()].map((id) => id + 1).map((id) =>
       <box cssClasses={bind(hyprland, 'focusedWorkspace').as((focused) => {
         const workspace = hyprland.workspaces.find((w) => w.id == id);
     
@@ -20,7 +20,7 @@ export const Workspaces = () =>
         const isOccupied = workspace.get_clients().length > 0;
         const active = focused.id == id;
         
-        return (active) 
+        return (active)
           ? ['workspaceBtn', 'active']
           : isOccupied ? ['workspaceBtn', 'occupied']
           : ['workspaceBtn']
