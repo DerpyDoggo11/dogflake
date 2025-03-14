@@ -1,9 +1,7 @@
-// Mostly stolen from https://github.com/matt1432/nixos-configs/blob/2f5cb5b4a01a91b8564c72cf10403fca47825572/modules/ags/config/widgets/clipboard/clip-item.tsx
-
 import { GLib, exec } from 'astal';
 import { App, Gtk } from 'astal/gtk4';
 
-export const ClipboardItem = (id: number, content: string): Gtk.Widget => {
+export const ClipboardItem = (id: string, content: string): Gtk.Widget => {
     function show_image(file: string, width: number, height: number) {
         const adjustedWidth = (width / height) * 150;
         const maxContainerWidth = 400;
@@ -23,7 +21,7 @@ export const ClipboardItem = (id: number, content: string): Gtk.Widget => {
             min-width: ${maxWidth}px;
         }`);
 
-        return <box cssClasses={[`_${id}`]} name={'image'} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER}/>
+        return <box cssClasses={[`_${id}`, 'image']} name={id} valign={Gtk.Align.CENTER} halign={Gtk.Align.CENTER}/>
     };
 
     const matches = content.match(/\[\[ binary data (\d+) (B|KiB|MiB) (\w+) (\d+)x(\d+) \]\]/);
@@ -40,5 +38,5 @@ export const ClipboardItem = (id: number, content: string): Gtk.Widget => {
         return show_image(path, Number(width), Number(height));
     };
 
-    return <label label={content} xalign={0} wrap cssClasses={[`_${id}`]}/>
+    return <label label={content} xalign={0} wrap name={id}/>
 };

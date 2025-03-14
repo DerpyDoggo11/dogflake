@@ -1,6 +1,22 @@
 import { Astal, App } from 'astal/gtk4';
 import { execAsync } from 'astal';
-import centerCursor from '../../services/centerCursor';
+import Hyprland from 'gi://AstalHyprland?version=0.1';
+const hypr = Hyprland.get_default();
+
+const centerCursor = () => {
+   let x, y;
+   const monitor = hypr.focusedMonitor;
+   const scale = monitor.scale;
+
+   if (monitor.transform == 0) { // Horizontal display
+      x = monitor.x + (monitor.width / (2 * scale));
+      y = monitor.y + (monitor.height / (2 * scale));
+   } else { // Vertical (90deg) display
+      x = monitor.x - (monitor.height / (2 * scale));
+      y = monitor.y - (monitor.width / (2 * scale));
+   };
+   hypr.dispatch('movecursor', `${x} ${y}`);
+};
 
 export const powermenu = () =>
    <window

@@ -40,10 +40,8 @@ export const notificationItem = (n: Notifd.Notification) =>
                     file={n.image}
                     heightRequest={100}
                     widthRequest={100}
-                    cssClasses={['image']}
                 />}
                 {n.body && <label
-                    cssClasses={['body']}
                     wrap
                     xalign={0}
                     label={n.body}

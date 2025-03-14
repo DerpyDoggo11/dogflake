@@ -10,7 +10,7 @@ list row {
     margin-bottom: 0.5rem;
 }
 
-list #image {
+list .image {
     border-radius: 0.3rem;
     background-size: cover;
     background-position: center;
