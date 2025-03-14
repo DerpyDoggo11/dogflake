@@ -91,10 +91,7 @@
                 c = class: "float, ^(${class})$";
                 t = title: "float, title:^(${title})(.*)$";
             in [
-                (t "Open File")
-                (t "Select a File")
-                (t "Save As")
-                (t "Library")
+                (c "xdg-desktop-portal-gtk")
             ];
 
             windowrulev2 = [
