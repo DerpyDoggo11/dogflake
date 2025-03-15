@@ -11,6 +11,9 @@
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
+
+    arduino-ide # Embedded microcontroller programming
+    python3 # Required for Arduino IDE
   ];
 
   home-manager.users.alec.imports = [ ./hm.nix ];

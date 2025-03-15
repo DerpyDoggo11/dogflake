@@ -100,8 +100,9 @@
       ];
 
       windowrulev2 = [
-        "fullscreenstate, -1, 2,title:(Minecraft 1)(.*)$" # Minecraft titlebar fix
-        "renderunfocused,title:(Minecraft 1)(.*)$" # Play Minecraft sounds even when not focused
+        # Play Minecraft sounds even when not focused
+        "renderunfocused,title:(Minecraft 1)(.*)$"
+        "renderunfocused,title:(Minecraft*)(.*)$"
 
         # Window organization
         "workspace 4,class:^teams-for-linux$" # Teams on Workspace 4

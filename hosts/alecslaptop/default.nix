@@ -16,7 +16,8 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
-    arduino-ide # Arduino & m:b development  
+    arduino-ide # Embedded microcontroller programming  
+    python3 # Required for Arduino IDE
     flashprint # Flashforge 3D printer
 
     bun # Fast all-in-one JS toolkit 
