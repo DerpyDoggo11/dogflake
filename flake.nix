@@ -14,6 +14,8 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs @ { home-manager, nixpkgs, ... }: {
