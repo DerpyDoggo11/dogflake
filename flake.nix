@@ -29,16 +29,6 @@
           home-manager.nixosModules.home-manager
         ];
       };
-      
-      # VM config
-      "vm" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/vm/hardware-configuration.nix
-          home-manager.nixosModules.home-manager
-        ];
-      };
 
       # Desktop config
       "alecpc" = nixpkgs.lib.nixosSystem {
