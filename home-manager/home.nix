@@ -44,7 +44,7 @@
         name = "desktop-shell"; # Executable name
         gtk4 = true;
         entry = "app.ts";
-        
+
         extraPackages = with inputs.ags.packages.${pkgs.system}; [
           apps # App launcher
           mpris # Media controls

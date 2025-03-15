@@ -11,11 +11,10 @@
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
-    vscodium # Better VSCode fork
   ];
 
   home-manager.users.alec.imports = [ ./hm.nix ];
-  
+
   # Bootloader settings (w/ AMD GPU support)
   boot.initrd = {
     kernelModules = [ "amdgpu" ];

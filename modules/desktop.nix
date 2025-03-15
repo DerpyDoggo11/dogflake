@@ -3,16 +3,13 @@
 
   environment.systemPackages = with pkgs; [
     # Desktop programs
-    foot # Terminal
     libnotify # For ags internal notifications
-    mpd # Music daemon for the Ags music player
     mpc # CLI for the Ags music player
     cliphist # Clipboard history for astal
     swww # Background manager w/ cool transitions
     brightnessctl # Control laptop brightness
     wl-screenrec # Efficient screen recorder
     grimblast # Screenshotting tool
-    swappy # Quick screenshot editor
     wl-clipboard # Wayland clipboard utils
     celluloid # Fast, simple GTK video player using mpv
     adwaita-icon-theme # Astal icons
@@ -24,8 +21,6 @@
     nemo-with-extensions # Simple file manager
     nemo-fileroller # File manager archive feature
     file-roller # File manager archive feature part 2
-    fish # Better shell
-    starship # Fish prompt theme
     gnome-system-monitor # Task manager
 
     # Non-host-specific programs
@@ -125,7 +120,7 @@
     };
     xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5
   };
-  
+
   # Bluetooth support
   hardware.bluetooth.enable = true;
 }
