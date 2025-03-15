@@ -29,17 +29,17 @@ export const powermenu = () =>
       onKeyPressed={(self, key) => {
          self.hide();
          switch (key) {
-            case 115: // S
+            case 115: // S - sleep
                execAsync('hyprlock');
                execAsync('systemctl suspend');
                break;
-            case 113: // Q
+            case 113: // Q - power off
                execAsync('systemctl poweroff')
                break;
-            case 108: // L
+            case 108: // L - lock
                execAsync('hyprlock');
                break;
-            case 114: // R
+            case 114: // R - reboot
                execAsync('systemctl reboot');
                break;
          };

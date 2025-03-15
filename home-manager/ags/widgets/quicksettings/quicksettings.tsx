@@ -3,6 +3,7 @@ import { VolumeSlider, SinkSelector } from './sound';
 import { App, Astal, Gdk } from 'astal/gtk4';
 import { bind } from 'astal';
 import { DND } from '../notifications/notifications';
+const { BOTTOM, LEFT } = Astal.WindowAnchor;
 
 const DNDToggle = () => 
     <button
@@ -17,7 +18,7 @@ const DNDToggle = () =>
 export const quickSettings = () =>
     <window
         name="quickSettings"
-        anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
+        anchor={BOTTOM | LEFT}
         application={App}
         visible={false}
     >

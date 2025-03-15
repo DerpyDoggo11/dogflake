@@ -1,5 +1,7 @@
 import { App, Astal, Gtk } from 'astal/gtk4';
 import { execAsync } from 'astal';
+const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor;
+
 
 const hide = () => App.get_window('emojiPicker')?.hide();
 
@@ -7,7 +9,7 @@ export const emojiPicker = () =>
   <window
     name="emojiPicker"
     keymode={Astal.Keymode.ON_DEMAND}
-    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
+    anchor={TOP | BOTTOM | LEFT | RIGHT}
     application={App}
     visible={false}
   >

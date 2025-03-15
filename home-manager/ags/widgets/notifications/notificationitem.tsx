@@ -3,6 +3,7 @@ import { Gtk, Gdk } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
 import Pango from 'gi://Pango';
 const { START, CENTER, END } = Gtk.Align
+const notifd = Notifd.get_default();
 
 const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%H:%M")!;
 
@@ -52,7 +53,12 @@ export const notificationItem = (n: Notifd.Notification) =>
                         <button
                             hexpand
                             cursor={Gdk.Cursor.new_from_name('pointer', null)}
-                            onButtonPressed={() => { n.invoke(id); n.dismiss(); }} // TODO find work-around for null pointer error
+                            onButtonPressed={() => {
+                                n.invoke(id);
+                                setTimeout(() =>
+                                    (notifd.get_notification(n.id)) && n.dismiss()
+                                , 100)
+                             }}
                         >
                             <label label={label} halign={CENTER}/>
                         </button>

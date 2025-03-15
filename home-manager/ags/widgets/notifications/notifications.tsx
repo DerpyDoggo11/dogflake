@@ -21,12 +21,14 @@ const deleteKey = (key: number) => {
 	map.delete(key);
 	notifiy(true); // Force delete notification even if DND is enabled
 };
-	
+
 export const notifications = () =>
 	<window
 		name="notifications"
 		anchor={TOP | RIGHT}
 		application={App}
+
+		// This prop gives broken accounting warning but fixes allocation size
 		visible={bind(notificationlist).as(n => (n.length != 0) ? true : false)}
 		setup={() => {
 			const notifd = Notifd.get_default();

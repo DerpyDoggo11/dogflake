@@ -1,9 +1,10 @@
 import { App, Astal, Gtk } from 'astal/gtk4';
+const { BOTTOM, LEFT } = Astal.WindowAnchor;
 
 export const calendar = () =>
   <window
     name="calendar"
-    anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
+    anchor={BOTTOM | LEFT}
     application={App}
     visible={false}
   >

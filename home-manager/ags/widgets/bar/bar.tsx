@@ -5,13 +5,14 @@ import { Status } from './modules/statusmenu';
 import { Mpris } from './modules/mpris';
 import { Media } from '../../services/mediaplayer';
 import { RecordingIndicator } from '../../services/screen';
+const { TOP, BOTTOM, LEFT } = Astal.WindowAnchor;
 
 export const Bar = (monitor: number) =>
   <window
     name="bar"
     monitor={monitor}
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
-    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
+    anchor={TOP | BOTTOM | LEFT}
     application={App}
     visible
   >

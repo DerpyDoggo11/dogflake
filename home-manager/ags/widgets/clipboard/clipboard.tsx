@@ -34,7 +34,7 @@ const refreshItems = async () => {
             const [id, ...content] = entry.split('\t');
             return { id: id.trim(), content: content.join(' ').trim() };
         })
-    ).catch((e) => { console.error(e); return [] });
+    ).catch(() => { return [] });
 
     list.remove_all();
     entries.forEach((entry) =>

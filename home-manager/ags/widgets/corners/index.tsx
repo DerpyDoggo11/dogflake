@@ -2,12 +2,13 @@
 
 import { Astal, App } from 'astal/gtk4';
 import { Corner } from './corners';
+const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor;
 
 export const topLeft = (monitor: number) => (
     <window
         name="cornertl"
         monitor={monitor}
-        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
+        anchor={TOP | LEFT}
         application={App}
         visible
     >
@@ -19,7 +20,7 @@ export const topRight = (monitor: number) => (
     <window
         name="cornertr"
         monitor={monitor}
-        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
+        anchor={TOP | RIGHT}
         application={App}
         visible
     >
@@ -31,7 +32,7 @@ export const bottomLeft = (monitor: number) => (
     <window
         name="cornerbl"
         monitor={monitor}
-        anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT}
+        anchor={BOTTOM | LEFT}
         application={App}
         visible
     >
@@ -43,7 +44,7 @@ export const bottomRight = (monitor: number) => (
     <window
         name="cornerbr"
         monitor={monitor}
-        anchor={Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.RIGHT}
+        anchor={BOTTOM | RIGHT}
         application={App}
         visible
     >
