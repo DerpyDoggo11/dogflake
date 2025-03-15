@@ -10,15 +10,14 @@
 
   # Packages to only be installed on this host
   environment.systemPackages = with pkgs; [
-    flashprint # Flashforge 3D printer
-    arduino-ide # Arduino & m:b development  
-
     libsForQt5.kdenlive # Video editor
     blockbench-electron # Minecraft 3D modeling app
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
+    arduino-ide # Arduino & m:b development  
+    flashprint # Flashforge 3D printer
 
     bun # Fast all-in-one JS toolkit 
     #wrangler # Local Workers development
@@ -26,7 +25,6 @@
     jdk23 # Java JDK version 23 for compling & running jars
     nodejs_22 # Slow JS runtime
     steam-run # Used for running some games
-    microsoft-edge # Browser
   ];
 
   programs.kdeconnect.enable = true; # Device integration
