@@ -12,13 +12,14 @@
     libsForQt5.kdenlive # Video editor
     blockbench-electron # Minecraft 3D modeling app
     #jetbrains.idea-community # Jetbrains IDEA
-    thunderbird # Best email & IRC client
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
-    (microsoft-edge.override { commandLineArgs = "--disable-gpu"; })
-    (vscodium.override { commandLineArgs = "--disable-gpu"; })
+
+    # 3d modeling/printing
+    (pkgs.plasticity.overrideAttrs (oldAttrs: { dontCheckForBrokenSymlinks = true; }))
+    flashprint # Flashforge 3D printer
 
     bun # Fast all-in-one JS toolkit 
     #wrangler # Local Workers development
@@ -33,14 +34,18 @@
   # Nvidia options --
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+    enable32Bit = true;
+    extraPackages = with pkgs; [ nvidia-vaapi-driver vaapiVdpau libvdpau-va-gl ];
   };
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  boot = { # Nvidia kernel support
-    initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-    kernelParams = [ "nvidia-drm.modeset=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-    extraModprobeConfig = "options nvidia_drm modeset=1 fbdev=1";
+  boot = {
+    initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ]; # "nvidia-dkms" or "nvidia"?
+    kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+    extraModprobeConfig=''
+      options nvidia_drm modeset=1 fbdev=1
+      options nvidia NVreg_RegistryDwords="PowerMizerEnable=0x1; PerfLevelSrc=0x2222; PowerMizerLevel=0x3; PowerMizerDefault=0x3; PowerMizerDefaultAC=0x3"
+    '';
   };
 
   hardware.nvidia = {

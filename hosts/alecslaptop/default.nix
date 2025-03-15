@@ -15,7 +15,6 @@
 
     libsForQt5.kdenlive # Video editor
     blockbench-electron # Minecraft 3D modeling app
-    thunderbird # Best email & IRC client
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
@@ -27,7 +26,6 @@
     jdk23 # Java JDK version 23 for compling & running jars
     nodejs_22 # Slow JS runtime
     steam-run # Used for running some games
-    microsoft-edge # Browser
     vscodium # Better VSCode fork
   ];
 

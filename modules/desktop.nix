@@ -2,7 +2,6 @@
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
-
     # Desktop programs
     foot # Terminal
     libnotify # For ags internal notifications
@@ -17,7 +16,7 @@
     wl-clipboard # Wayland clipboard utils
     celluloid # Fast, simple GTK video player using mpv
     adwaita-icon-theme # Astal icons
-    
+
     # Desktop applications
     gnome-text-editor # Clean, tabbed, GTK text editor
     gthumb # Image viewer & lightweight editor
@@ -28,11 +27,13 @@
     fish # Better shell
     starship # Fish prompt theme
     gnome-system-monitor # Task manager
-    
+
     # Non-host-specific programs
     discord # Voice & video chat app
     spotdl # Download Spotify playlists
-    
+    microsoft-edge # Browser
+    thunderbird # Email client
+
     # Wayland MC w/ key modifiers patch
     (prismlauncher.override {
       glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {

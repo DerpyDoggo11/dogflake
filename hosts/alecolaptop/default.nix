@@ -8,11 +8,9 @@
   networking.hostName = "alecolaptop"; # Hostname
 
   environment.systemPackages = with pkgs; [
-    thunderbird # Best email & IRC client
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
-    microsoft-edge # Browser
     vscodium # Better VSCode fork
   ];
 
