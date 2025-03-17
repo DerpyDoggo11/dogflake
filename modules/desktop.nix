@@ -3,6 +3,7 @@
 
   environment.systemPackages = with pkgs; [
     # Desktop programs
+    swappy # Fast screenshot editor
     libnotify # For ags internal notifications
     mpc # CLI for the Ags music player
     cliphist # Clipboard history for astal
@@ -17,7 +18,6 @@
     # Desktop applications
     gnome-text-editor # Clean, tabbed, GTK text editor
     gthumb # Image viewer & lightweight editor
-    amberol # Lightweight GTK music player
     nemo-with-extensions # Simple file manager
     nemo-fileroller # File manager archive feature
     file-roller # File manager archive feature part 2

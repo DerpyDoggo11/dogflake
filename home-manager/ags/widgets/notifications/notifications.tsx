@@ -8,18 +8,19 @@ export const DND = Variable(false);
 const map: Map<number, Notifd.Notification> = new Map();
 const notificationlist: Variable<Array<Notifd.Notification>> = new Variable([]);
 
-const notifiy = (ignoreDND = false) =>
-	(!DND.get() || ignoreDND) &&
-		notificationlist.set([...map.values()].reverse());
+const notifiy = () =>
+	notificationlist.set([...map.values()].reverse());
 
 const setKey = (key: number, value: Notifd.Notification) => {
-	map.set(key, value);
-	notifiy();
+	if (!DND.get()) {
+		map.set(key, value);
+		notifiy();
+	}
 };
 
 const deleteKey = (key: number) => {
 	map.delete(key);
-	notifiy(true); // Force delete notification even if DND is enabled
+	notifiy();
 };
 
 export const notifications = () =>
