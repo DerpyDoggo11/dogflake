@@ -10,6 +10,7 @@ list.connect('row-activated', async (_, row) => {
     App.get_window('clipboard')?.set_visible(false);
 
     const xargs = (row.child.cssClasses.includes('image')) ? '' : '| xargs';
+    await execAsync(`cliphist decode ${id}`).then((e) => console.log(e)) // TODO test & fix me
     await execAsync(`bash -c 'cliphist decode ${id} ${xargs} | wl-copy'`);
 });
 

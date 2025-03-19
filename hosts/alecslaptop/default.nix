@@ -26,6 +26,16 @@
     jdk23 # Java JDK version 23 for compling & running jars
     nodejs_22 # Slow JS runtime
     steam-run # Used for running some games
+    playit # Tunnel service for hosting MC servers locally
+  ];
+
+  # TODO remove me when playit is merged upstream
+  nixpkgs.overlays = [
+    (self: super: {
+      playit = import ../../overlays/playit.nix {
+        inherit (super) lib rustPlatform fetchFromGitHub stdenv;
+      };
+    })
   ];
 
   programs.kdeconnect.enable = true; # Device integration

@@ -19,5 +19,9 @@
       "4, monitor:HDMI-A-1"
       "5, monitor:DP-1"
     ];
+
+    bind = [ # Custom side mouse key for quick screenshots
+      "Super, D, exec, astal 'screenshot false'"
+    ];
   };
 }

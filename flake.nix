@@ -2,15 +2,14 @@
   description = "Alec's Nix system configurations";
 
   inputs = {
-    # Nixpkgs - always pull from unstable
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home-manager = { # Manage user home
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags = { # Desktop shell
+    ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -44,7 +43,7 @@
       "alecolaptop" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
-        modules = [ #
+        modules = [
           ./hosts/alecolaptop/default.nix
           home-manager.nixosModules.home-manager
         ];

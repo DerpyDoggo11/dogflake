@@ -58,8 +58,6 @@
       "ControlSuperShift, mouse_down, movetoworkspace, -1"
       
       "Super, F, togglefloating, activewindow" # Makes a window floating
-
-      #", mouse:133, exec, astal -t emojiPicker" # 64 40 0xffe9 0x64 0x10 0x50
     ];
 
     bindle = [
