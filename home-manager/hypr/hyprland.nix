@@ -2,7 +2,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    # Remove imports after removing this
+    # TODO Remove imports after removing this
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
@@ -93,7 +93,7 @@
       };
 
       windowrule = let
-        c = class: "float, ^(${class})$";
+        c = class: "float, class:^(${class})$";
         t = title: "float, title:^(${title})(.*)$";
       in [
         (c "xdg-desktop-portal-gtk")
