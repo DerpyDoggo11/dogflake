@@ -2,22 +2,22 @@
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
-    # Desktop programs
-    swappy # Fast screenshot editor
+    # Desktop services
     libnotify # For ags internal notifications
     mpc # CLI for the Ags music player
     cliphist # Clipboard history for astal
     swww # Background manager w/ cool transitions
-    brightnessctl # Control laptop brightness
-    wl-screenrec # Efficient screen recorder
+    brightnessctl # Control screen brightness
+    adwaita-icon-theme # Icons for GTK apps
+    wl-screenrec # Screen recorder tool
     grimblast # Screenshotting tool
     wl-clipboard # Wayland clipboard utils
-    celluloid # Fast, simple GTK video player using mpv
-    adwaita-icon-theme # Astal icons
 
     # Desktop applications
+    swappy # Screenshot editor
+    celluloid # GTK video player using mpv
     gnome-text-editor # Clean, tabbed, GTK text editor
-    gthumb # Image viewer & lightweight editor
+    gthumb # Image viewer & editor
     nemo-with-extensions # Simple file manager
     nemo-fileroller # File manager archive feature
     file-roller # File manager archive feature part 2

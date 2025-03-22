@@ -80,19 +80,4 @@
       extraConfig.XDG_MODELS_DIR = "/home/alec/Models";
     };
   };
-
-  # For pmOS to optimize local connection
-  programs.ssh = {
-    enable = true;
-    extraConfig = ''
-      Host 172.16.42.1 pmos
-        HostName 172.16.42.1
-        User user
-        StrictHostKeyChecking no
-        UserKnownHostsFile=/dev/null
-        ConnectTimeout 5
-        ServerAliveInterval 1
-        ServerAliveCountMax 5
-    '';
-  };
 }

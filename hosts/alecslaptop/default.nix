@@ -20,11 +20,11 @@
     python3 # Required for Arduino IDE
     flashprint # Flashforge 3D printer
 
-    bun # Fast all-in-one JS toolkit 
+    bun # All-in-one JS toolkit 
     #wrangler # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars
-    nodejs_22 # Slow JS runtime
+    nodejs_22 # JS runtime
     steam-run # Used for running some games
     playit # Tunnel service for hosting MC servers locally
   ];
