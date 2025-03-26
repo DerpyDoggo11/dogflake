@@ -1,10 +1,7 @@
-{inputs, pkgs, ...}: {
+
+{
   wayland.windowManager.hyprland = {
     enable = true;
-
-    # TODO Remove imports after removing this
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     systemd.variables = ["--all"];
     settings = {

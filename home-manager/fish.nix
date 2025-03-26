@@ -1,7 +1,6 @@
 {
   programs.fish = {
     enable = true;
-    generateCompletions = false; # Fix build error
     shellAliases = {
       nx-switch = "sudo nixos-rebuild switch --flake /home/alec/Projects/flake/";
       g = "git";

@@ -1,7 +1,6 @@
 { lib, ...}: {
   programs.starship = {
     enable = true;
-    enableFishIntegration = false; # Fix weird message on console start
     settings = {
       format = lib.concatStrings [
         "[▓](#a3aed2)"

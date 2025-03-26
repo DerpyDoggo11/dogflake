@@ -20,6 +20,9 @@
     python3 # Required for Arduino IDE
     flashprint # Flashforge 3D printer
 
+    # TODO implement Plasticity fix
+    freecad-wayland
+
     bun # All-in-one JS toolkit 
     #wrangler # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version

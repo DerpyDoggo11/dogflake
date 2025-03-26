@@ -114,7 +114,7 @@
       pulse.enable = true;
       wireplumber = {
         enable = true;
-        # Fix unnecessary power drain issue
+        # No unnecessary power drain
         extraConfig."10-disable-camera"."wireplumber.profiles".main."monitor.libcamera" = "disabled";
       };
     };

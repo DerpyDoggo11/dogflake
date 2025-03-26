@@ -35,7 +35,7 @@ export const notifications = () =>
 			const notifd = Notifd.get_default();
 			notifd.connect("notified", (_, id) => {
 				const notif = notifd.get_notification(id);
-				(!notif.summary.startsWith('Failed to connect to server')) // Hide annoying thunderbird message
+				(!notif.body.startsWith('Failed to connect to server')) // Hide annoying thunderbird message
 				&& setKey(id, notif)
 			});
 			notifd.connect("resolved", (_, id) =>

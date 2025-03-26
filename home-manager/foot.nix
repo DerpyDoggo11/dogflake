@@ -8,9 +8,9 @@
         pad = "5x5";
         font = "Iosevka:size=9";
       };
-      url.protocols = "http, https, ftp, ftps, sftp, file";
       cursor = {
         style = "beam";
+        unfocused-style = "unchanged";
         blink = true;
         beam-thickness = 1;
       };
@@ -31,12 +31,7 @@
 
         urls = "5e81ac"; # Blue <regular4>
       };
-
-      key-bindings = {
-        clipboard-copy = "Control+Shift+c XF86Copy";
-        clipboard-paste = "Control+v XF86Paste";
-        show-urls-launch = "Control+z";
-      };
+      key-bindings.clipboard-paste = "Control+v XF86Paste";
     };
   };
 }
