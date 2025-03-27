@@ -10,9 +10,9 @@ const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%
 export const notificationItem = (n: Notifd.Notification) =>
     <box vertical cssClasses={['notification']}>
         <box cssClasses={['header']}>
-            {(n.appIcon || n.desktopEntry) && <image
+            {(n.image || n.desktopEntry) && <image
                 cssClasses={['app-icon']}
-                iconName={n.appIcon || n.desktopEntry}
+                iconName={n.image || n.desktopEntry}
             />}
             <label
                 cssClasses={['app-name']}
@@ -37,8 +37,8 @@ export const notificationItem = (n: Notifd.Notification) =>
                     label={n.summary}
                     maxWidthChars={1} // Literally any value forces wrap for some reason
                 />
-                {n.image && n.get_hint('internal') && <image
-                    file={n.image}
+                {n.get_hint('internal-image-path') && <image
+                    file={n.get_hint('internal-image-path')?.get_string()[0]}
                     heightRequest={100}
                     widthRequest={100}
                 />}
