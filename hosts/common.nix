@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   users.users.alec = { # Default user
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "video" "dialout" ];
@@ -8,7 +8,7 @@
   boot = {
     loader = {
       systemd-boot = {
-        enable = lib.mkDefault true; # VM ignore this option
+        enable = true;
         configurationLimit = 2; # Save space in the boot partition
         editor = false;
       };
@@ -24,8 +24,11 @@
     kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
   };
 
-  # Networking w/ pure iwd
-  networking.wireless.iwd.enable = true;
+  # Networking w/ iwd
+  networking = {
+    useDHCP = true;
+    wireless.iwd.enable = true;
+  };
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -38,7 +41,6 @@
     warn-dirty = false;
   };
 
-  # Random machine optimization settings
   services.journald.extraConfig = "SystemMaxUse=1G";
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ]; # Optimize SSD trim
 

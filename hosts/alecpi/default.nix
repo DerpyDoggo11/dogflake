@@ -1,15 +1,15 @@
 { pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix # Hardware-specific settings
+    ./hardware-configuration.nix
     ../common.nix
   ];
+
+  networking.hostName = "alecpi";
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [
     git
   ];
-
-  networking.hostName = "alecpi"; # Hostname
 
   # SSH IP resolve shorthand by publishing its address on the network
   services.avahi = {

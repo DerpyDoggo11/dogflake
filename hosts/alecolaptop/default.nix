@@ -5,18 +5,16 @@
     ../../modules/desktop.nix
   ];
 
-  networking.hostName = "alecolaptop"; # Hostname
+  networking.hostName = "alecolaptop";
 
   environment.systemPackages = with pkgs; [
-    gimp # GNU image manipulation program
-    teams-for-linux # Unoffical MS Teams client
-    libreoffice # Preview Word documents and Excel sheets offline
+    gimp # Image editor
+    teams-for-linux # Unoffical Teams client
+    libreoffice # Preview Word documents & Excel sheets offline
 
     arduino-ide # Embedded microcontroller programming
     python3 # Required for Arduino IDE
   ];
-
-  home-manager.users.alec.imports = [ ./hm.nix ];
 
   # Bootloader settings (w/ AMD GPU support)
   boot.initrd = {
@@ -25,8 +23,7 @@
   };
 
   services = {
-    upower.enable = true; # For getting battery level (used by astal shell)
-    power-profiles-daemon.enable = false; # No power-profiles!
+    upower.enable = true; # For displaying battery level on astal shell
     tlp = { # Better battery life
       enable = true;
       settings = {

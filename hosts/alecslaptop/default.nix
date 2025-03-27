@@ -42,8 +42,6 @@
   ];
 
   programs.kdeconnect.enable = true; # Device integration
-
-  home-manager.users.alec.imports = [ ./hm.nix ];
   
   # Bootloader settings
   boot = {
@@ -62,8 +60,7 @@
   };
 
   services = {
-    upower.enable = true; # Battery level support (used by astal shell)
-    power-profiles-daemon.enable = false; # No power-profiles!
+    upower.enable = true; # For displaying battery level on astal shell
     tlp = { # Better battery life
       enable = true;
       settings = {
@@ -74,16 +71,5 @@
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       };
     };
-
-    # micro:bit workaround
-    udev.packages = [
-      (pkgs.writeTextFile {
-        name = "microbit_udev";
-        text = ''
-          SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", MODE="0664", TAG+="uaccess"
-        '';
-        destination = "/etc/udev/rules.d/50-microbit.rules";
-      })
-    ];
   };
 }

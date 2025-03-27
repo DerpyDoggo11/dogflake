@@ -3,24 +3,24 @@
 
   environment.systemPackages = with pkgs; [
     # Desktop services
-    libnotify # For ags internal notifications
-    mpc # CLI for the Ags music player
+    libnotify # Astal internal notifications
+    mpc # CLI for the astal
     cliphist # Clipboard history for astal
-    swww # Background manager w/ cool transitions
-    brightnessctl # Control screen brightness
+    swww # Wallpaper manager w/ cool transitions
+    brightnessctl # Screen brightness CLI for astal
     adwaita-icon-theme # Icons for GTK apps
     wl-screenrec # Screen recorder tool
-    grimblast # Screenshotting tool
-    wl-clipboard # Wayland clipboard utils
+    grimblast # Screenshot tool
+    wl-clipboard # Astal clipboard utils
 
     # Desktop applications
     swappy # Screenshot editor
     celluloid # GTK video player using mpv
-    gnome-text-editor # Clean, tabbed, GTK text editor
+    gnome-text-editor # GTK text editor
     gthumb # Image viewer & editor
-    nemo-with-extensions # Simple file manager
-    nemo-fileroller # File manager archive feature
-    file-roller # File manager archive feature part 2
+    nemo-with-extensions # File manager
+    nemo-fileroller # Create archives in file manager
+    file-roller # Open archives in file manager
     gnome-system-monitor # Task manager
 
     # Non-host-specific programs
@@ -102,23 +102,17 @@
   };
 
   services = {
-    flatpak.enable = true; # For running Sober (Roblox)
-    logrotate.enable = false; # Don't need this
+    flatpak.enable = true; # For running Sober
     gvfs.enable = true; # For nemo trash support
 
-    # Sound support 
+    # Sound support
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      wireplumber = {
-        enable = true;
-        # No unnecessary power drain
-        extraConfig."10-disable-camera"."wireplumber.profiles".main."monitor.libcamera" = "disabled";
-      };
+      wireplumber.enable = true;
     };
-    xserver.desktopManager.runXdgAutostartIfNone = true; # Autostart fcitx5
   };
 
   # Bluetooth support

@@ -5,7 +5,7 @@
     ../../modules/desktop.nix
   ];
 
-  home-manager.users.alec.imports = [ ./hm.nix ];
+  networking.hostName = "alecpc";
 
   # Packages to only be installed on this host
   environment.systemPackages = with pkgs; [
@@ -38,8 +38,6 @@
       };
     })
   ];
-
-  networking.hostName = "alecpc"; # Hostname
 
   # Nvidia options --
   hardware.graphics = {

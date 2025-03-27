@@ -1,9 +1,9 @@
-{ inputs, pkgs, ... }: {
+{ pkgs, ... }: {
   # Printing support
   services = {
     printing = { # CUPS
       enable = true;
-      drivers = with pkgs; [ hplip ]; # HP
+      drivers = [ pkgs.hplip ]; # HP
       listenAddresses = [ "*:631" ];
       allowFrom = [ "all" ];
       browsing = true;
