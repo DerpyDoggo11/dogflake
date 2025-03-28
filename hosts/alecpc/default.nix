@@ -18,7 +18,7 @@
     gnome-sound-recorder # Voice recording app
 
     # 3d modeling/printing
-    plasticity
+    (pkgs.plasticity.overrideAttrs (oldAttrs: { dontCheckForBrokenSymlinks = true; })) # TODO remove override when nixpkgs is repropogated
     flashprint # Flashforge 3D printer
 
     bun # All-in-one JS toolkit 

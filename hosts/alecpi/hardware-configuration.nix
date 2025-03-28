@@ -12,5 +12,5 @@
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = "aarch64-linux";
-  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 }
