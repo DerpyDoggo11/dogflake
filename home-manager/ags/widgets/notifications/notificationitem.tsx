@@ -60,7 +60,7 @@ export const notificationItem = (n: Notifd.Notification) =>
                                 , 100)
                              }}
                         >
-                            <label label={label.replaceAll('Activate', 'Open')} halign={CENTER}/>
+                            <label label={label.replace('Activate', 'Open')} halign={CENTER}/>
                         </button>
                     )}
                 </box>}

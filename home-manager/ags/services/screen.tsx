@@ -81,10 +81,10 @@ export const screenshot = (fullscreen: boolean) => {
 	// Disable blue light shader
 	exec("hyprctl keyword decoration:screen_shader ''"); 
 
-	const regionType = (fullscreen) ? 'screen' : 'area';
+	const regionType = (fullscreen) ? 'output' : 'area';
 
 	subprocess(
-		`bash -c 'grimblast --freeze copysave ${regionType} ${file}'`, // Run copy command
+		`grimblast --freeze copysave ${regionType} ${file}`, // Run copy command
 		(file) => {
 			execAsync("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl");
 			notifySend({

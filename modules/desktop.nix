@@ -65,7 +65,7 @@
     };
   };
 
-  # Keyboard layout & language (with Chinese support)
+  # Chinese keyboard layout support
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5"; 
@@ -76,6 +76,7 @@
         fcitx5-nord # Theme
 
         # Simplified Chinese
+        # TODO are these necessary
         fcitx5-rime
         fcitx5-mozc
       ];
