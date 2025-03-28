@@ -30,7 +30,7 @@ const nameSubstitute = (name: string) => {
 };
 
 export const SinkSelector = () =>
-	{bind(audio, 'speakers').as((speakers) => {
+	<box>{bind(audio, 'speakers').as((speakers) => {
 		const menu = new Gio.Menu();
 
 		speakers.forEach((speaker) => {
@@ -63,4 +63,4 @@ export const SinkSelector = () =>
 		/>;
 		button.insert_action_group('speakers', actionGroup);
 		return button;
-	})}
+	})}</box>

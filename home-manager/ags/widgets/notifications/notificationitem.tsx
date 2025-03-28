@@ -10,9 +10,9 @@ const time = (time: number) => GLib.DateTime.new_from_unix_local(time).format("%
 export const notificationItem = (n: Notifd.Notification) =>
     <box vertical cssClasses={['notification']}>
         <box cssClasses={['header']}>
-            {(n.image || n.desktopEntry) && <image
+            {(n.desktopEntry || n.image) && <image
                 cssClasses={['app-icon']}
-                iconName={n.image || n.desktopEntry}
+                iconName={n.desktopEntry || n.image}
             />}
             <label
                 cssClasses={['app-name']}
@@ -60,7 +60,7 @@ export const notificationItem = (n: Notifd.Notification) =>
                                 , 100)
                              }}
                         >
-                            <label label={label} halign={CENTER}/>
+                            <label label={label.replaceAll('Activate', 'Open')} halign={CENTER}/>
                         </button>
                     )}
                 </box>}

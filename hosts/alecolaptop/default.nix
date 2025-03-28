@@ -6,6 +6,7 @@
   ];
 
   networking.hostName = "alecolaptop";
+  home-manager.users.alec.imports = [ ./hm.nix ];
 
   environment.systemPackages = with pkgs; [
     gimp # Image editor
