@@ -19,7 +19,7 @@
     gnome-sound-recorder # Voice recording app
 
     # 3d modeling/printing
-    (pkgs.plasticity.overrideAttrs (oldAttrs: { dontCheckForBrokenSymlinks = true; })) # TODO remove override when nixpkgs is repropogated
+    plasticity
     flashprint # Flashforge 3D printer
 
     bun # All-in-one JS toolkit 
@@ -28,16 +28,6 @@
     jdk23 # Java JDK version 23 for compling & running jars
     nodejs_22 # JS runtime
     steam-run # Used for running some games
-    playit # Tunnel service for hosting MC servers locally
-  ];
-
-  # TODO remove me when playit is merged upstream
-  nixpkgs.overlays = [
-    (self: super: {
-      playit = import ../../overlays/playit.nix {
-        inherit (super) lib rustPlatform fetchFromGitHub stdenv;
-      };
-    })
   ];
 
   # Nvidia options --

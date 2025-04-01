@@ -24,6 +24,8 @@ const nameSubstitute = (name: string) => {
 		return String(name.split(' ').pop()); // Returns 'Speaker' or 'Headphones'
 	} else if (name.includes('Rembrandt Radeon High Definition Audio Controller')) {
 		return "Monitor Output"; // Monitor has a speaker
+	} else if (name == 'K38') {
+		return 'Bluetooth Speaker';
 	};
 	
 	return name;

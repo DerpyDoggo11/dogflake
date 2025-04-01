@@ -74,16 +74,11 @@
         fcitx5-gtk # For frontend & configtool
         fcitx5-chinese-addons # Pinyin
         fcitx5-nord # Theme
-
-        # Simplified Chinese
-        # TODO are these necessary
-        fcitx5-rime
-        fcitx5-mozc
       ];
 
-      waylandFrontend = true; # Hide warnings on Wayland
+      waylandFrontend = true;
       settings = {
-        inputMethod = { # Options in 'fcitx5/profile'
+        inputMethod = {
           "Groups/0" = {
             Name = "Default";
             "Default Layout" = "us";
