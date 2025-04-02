@@ -13,7 +13,7 @@ const playlistColors = ['CC7F1F', '649FEC', 'C363C7',    '8169E5',       '1A47D0
 export const updTrack = (direction: musicAction) => {
     exec('mpc pause');
     exec('mpc ' + direction);
-    
+
     // Start playing again
     execAsync('mpc play');
     isPlaying.set(true);
@@ -26,12 +26,12 @@ export const playPause = () => {
 
 export const chngPlaylist = (direction: musicAction) => {
     if (direction == 'next') {
-        (playlist.get() == playlists.length) 
+        (playlist.get() == playlists.length)
         ? (playlist.set(1)) // Go to first
         : (playlist.set(Number(playlist.get()) + 1));
     } else if (direction == 'prev') {
-        (playlist.get() == 1) 
-        ? (playlist.set(playlists.length)) // Go to last  
+        (playlist.get() == 1)
+        ? (playlist.set(playlists.length)) // Go to last
         : (playlist.set(Number(playlist.get()) - 1));
     }
 
@@ -62,7 +62,7 @@ export const initMedia = () => {
 
 
 export const Media = () =>
-    <box heightRequest={35} marginBottom={1}> 
+    <box heightRequest={35} marginBottom={1}>
         <overlay>
             <box
                 cssClasses={bind(isPlaying).as((v) => (v) ? ['playing', 'mediaBg'] : ['mediaBg'])}

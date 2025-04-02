@@ -36,7 +36,7 @@ export const notifySend = ({
         '--print-id',
         escapeShellArg(title),
         escapeShellArg(body ?? ''),
-        
+
         // Optional params
         appName && '--app-name=' + escapeShellArg(appName),
         category && '--category=' + escapeShellArg(category),

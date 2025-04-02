@@ -3,14 +3,14 @@
     enable = true;
     package = pkgs.vscodium;
     profiles.default = {
-      extensions = with pkgs.vscode-extensions; [ 
+      extensions = with pkgs.vscode-extensions; [
         arcticicestudio.nord-visual-studio-code # Nord theme
         jnoortheen.nix-ide # Nix syntax highlighting
         mechatroner.rainbow-csv # CSV syntax highlighting
-        ms-python.python # Rich Python support
-        davidanson.vscode-markdownlint # Markdown linter & spellcheck
-        yzhang.markdown-all-in-one # Markdown ToC, keybinds, preview support 
-        github.vscode-github-actions # Github Actions lint
+        ms-python.python # Python support
+        davidanson.vscode-markdownlint # Markdown lint & spellcheck
+        yzhang.markdown-all-in-one # Markdown ToC, keybinds, preview support
+        github.vscode-github-actions # Github Actions highlighting
         dbaeumer.vscode-eslint # ESlint integration
         ms-vscode.live-server # Local HTTP dev server
         svelte.svelte-vscode # Svelte support

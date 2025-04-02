@@ -4,7 +4,7 @@ import MprisService from 'gi://AstalMpris';
 
 const mpris = MprisService.get_default();
 
-export const Mpris = () => 
+export const Mpris = () =>
     <button
         cssClasses={['mpris']}
         onButtonPressed={() => mpris.players[0].play_pause()}

@@ -34,7 +34,7 @@ window {
   font-family: 'Sora';
 }
 
-calendar, .quickSettings { 
+calendar, .quickSettings {
   border: 0;
   border-radius: 0 5px 0 0;
   background-color: @dark2;

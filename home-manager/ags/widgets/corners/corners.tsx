@@ -9,7 +9,7 @@ export const Corner = (place: string) => {
     drawingArea.set_size_request(radius, radius);
     drawingArea.set_draw_func((_, cr) => {
         const cairoContext = cr as Cairo.Context;
-        
+
         switch (place) {
             case 'topleft':
                 cairoContext.arc(radius, radius, radius, Math.PI, 3 * Math.PI / 2);

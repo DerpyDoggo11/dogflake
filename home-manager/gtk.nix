@@ -13,7 +13,7 @@
 
     font = {
       name = "Ubuntu Nerd Font Propo Medium";
-      package = pkgs.nerd-fonts.ubuntu-sans; 
+      package = pkgs.nerd-fonts.ubuntu-sans;
       size = 11;
     };
     iconTheme = {

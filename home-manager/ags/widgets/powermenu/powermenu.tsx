@@ -25,7 +25,7 @@ export const powermenu = () =>
       visible={false}
       keymode={Astal.Keymode.ON_DEMAND}
       onShow={centerCursor}
-      
+
       onKeyPressed={(self, key) => {
          self.hide();
          switch (key) {

@@ -9,27 +9,27 @@ const bluetooth = Bluetooth.get_default()
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const battery = Battery.get_default();
 
-const BluetoothIcon = () => 
+const BluetoothIcon = () =>
   <image
     cssClasses={bind(bluetooth, 'isConnected').as((isConn) => (isConn) ? ['btConnected'] : [''])}
     iconName='bluetooth-active-symbolic'
     visible={bind(bluetooth, 'isPowered')}
   />
-  
+
 const BatteryWidget = () =>
   <image
     tooltipText={bind(battery, 'percentage').as((p) => (p * 100) + '%')}
     iconName={bind(battery, 'batteryIconName')}
   />
 
-const VolumeIcon = () => 
+const VolumeIcon = () =>
   <image iconName={bind(speaker, 'volumeIcon')}/>
 
-const DNDIcon = () => 
+const DNDIcon = () =>
   <image visible={bind(DND)} iconName='notifications-disabled-symbolic'/>
 
 export const Status = () =>
-  <button 
+  <button
     onButtonPressed={() => {
       App.get_window('calendar')?.hide();
       App.toggle_window('quickSettings');

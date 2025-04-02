@@ -12,7 +12,7 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
     <button
         onKeyPressed={(_, key) => {
             if (key == Gdk.KEY_Return) {
-                app.launch(); 
+                app.launch();
                 hide();
             }
         }}

@@ -33,7 +33,7 @@ export const toggleRec = () => (isRec.get()) ? stopRec() : startRec();
 
 const startRec = () => {
 	// Disable blue light shader
-	exec("hyprctl keyword decoration:screen_shader ''"); 
+	exec("hyprctl keyword decoration:screen_shader ''");
 
 	file = `${captureDir}/${now()}.mp4`; // Start recording
 	const audioOutput = exec("bash -c 'wpctl inspect @DEFAULT_AUDIO_SINK@ | grep node.name'")
@@ -79,7 +79,7 @@ export const screenshot = (fullscreen: boolean) => {
 	const file = `${screenshotDir}/${now()}.png`;
 
 	// Disable blue light shader
-	exec("hyprctl keyword decoration:screen_shader ''"); 
+	exec("hyprctl keyword decoration:screen_shader ''");
 
 	const regionType = (fullscreen) ? 'output' : 'area';
 

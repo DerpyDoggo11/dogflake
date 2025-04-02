@@ -7,12 +7,12 @@ const time = Variable<string>('').poll(1000,
   () => GLib.DateTime.new_now_local().format('%H\n%M')!
 );
 
-export const Time = () => 
-  <button 
+export const Time = () =>
+  <button
     onButtonPressed={() => {
       App.get_window("quickSettings")?.hide();
       App.toggle_window("calendar");
-    }} 
+    }}
     cssClasses={['time', 'timeBtn']}
     cursor={Gdk.Cursor.new_from_name('pointer', null)}
   >

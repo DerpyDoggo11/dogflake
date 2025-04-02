@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ 
+  imports = [
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/desktop.nix
@@ -17,11 +17,11 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
-    arduino-ide # Embedded microcontroller programming  
+    arduino-ide # Embedded microcontroller programming
     python3 # Required for Arduino IDE
     flashprint # Flashforge 3D printer
 
-    bun # All-in-one JS toolkit 
+    bun # All-in-one JS toolkit
     #wrangler # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars
@@ -31,7 +31,7 @@
 
   programs.kdeconnect.enable = true; # Device integration\
   programs.steam.protontricks.enable = true;
-  
+
   # Bootloader settings
   boot = {
     # Sea Islands Radeon support for Vulkan

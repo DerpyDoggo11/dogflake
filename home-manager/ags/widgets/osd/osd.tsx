@@ -21,7 +21,7 @@ export const osd = () =>
             brightness.subscribe((v) =>
                 osdChange('display-brightness-symbolic', v, self)
             );
-        
+
             Variable.derive([bind(speaker, 'volume'), bind(speaker, 'mute')], (v) => {
                 osdChange(speaker.volume_icon, v, self);
             });

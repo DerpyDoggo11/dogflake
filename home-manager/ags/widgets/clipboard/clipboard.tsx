@@ -6,7 +6,7 @@ const list = new Gtk.ListBox;
 
 list.connect('row-activated', async (_, row) => {
     App.get_window('clipboard')?.set_visible(false);
-    
+
     const id = row.child.name;
     await execAsync(`bash -c 'cliphist decode ${id} | wl-copy'`);
 });

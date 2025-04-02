@@ -4,7 +4,7 @@
       "        , preferred,     auto,     auto"
       "HDMI-A-1, 1920x1080@144, auto-left,  auto"
     ];
-    
+
     exec-once = [ # Autostart apps
       "[workspace 3 silent] microsoft-edge"
       "[workspace 4 silent] teams-for-linux"

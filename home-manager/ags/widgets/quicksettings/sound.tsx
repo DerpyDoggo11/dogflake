@@ -51,13 +51,13 @@ export const SinkSelector = () =>
 			)
 		});
 
-		speaker.connect('notify', (source) => 
+		speaker.connect('notify', (source) =>
 			(source.description) && (source.isDefault) && radioAction.set_state(GLib.Variant.new_string(source.description)
 		));
 		const actionGroup = new Gio.SimpleActionGroup();
 		actionGroup.add_action(radioAction);
 	
-		const button = <menubutton 
+		const button = <menubutton
 			menuModel={menu}
 			label="Select Audio Output"
 			cursor={Gdk.Cursor.new_from_name('pointer', null)}

@@ -5,7 +5,7 @@ import { bind } from 'astal';
 import { DND } from '../notifications/notifications';
 const { BOTTOM, LEFT } = Astal.WindowAnchor;
 
-const DNDToggle = () => 
+const DNDToggle = () =>
     <button
         widthRequest={60}
         onButtonPressed={() => DND.set(!DND.get())}

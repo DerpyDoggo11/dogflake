@@ -30,7 +30,7 @@
         gaps_out = 4;
         border_size = 3;
         layout = "dwindle";
-        
+
         # Window border colors
         "col.active_border" = "rgb(81A1C1) rgb(5E81AC)";
         "col.inactive_border" = "rgb(434C5E)";
@@ -80,9 +80,9 @@
       animations = {
         enabled = true;
         bezier = "decel, 0, 1, 0, 1";
-        
+
         # Animations
-        animation = [ 
+        animation = [
           "windows, 1, 4, decel, popin 80%"
           "fade, 1, 2.5, decel"
           " workspaces, 1, 4, decel, slide"
@@ -104,7 +104,7 @@
         # Window organization
         "workspace 4,class:^teams-for-linux$" # Teams on Workspace 4
         "workspace 6,class:thunderbird" # Thunderbird on Workspace 6
-        
+
         # No gaps when only window in workspace
         "prop bordersize 0, floating:0, onworkspace:w[tv1]"
         "prop rounding 0, floating:0, onworkspace:w[tv1]"

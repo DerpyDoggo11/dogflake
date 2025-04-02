@@ -6,14 +6,14 @@
       "Super, E, exec, microsoft-edge" # Browser
 
       # Desktop shell control
-      "Super, Period, exec, astal -t emojiPicker" # Emoji Picker
+      "Super, Period, exec, astal -t emojiPicker" # Emoji picker
       "Super, V, exec, astal -t clipboard" # Clipboard
       "SuperShift, S, exec, astal -t powermenu" # Power menu
       ",XF86PowerOff, exec, astal -t powermenu" # Power button opens power menu
       "Super, space, exec, astal -t launcher" # App laucher
       "Super, C, exec, astal hideNotif" # Hide oldest notification
 
-      "Super, R, exec, astal screenrec" # Toggle screen recording
+      "Super, R, exec, astal screenrec" # Screen record
       ",Print, exec, astal 'screenshot false'" # Custom-size screenshot
       "SHIFT, Print, exec, astal 'screenshot true'" # Fullscreen screenshot
 
@@ -56,7 +56,7 @@
       "SuperShift, mouse_down, movewindow, l"
       "ControlSuperShift, mouse_up, movetoworkspace, +1"
       "ControlSuperShift, mouse_down, movetoworkspace, -1"
-      
+
       "Super, F, togglefloating, activewindow" # Makes a window floating
     ];
 
@@ -77,7 +77,7 @@
     ];
 
     bindn = [
-      ", mouse:274, exec, wl-copy -pc" # Disables middle mouse paste
+      ", mouse:274, exec, wl-copy -pc" # Disable middle mouse paste
     ];
-  }; 
+  };
 }

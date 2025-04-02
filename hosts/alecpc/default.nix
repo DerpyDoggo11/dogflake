@@ -1,5 +1,5 @@
 { pkgs, config, ... }: {
-  imports = [ 
+  imports = [
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/desktop.nix
@@ -22,7 +22,7 @@
     plasticity
     flashprint # Flashforge 3D printer
 
-    bun # All-in-one JS toolkit 
+    bun # All-in-one JS toolkit
     (pkgs.wrangler.overrideAttrs (oldAttrs: { dontCheckForBrokenSymlinks = true; })) # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars

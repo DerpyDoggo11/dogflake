@@ -18,7 +18,7 @@
         alpha = 0.7;
         background = "2e3440"; # Black <regular0>
         foreground = "d8dee9"; # Grayish-white
-        
+
         # Normal/regular Nord colors
         regular0 = "2e3440";  # Black
         regular1 = "bf616a";  # Red

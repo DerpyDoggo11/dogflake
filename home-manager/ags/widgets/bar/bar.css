@@ -36,8 +36,8 @@
 
 
 /* Workspace list */
-.workspaceList { 
-    padding-top: 0.3rem; 
+.workspaceList {
+    padding-top: 0.3rem;
     min-height: 17rem; /* Combined height of workspace buttons */
 }
 #bar .workspaceBtn {

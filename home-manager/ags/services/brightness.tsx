@@ -25,7 +25,7 @@ export const monitorBrightness = () =>
         brightness.set(Number(v) / screenMax);
     });
 
-export const BrightnessSlider = () => 
+export const BrightnessSlider = () =>
     <box>
         <image iconName="display-brightness-symbolic"/>
         <slider

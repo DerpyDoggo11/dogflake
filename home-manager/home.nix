@@ -65,7 +65,7 @@
     extraOptions = [ "-preview-width" "200" "-max-items" "10" "-max-dedupe-search" "10" ];
   };
 
-  xdg = {    
+  xdg = {
     # Symlink all fonts
     dataFile."fonts" = {
       target = "./fonts";

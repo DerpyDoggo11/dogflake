@@ -13,7 +13,7 @@
     color: @white3;
 }
 
-#powermenu .sleep, #powermenu .reboot { 
+#powermenu .sleep, #powermenu .reboot {
     background-color: @blue2;
     box-shadow: 0 0 7px @blue2;
 }

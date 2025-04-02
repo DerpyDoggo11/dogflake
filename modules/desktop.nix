@@ -68,7 +68,7 @@
   # Chinese keyboard layout support
   i18n.inputMethod = {
     enable = true;
-    type = "fcitx5"; 
+    type = "fcitx5";
     fcitx5 = {
       addons = with pkgs; [
         fcitx5-gtk # For frontend & configtool
@@ -88,7 +88,7 @@
           "Groups/0/Items/1".Name = "pinyin";
         };
         globalOptions."Hotkey/TriggerKeys"."0" = "Control+Super+space";
-        
+
         addons = {
           clipboard.globalSection."TriggerKey" = ""; # Disable clipboard
           classicui.globalSection."Theme" = "Nord-Dark"; # Enable theme

@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   # Custom fonts
-  fonts.packages = with pkgs; [ 
+  fonts.packages = with pkgs; [
     iosevka # Best coding font
     font-awesome # For swappy TODO remove when swappy fork is finished
     wqy_zenhei # Chinese font
@@ -10,14 +10,14 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ 
+    extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
       xdg-desktop-portal-wlr
     ];
   };
 
-  # Make Electron apps use Wayland by default 
+  # Make Electron apps use Wayland by default
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services = {
