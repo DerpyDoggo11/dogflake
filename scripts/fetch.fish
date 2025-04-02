@@ -20,7 +20,8 @@ else
 end
 
 if test $minutes -le 10 # If there is only 1 digit in $minutes then we should remove the leading 0
-    set -l minutes (string sub --start 2 $minutes);
+    echo "hi"
+    set minutes (string sub -s 2 $minutes);
 end
 
 
