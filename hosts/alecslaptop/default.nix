@@ -29,8 +29,10 @@
     steam-run # Used for running some games
   ];
 
-  programs.kdeconnect.enable = true; # Device integration\
-  programs.steam.protontricks.enable = true;
+  programs = {
+    kdeconnect.enable = true; # Device integration
+    steam.protontricks.enable = true; # Fusion 360 support
+  };
 
   # Bootloader settings
   boot = {

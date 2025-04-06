@@ -63,6 +63,9 @@
         push.autoSetupRemote = true;
       };
     };
+
+    # Fix dynamic executables for Cloudflare & Workers development
+    nix-ld.enable = true;
   };
 
   # Chinese keyboard layout support

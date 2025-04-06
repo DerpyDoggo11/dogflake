@@ -72,7 +72,7 @@ const stopRec = () => {
 	});
 
 	// Re-enable blue light shader
-	exec("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl");
+	exec('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
 };
 
 export const screenshot = (fullscreen: boolean) => {
@@ -86,7 +86,7 @@ export const screenshot = (fullscreen: boolean) => {
 	subprocess(
 		`grimblast --freeze copysave ${regionType} ${file}`, // Run copy command
 		(file) => {
-			execAsync("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl");
+			execAsync('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
 			notifySend({
 				appName: 'Screenshot',
 				title: 'Screenshot Saved',
@@ -107,6 +107,6 @@ export const screenshot = (fullscreen: boolean) => {
 			});
 		},
 		// Selection was cancelled
-		() => execAsync("hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl")
+		() => execAsync('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl')
 	);
 };
