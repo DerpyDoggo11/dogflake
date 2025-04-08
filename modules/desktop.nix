@@ -10,7 +10,7 @@
     brightnessctl # Screen brightness CLI for astal
     adwaita-icon-theme # Icons for GTK apps
     wl-screenrec # Screen recorder tool
-    grimblast # Screenshot tool
+    hyprshot # Screenshot tool
     wl-clipboard # Astal clipboard utils
 
     # Desktop applications
@@ -40,6 +40,7 @@
     (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
     (writeScriptBin "data-sync" (builtins.readFile ../scripts/data-sync.fish))
     (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
+    (writeScriptBin "screenshot" (builtins.readFile ../scripts/screenshot.fish))
     (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
   ];
 

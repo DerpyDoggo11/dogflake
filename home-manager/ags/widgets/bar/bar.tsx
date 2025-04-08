@@ -4,7 +4,7 @@ import { Workspaces } from './modules/workspaces';
 import { Status } from './modules/statusmenu';
 import { Mpris } from './modules/mpris';
 import { Media } from '../../services/mediaplayer';
-import { RecordingIndicator } from '../../services/screen';
+import { RecordingIndicator } from '../../services/screenrec';
 const { TOP, BOTTOM, LEFT } = Astal.WindowAnchor;
 
 export const Bar = (monitor: number) =>

@@ -62,7 +62,7 @@
   # Astal clipboard management
   services.cliphist = {
     enable = true;
-    extraOptions = [ "-preview-width" "200" "-max-items" "10" "-max-dedupe-search" "10" ];
+    extraOptions = [ "-preview-width" "200" "-max-items" "20" "-max-dedupe-search" "20" ];
   };
 
   xdg = {

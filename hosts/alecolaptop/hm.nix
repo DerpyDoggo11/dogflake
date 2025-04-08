@@ -4,9 +4,8 @@
       "[workspace 3 silent] microsoft-edge"
     ];
 
-    bind = [ # Custom side mouse key for quick screenshots
-      "Super, D, exec, astal 'screenshot false'"
-    ];
+    # Custom side mouse key for quick screenshots
+    bind = [ "Super, D, exec, screenshot" ];
   };
 
   # For pmOS to optimize local connection

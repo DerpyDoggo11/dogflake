@@ -12,10 +12,8 @@
       ",XF86PowerOff, exec, astal -t powermenu" # Power button opens power menu
       "Super, space, exec, astal -t launcher" # App laucher
       "Super, C, exec, astal hideNotif" # Hide oldest notification
-
-      "Super, R, exec, astal screenrec" # Screen record
-      ",Print, exec, astal 'screenshot false'" # Custom-size screenshot
-      "SHIFT, Print, exec, astal 'screenshot true'" # Fullscreen screenshot
+      "Super, R, exec, astal record" # Screen record
+      ",Print, exec, screenshot" # Custom-size screenshot
 
       # Astal mpc player integration
       "ControlSuper, Period, exec, astal 'media next'" # Next track

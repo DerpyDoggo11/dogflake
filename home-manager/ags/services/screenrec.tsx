@@ -1,12 +1,11 @@
 
-import { AstalIO, exec, execAsync, GLib, subprocess, interval, bind, Variable } from 'astal';
+import { AstalIO, exec, GLib, interval, bind, Variable } from 'astal';
 import { Gtk } from 'astal/gtk4';
 import { notifySend } from './notifySend';
 import Hyprland from 'gi://AstalHyprland?version=0.1';
 
 const hypr = Hyprland.get_default();
 const captureDir = '/home/alec/Videos/Captures';
-const screenshotDir = '/home/alec/Pictures/Screenshots';
 
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S');
 
@@ -54,13 +53,13 @@ const stopRec = () => {
 	isRec.set(false);
 
 	notifySend({
-		appName: 'Screenrec',
-		title: 'Screen Recording Saved',
+		appName: 'Screen Recording',
+		title: 'Screen recording saved',
 		iconName: 'emblem-videos-symbolic',
 		actions: [
 			{
 				id: 1,
-				label: 'Open Captures folder',
+				label: 'Open Captures',
 				command: 'nemo ' + captureDir,
 			},
 			{
@@ -73,40 +72,4 @@ const stopRec = () => {
 
 	// Re-enable blue light shader
 	exec('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
-};
-
-export const screenshot = (fullscreen: boolean) => {
-	const file = `${screenshotDir}/${now()}.png`;
-
-	// Disable blue light shader
-	exec("hyprctl keyword decoration:screen_shader ''");
-
-	const regionType = (fullscreen) ? 'output' : 'area';
-
-	subprocess(
-		`grimblast --freeze copysave ${regionType} ${file}`, // Run copy command
-		(file) => {
-			execAsync('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
-			notifySend({
-				appName: 'Screenshot',
-				title: 'Screenshot Saved',
-				iconName: 'image-x-generic-symbolic',
-				image: file,
-				actions: [
-					{
-						id: 1,
-						label: 'Open Screenshots folder',
-						command: 'nemo ' + screenshotDir
-					},
-					{
-						id: 2,
-						label: 'Edit',
-						command: 'swappy -f ' + file
-					}
-				]
-			});
-		},
-		// Selection was cancelled
-		() => execAsync('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl')
-	);
 };

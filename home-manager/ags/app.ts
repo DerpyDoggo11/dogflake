@@ -17,7 +17,7 @@ import { emojiPicker } from './widgets/emojipicker';
 import { notifications, clearOldestNotification } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './services/notifySend';
-import { screenshot, toggleRec } from './services/screen';
+import { toggleRec } from './services/screenrec';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
 import { osd } from './widgets/osd/osd';
 import { powermenu } from './widgets/powermenu/powermenu';
@@ -71,10 +71,7 @@ App.start({
             case "hideNotif":
                 clearOldestNotification();
                 break;
-            case "screenshot":
-                screenshot((reqArgs[1] == 'true'))
-                break;
-            case "screenrec":
+            case "record":
                 toggleRec();
                 break;
             case "media":
