@@ -8,7 +8,7 @@ import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
 
 import { App, Gtk } from 'astal/gtk4';
-import { GLib, exec } from 'astal';
+import { exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
 import { cornerTop, cornerBottom } from './widgets/corners';
 import { calendar } from './widgets/calendar';
@@ -51,7 +51,7 @@ App.start({
             powermenu();
             emojiPicker();
             reminders();
-            initMedia(); // Mpd player
+            initMedia();
         }, 500); // Delay to fix widgets on slow devices
 
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
@@ -60,9 +60,9 @@ App.start({
         hypr.connect('monitor-added', (_, monitor) =>
             widgetMap.set(monitor.id, widgets(monitor.id))
         );
-        hypr.connect('monitor-removed', (_, id) => {
-            widgetMap.get(id)?.forEach((w) => w.disconnect);
-            widgetMap.delete(id);
+        hypr.connect('monitor-removed', (_, monitorID) => {
+            widgetMap.get(monitorID)?.forEach((w) => w.disconnect);
+            widgetMap.delete(monitorID);
         });
     },
     requestHandler(req, res) {
@@ -99,38 +99,30 @@ App.start({
 });
 
 const reminders = () => {
-    const day = GLib.DateTime.new_now_local().format("%a")!;
-    const folderSize = Number(exec(`bash -c "(du -sb /home/alec/Downloads | awk '{print $1}')"`));
-    let bodyText;
-
-    if (day == 'Mon') {
-        (folderSize > 10000000) // Greater than 10MB
-        bodyText = "Clean up some unused files to keep the system clean";
-    } else if (day == 'Fri') { // Send spotify cleanup message
+    const day = String(exec(`fish -c "echo (date '+%A')"`));
+    const folderSize = Number(exec(`fish -c "du -sb /home/alec/Downloads | awk '{print \$1}'"`));
+    
+    if (day == 'Friday') { // Send sync message
         notifySend({
-            appName: 'Spotify Sync',
-            title: 'Sync Spotify playlists',
-            iconName: 'spotify-symbolic',
-            body: 'Sync all Spotify playlists to have the latest music',
+            appName: 'Sync',
+            title: 'Sync system files',
+            iconName: 'emblem-synchronizing-symbolic',
             actions: [{
                 id: 1,
-                label: 'Sync Music',
-                command: 'foot -e fish -c spotify-sync'
+                label: 'Update & Sync',
+                command: 'foot -e fish -c sys-sync'
             }]
         });
     } else if (folderSize > 100000000) { // Greater than 100MB
-        bodyText = "The Downloads folder is large! Clean up some unused files.";
+        notifySend({
+            appName: 'System Cleanup',
+            title: 'Clean Downloads folder',
+            iconName: 'system-file-manager-symbolic',
+            actions: [{
+                id: 1,
+                label: 'View folder',
+                command: 'nemo /home/alec/Downloads'
+            }]
+        });
     };
-
-    (bodyText) && notifySend({
-        appName: 'System Cleanup',
-        title: 'Clean Downloads folder',
-        iconName: 'system-file-manager-symbolic',
-        body: bodyText,
-        actions: [{
-            id: 1,
-            label: 'View folder',
-            command: 'nemo /home/alec/Downloads'
-        }]
-    });
 };

@@ -16,7 +16,3 @@ for playlist in $playlists
     spotdl download "$url" --output "/home/alec/Music/$name"
     echo "[Spotify Playlist Updater] Finished downloading $name playlist"
 end
-
-# Update mpc database
-mpc update
-echo "[Spotify Playlist Updater] Updated mpc database"

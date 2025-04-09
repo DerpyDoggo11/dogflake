@@ -1,11 +1,4 @@
 { pkgs, ... }: {
-  # Custom fonts
-  fonts.packages = with pkgs; [
-    iosevka # Best coding font
-    font-awesome # For swappy TODO remove when swappy fork is finished
-    wqy_zenhei # Chinese font
-  ];
-
   programs.hyprland.enable = true;
 
   xdg.portal = {

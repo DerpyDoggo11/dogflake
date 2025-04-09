@@ -38,10 +38,17 @@
 
     # Scripts
     (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
-    (writeScriptBin "data-sync" (builtins.readFile ../scripts/data-sync.fish))
+    (writeScriptBin "sys-sync" (builtins.readFile ../scripts/sys-sync.fish))
     (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
     (writeScriptBin "screenshot" (builtins.readFile ../scripts/screenshot.fish))
-    (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
+    (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish)) # TODO remove me after finishing Pi server
+  ];
+
+  # Custom fonts
+  fonts.packages = with pkgs; [
+    iosevka # Best coding font
+    font-awesome # For swappy TODO remove when swappy fork is finished
+    wqy_zenhei # Chinese font
   ];
 
   home-manager = {
