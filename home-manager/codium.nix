@@ -19,8 +19,7 @@
         publisher = "ayhamalali";
         version = "2.6.6";
         sha256 = "sha256-hTMSi3UTbum+mht9ELWReAX8V5/s61/f7iFEj70xj7Q";
-      }
-      {
+      } {
         name = "vscode-nbt";
         publisher = "Misodee";
         version = "0.9.3";
@@ -28,37 +27,40 @@
       }];
 
       userSettings = {
-        "explorer.confirmDelete" = false;
-        "window.titleBarStyle" = "custom";
-        "git.enableSmartCommit" = true;
-        "git.confirmSync" = false;
-        "git.autofetch" = true;
-        "workbench.startupEditor" = "fish";
-        "editor.wordWrap" = "on";
-
-        "terminal.integrated.profiles.linux" = {
-          fish = {
+        editor = {
+          wordWrap = "on";
+          fontFamily = "'Iosevka'"; # Iosevka ftw
+          fontLigatures = "'calt'"; # Iosveka ligatures
+          confirmPasteNative = false;
+          minimap.enabled = false; # I don't use this
+        };
+        explorer = {
+          confirmDelete = false;
+          confirmDragAndDrop = false; # Disable popup
+        };
+        git = {
+          enableSmartCommit = true;
+          confirmSync = false;
+          autofetch = true;
+        };
+        workbench = {
+          startupEditor = "fish";
+          colorTheme = "Nord"; # Enable theme - requires VSCodium restart
+        };
+        terminal.integrated = {
+          defaultProfile.linux = "fish";
+          profiles.linux.fish = {
             path = "fish";
             icon = "terminal-bash";
           };
-          tmux = {
-            path = "tmux";
-            icon = "terminal-tmux";
-          };
         };
-        "terminal.integrated.defaultProfile.linux" = "fish";
-        "svelte.enable-ts-plugin" = true;
-        "editor.fontFamily" = "'Iosevka', 'monospace', monospace";
-        "editor.fontLigatures" = "'calt'";
-        "explorer.confirmPasteNative" = false;
-        "workbench.colorTheme" = "Nord"; # Enable Nord theme - requires VSCodium to restart
-        "workbench.editor.empty.hint" = "hidden";
-        "explorer.confirmDragAndDrop" = false;
-        "javascript.updateImportsOnFileMove.enabled" = "always";
-        "typescript.updateImportsOnFileMove.enabled" = "always";
-        "diffEditor.ignoreTrimWhitespace" = false;
-        "livePreview.serverRoot" = "public/";
-        "editor.minimap.enabled" = false;
+        svelte.enable-ts-plugin = true; # Svelte TS intellisense
+        window.titleBarStyle = "custom"; # Fix Wayland bug
+        javascript.updateImportsOnFileMove.enabled = "always";
+        typescript.updateImportsOnFileMove.enabled = "always";
+        diffEditor.ignoreTrimWhitespace = false; # Keep diff viewer clean
+        livePreview.serverRoot = "public/"; # For Journal writing previews
+        markdownlint.focusMode = true; # Don't show Markdown warnings when typing
       };
     };
   };
