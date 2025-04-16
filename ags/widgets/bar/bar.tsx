@@ -17,6 +17,11 @@ export default (monitor: number): Astal.Window =>
     visible
   >
     <box vertical>
+
+      <Time/>
+
+      <box vexpand/>
+
       <Workspaces/>
 
       <box vexpand/>
@@ -24,10 +29,8 @@ export default (monitor: number): Astal.Window =>
       <Media/>
       <Mpris/>
 
-      <box vexpand/>
-
       <RecordingIndicator/>
-      <Time/>
       <Status/>
+
     </box>
   </window>
