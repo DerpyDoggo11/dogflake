@@ -71,5 +71,5 @@ const stopRec = () => {
 	});
 
 	// Re-enable blue light shader
-	exec('hyprctl keyword decoration:screen_shader /home/dog/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
+	exec('hyprctl keyword decoration:screen_shader /home/dog/dogflake/home-manager/hypr/blue-light-filter.glsl');
 };
