@@ -62,16 +62,6 @@ export const initMedia = () => {
 
 
 export const Media = () =>
-    <box heightRequest={35} marginBottom={1}>
-        <overlay>
-            <box
-                cssClasses={bind(isPlaying).as((v) => (v) ? ['playing', 'mediaBg'] : ['mediaBg'])}
-                hexpand
-                setup={() =>
-                    playlistName.subscribe((w) =>
-                        App.apply_css(`#bar .mediaBg { background-color: #${playlistColors[playlists.indexOf(w)]}; }`)
-                )}
-            />
             <button
                 cssClasses={['media']}
                 type="overlay"
@@ -83,5 +73,3 @@ export const Media = () =>
                     (v) => (v) ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic')
                 }/>
             </button>
-        </overlay>
-    </box>

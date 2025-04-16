@@ -52,7 +52,7 @@ export default () =>
                         cssClasses={['searchBg']}
                         setup={() =>
                             playlistName.subscribe((w) =>
-                                App.apply_css(`.searchBg { background-image: url("file:///home/dog/Projects/flake/home-manager/wallpapers/${w}.jpg"); }`)
+                                App.apply_css(`.searchBg { background-image: url("file:///home/dog/dogflake/home-manager/wallpapers/${w}.jpg"); }`)
                             )
                         }
                     />
