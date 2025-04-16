@@ -27,7 +27,7 @@
 .time .date { font-size: 0.6rem; }
 .time .time {
     font-size: 1.45rem;
-    font-family: 'WenQuanYi Zen Hei Mono';
+    font-family: 'Liberation Mono';
     font-weight: bold;
     letter-spacing: 2px;
     color: @blue2;
