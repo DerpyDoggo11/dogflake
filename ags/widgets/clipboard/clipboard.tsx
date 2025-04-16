@@ -18,7 +18,7 @@ list.set_sort_func((a, b) => {
     return row2id - row1id;
 });
 
-monitorFile(`/home/alec/.cache/cliphist/db`, (_, event) =>
+monitorFile(`/home/dog/.cache/cliphist/db`, (_, event) =>
     (event == Gio.FileMonitorEvent.CHANGES_DONE_HINT) && refreshItems()
 );
 

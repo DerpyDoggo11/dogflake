@@ -1,5 +1,5 @@
-{ pkgs, lib, ... }: {
-  users.users.alec = { # Default user
+{ pkgs, ... }: {
+  users.users.dog = { # Default user
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "video" "dialout" "networkmanager" ];
   };

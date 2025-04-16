@@ -67,6 +67,12 @@
     wqy_zenhei # Chinese font
   ];
 
+  home-manager = {
+    backupFileExtension = "backup";
+    extraSpecialArgs = { inherit inputs; };
+    users.dog.imports = [ ../home-manager/home.nix ];
+  };
+
   programs = {
     git = {
       enable = true;
@@ -75,41 +81,14 @@
         color.ui = true;
         core.editor = "codium";
         credential.helper = "store";
-        github.user = "AmazinAxel"; # Github
-        user.name = "AmazinAxel"; # Git
+        github.user = "DerpyDoggo11"; # Github
+        user.name = "DerpyDoggo11"; # Git
         push.autoSetupRemote = true;
       };
     };
     nix-ld.enable = true; # For dynamic executables
   };
 
-  # Chinese input support
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5 = {
-      addons = with pkgs; [ fcitx5-chinese-addons fcitx5-nord ];
-      waylandFrontend = true;
-
-      settings = {
-        inputMethod = {
-          "Groups/0" = {
-            Name = "Default";
-            "Default Layout" = "us";
-            DefaultIM = "pinyin";
-          };
-          "Groups/0/Items/0".Name = "keyboard-us";
-          "Groups/0/Items/1".Name = "pinyin";
-        };
-        globalOptions."Hotkey/TriggerKeys"."0" = "Control+Super+space";
-
-        addons = {
-          clipboard.globalSection."TriggerKey" = ""; # Disable clipboard
-          classicui.globalSection."Theme" = "Nord-Dark"; # Enable theme
-        };
-      };
-    };
-  };
 
   services = {
     gvfs.enable = true; # For nemo trash support

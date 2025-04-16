@@ -17,8 +17,14 @@
   systemd.user.startServices = "sd-switch"; # Better system unit reloads
   home = {
     stateVersion = "23.05";
-    username = "alec";
-    homeDirectory = "/home/alec";
+    username = "dog";
+    homeDirectory = "/home/dog";
+
+    # Symlink all wallpapers
+    file."wallpapers" = {
+      target = "./wallpapers";
+      source = ./wallpapers;
+    };
 
     # Glboal cursor system
     pointerCursor = {
@@ -48,10 +54,9 @@
     userDirs = {
       enable = true; # Allows home-manager to manage & create user dirs
       createDirectories = true; # Auto-creates all directories
-      extraConfig.XDG_PROJECTS_DIR = "/home/alec/Projects";
-      extraConfig.XDG_CAPTURES_DIR = "/home/alec/Videos/Captures";
-      extraConfig.XDG_CLIPS_DIR = "/home/alec/Videos/Clips";
-      extraConfig.XDG_MODELS_DIR = "/home/alec/Models";
+      extraConfig.XDG_PROJECTS_DIR = "/home/dog/Projects";
+      extraConfig.XDG_CAPTURES_DIR = "/home/dog/Videos/Captures";
+      extraConfig.XDG_MODELS_DIR = "/home/dog/Models";
     };
 
     # Swappy config

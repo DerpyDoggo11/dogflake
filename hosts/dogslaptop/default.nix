@@ -6,30 +6,24 @@
     ../../modules/printing.nix
   ];
 
-  networking.hostName = "alecslaptop"; # Hostname
-  home-manager.users.alec.imports = [ ./hm.nix ];
+  networking.hostName = "dogslaptop"; # Hostname
+  home-manager.users.dog.imports = [ ./hm.nix ];
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [
     libsForQt5.kdenlive # Video editor
-    blockbench-electron # Minecraft 3D modeling app
-    gimp3 # Image editor
-    teams-for-linux # Unoffical Teams client
-    libreoffice # Preview Word documents and Excel sheets offline
+    gimp # GNU image manipulation program
+    teams-for-linux # Unoffical MS Teams client
     gnome-sound-recorder # Voice recording app
-    flashprint # Flashforge 3D printer
-    thunderbird # Email client
-    worldpainter # Minecraft world generator
-    jetbrains.idea-community # Jetbrains IDEA
-    maven # Java build tool
-    zulu24 # JDK
-    gpu-screen-recorder # Screen record & clipping tool - expose binary for use within Astal
+    arduino-ide # Embedded microcontroller programming
+    python3 # Required for Arduino IDE
 
     bun # All-in-one JS toolkit
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars
     nodejs_22 # JS runtime
     steam-run # Used for running some games
+    gpu-screen-recorder # Screen record & clipping tool - expose binary for use within Astal
   ];
   programs = {
     kdeconnect.enable = true; # Device integration

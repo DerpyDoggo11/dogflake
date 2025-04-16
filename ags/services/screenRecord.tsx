@@ -5,7 +5,7 @@ import { notifySend } from './notifySend';
 import Hyprland from 'gi://AstalHyprland?version=0.1';
 
 const hypr = Hyprland.get_default();
-const captureDir = '/home/alec/Videos/Captures';
+const captureDir = '/home/dog/Videos/Captures';
 
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S');
 
@@ -77,7 +77,5 @@ export const stopRec = () => {
 	execAsync(`bash -c "echo -n file:/${file} | wl-copy -t text/uri-list"`);
 
 	// Re-enable blue light shader
-	exec('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
-
-	startClippingService(); // Restart screen clipping
+	exec('hyprctl keyword decoration:screen_shader /home/dog/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
 };

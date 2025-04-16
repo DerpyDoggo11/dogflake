@@ -13,5 +13,8 @@ set playlists \
 for playlist in $playlists
     set name (echo $playlist | awk '{print $1}')
     set url (echo $playlist | awk '{print $2}')
-    spotdl download "$url" --output "/home/alec/Music/$name" # TODO put in shared USB music dir
+    echo ""
+    echo "[Spotify Playlist Updater] Downloading $name playlist"
+    spotdl download "$url" --output "/home/dog/Music/$name"
+    echo "[Spotify Playlist Updater] Finished downloading $name playlist"
 end

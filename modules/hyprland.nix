@@ -20,7 +20,7 @@
     enable = true;
     settings.default_session = {
       command = "Hyprland";
-      user = "alec";
+      user = "dog";
     };
   };
 }

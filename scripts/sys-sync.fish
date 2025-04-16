@@ -9,7 +9,7 @@ mpc update
 echo "[Sync] Pulled [song amount here] new tracks from Pi"
 
 ## Update system
-cd /home/alec/Projects/flake/
+cd /home/dog/Projects/flake/
 if test -n "(git status --porcelain)"
     echo "[Sync] System configuration has uncommited changes - not updating system"
 else

@@ -110,7 +110,7 @@ App.start({
 
 const reminders = () => {
     const day = String(exec(`fish -c "echo (date '+%A')"`));
-    const folderSize = Number(exec(`fish -c "du -sb /home/alec/Downloads | awk '{print \$1}'"`));
+    const folderSize = Number(exec(`fish -c "du -sb /home/dog/Downloads | awk '{print \$1}'"`));
     
     if (day == 'Friday') { // Send sync message
         notifySend({
@@ -131,7 +131,7 @@ const reminders = () => {
             actions: [{
                 id: 1,
                 label: 'View folder',
-                command: 'nemo /home/alec/Downloads'
+                command: 'nemo /home/dog/Downloads'
             }]
         });
     };

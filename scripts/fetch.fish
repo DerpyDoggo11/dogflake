@@ -25,7 +25,7 @@ end
 
 
 echo -e "$blue  ▗▄   $cyan▗▄ ▄▖     $white┌───────────────────────────────┐";
-echo -e "$blue ▄▄🬸█▄▄▄$cyan🬸█▛ $blue▃     $cyan alec$white@$blue$(hostname)"
+echo -e "$blue ▄▄🬸█▄▄▄$cyan🬸█▛ $blue▃     $cyan dog$white@$blue$(hostname)"
 echo -e "$cyan   ▟▛    ▜$blue▃▟🬕     $cyan CPU:$white $cpu%";
 echo -e "$cyan🬋🬋🬫█      $blue█🬛🬋🬋    $cyan Disk:$white $disk";
 echo -e "$cyan 🬷▛🮃$blue▙    ▟▛       $cyan Memory:$white $memory";
