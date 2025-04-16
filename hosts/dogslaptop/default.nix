@@ -6,20 +6,17 @@
     ../../modules/printing.nix
   ];
 
-  networking.hostName = "alecslaptop"; # Hostname
-  home-manager.users.alec.imports = [ ./hm.nix ];
+  networking.hostName = "dogslaptop"; # Hostname
+  home-manager.users.dog.imports = [ ./hm.nix ];
 
   # Packages to only be installed on this host
   environment.systemPackages = with pkgs; [
     libsForQt5.kdenlive # Video editor
-    blockbench-electron # Minecraft 3D modeling app
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
-    libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
     arduino-ide # Embedded microcontroller programming
     python3 # Required for Arduino IDE
-    flashprint # Flashforge 3D printer
 
     bun # All-in-one JS toolkit
     #wrangler # Local Workers development

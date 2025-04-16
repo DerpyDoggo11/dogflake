@@ -1,8 +1,8 @@
 {
   services.mpd = {
     enable = true;
-    musicDirectory = "/home/alec/Music";
-    playlistDirectory = "/home/alec/Music";
+    musicDirectory = "/home/dog/Music";
+    playlistDirectory = "/home/dog/Music";
 
     # Audio output declaration is required for volume control
     extraConfig = ''

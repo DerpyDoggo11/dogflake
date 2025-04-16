@@ -4,7 +4,7 @@
     settings = {
       format = lib.concatStrings [
         "[▓](#a3aed2)"
-        "[ Alec ](bg:#a3aed2 fg:#090c0c)"
+        "[ dog ](bg:#a3aed2 fg:#090c0c)"
         "[](bg:#769ff0 fg:#a3aed2)"
         "$directory"
         "[](fg:#769ff0 bg:#394260)"

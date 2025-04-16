@@ -13,6 +13,6 @@ for playlist in $playlists
     set url (echo $playlist | awk '{print $2}')
     echo ""
     echo "[Spotify Playlist Updater] Downloading $name playlist"
-    spotdl download "$url" --output "/home/alec/Music/$name"
+    spotdl download "$url" --output "/home/dog/Music/$name"
     echo "[Spotify Playlist Updater] Finished downloading $name playlist"
 end
