@@ -17,6 +17,11 @@ export const Bar = (monitor: number) =>
     visible
   >
     <box vertical>
+
+      <Time/>
+
+      <box vexpand/>
+
       <Workspaces/>
 
       <box vexpand/>
@@ -24,10 +29,8 @@ export const Bar = (monitor: number) =>
       <Media/>
       <Mpris/>
 
-      <box vexpand/>
-
       <RecordingIndicator/>
-      <Time/>
       <Status/>
+
     </box>
   </window>
