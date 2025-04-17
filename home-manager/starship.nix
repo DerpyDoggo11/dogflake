@@ -18,8 +18,6 @@
         "$docker_context"
         "$gradle"
         "$java"
-        "[](fg:#212736 bg:#1d2230)"
-        "$time"
         "[ ](fg:#1d2230)"
       ];
 

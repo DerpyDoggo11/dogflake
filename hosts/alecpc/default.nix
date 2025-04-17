@@ -33,7 +33,7 @@
   services = {
     flatpak.enable = true; # For running Sober
     xserver.videoDrivers = [ "nvidia" ]; # Load nvidia drivers
-  }
+  };
 
   # Nvidia options --
   hardware.graphics = {

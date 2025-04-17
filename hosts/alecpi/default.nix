@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../common.nix
@@ -24,7 +24,7 @@
   boot.loader = {
     generic-extlinux-compatible.enable = true;
     grub.enable = false;
-    systemd-boot.enable = false;
+    systemd-boot.enable = lib.mkForce false;
   };
 
   # Enable SSH support
