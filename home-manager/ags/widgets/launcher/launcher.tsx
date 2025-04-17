@@ -59,7 +59,7 @@ export const launcher = () =>
                         cssClasses={['searchBg']}
                         setup={() =>
                             playlistName.subscribe((w) =>
-                                App.apply_css(`.searchBg { background-image: url("file:///home/alec/Projects/flake/home-manager/wallpapers/${w}.jpg"); }`)
+                                App.apply_css(`.searchBg { background-image: url("file:///home/alec/Projects/flake/wallpapers/${w}.jpg"); }`)
                             )
                         }
                     />

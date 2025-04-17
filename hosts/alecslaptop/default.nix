@@ -13,7 +13,7 @@
   environment.systemPackages = with pkgs; [
     libsForQt5.kdenlive # Video editor
     blockbench-electron # Minecraft 3D modeling app
-    gimp # GNU image manipulation program
+    gimp # Image editor
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
