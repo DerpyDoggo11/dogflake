@@ -1,7 +1,17 @@
 #bar {
     background: @theme_bg_color;
+    opacity: 0.5;
     font-family: 'Sora';
 }
+
+#cornertop {
+    opacity: 0;
+}
+
+#cornerbottom {
+    opacity: 0;
+}
+
 
 #bar button {
     border-radius: 0;
