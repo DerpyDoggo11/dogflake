@@ -20,12 +20,6 @@
     username = "dog";
     homeDirectory = "/home/dog";
 
-    # Symlink all wallpapers
-    file."wallpapers" = {
-      target = "./wallpapers";
-      source = ./wallpapers;
-    };
-
     # Glboal cursor system
     pointerCursor = {
       name = "Bibata-Modern-Ice";
