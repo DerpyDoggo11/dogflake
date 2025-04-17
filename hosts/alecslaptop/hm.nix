@@ -1,6 +1,6 @@
 {
   wayland.windowManager.hyprland.settings = {
-    monitor = [ # https://wiki.hyprland.org/Configuring/Monitors/
+    monitor = [
       "        , preferred,     auto,     auto"
       "HDMI-A-1, 1920x1080@144, auto-left,  auto"
     ];

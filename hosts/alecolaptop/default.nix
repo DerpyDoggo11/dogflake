@@ -8,6 +8,7 @@
   networking.hostName = "alecolaptop";
   home-manager.users.alec.imports = [ ./hm.nix ];
 
+  # Host-specific packages
   environment.systemPackages = with pkgs; [
     gimp # Image editor
     teams-for-linux # Unoffical Teams client

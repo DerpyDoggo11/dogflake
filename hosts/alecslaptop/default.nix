@@ -9,7 +9,7 @@
   networking.hostName = "alecslaptop"; # Hostname
   home-manager.users.alec.imports = [ ./hm.nix ];
 
-  # Packages to only be installed on this host
+  # Host-specific packages
   environment.systemPackages = with pkgs; [
     libsForQt5.kdenlive # Video editor
     blockbench-electron # Minecraft 3D modeling app
@@ -22,7 +22,7 @@
     flashprint # Flashforge 3D printer
 
     bun # All-in-one JS toolkit
-    #wrangler # Local Workers development
+    (pkgs.wrangler.overrideAttrs (oldAttrs: { dontCheckForBrokenSymlinks = true; })) # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars
     nodejs_22 # JS runtime
@@ -46,7 +46,7 @@
   };
 
   hardware = { # OpenCL drivers for better hardware acceleration
-    graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
+    graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
     amdgpu.opencl.enable = true;
 
     # Fusion 360 support
@@ -58,6 +58,7 @@
   };
 
   services = {
+    flatpak.enable = true; # For running Sober
     upower.enable = true; # For displaying battery level on astal shell
     tlp = { # Better battery life
       enable = true;

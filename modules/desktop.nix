@@ -62,7 +62,6 @@
       enable = true;
       config = {
         init.defaultBranch = "main";
-        url."https://github.com/".insteadOf = [ "gh:" ];
         color.ui = true;
         core.editor = "codium";
         credential.helper = "store";
@@ -81,11 +80,7 @@
     enable = true;
     type = "fcitx5";
     fcitx5 = {
-      addons = with pkgs; [
-        fcitx5-gtk # For frontend & configtool
-        fcitx5-chinese-addons # Pinyin
-        fcitx5-nord # Theme
-      ];
+      addons = with pkgs; [ fcitx5-chinese-addons fcitx5-nord ];
 
       waylandFrontend = true;
       settings = {
@@ -109,7 +104,6 @@
   };
 
   services = {
-    flatpak.enable = true; # For running Sober
     gvfs.enable = true; # For nemo trash support
 
     # Sound support

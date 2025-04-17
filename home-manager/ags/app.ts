@@ -42,8 +42,8 @@ App.start({
         hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 
         // TODO
-        console.log(App.get_flags()) // ags run . --gtk4 --define isDesktop=true
-        App.set_property('isDesktop', true);
+        //console.log(App.get_flags()) // ags run . --gtk4 --define isDesktop=true
+        //App.set_property('isDesktop', true);
 
         setTimeout(() => {
             notifications();

@@ -8,7 +8,7 @@
   networking.hostName = "alecpc";
   home-manager.users.alec.imports = [ ./hm.nix ];
 
-  # Packages to only be installed on this host
+  # Host-specific packages
   environment.systemPackages = with pkgs; [
     libsForQt5.kdenlive # Video editor
     blockbench-electron # Minecraft 3D modeling app
@@ -30,13 +30,17 @@
     steam-run # Used for running some games
   ];
 
+  services = {
+    flatpak.enable = true; # For running Sober
+    xserver.videoDrivers = [ "nvidia" ]; # Load nvidia drivers
+  }
+
   # Nvidia options --
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [ nvidia-vaapi-driver vaapiVdpau libvdpau-va-gl ];
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   boot = {
     initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ]; # "nvidia-dkms" or "nvidia"?

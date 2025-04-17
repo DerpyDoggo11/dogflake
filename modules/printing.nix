@@ -1,5 +1,4 @@
 { pkgs, ... }: {
-  # Printing support
   services = {
     printing = { # CUPS
       enable = true;

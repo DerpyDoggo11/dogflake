@@ -45,8 +45,7 @@
           shadow_passes = 1;
           shadow_size = 7;
           shadow_color = "rgb(255,255,255)";
-        }
-        { # Minute
+        } { # Minute
           text = ''cmd[update:1000] echo -e "$(date +'%M')"'';
           color = "rgba(255, 255, 255, 0.5)";
           font_size = 200;

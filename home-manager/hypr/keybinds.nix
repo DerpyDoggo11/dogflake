@@ -1,7 +1,6 @@
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      # Quick app access
       "Super, return, exec, foot" # Terminal
       "Super, E, exec, microsoft-edge" # Browser
 

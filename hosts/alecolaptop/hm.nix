@@ -8,7 +8,7 @@
     bind = [ "Super, D, exec, screenshot" ];
   };
 
-  # For pmOS to optimize local connection
+  # pmOS optimize local connection
   programs.ssh = {
     enable = true;
     extraConfig = ''
