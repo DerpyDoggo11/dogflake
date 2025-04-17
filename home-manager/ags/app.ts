@@ -10,7 +10,6 @@ import powermenuStyle from './widgets/powermenu/powermenu.css';
 import { App, Gtk } from 'astal/gtk4';
 import { exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
-import { cornerTop, cornerBottom } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import clipboard from './widgets/clipboard/clipboard';
 import { emojiPicker } from './widgets/emojipicker';
@@ -31,9 +30,7 @@ const widgetMap: Map<number, Gtk.Widget[]> = new Map();
 
 // Per-monitor widgets
 const widgets = (monitor: number) => [
-    Bar(monitor),
-    cornerTop(monitor),
-    cornerBottom(monitor)
+    Bar(monitor)
 ];
 
 App.start({

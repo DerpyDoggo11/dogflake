@@ -1,9 +1,10 @@
 { # add this back for another monitor
   wayland.windowManager.hyprland.settings = {
-    #monitor = [ # https://wiki.hyprland.org/Configuring/Monitors/
-    #  "        , preferred,     auto,     auto"
-    #  "HDMI-A-1, 1920x1080@144, auto-left,  auto"
-    #];
+    monitor = [ # https://wiki.hyprland.org/Configuring/Monitors/
+      "        , highres,     auto,     1.5"
+      "HDMI-A-1, 1920x1080@144, auto-left,  auto"
+    ];
+
 
     exec-once = [ # Autostart apps
       #"[workspace 4 silent] discord"
