@@ -39,6 +39,7 @@
         preserve_split = true;
         force_split = 2;
       };
+      
       debug.disable_logs = false;
 
       misc = {
@@ -106,9 +107,18 @@
         "prop rounding 0, floating:0, onworkspace:f[1]"
       ];
 
+      # No glitchy shell animations
+      layerrule = [ "noanim, gtk-layer-shell" ];
+
+      xwayland = {
+        force_zero_scaling = true;
+      };
+
       env = [ # Some legacy apps still use xcursor
         "XCURSOR_THEME,Bibata-Modern-Ice"
+        "GDK_SCALE,2"
         "XCURSOR_SIZE,24"
+        
       ];
 
       exec-once = [
