@@ -10,7 +10,7 @@
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [
-    gimp # Image editor
+    gimp3 # Image editor
     teams-for-linux # Unoffical Teams client
     libreoffice # Preview Word documents & Excel sheets offline
 
