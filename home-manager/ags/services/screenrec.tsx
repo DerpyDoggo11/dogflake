@@ -1,5 +1,5 @@
 
-import { AstalIO, exec, GLib, interval, bind, Variable } from 'astal';
+import { AstalIO, exec, execAsync, GLib, interval, bind, Variable } from 'astal';
 import { Gtk } from 'astal/gtk4';
 import { notifySend } from './notifySend';
 import Hyprland from 'gi://AstalHyprland?version=0.1';
@@ -31,10 +31,9 @@ export const RecordingIndicator = () =>
 export const toggleRec = () => (isRec.get()) ? stopRec() : startRec();
 
 const startRec = () => {
-	// Disable blue light shader
-	exec("hyprctl keyword decoration:screen_shader ''");
+	exec("hyprctl keyword decoration:screen_shader ''"); // Disable blue light shader
 
-	file = `${captureDir}/${now()}.mp4`; // Start recording
+	file = `${captureDir}/${now()}.mp4`;
 	const audioOutput = exec("bash -c 'wpctl inspect @DEFAULT_AUDIO_SINK@ | grep node.name'")
 
 	rec = AstalIO.Process.subprocess(`
@@ -47,7 +46,7 @@ const startRec = () => {
 };
 
 const stopRec = () => {
-	rec?.signal(15); // Request wl-screenrec to finish gracefully
+	rec?.signal(15); // Request wl-screenrec to gracefully stop
 	rec = null;
 	if (iterable) iterable.cancel();
 	isRec.set(false);
@@ -69,6 +68,9 @@ const stopRec = () => {
 			}
 		]
 	});
+
+	// Copy video to clipboard
+	execAsync(`bash -c "echo -n file:/${file} | wl-copy -t text/uri-list"`);
 
 	// Re-enable blue light shader
 	exec('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
