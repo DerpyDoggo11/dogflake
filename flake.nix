@@ -10,7 +10,7 @@
     };
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, ... }: {
+  outputs = { home-manager, nixpkgs, ... }: {
     nixosConfigurations = {
       # Laptop config
       "alecslaptop" = nixpkgs.lib.nixosSystem {
