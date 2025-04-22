@@ -2,7 +2,6 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.variables = ["--all"];
 
     settings = {
       input = {
@@ -121,10 +120,8 @@
       ];
 
       exec-once = [
-        "fcitx5 -d" # Chinese support
-        "swww-daemon" # Wallpaper service
+        "fcitx5 -d" # Chinese input daemon
         "desktop-shell" # Custom Astal shell
-        "hyprlock" # Lockscreen
       ];
 
       workspace = [ # No gaps when only window in workspace

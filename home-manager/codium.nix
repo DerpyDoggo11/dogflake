@@ -30,7 +30,7 @@
         editor = {
           wordWrap = "on";
           fontFamily = "'Iosevka'"; # Iosevka ftw
-          fontLigatures = "'calt'"; # Iosveka ligatures
+          fontLigatures = "'calt'"; # Iosevka ligatures
           confirmPasteNative = false;
           minimap.enabled = false; # I don't use this
         };

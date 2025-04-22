@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hypr/hyprland.nix
     ./hypr/keybinds.nix
@@ -10,8 +10,6 @@
     ./gtk.nix
     ./mpd.nix
     ./starship.nix
-
-    inputs.ags.homeManagerModules.default
   ];
 
   programs.home-manager.enable = true;
@@ -28,34 +26,15 @@
       size = 24;
       gtk.enable = true;
     };
-
-    # Astal desktop shell
-    packages = [
-      (inputs.ags.lib.bundle {
-        inherit pkgs;
-        src = ./ags;
-        name = "desktop-shell"; # Executable name
-        gtk4 = true;
-        entry = "app.ts";
-
-        extraPackages = with inputs.ags.packages.${pkgs.system}; [
-          apps # App launcher
-          mpris # Media controls
-          hyprland # Workspace integration
-          bluetooth # Bluez integration
-          battery # For laptop only - not used on desktop
-          wireplumber # Used by pipewire
-          notifd # Desktop notification integration
-        ];
-      })
-      inputs.ags.packages.${pkgs.system}.io # Astal CLI for keybinds
-    ];
   };
 
   # Astal clipboard management
-  services.cliphist = {
-    enable = true;
-    extraOptions = [ "-preview-width" "200" "-max-items" "20" "-max-dedupe-search" "20" ];
+  services = {
+    swww.enable = true; # Auto-start wallpaper manager on boot
+    cliphist = {
+      enable = true;
+      extraOptions = [ "-preview-width" "200" "-max-items" "20" "-max-dedupe-search" "20" ];
+    };
   };
 
   xdg = {

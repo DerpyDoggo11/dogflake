@@ -1,13 +1,11 @@
-{ inputs, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   environment.systemPackages = with pkgs; [
     # Desktop services
     libnotify # Astal internal notifications
-    mpc # CLI for the astal
-    cliphist # Clipboard history for astal
-    swww # Wallpaper manager w/ cool transitions
-    brightnessctl # Screen brightness CLI for astal
+    mpc # CLI for Astal
+    brightnessctl # Screen brightness CLI for Astal
     adwaita-icon-theme # Icons for GTK apps
     wl-screenrec # Screen recorder tool
     hyprshot # Screenshot tool
@@ -36,6 +34,27 @@
       });
     })
 
+    # Astal desktop shell
+    (pkgs.ags.bundle {
+      src = ../ags;
+      enableGtk4 = true;
+
+      # TODO upstream change to use name instead of pname
+      name = "desktop-shell";
+      pname = "desktop-shell";
+
+      dependencies = with pkgs.astal; [
+        apps # App launcher
+        mpris # Media controls
+        hyprland # Workspace integration
+        bluetooth # Bluez integration
+        battery # For laptop only - not used on desktop
+        wireplumber # Used by pipewire
+        notifd # Desktop notification integration
+      ];
+    })
+    astal.io # Astal CLI for keybinds
+
     # Scripts
     (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
     (writeScriptBin "sys-sync" (builtins.readFile ../scripts/sys-sync.fish))
@@ -46,14 +65,13 @@
 
   # Custom fonts
   fonts.packages = with pkgs; [
-    iosevka # Best coding font
+    iosevka # Coding font
     font-awesome # For swappy TODO remove when swappy fork is finished
     wqy_zenhei # Chinese font
   ];
 
   home-manager = {
     backupFileExtension = "backup";
-    extraSpecialArgs = { inherit inputs; };
     users.alec.imports = [ ../home-manager/home.nix ];
   };
 
@@ -81,8 +99,8 @@
     type = "fcitx5";
     fcitx5 = {
       addons = with pkgs; [ fcitx5-chinese-addons fcitx5-nord ];
-
       waylandFrontend = true;
+
       settings = {
         inputMethod = {
           "Groups/0" = {
