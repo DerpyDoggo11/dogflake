@@ -120,6 +120,7 @@
       ];
 
       exec-once = [
+        "hyprlock" # Screen lock
         "fcitx5 -d" # Chinese input daemon
         "desktop-shell" # Custom Astal shell
       ];

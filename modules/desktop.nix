@@ -66,7 +66,7 @@
   # Custom fonts
   fonts.packages = with pkgs; [
     iosevka # Coding font
-    font-awesome # For swappy TODO remove when swappy fork is finished
+    font-awesome # For Swappy
     wqy_zenhei # Chinese font
   ];
 
