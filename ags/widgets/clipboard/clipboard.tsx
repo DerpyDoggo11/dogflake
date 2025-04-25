@@ -55,7 +55,7 @@ export default () => <window
                 list.get_row_at_index(1)?.activate()
                 break;
             case 101: // E - edit image with Swappy
-                const id = list.get_selected_row()?.child.name;
+                const id = list.get_selected_row()?.child.name ?? list.get_first_child()?.child.name;
 
                 const path = `/tmp/ags/cliphist/${id}.png`; // .png extension is assumed here
                 if (!GLib.file_test(path, GLib.FileTest.EXISTS)) break;

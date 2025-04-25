@@ -21,20 +21,20 @@
         ];
       };
 
-      # Desktop config
-      "alecpc" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/alecpc/default.nix
-          home-manager.nixosModules.home-manager
-        ];
-      };
-
       # Old laptop config
       "alecolaptop" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./hosts/alecolaptop/default.nix
+          home-manager.nixosModules.home-manager
+        ];
+      };
+
+      # Desktop config
+      "alecpc" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/alecpc/default.nix
           home-manager.nixosModules.home-manager
         ];
       };
