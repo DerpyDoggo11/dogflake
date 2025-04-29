@@ -1,12 +1,7 @@
 {
-  wayland.windowManager.hyprland.settings = {
-    exec-once = [ # Autostart apps
-      "[workspace 3 silent] microsoft-edge"
-    ];
-
-    # Custom side mouse key for quick screenshots
-    bind = [ "Super, D, exec, screenshot" ];
-  };
+  wayland.windowManager.hyprland.settings.exec-once = [ # Autostart apps
+    "[workspace 3 silent] microsoft-edge"
+  ];
 
   # pmOS optimize local connection
   programs.ssh = {

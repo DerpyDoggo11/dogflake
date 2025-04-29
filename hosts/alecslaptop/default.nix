@@ -17,9 +17,8 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
-    arduino-ide # Embedded microcontroller programming
-    python3 # Required for Arduino IDE
     flashprint # Flashforge 3D printer
+    thunderbird # Email client
 
     bun # All-in-one JS toolkit
     (pkgs.wrangler.overrideAttrs (oldAttrs: { dontCheckForBrokenSymlinks = true; })) # Local Workers development
@@ -29,10 +28,7 @@
     steam-run # Used for running some games
   ];
 
-  programs = {
-    kdeconnect.enable = true; # Device integration
-    steam.protontricks.enable = true; # Fusion 360 support
-  };
+  programs.kdeconnect.enable = true; # Device integration
 
   # Bootloader settings
   boot = {
@@ -48,13 +44,6 @@
   hardware = { # OpenCL drivers for better hardware acceleration
     graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
     amdgpu.opencl.enable = true;
-
-    # Fusion 360 support
-    spacenavd.enable = true;
-    graphics.enable32Bit = true; # is necessary?
-
-    # nix-shell -p gettext p7zip xorg.xrandr bc samba4Full cabextract wget virtualglLib lsb-release mokutil wineWowPackages.wayland
-    # curl -L https://raw.githubusercontent.com/cryinkfly/Autodesk-Fusion-360-for-Linux/main/files/setup/autodesk_fusion_installer_x86-64.sh -o "autodesk_fusion_installer_x86-64.sh" && chmod +x autodesk_fusion_installer_x86-64.sh && ./autodesk_fusion_installer_x86-64.sh --install --default
   };
 
   services = {

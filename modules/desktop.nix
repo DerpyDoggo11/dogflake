@@ -16,16 +16,15 @@
     celluloid # GTK video player using mpv
     gnome-text-editor # GTK text editor
     gthumb # Image viewer & editor
+    gnome-system-monitor # Task manager
     nemo-with-extensions # File manager
     nemo-fileroller # Create archives in file manager
     file-roller # Open archives in file manager
-    gnome-system-monitor # Task manager
 
     # Non-host-specific programs
     discord # Voice & video chat app
-    spotdl # Download Spotify playlists
+    spotdl # Download Spotify playlists (TODO remove me after finishing Pi sync)
     microsoft-edge # Browser
-    thunderbird # Email client
 
     # Wayland MC w/ key modifiers patch
     (prismlauncher.override {
@@ -89,7 +88,7 @@
       };
     };
 
-    # Fix dynamic executables for Cloudflare & Workers development
+    # Fix dynamic executables
     nix-ld.enable = true;
   };
 

@@ -13,7 +13,7 @@
   # Make Electron apps use Wayland by default
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-  # We use the hyprlock hm package which requires this
+  # We use the Hyprlock hm package which requires this
   security.pam.services.hyprlock = {};
 
   services = {
