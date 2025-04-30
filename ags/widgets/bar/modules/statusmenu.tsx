@@ -9,8 +9,6 @@ const bluetooth = Bluetooth.get_default()
 const speaker = Wp.get_default()?.audio.defaultSpeaker!;
 const battery = Battery.get_default();
 
-//const isDesktop = App.get_property('isDesktop');
-
 const BluetoothIcon = () =>
   <image
     cssClasses={bind(bluetooth, 'isConnected').as((isConn) => (isConn) ? ['btConnected'] : [''])}
@@ -18,13 +16,14 @@ const BluetoothIcon = () =>
     visible={bind(bluetooth, 'isPowered')}
   />
 
-const BatteryWidget = () => //{ 
-  //(isDesktop !== true) &&
+const BatteryWidget = () => 
     <image
       tooltipText={bind(battery, 'percentage').as((p) => (p * 100) + '%')}
       iconName={bind(battery, 'batteryIconName')}
+
+      // TODO check on desktop
+      visible={(!battery.percentage == 0)} // Hide widget if on desktop
     />
-  //};
 
 const VolumeIcon = () =>
   <image iconName={bind(speaker, 'volumeIcon')}/>

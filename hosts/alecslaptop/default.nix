@@ -19,6 +19,7 @@
     gnome-sound-recorder # Voice recording app
     flashprint # Flashforge 3D printer
     thunderbird # Email client
+    worldpainter # Minecraft world generator
 
     bun # All-in-one JS toolkit
     (pkgs.wrangler.overrideAttrs (oldAttrs: { dontCheckForBrokenSymlinks = true; })) # Local Workers development

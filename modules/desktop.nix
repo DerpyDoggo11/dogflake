@@ -37,10 +37,8 @@
     (pkgs.ags.bundle {
       src = ../ags;
       enableGtk4 = true;
-
-      # TODO upstream change to use name instead of pname
-      name = "desktop-shell";
       pname = "desktop-shell";
+      version = "1.0.0"; # Version won't change anything but is necessary for the build to pass
 
       dependencies = with pkgs.astal; [
         apps # App launcher

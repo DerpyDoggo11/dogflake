@@ -41,10 +41,6 @@ App.start({
     main() {
         hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 
-        // TODO
-        //console.log(App.get_flags()) // ags run . --gtk4 --define isDesktop=true
-        //App.set_property('isDesktop', true);
-
         setTimeout(() => {
             notifications();
             launcher();
@@ -61,9 +57,13 @@ App.start({
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
 
         // Monitor reactivity
-        hypr.connect('monitor-added', (_, monitor) =>
+        hypr.connect('monitor-added', (_, monitor) => {
+            // Fix duplicated bars TODO test me
+            widgetMap.get(monitor.id)?.forEach((w) => w.disconnect);
+            widgetMap.delete(monitor.id);
+        
             widgetMap.set(monitor.id, widgets(monitor.id))
-        );
+        });
         hypr.connect('monitor-removed', (_, monitorID) => {
             widgetMap.get(monitorID)?.forEach((w) => w.disconnect);
             widgetMap.delete(monitorID);
