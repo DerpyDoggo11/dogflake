@@ -3,13 +3,12 @@
     enable = true;
     settings = {
       format = lib.concatStrings [
-        "[▓](#a3aed2)"
-        "[ Alec ](bg:#a3aed2 fg:#090c0c)"
-        "[](bg:#769ff0 fg:#a3aed2)"
+        "[  Alec ](bg:#5e81ac fg:#d8dee9)"
+        "[](bg:#81a1c1 fg:#5e81ac)"
         "$directory"
-        "[](fg:#769ff0 bg:#394260)"
+        "[](fg:#81a1c1 bg:#4c566a)"
         "$git_branch"
-        "[](fg:#394260 bg:#212736)"
+        "[](fg:#4c566a bg:#3b4252)"
         "$nodejs"
         "$rust"
         "$golang"
@@ -18,68 +17,58 @@
         "$docker_context"
         "$gradle"
         "$java"
-        "[ ](fg:#1d2230)"
+        "[ ](fg:#3b4252)"
       ];
 
       directory = {
-        style = "fg:#e3e5e5 bg:#769ff0";
-        format = "[ $path ]($style)";
+        format = "[ $path ](fg:#d8dee9 bg:#81a1c1)";
         truncation_length = 4;
         truncation_symbol = "../";
       };
 
       git_branch = {
         symbol = "";
-        style = "bg:#394260";
-        format = "[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)";
+        format = "[[ $symbol $branch ](fg:#d8dee9 bg:#4c566a)](bg:#4c566a)";
       };
 
       nodejs = {
         symbol = "";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[ $symbol ($version) ](fg:#8fbcbb bg:#3b4252)](bg:#3b4252)";
       };
 
       rust = {
         symbol = "";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[ $symbol ($version) ](fg:#d8dee9 bg:#3b4252)](bg:#3b4252)";
       };
 
       golang = {
         symbol = "";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[ $symbol ($version) ](fg:#d8dee9 bg:#3b4252)](bg:#3b4252)";
       };
 
       php = {
         symbol = "";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[ $symbol ($version) ](fg:#d8dee9 bg:#3b4252)](bg:#3b4252)";
       };
 
       c = {
         symbol = "";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[ $symbol ($version) ](fg:#d8dee9 bg:#3b4252)](bg:#3b4252)";
       };
 
       docker_context = {
         symbol = "";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[ $symbol ($version) ](fg:#d8dee9 bg:#3b4252)](bg:#3b4252)";
       };
 
       gradle = {
         symbol = " ";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[ $symbol ($version) ](fg:#d8dee9 bg:#3b4252)](bg:#3b4252)";
       };
 
       java = {
         symbol = "";
-        style = "bg:#212736";
-        format = "[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)";
+        format = "[[ $symbol ($version) ](fg:#d8dee9 bg:#3b4252)](bg:#3b4252)";
       };
     };
   };
