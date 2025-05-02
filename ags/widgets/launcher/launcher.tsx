@@ -2,8 +2,6 @@ import Apps from 'gi://AstalApps'
 import { App, Astal, Gtk, Gdk } from 'astal/gtk4';
 import { bind } from 'astal';
 import { playlistName } from '../../services/mediaplayer';
-import Hyprland from 'gi://AstalHyprland?version=0.1';
-const hypr = Hyprland.get_default();
 
 const apps = new Apps.Apps()
 let textBox: Gtk.Entry;
@@ -14,7 +12,7 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
     <button
         onKeyPressed={(_, key) => {
             if (key == Gdk.KEY_Return) {
-                hypr.dispatch("exec", app.executable); // Run apps even when astal process is disowned from shell
+                app.launch();
                 hide();
             }
         }}
