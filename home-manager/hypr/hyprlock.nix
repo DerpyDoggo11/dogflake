@@ -34,7 +34,7 @@
 
       label = [ # Clock
         { # Hour
-          text = ''cmd[update:1000] echo -e "$(date +'%I')"'';
+          text = ''cmd[update:1000] echo -e "$(date +'%H')"'';
           color = "rgba(255, 255, 255, 0.5)";
           font_size = 200;
           font_family = "Liberation Mono";
