@@ -1,4 +1,5 @@
 {
+  services.kdeconnect.enable = true; # Device integration
   wayland.windowManager.hyprland.settings = {
     monitor = [
       "        , preferred,     auto,     auto"

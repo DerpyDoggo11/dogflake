@@ -29,8 +29,6 @@
     steam-run # Used for running some games
   ];
 
-  programs.kdeconnect.enable = true; # Device integration
-
   # Bootloader settings
   boot = {
     # Sea Islands Radeon support for Vulkan
