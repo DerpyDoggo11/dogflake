@@ -16,7 +16,7 @@
     celluloid # GTK video player using mpv
     gnome-text-editor # GTK text editor
     gthumb # Image viewer & editor
-    gnome-system-monitor # Task manager
+    mission-center # Task manager
     nemo-with-extensions # File manager
     nemo-fileroller # Create archives in file manager
     file-roller # Open archives in file manager

@@ -3,8 +3,8 @@
     enable = true;
     settings = {
       format = lib.concatStrings [
-        "[  Alec ](bg:#d8dee9 fg:#2e3440)"
-        "[](bg:#5e81ac fg:#d8dee9)"
+        "[  Alec ](bg:#eceff4 fg:#2e3440)"
+        "[](bg:#5e81ac fg:#eceff4)"
         "[](bg:#81a1c1 fg:#5e81ac)"
         "$directory"
         "$git_branch"
