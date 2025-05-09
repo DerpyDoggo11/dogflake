@@ -58,7 +58,7 @@ App.start({
 
         // Monitor reactivity
         hypr.connect('monitor-added', (_, monitor) => {
-            // Fix duplicated bars TODO test me
+            // TODO Fix duplicated bars
             widgetMap.get(monitor.id)?.forEach((w) => w.disconnect);
             widgetMap.delete(monitor.id);
         

@@ -20,9 +20,7 @@ const BatteryWidget = () =>
     <image
       tooltipText={bind(battery, 'percentage').as((p) => (p * 100) + '%')}
       iconName={bind(battery, 'batteryIconName')}
-
-      // TODO check on desktop
-      visible={(!battery.percentage == 0)} // Hide widget if on desktop
+      visible={(!battery.percentage == 0)} // Hide if on desktop
     />
 
 const VolumeIcon = () =>

@@ -17,10 +17,8 @@
     teams-for-linux # Unoffical MS Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
-
-    # 3d modeling/printing
-    plasticity
     flashprint # Flashforge 3D printer
+    thunderbird # Email client
 
     bun # All-in-one JS toolkit
     (pkgs.wrangler.overrideAttrs (oldAttrs: { dontCheckForBrokenSymlinks = true; })) # Local Workers development
