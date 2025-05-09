@@ -7,7 +7,7 @@ import osdStyle from './widgets/osd/osd.css';
 import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
 
-import { App, Gtk } from 'astal/gtk4';
+import { App, Astal } from 'astal/gtk4';
 import { exec } from 'astal';
 import { Bar } from './widgets/bar/bar';
 import { cornerTop, cornerBottom } from './widgets/corners';
@@ -27,10 +27,10 @@ const hypr = Hyprland.get_default();
 import { monitorBrightness } from './services/brightness';
 import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaplayer';
 
-const widgetMap: Map<number, Gtk.Widget[]> = new Map();
+const widgetMap: Map<number, Astal.Window[]> = new Map();
 
 // Per-monitor widgets
-const widgets = (monitor: number) => [
+const widgets = (monitor: number): Astal.Window[] => [
     Bar(monitor),
     cornerTop(monitor),
     cornerBottom(monitor)
@@ -57,15 +57,11 @@ App.start({
         monitorBrightness(); // Start brightness monitor for OSD subscribbable
 
         // Monitor reactivity
-        hypr.connect('monitor-added', (_, monitor) => {
-            // TODO Fix duplicated bars
-            widgetMap.get(monitor.id)?.forEach((w) => w.disconnect);
-            widgetMap.delete(monitor.id);
-        
+        hypr.connect('monitor-added', (_, monitor) =>
             widgetMap.set(monitor.id, widgets(monitor.id))
-        });
+        );
         hypr.connect('monitor-removed', (_, monitorID) => {
-            widgetMap.get(monitorID)?.forEach((w) => w.disconnect);
+            widgetMap.get(monitorID)?.forEach((w) => w.destroy());
             widgetMap.delete(monitorID);
         });
     },

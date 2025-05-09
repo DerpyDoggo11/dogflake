@@ -4,7 +4,7 @@ import { Astal, App } from 'astal/gtk4';
 import { Corner } from './corners';
 const { TOP, LEFT, BOTTOM } = Astal.WindowAnchor;
 
-export const cornerTop = (monitor: number) => (
+export const cornerTop = (monitor: number): Astal.Window => (
     <window
         name="cornertop"
         monitor={monitor}
@@ -16,7 +16,7 @@ export const cornerTop = (monitor: number) => (
     </window>
 );
 
-export const cornerBottom = (monitor: number) => (
+export const cornerBottom = (monitor: number): Astal.Window => (
     <window
         name="cornerbottom"
         monitor={monitor}

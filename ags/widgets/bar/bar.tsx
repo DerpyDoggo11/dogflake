@@ -7,7 +7,7 @@ import { Media } from '../../services/mediaplayer';
 import { RecordingIndicator } from '../../services/screenrec';
 const { TOP, BOTTOM, LEFT } = Astal.WindowAnchor;
 
-export const Bar = (monitor: number) =>
+export const Bar = (monitor: number): Astal.Window =>
   <window
     name="bar"
     monitor={monitor}
