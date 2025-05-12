@@ -76,5 +76,10 @@
     bindn = [
       ", mouse:274, exec, wl-copy -pc" # Disable middle mouse paste
     ];
+
+    bindr = [
+      "Super, Super_L, exec, astal -t quickSettings" # Quick settings toggle
+      ", SUPER_L, exec," # Fix mod key activating on other keybinds
+    ];
   };
 }

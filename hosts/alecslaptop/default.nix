@@ -28,6 +28,7 @@
     nodejs_22 # JS runtime
     steam-run # Used for running some games
   ];
+  programs.kdeconnect.enable = true; # Device integration
 
   # Bootloader settings
   boot = {
