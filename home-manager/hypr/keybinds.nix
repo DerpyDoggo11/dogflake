@@ -12,6 +12,7 @@
       "Super, space, exec, astal -t launcher" # App laucher
       "Super, C, exec, astal hideNotif" # Hide oldest notification
       "Super, R, exec, astal record" # Screen record
+      "Super, T, exec, astal -t quickSettings" # Quick settings toggle
       ",Print, exec, screenshot" # Custom-size screenshot
 
       # Astal mpc player integration
@@ -75,11 +76,6 @@
 
     bindn = [
       ", mouse:274, exec, wl-copy -pc" # Disable middle mouse paste
-    ];
-
-    bindr = [
-      "Super, Super_L, exec, astal -t quickSettings" # Quick settings toggle
-      ", SUPER_L, exec," # Fix mod key activating on other keybinds
     ];
   };
 }
