@@ -43,15 +43,15 @@
 
       misc = {
         vfr = true; # Better power usage
-        vrr = 1; # Always sync to monitor refresh rate, even when not fullscreened
+        vrr = 1; # Sync to monitor refresh rate, even when not fullscreen
         focus_on_activate = true;
         animate_manual_resizes = false;
         force_default_wallpaper = 0;
-        disable_autoreload = true; # This saves power!
+        disable_autoreload = true; # Save power
         disable_hyprland_logo = true;
         new_window_takes_over_fullscreen = 2;
         initial_workspace_tracking = 0; # Always open in current workspace
-        disable_hyprland_qtutils_check = true; # Hide annoying qtutils popup
+        disable_hyprland_qtutils_check = true; # Hide annoying Hypr popup
       };
       binds.scroll_event_delay = 0;
       ecosystem.no_update_news = true;
@@ -97,12 +97,7 @@
 
       windowrulev2 = [
         # Play Minecraft sounds even when not focused
-        "renderunfocused,title:(Minecraft 1)(.*)$"
         "renderunfocused,title:(Minecraft*)(.*)$"
-
-        # Window organization
-        "workspace 4,class:^teams-for-linux$" # Teams on Workspace 4
-        "workspace 6,class:thunderbird" # Thunderbird on Workspace 6
 
         # No gaps when only window in workspace
         "prop bordersize 0, floating:0, onworkspace:w[tv1]"
@@ -110,9 +105,6 @@
         "prop bordersize 0, floating:0, onworkspace:f[1]"
         "prop rounding 0, floating:0, onworkspace:f[1]"
       ];
-
-      # No glitchy shell animations
-      layerrule = [ "noanim, gtk-layer-shell" ];
 
       env = [ # Some legacy apps still use xcursor
         "XCURSOR_THEME,Bibata-Modern-Ice"

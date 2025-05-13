@@ -52,7 +52,7 @@ export const launcher = () =>
                && hide()
         }
     >
-        <box heightRequest={700}> {/* Allocate enough height to prevent resizing bug */}
+        <box heightRequest={700}>
             <box widthRequest={500} cssClasses={['launcher']} vertical valign={Gtk.Align.START}>
                 <overlay>
                     <box
