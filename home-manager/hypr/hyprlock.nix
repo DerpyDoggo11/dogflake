@@ -4,9 +4,9 @@
 
     settings = {
       background = {
-        #path = "screenshot";
-        path = "/home/dog/dogflake/wallpapers/Study.jpg";
-        blur_passes = 2;
+        #path = "/home/dog/dogflake/wallpapers/Study.jpg";
+        path = "screenshot";
+        blur_passes = 1;
         brightness = 0.7;
       };
 

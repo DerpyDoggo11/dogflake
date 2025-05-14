@@ -31,7 +31,7 @@ export const powermenu = () =>
          switch (key) {
             case 115: // S - sleep
                execAsync('hyprlock');
-               execAsync('systemctl suspend');
+               execAsync('systemctl hibernate');
                break;
             case 113: // Q - power off
                execAsync('systemctl poweroff')

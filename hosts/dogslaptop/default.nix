@@ -3,7 +3,6 @@
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/desktop.nix
-    ../../modules/printing.nix
   ];
 
   networking.hostName = "dogslaptop"; # Hostname
@@ -15,44 +14,25 @@
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     gnome-sound-recorder # Voice recording app
-    arduino-ide # Embedded microcontroller programming
-    python3 # Required for Arduino IDE
+    blender # 3d modelling software
+    guvcview # microscope/camera viewer
 
-    bun # All-in-one JS toolkit
-    #wrangler # Local Workers development
     jre # For Minecraft - uses the latest stable Java runtime version
     jdk23 # Java JDK version 23 for compling & running jars
-    nodejs_22 # JS runtime
-    steam-run # Used for running some games
+
   ];
 
-  programs = {
-    kdeconnect.enable = true; # Device integration
-    steam.protontricks.enable = true; # Fusion 360 support
-  };
-
   # Bootloader settings
-  boot = {
-    # Sea Islands Radeon support for Vulkan
-    kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
-
-    initrd = { # AMD GPU support
-      kernelModules = [ "amdgpu" ];
-      includeDefaultModules = false;
-    };
+  boot.initrd = { # AMD GPU support
+    kernelModules = [ "amdgpu" ];
+    includeDefaultModules = false;
   };
 
-  hardware = { # OpenCL drivers for better hardware acceleration
-    graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
-    amdgpu.opencl.enable = true;
-
-    # Fusion 360 support
-    spacenavd.enable = true;
-    graphics.enable32Bit = true; # is necessary?
-
-    # nix-shell -p gettext p7zip xorg.xrandr bc samba4Full cabextract wget virtualglLib lsb-release mokutil wineWowPackages.wayland
-    # curl -L https://raw.githubusercontent.com/cryinkfly/Autodesk-Fusion-360-for-Linux/main/files/setup/autodesk_fusion_installer_x86-64.sh -o "autodesk_fusion_installer_x86-64.sh" && chmod +x autodesk_fusion_installer_x86-64.sh && ./autodesk_fusion_installer_x86-64.sh --install --default
-  };
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+    HandleSuspendKey=ignore
+    HandleLidSwitch=ignore
+  '';
 
   services = {
     upower.enable = true; # For displaying battery level on astal shell
