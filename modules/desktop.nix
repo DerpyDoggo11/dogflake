@@ -54,7 +54,6 @@
 
     # Scripts
     (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
-    (writeScriptBin "sys-sync" (builtins.readFile ../scripts/sys-sync.fish))
     (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
     (writeScriptBin "screenshot" (builtins.readFile ../scripts/screenshot.fish))
     (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish)) # TODO remove me after finishing Pi server

@@ -7,7 +7,8 @@ set playlists \
     "Focus https://open.spotify.com/playlist/3Qk9br14pjEo2aRItDhb2f" \
     "Study https://open.spotify.com/playlist/0vvXsWCC9xrXsKd4FyS8kM" \
     "SynthAmbient https://open.spotify.com/playlist/4murW7FWRb0LFbG7eUwDy0" \
-    "Ambient https://open.spotify.com/playlist/07lYUEyTkWP3NqIa7Kzyqx"
+    "Ambient https://open.spotify.com/playlist/07lYUEyTkWP3NqIa7Kzyqx" \
+    "Vibes https://open.spotify.com/playlist/0WjZLaHqCNPALmqacbqLIf"
 
 # Loop & download each playlist
 for playlist in $playlists
@@ -18,3 +19,4 @@ for playlist in $playlists
     spotdl download "$url" --output "/home/dog/Music/$name"
     echo "[Spotify Playlist Updater] Finished downloading $name playlist"
 end
+mpc update

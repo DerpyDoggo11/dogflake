@@ -109,21 +109,9 @@ App.start({
 });
 
 const reminders = () => {
-    const day = String(exec(`fish -c "echo (date '+%A')"`));
     const folderSize = Number(exec(`fish -c "du -sb /home/dog/Downloads | awk '{print \$1}'"`));
     
-    if (day == 'Friday') { // Send sync message
-        notifySend({
-            appName: 'Sync',
-            title: 'Sync system files',
-            iconName: 'emblem-synchronizing-symbolic',
-            actions: [{
-                id: 1,
-                label: 'Update & Sync',
-                command: 'foot -e fish -c sys-sync'
-            }]
-        });
-    } else if (folderSize > 100000000) { // Greater than 100MB
+    if (folderSize > 100000000) { // Greater than 100MB
         notifySend({
             appName: 'System Cleanup',
             title: 'Clean Downloads folder',

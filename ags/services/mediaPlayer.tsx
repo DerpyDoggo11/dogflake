@@ -7,8 +7,8 @@ export const playlist: Variable<number> = new Variable(1);
 export const playlistName: Variable<string> = new Variable('');
 
 // These playlists match with the folder names in ~/Music
-const playlists =      ['Study',  'Focus',  'Synthwave', 'SynthAmbient', 'Ambient'];
-const playlistColors = ['CC7F1F', '649FEC', 'C363C7',    '8169E5',       '1A47D0']
+const playlists =      ['Study',  'Focus',  'Synthwave', 'SynthAmbient', 'Ambient', 'Vibes'];
+const playlistColors = ['CC7F1F', '649FEC', 'C363C7',    '8169E5', '1A47D0', 'C46D00'];
 
 export const updTrack = (direction: musicAction) => {
     exec('mpc pause');

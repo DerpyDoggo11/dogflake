@@ -9,6 +9,7 @@
       "Super, V, exec, astal -t clipboard" # Clipboard
       "SuperShift, S, exec, astal -t powermenu" # Power menu
       ",XF86PowerOff, exec, astal -t powermenu" # Power button opens power menu
+      
       "Super, space, exec, astal -t launcher" # App laucher
       "Super, C, exec, astal hideNotif" # Hide oldest notification
       "Super, R, exec, astal record" # Screen record & clipping

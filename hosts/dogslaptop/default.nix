@@ -3,7 +3,6 @@
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/desktop.nix
-    ../../modules/printing.nix
   ];
 
   networking.hostName = "dogslaptop"; # Hostname
@@ -15,14 +14,9 @@
     gimp # GNU image manipulation program
     teams-for-linux # Unoffical MS Teams client
     gnome-sound-recorder # Voice recording app
-    arduino-ide # Embedded microcontroller programming
-    python3 # Required for Arduino IDE
+    blender # 3d modelling software
+    guvcview # microscope/camera viewer
 
-    bun # All-in-one JS toolkit
-    jre # For Minecraft - uses the latest stable Java runtime version
-    jdk23 # Java JDK version 23 for compling & running jars
-    nodejs_22 # JS runtime
-    steam-run # Used for running some games
     gpu-screen-recorder # Screen record & clipping tool - expose binary for use within Astal
   ];
   programs = {
@@ -31,20 +25,20 @@
   };
 
   # Bootloader settings
-  boot = {
-    # Sea Islands Radeon support for Vulkan
-    kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
-
-    initrd = { # AMD GPU support
-      kernelModules = [ "amdgpu" ];
-      includeDefaultModules = false;
-    };
+  boot.initrd = { # AMD GPU support
+    kernelModules = [ "amdgpu" ];
+    includeDefaultModules = false;
   };
 
   hardware = { # OpenCL drivers for better hardware acceleration
     graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
     amdgpu.opencl.enable = true;
   };
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+    HandleSuspendKey=ignore
+    HandleLidSwitch=ignore
+  '';
 
   services = {
     flatpak.enable = true; # For running Sober

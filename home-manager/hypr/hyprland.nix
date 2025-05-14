@@ -122,9 +122,10 @@
       ];
 
       exec-once = [
-        "hyprlock" # Screen lock
-        "fcitx5 -d" # Chinese input daemon
+        "swww-daemon" # Wallpaper service
         "desktop-shell" # Custom Astal shell
+        "sleep 0.5 && hyprlock" # Lockscreen
+        
       ];
 
       workspace = [ # No gaps when only window in workspace
