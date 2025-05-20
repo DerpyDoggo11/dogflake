@@ -18,16 +18,15 @@
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest; # Use the latest Linux kernel version
     enableContainers = false;
-
-    # Speed up networking
-    kernelModules = [ "tcp_bbr" ];
-    kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
   };
 
   # Networking w/ iwd
-  networking = {
-    useDHCP = true;
-    wireless.iwd.enable = true;
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      IPv6.Enabled = true;
+      Settings.AutoConnect = true;
+    };
   };
 
   time.timeZone = "America/Los_Angeles";

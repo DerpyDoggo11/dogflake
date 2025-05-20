@@ -17,5 +17,5 @@ export const Mpris = () =>
         visible={bind(mpris, 'players').as((players) => (players.length > 0))}
         cursor={Gdk.Cursor.new_from_name('pointer', null)}
     >
-        <image iconName="emblem-music-symbolic"/>
+        <image iconName="folder-music-symbolic"/>
     </button>
