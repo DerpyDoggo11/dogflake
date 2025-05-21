@@ -8,6 +8,7 @@
     ./fish.nix
     ./foot.nix
     ./gtk.nix
+    ./librewolf.nix
     ./mpd.nix
     ./starship.nix
   ];
