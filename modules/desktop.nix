@@ -20,11 +20,9 @@
     nemo-with-extensions # File manager
     nemo-fileroller # Create archives in file manager
     file-roller # Open archives in file manager
-
-    # Non-host-specific programs
     discord # Voice & video chat app
+
     spotdl # Download Spotify playlists (TODO remove me after finishing Pi sync)
-    microsoft-edge # Browser
 
     # Wayland MC w/ key modifiers patch
     (prismlauncher.override {

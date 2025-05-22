@@ -2,7 +2,7 @@
   wayland.windowManager.hyprland.settings = {
     bind = [
       "Super, return, exec, foot" # Terminal
-      "Super, E, exec, microsoft-edge" # Browser
+      "Super, E, exec, librewolf" # Browser
 
       # Desktop shell control
       "Super, Period, exec, astal -t emojiPicker" # Emoji picker

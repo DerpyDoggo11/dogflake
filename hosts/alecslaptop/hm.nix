@@ -6,7 +6,7 @@
     ];
 
     exec-once = [ # Autostart apps
-      "[workspace 3 silent] microsoft-edge"
+      "[workspace 3 silent] librewolf"
       "[workspace 7 silent] thunderbird"
       "[workspace 8 silent] teams-for-linux"
     ];

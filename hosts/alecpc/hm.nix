@@ -31,7 +31,7 @@
 
     exec-once = [ # Autostart apps
       "[workspace 1 silent] discord"
-      "[workspace 4 silent] microsoft-edge"
+      "[workspace 4 silent] librewolf"
     ];
   };
 }

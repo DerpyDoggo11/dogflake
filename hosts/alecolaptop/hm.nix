@@ -1,6 +1,6 @@
 {
   wayland.windowManager.hyprland.settings.exec-once = [ # Autostart apps
-    "[workspace 3 silent] microsoft-edge"
+    "[workspace 3 silent] librewolf"
   ];
 
   # pmOS optimize local connection
