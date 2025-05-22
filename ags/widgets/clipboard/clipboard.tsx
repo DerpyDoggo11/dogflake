@@ -1,6 +1,6 @@
 import { execAsync, monitorFile, Gio, GLib } from 'astal';
 import { App, Gtk, Astal } from 'astal/gtk4';
-import { ClipboardItem } from './clipboarditem';
+import { ClipboardItem } from './clipboardItem';
 
 const list = new Gtk.ListBox;
 

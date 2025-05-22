@@ -13,11 +13,11 @@ import { Bar } from './widgets/bar/bar';
 import { cornerTop, cornerBottom } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import clipboard from './widgets/clipboard/clipboard';
-import { emojiPicker } from './widgets/emojipicker';
+import { emojiPicker } from './widgets/emojiPicker';
 import { notifications, clearOldestNotification } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './services/notifySend';
-import { toggleRec } from './services/screenrec';
+import { toggleRec } from './services/screenRecord';
 import { quickSettings } from './widgets/quicksettings/quicksettings';
 import { osd } from './widgets/osd/osd';
 import { powermenu } from './widgets/powermenu/powermenu';
@@ -25,7 +25,7 @@ import Hyprland from 'gi://AstalHyprland?version=0.1';
 const hypr = Hyprland.get_default();
 
 import { monitorBrightness } from './services/brightness';
-import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaplayer';
+import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaPlayer';
 
 const widgetMap: Map<number, Astal.Window[]> = new Map();
 

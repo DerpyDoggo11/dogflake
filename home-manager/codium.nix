@@ -32,7 +32,7 @@
           fontFamily = "'Iosevka'"; # Iosevka ftw
           fontLigatures = "'calt'"; # Iosevka ligatures
           confirmPasteNative = false;
-          minimap.enabled = false; # I don't use this
+          minimap.enabled = false;
         };
         explorer = {
           confirmDelete = false;

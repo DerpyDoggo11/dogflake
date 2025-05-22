@@ -1,6 +1,6 @@
 import { App, Astal } from 'astal/gtk4';
 import Notifd from 'gi://AstalNotifd';
-import { notificationItem } from './notificationitem';
+import { notificationItem } from './notificationItem';
 import { Variable, bind } from 'astal';
 const { TOP, RIGHT } = Astal.WindowAnchor;
 export const DND = Variable(false);

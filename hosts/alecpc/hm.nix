@@ -9,7 +9,6 @@
     ];
 
     workspace = [
-      # Monitor handling (supports up to two monitors: main screen on left/above, laptop screen on right/bottom)
       "1, monitor:HDMI-A-1"
       "2, monitor:HDMI-A-1"
       "3, monitor:HDMI-A-1"

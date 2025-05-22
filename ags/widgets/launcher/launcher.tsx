@@ -1,7 +1,7 @@
 import Apps from 'gi://AstalApps'
 import { App, Astal, Gtk, Gdk } from 'astal/gtk4';
 import { bind } from 'astal';
-import { playlistName } from '../../services/mediaplayer';
+import { playlistName } from '../../services/mediaPlayer';
 
 const apps = new Apps.Apps()
 let textBox: Gtk.Entry;

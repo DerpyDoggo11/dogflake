@@ -36,7 +36,7 @@
       src = ../ags;
       enableGtk4 = true;
       pname = "desktop-shell";
-      version = "1.0.0"; # Version won't change anything but is necessary for the build to pass
+      version = "1.0.0"; # Needed for build to pass
 
       dependencies = with pkgs.astal; [
         apps # App launcher
@@ -83,12 +83,10 @@
         push.autoSetupRemote = true;
       };
     };
-
-    # Fix dynamic executables
-    nix-ld.enable = true;
+    nix-ld.enable = true; # Fix dynamic executables
   };
 
-  # Chinese keyboard layout support
+  # Chinese input support
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";

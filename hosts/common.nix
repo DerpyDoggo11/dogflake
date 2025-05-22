@@ -19,7 +19,12 @@
     enableContainers = false;
   };
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.powersave = true;
+    wifi.backend = "iwd";
+  };
+
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -32,11 +37,9 @@
 
   services.journald.extraConfig = "SystemMaxUse=1G";
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ]; # Optimize SSD trim
-
-  # Disable all documentation
   documentation.enable = false;
 
-  environment.defaultPackages = []; # Remove unnecessary default packages
+  environment.defaultPackages = []; # These are unnecessary
   programs.command-not-found.enable = false; # Don't show recommendations when a package is missing
 
   system.stateVersion = "24.05";

@@ -12,7 +12,7 @@
 
   outputs = { home-manager, nixpkgs, ... }: {
     nixosConfigurations = {
-      # Laptop config
+      # Primary laptop
       "alecslaptop" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -39,7 +39,7 @@
         ];
       };
 
-      # Raspberry Pi
+      # Raspberry Pi home server
       "alecpi" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
