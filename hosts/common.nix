@@ -22,7 +22,6 @@
   networking.networkmanager = {
     enable = true;
     wifi.powersave = true;
-    wifi.backend = "iwd";
   };
 
   time.timeZone = "America/Los_Angeles";

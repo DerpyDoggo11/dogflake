@@ -23,7 +23,7 @@ const nameSubstitute = (name: string) => {
 	if (name.includes('HD Audio Controller')) {
 		return String(name.split(' ').pop()); // Returns 'Speaker' or 'Headphones'
 	} else if (name.includes('Rembrandt Radeon High Definition Audio Controller')) {
-		return "Monitor Output"; // Monitor has a speaker
+		return "Monitor"; // Monitor has a speaker
 	} else if (name == 'K38') {
 		return 'Bluetooth Speaker';
 	};
@@ -44,12 +44,11 @@ export const SinkSelector = () =>
 
 		const radioAction = Gio.SimpleAction.new_stateful('radio', new GLib.VariantType('s'), GLib.Variant.new_string('speakers'))
 		radioAction.activate(GLib.Variant.new_string(String(audio.get_default_speaker()?.description)))
-		radioAction.connect("notify::state", (action: Gio.Action) => {
-			let selSpeaker = action.get_state()?.unpack();
+		radioAction.connect("notify::state", (action: Gio.Action) =>
 			speakers.forEach((speaker) =>
-				(selSpeaker == speaker.description) && speaker.set_is_default(true)
+				(action.get_state().unpack() == speaker.description) && speaker.set_is_default(true)
 			)
-		});
+		);
 
 		speaker.connect('notify', (source) =>
 			(source.description) && (source.isDefault) && radioAction.set_state(GLib.Variant.new_string(source.description)
@@ -59,7 +58,7 @@ export const SinkSelector = () =>
 	
 		const button = <menubutton
 			menuModel={menu}
-			label="Select Audio Output"
+			label={bind(audio, 'defaultSpeaker').as((speaker) => `Select Audio Output (${nameSubstitute(speaker.description)})`)}
 			cursor={Gdk.Cursor.new_from_name('pointer', null)}
 			hexpand
 		/>;
