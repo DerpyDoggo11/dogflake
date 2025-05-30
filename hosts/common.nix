@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   users.users.alec = { # Default user
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "video" "dialout" "networkmanager" ];
@@ -19,10 +19,19 @@
     enableContainers = false;
   };
 
-  networking.networkmanager = {
-    enable = true;
-    wifi.powersave = true;
+  networking = {
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        IPv6.Enabled = true;
+        Settings.AutoConnect = true;
+      };
+    };
+    useNetworkd = true;
+    #useDHCP = false;
+    #dhcpcd.enable = false;
   };
+  systemd.network.enable = true;
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -38,7 +47,7 @@
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ]; # Optimize SSD trim
   documentation.enable = false;
 
-  environment.defaultPackages = []; # These are unnecessary
+  environment.defaultPackages = lib.mkForce [];
   programs.command-not-found.enable = false; # Don't show recommendations when a package is missing
 
   system.stateVersion = "24.05";

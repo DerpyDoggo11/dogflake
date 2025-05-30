@@ -35,7 +35,7 @@ export const notificationItem = (n: Notifd.Notification) =>
                     wrap
                     xalign={0}
                     label={n.summary}
-                    maxWidthChars={1} // Literally any value forces wrap for some reason
+                    maxWidthChars={10}
                 />
                 {n.get_hint('internal-image-path') && <image
                     file={n.get_hint('internal-image-path')?.get_string()[0]}
@@ -46,7 +46,7 @@ export const notificationItem = (n: Notifd.Notification) =>
                     wrap
                     xalign={0}
                     label={n.body}
-                    maxWidthChars={1} // Literally any value forces wrap for some reason
+                    maxWidthChars={10}
                 />}
                 {n.get_actions().length > 0 && <box cssClasses={['actions']} spacing={5}>
                     {n.get_actions().map(({ label, id }) =>

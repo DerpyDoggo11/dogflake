@@ -14,7 +14,7 @@ import { cornerTop, cornerBottom } from './widgets/corners';
 import { calendar } from './widgets/calendar';
 import clipboard from './widgets/clipboard/clipboard';
 import { emojiPicker } from './widgets/emojiPicker';
-import { notifications, clearOldestNotification } from './widgets/notifications/notifications';
+import { notifications, clearOldestNotification, DND } from './widgets/notifications/notifications';
 import { launcher } from './widgets/launcher/launcher';
 import { notifySend } from './services/notifySend';
 import { toggleRec } from './services/screenRecord';
@@ -92,6 +92,9 @@ App.start({
                         chngPlaylist('prev');
                         break;
                 };
+                break;
+            case "toggleDND":
+                DND.set(!DND.get())
                 break;
         };
         res("Request handled successfully");
