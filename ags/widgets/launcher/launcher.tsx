@@ -21,18 +21,12 @@ const AppBtn = ({ app }: { app: Apps.Application }) =>
     >
         <box>
             <image iconName={app.iconName}/>
-            <box valign={Gtk.Align.CENTER} vertical>
+            <box valign={Gtk.Align.CENTER}>
                 <label
                     cssClasses={['name']}
                     xalign={0}
                     label={app.name}
                 />
-                {app.description && <label
-                    cssClasses={['description']}
-                    wrap
-                    xalign={0}
-                    label={app.description}
-                />}
             </box>
         </box>
     </button>
