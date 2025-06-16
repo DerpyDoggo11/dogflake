@@ -20,6 +20,9 @@
     flashprint # Flashforge 3D printer
     thunderbird # Email client
     worldpainter # Minecraft world generator
+    jetbrains.idea-community # Jetbrains IDEA
+    maven # Java build tool
+    zulu24 # JDK
 
     bun # All-in-one JS toolkit
     jre # For Minecraft - uses the latest stable Java runtime version
