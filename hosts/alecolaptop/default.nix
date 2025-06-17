@@ -13,6 +13,7 @@
     gimp3 # Image editor
     teams-for-linux # Unoffical Teams client
     libreoffice # Preview Word documents & Excel sheets offline
+    thunderbird # Email client
 
     arduino-ide # Embedded microcontroller programming
     python3 # Required for Arduino IDE
@@ -36,5 +37,16 @@
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       };
     };
+
+    # For micro:bit development
+    udev.packages = [
+      (pkgs.writeTextFile {
+        name = "microbit_udev";
+        text = ''
+          SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", MODE="0664", TAG+="uaccess"
+        '';
+        destination = "/etc/udev/rules.d/50-microbit.rules";
+      })
+    ];
   };
 }
