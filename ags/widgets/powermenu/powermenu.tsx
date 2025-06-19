@@ -18,7 +18,7 @@ const centerCursor = () => {
    hypr.dispatch('movecursor', `${x} ${y}`);
 };
 
-export const powermenu = () =>
+export default () =>
    <window
       name="powermenu"
       application={App}

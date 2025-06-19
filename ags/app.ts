@@ -6,21 +6,23 @@ import notificationStyle from './widgets/notifications/notifications.css';
 import osdStyle from './widgets/osd/osd.css';
 import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
+import recordStyle from './widgets/record/record.css';
 
 import { App, Astal } from 'astal/gtk4';
 import { exec } from 'astal';
-import { Bar } from './widgets/bar/bar';
-import { cornerTop, cornerBottom } from './widgets/corners';
-import { calendar } from './widgets/calendar';
+import Bar from './widgets/bar/bar';
+import calendar from './widgets/calendar';
 import clipboard from './widgets/clipboard/clipboard';
-import { emojiPicker } from './widgets/emojiPicker';
+import emojiPicker from './widgets/emojiPicker';
+import { cornerTop, cornerBottom } from './widgets/corners';
 import { notifications, clearOldestNotification, DND } from './widgets/notifications/notifications';
-import { launcher } from './widgets/launcher/launcher';
+import launcher from './widgets/launcher/launcher';
 import { notifySend } from './services/notifySend';
-import { toggleRec } from './services/screenRecord';
-import { quickSettings } from './widgets/quicksettings/quicksettings';
-import { osd } from './widgets/osd/osd';
-import { powermenu } from './widgets/powermenu/powermenu';
+import recordMenu from './widgets/record/record';
+import { isRec, stopRec } from './services/screenRecord';
+import quickSettings from './widgets/quicksettings/quicksettings';
+import osd from './widgets/osd/osd';
+import powermenu from './widgets/powermenu/powermenu';
 import Hyprland from 'gi://AstalHyprland?version=0.1';
 const hypr = Hyprland.get_default();
 
@@ -37,7 +39,7 @@ const widgets = (monitor: number): Astal.Window[] => [
 ];
 
 App.start({
-    css: style + lancherStyle + clipboardStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
+    css: style + lancherStyle + clipboardStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + recordStyle + powermenuStyle,
     main() {
         hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 
@@ -47,6 +49,7 @@ App.start({
             calendar();
             clipboard();
             quickSettings();
+            recordMenu();
             osd();
             powermenu();
             emojiPicker();
@@ -72,7 +75,11 @@ App.start({
                 clearOldestNotification();
                 break;
             case "record":
-                toggleRec();
+                if (isRec.get() == true) { // If recording, stop
+                    stopRec();
+                } else { // Show record menu to clip or begin recording
+                    App.toggle_window("recordMenu");
+                };
                 break;
             case "media":
                 switch (reqArgs[1]) {

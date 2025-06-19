@@ -15,7 +15,7 @@ const DNDToggle = () =>
         <image iconName="notifications-disabled-symbolic"/>
     </button>
 
-export const quickSettings = () =>
+export default () =>
     <window
         name="quickSettings"
         anchor={BOTTOM | LEFT}

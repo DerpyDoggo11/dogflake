@@ -7,7 +7,6 @@
     mpc # CLI for Astal
     brightnessctl # Screen brightness CLI for Astal
     adwaita-icon-theme # Icons for GTK apps
-    wl-screenrec # Screen recorder tool
     hyprshot # Screenshot tool
     wl-clipboard # Astal clipboard utils
 

@@ -1,0 +1,12 @@
+#recordMenu .header {
+    font-family: 'Hammersmith One';
+    color: @light1;
+    font-weight: 100;
+    font-size: 1.5rem;
+}
+
+#recordMenu {
+    background-color: @theme_bg_color;
+    border-radius: 1rem;
+    padding: 1rem;
+}

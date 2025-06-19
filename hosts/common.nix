@@ -19,19 +19,13 @@
     enableContainers = false;
   };
 
-  networking = {
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        IPv6.Enabled = true;
-        Settings.AutoConnect = true;
-      };
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      IPv6.Enabled = true;
+      Settings.AutoConnect = true;
     };
-    useNetworkd = true;
-    #useDHCP = false;
-    #dhcpcd.enable = false;
   };
-  systemd.network.enable = true;
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";

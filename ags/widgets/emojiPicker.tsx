@@ -5,7 +5,7 @@ const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor;
 
 const hide = () => App.get_window('emojiPicker')?.hide();
 
-export const emojiPicker = () =>
+export default () =>
   <window
     name="emojiPicker"
     keymode={Astal.Keymode.ON_DEMAND}

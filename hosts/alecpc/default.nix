@@ -3,6 +3,7 @@
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/desktop.nix
+    ../../modules/screenrec.nix
   ];
 
   networking.hostName = "alecpc";
@@ -37,9 +38,6 @@
     enable32Bit = true;
     extraPackages = with pkgs; [ nvidia-vaapi-driver vaapiVdpau libvdpau-va-gl ];
   };
-
-  # Clipping software
-  programs.gpu-screen-recorder.enable = true;
 
   boot = {
     initrd.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ]; # "nvidia-dkms" or "nvidia"?

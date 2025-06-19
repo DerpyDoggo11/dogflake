@@ -9,8 +9,11 @@ const captureDir = '/home/alec/Videos/Captures';
 
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S');
 
-const isRec: Variable<boolean> = new Variable(false);
+export const isRec: Variable<boolean> = new Variable(false);
 const recTimer: Variable<number> = new Variable(0);
+
+export const recMic: Variable<boolean> = new Variable(false);
+export const recQuality: Variable<string> = new Variable('ultra')
 
 let rec: AstalIO.Process | null = null;
 let iterable: AstalIO.Time | null = null;
@@ -27,28 +30,26 @@ export const RecordingIndicator = () =>
 		<label label={bind(recTimer).as((t) => t + "s")}/>
 	</box>
 
+export const startRec = () => {
+	execAsync("killall -SIGINT gpu-screen-recorder").catch(() => { return; }) // Stops screen clipping, otherwise exits
 
-export const toggleRec = () => (isRec.get()) ? stopRec() : startRec();
-
-const startRec = () => {
 	exec("hyprctl keyword decoration:screen_shader ''"); // Disable blue light shader
 
 	file = `${captureDir}/${now()}.mp4`;
-	const audioOutput = exec("bash -c 'wpctl inspect @DEFAULT_AUDIO_SINK@ | grep node.name'")
+	const monitor = hypr.get_focused_monitor().name;
+	const audio = (recMic.get() == true) ? "default_output|default_input" : "default_output";
 
-	rec = AstalIO.Process.subprocess(`
-		wl-screenrec --audio --audio-device=${audioOutput.split('"')[1]}.monitor -o ${hypr.focusedMonitor.name} -f ${file}
-	`);
+	rec = AstalIO.Process.subprocess(`gpu-screen-recorder -a ${audio} -q ${recQuality.get()} -w ${monitor} -o ${file}`);
 
 	recTimer.set(0);
 	isRec.set(true);
 	iterable = interval(1000, () => recTimer.set(recTimer.get() + 1));
 };
 
-const stopRec = () => {
-	rec?.signal(15); // Request wl-screenrec to gracefully stop
+export const stopRec = () => {
+	rec?.signal(2); // Send SIGINT to stop recording
 	rec = null;
-	if (iterable) iterable.cancel();
+	iterable?.cancel();
 	isRec.set(false);
 
 	notifySend({
@@ -74,4 +75,8 @@ const stopRec = () => {
 
 	// Re-enable blue light shader
 	exec('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
+
+	// Restart screen clipping
+	const monitor = hypr.get_focused_monitor().name;
+	execAsync(`gpu-screen-recorder -w ${monitor} -f 30 -r 30 -c mp4 -o /home/alec/Videos/Clips/`)
 };

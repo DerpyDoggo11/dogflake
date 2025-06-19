@@ -11,7 +11,7 @@ const val: Variable<number> = new Variable(0);
 
 timeout(3000, () => dontShow = false);
 
-export const osd = () =>
+export default () =>
     <window
         name="osd"
         anchor={Astal.WindowAnchor.BOTTOM}
