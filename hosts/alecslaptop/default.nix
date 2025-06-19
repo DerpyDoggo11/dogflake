@@ -4,7 +4,6 @@
     ../common.nix
     ../../modules/desktop.nix
     ../../modules/printing.nix
-    ../../modules/screenrec.nix
   ];
 
   networking.hostName = "alecslaptop"; # Hostname
@@ -24,6 +23,7 @@
     jetbrains.idea-community # Jetbrains IDEA
     maven # Java build tool
     zulu24 # JDK
+    gpu-screen-recorder # Screen record & clipping tool - expose binary for use within Astal
 
     bun # All-in-one JS toolkit
     jre # For Minecraft - uses the latest stable Java runtime version
@@ -31,7 +31,10 @@
     nodejs_22 # JS runtime
     steam-run # Used for running some games
   ];
-  programs.kdeconnect.enable = true; # Device integration
+  programs = {
+    kdeconnect.enable = true; # Device integration
+    gpu-screen-recorder.enable = true; # Clipping software services
+  };
 
   # Bootloader settings
   boot = {

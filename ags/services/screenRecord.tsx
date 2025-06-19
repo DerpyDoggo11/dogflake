@@ -30,8 +30,11 @@ export const RecordingIndicator = () =>
 		<label label={bind(recTimer).as((t) => t + "s")}/>
 	</box>
 
+export const startClippingService = () =>
+	execAsync(`gpu-screen-recorder -a 'default_output|default_input' -q medium -w ${hypr.get_focused_monitor().name} -o /home/alec/Videos/Clips/ -f 30 -r 30 -c mp4`)
+
 export const startRec = () => {
-	execAsync("killall -SIGINT gpu-screen-recorder").catch(() => { return; }) // Stops screen clipping, otherwise exits
+	execAsync("killall -SIGINT gpu-screen-recorder") // Stops screen clipping, otherwise exits
 
 	exec("hyprctl keyword decoration:screen_shader ''"); // Disable blue light shader
 
@@ -76,7 +79,5 @@ export const stopRec = () => {
 	// Re-enable blue light shader
 	exec('hyprctl keyword decoration:screen_shader /home/alec/Projects/flake/home-manager/hypr/blue-light-filter.glsl');
 
-	// Restart screen clipping
-	const monitor = hypr.get_focused_monitor().name;
-	execAsync(`gpu-screen-recorder -w ${monitor} -f 30 -r 30 -c mp4 -o /home/alec/Videos/Clips/`)
+	startClippingService(); // Restart screen clipping
 };

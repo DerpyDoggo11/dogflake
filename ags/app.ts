@@ -19,7 +19,7 @@ import { notifications, clearOldestNotification, DND } from './widgets/notificat
 import launcher from './widgets/launcher/launcher';
 import { notifySend } from './services/notifySend';
 import recordMenu from './widgets/record/record';
-import { isRec, stopRec } from './services/screenRecord';
+import { isRec, stopRec, startClippingService } from './services/screenRecord';
 import quickSettings from './widgets/quicksettings/quicksettings';
 import osd from './widgets/osd/osd';
 import powermenu from './widgets/powermenu/powermenu';
@@ -50,6 +50,7 @@ App.start({
             clipboard();
             quickSettings();
             recordMenu();
+            startClippingService();
             osd();
             powermenu();
             emojiPicker();

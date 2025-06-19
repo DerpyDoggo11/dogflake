@@ -51,3 +51,9 @@ calendar, .quickSettings {
   border: 1px solid @blue1;
   transform: translateY(-2px) scale(1.01);
 }
+
+.widgetBackground {
+  background-color: @theme_bg_color;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}

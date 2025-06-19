@@ -1,8 +1,5 @@
 .launcher {
-    background-color: @theme_bg_color;
-    border-radius: 0.4rem;
     margin: 1rem;
-    padding: 0.8rem;
     line-height: 1.2rem;
 }
 

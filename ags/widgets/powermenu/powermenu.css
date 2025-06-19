@@ -1,9 +1,3 @@
-#powermenu box {
-    background-color: @theme_bg_color;
-    border-radius: 1rem;
-    padding: 1rem;
-}
-
 #powermenu image {
     -gtk-icon-size: 4rem;
     -gtk-icon-shadow: 0 0 1rem @light1;

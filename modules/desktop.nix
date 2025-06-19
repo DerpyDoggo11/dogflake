@@ -9,6 +9,7 @@
     adwaita-icon-theme # Icons for GTK apps
     hyprshot # Screenshot tool
     wl-clipboard # Astal clipboard utils
+    killall # Astal screenrecord & useful utility
 
     # Desktop applications
     swappy # Screenshot editor

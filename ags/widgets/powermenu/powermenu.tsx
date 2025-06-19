@@ -45,7 +45,7 @@ export default () =>
          };
       }}
    >
-      <box>
+      <box cssClasses={['widgetBackground']}>
          <image cssClasses={['sleep']} iconName="weather-clear-night-symbolic"/>
          <image cssClasses={['shutdown']} iconName="system-shutdown-symbolic"/>
          <image cssClasses={['lock']} iconName="system-lock-screen-symbolic"/>

@@ -3,7 +3,6 @@
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/desktop.nix
-    ../../modules/screenrec.nix
   ];
 
   networking.hostName = "alecpc";
@@ -19,6 +18,7 @@
     gnome-sound-recorder # Voice recording app
     flashprint # Flashforge 3D printer
     thunderbird # Email client
+    gpu-screen-recorder # Screen record & clipping tool - expose binary for use within Astal
 
     bun # All-in-one JS toolkit
     jre # For Minecraft - uses the latest stable Java runtime version
@@ -26,6 +26,7 @@
     nodejs_22 # JS runtime
     steam-run # Used for running some games
   ];
+  programs.gpu-screen-recorder.enable = true; # Clipping software services
 
   services = {
     flatpak.enable = true; # For running Sober

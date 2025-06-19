@@ -13,7 +13,7 @@ export default () => <window
                 self.hide()
                 break;
             case 99: // C - clip & save last 30 seconds
-                execAsync("bash -c 'killall -SIGUSR1 gpu-screen-recorder'")
+                execAsync("killall -SIGUSR1 gpu-screen-recorder")
                 notifySend({
                     appName: 'Screen Recording',
                     title: 'Screen recording saved',
@@ -39,9 +39,10 @@ export default () => <window
     }}
     application={App}
     visible={false}
+    cssClasses={['widgetBackground']}
     >
         <box vertical>
-            <label label="Record screen" cssClasses={['header']}/>
+            <label label="Record & Clipping" cssClasses={['header']}/>
             <label label={bind(recMic).as((m) => (m) ? "Recording microphone input" : "Not recording microphone input")}/>
             <label label={bind(recQuality).as((q) => "Recording quality: " + q)}/>
         </box>

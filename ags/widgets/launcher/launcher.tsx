@@ -46,7 +46,7 @@ export default () =>
         }
     >
         <box heightRequest={700}>
-            <box widthRequest={500} cssClasses={['launcher']} vertical valign={Gtk.Align.START}>
+            <box widthRequest={500} cssClasses={['launcher', 'widgetBackground']} vertical valign={Gtk.Align.START}>
                 <overlay>
                     <box
                         cssClasses={['searchBg']}
