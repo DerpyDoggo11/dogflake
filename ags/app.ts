@@ -6,7 +6,6 @@ import notificationStyle from './widgets/notifications/notifications.css';
 import osdStyle from './widgets/osd/osd.css';
 import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
-import recordStyle from './widgets/record/record.css';
 
 import { App, Astal } from 'astal/gtk4';
 import { exec } from 'astal';
@@ -18,7 +17,7 @@ import { cornerTop, cornerBottom } from './widgets/corners';
 import { notifications, clearOldestNotification, DND } from './widgets/notifications/notifications';
 import launcher from './widgets/launcher/launcher';
 import { notifySend } from './services/notifySend';
-import recordMenu from './widgets/record/record';
+import recordMenu from './widgets/record';
 import { isRec, stopRec, startClippingService } from './services/screenRecord';
 import quickSettings from './widgets/quicksettings/quicksettings';
 import osd from './widgets/osd/osd';
@@ -39,7 +38,7 @@ const widgets = (monitor: number): Astal.Window[] => [
 ];
 
 App.start({
-    css: style + lancherStyle + clipboardStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + recordStyle + powermenuStyle,
+    css: style + lancherStyle + clipboardStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
     main() {
         hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
 

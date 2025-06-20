@@ -1,7 +1,7 @@
 import { execAsync, bind } from 'astal';
 import { App, Astal } from 'astal/gtk4';
-import { notifySend } from '../../services/notifySend'; 
-import { recMic, recQuality, startRec } from '../../services/screenRecord';
+import { notifySend } from '../services/notifySend'; 
+import { recMic, recQuality, startRec } from '../services/screenRecord';
 
 export default () => <window
     name="recordMenu"
