@@ -1,6 +1,4 @@
 {
-  description = "Alec's NixOS system configurations";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
@@ -21,7 +19,7 @@
         ];
       };
 
-      # Old laptop config
+      # Old laptop
       "alecolaptop" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -30,7 +28,7 @@
         ];
       };
 
-      # Desktop config
+      # Desktop/compute server
       "alecpc" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -39,7 +37,7 @@
         ];
       };
 
-      # Raspberry Pi home server
+      # RPi 4B home server
       "alecpi" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [

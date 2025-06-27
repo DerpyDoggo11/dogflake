@@ -1,25 +1,27 @@
 { pkgs, ... }: {
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
+  # Home-manager primary desktop entrance
+  home-manager.users.alec.imports = [ ../home-manager/home.nix ];
+
   environment.systemPackages = with pkgs; [
     # Desktop services
     libnotify # Astal internal notifications
-    mpc # CLI for Astal
+    mpc # CLI for Astal media player
     brightnessctl # Screen brightness CLI for Astal
     adwaita-icon-theme # Icons for GTK apps
     hyprshot # Screenshot tool
     wl-clipboard # Astal clipboard utils
-    killall # Astal screenrecord & useful utility
+    killall # Astal screenrecord util
 
     # Desktop applications
     swappy # Screenshot editor
-    celluloid # GTK video player using mpv
+    gthumb # Image & video viewer & lightweight editor
     gnome-text-editor # GTK text editor
-    gthumb # Image viewer & editor
     gnome-system-monitor # Task manager
     nemo-with-extensions # File manager
-    nemo-fileroller # Create archives in file manager
-    file-roller # Open archives in file manager
+    nemo-fileroller # Create archives in nemo
+    file-roller # Open archives in nemo
     discord # Voice & video chat app
 
     spotdl # Download Spotify playlists (TODO remove me after finishing Pi sync)
@@ -65,11 +67,6 @@
     wqy_zenhei # Chinese font
   ];
 
-  home-manager = {
-    backupFileExtension = "backup";
-    users.alec.imports = [ ../home-manager/home.nix ];
-  };
-
   programs = {
     git = {
       enable = true;
@@ -83,7 +80,7 @@
         push.autoSetupRemote = true;
       };
     };
-    nix-ld.enable = true; # Fix dynamic executables
+    nix-ld.enable = true; # For dynamic executables
   };
 
   # Chinese input support
@@ -116,6 +113,7 @@
 
   services = {
     gvfs.enable = true; # For nemo trash support
+    devmon.enable = true; # Automatically mounts/unmounts drives
 
     # Sound support
     pipewire = {

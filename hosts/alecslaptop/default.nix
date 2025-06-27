@@ -14,7 +14,7 @@
     libsForQt5.kdenlive # Video editor
     blockbench-electron # Minecraft 3D modeling app
     gimp3 # Image editor
-    teams-for-linux # Unoffical MS Teams client
+    teams-for-linux # Unoffical Teams client
     libreoffice # Preview Word documents and Excel sheets offline
     gnome-sound-recorder # Voice recording app
     flashprint # Flashforge 3D printer
