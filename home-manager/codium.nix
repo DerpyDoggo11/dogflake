@@ -36,7 +36,8 @@
         };
         explorer = {
           confirmDelete = false;
-          confirmDragAndDrop = false; # Disable popup
+          confirmDragAndDrop = false; # Disable drag & drop popup
+          confirmPasteNative = false; # Disable image paste popup
         };
         git = {
           enableSmartCommit = true;
@@ -59,6 +60,7 @@
         javascript.updateImportsOnFileMove.enabled = "always";
         typescript.updateImportsOnFileMove.enabled = "always";
         diffEditor.ignoreTrimWhitespace = false; # Keep diff viewer clean
+        
         livePreview.serverRoot = "public/"; # For Journal writing previews
         markdownlint.focusMode = 5; # Don't show nearby Markdown warnings when typing
       };
