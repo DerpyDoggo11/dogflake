@@ -60,8 +60,6 @@
         javascript.updateImportsOnFileMove.enabled = "always";
         typescript.updateImportsOnFileMove.enabled = "always";
         diffEditor.ignoreTrimWhitespace = false; # Keep diff viewer clean
-        
-        livePreview.serverRoot = "public/"; # For Journal writing previews
         markdownlint.focusMode = 5; # Don't show nearby Markdown warnings when typing
       };
     };
