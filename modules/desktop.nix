@@ -2,7 +2,7 @@
   imports = [ ./hyprland.nix ]; # Hyprland-specific config
 
   # Home-manager primary desktop entrance
-  home-manager.users.alec.imports = [ ../home-manager/home.nix ];
+  home-manager.users.dog.imports = [ ../home-manager/home.nix ];
 
   environment.systemPackages = with pkgs; [
     # Desktop services
@@ -65,12 +65,6 @@
     font-awesome # For Swappy
     wqy_zenhei # Chinese font
   ];
-
-  home-manager = {
-    backupFileExtension = "backup";
-    extraSpecialArgs = { inherit inputs; };
-    users.dog.imports = [ ../home-manager/home.nix ];
-  };
 
   programs = {
     git = {

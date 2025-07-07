@@ -21,7 +21,7 @@ export default () => <window
                     actions: [{
                         id: 1,
                         label: 'Open Clips folder',
-                        command: 'nemo /home/alec/Videos/Clips',
+                        command: 'nemo /home/dog/Videos/Clips',
                     }]
                 });
                 self.hide()
