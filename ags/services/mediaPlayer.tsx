@@ -45,7 +45,7 @@ export const chngPlaylist = (direction: musicAction) => {
     setIsPlaying(false);
 
     setPlaylistName(playlists[Number(playlist.get()) - 1]);
-    execAsync(`swww img /home/dog/Projects/flake/wallpapers/${playlistName.get()}.jpg --transition-type=grow --filter=Nearest --transition-duration=1 --transition-fps=145`);
+    execAsync(`swww img /home/dog/dogflake/wallpapers/${playlistName.get()}.jpg --transition-type=grow --filter=Nearest --transition-duration=1 --transition-fps=145`);
 
     // Clear the current cache and add the new playlist
     exec('mpc clear');
@@ -58,7 +58,7 @@ export const initMedia = () => {
     setPlaylistName('Study'); // Must set to invoke binds
 
     execAsync('mpc crossfade 2');
-    execAsync('swww img /home/dog/Projects/flake/wallpapers/Study.jpg --transition-type=grow  --filter=Nearest --transition-duration=1 --transition-fps=145');
+    execAsync('swww img /home/dog/dogflake/wallpapers/Study.jpg --transition-type=grow  --filter=Nearest --transition-duration=1 --transition-fps=145');
 
     exec('mpc clear');
     exec(`mpc add ${playlistName.get()}/`);
