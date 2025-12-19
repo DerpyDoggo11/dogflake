@@ -1,30 +1,50 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     ./hypr/hyprland.nix
     ./hypr/keybinds.nix
     ./hypr/hyprlock.nix
 
-    ./codium.nix
+    ./vscode.nix
     ./fish.nix
     ./foot.nix
     ./gtk.nix
-    ./librewolf.nix
     ./mpd.nix
     ./starship.nix
+    ./swappy.nix
+
+    inputs.ags.homeManagerModules.default
   ];
 
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
+    ags = {
+      enable = true;
+      configDir = ../ags;
+      systemd.enable = true;
+
+      extraPackages = with inputs.astal.packages.${pkgs.system}; [
+        apps # App launcher
+        battery # Laptop battery
+        bluetooth # Bluez
+        hyprland # For workspaces
+        mpris # Media controls
+        notifd # Desktop notifications
+        wireplumber # Used by pipewire
+      ];
+    };
+  };
   systemd.user.startServices = "sd-switch"; # Better system unit reloads
+
   home = {
     stateVersion = "23.05";
     username = "dog";
     homeDirectory = "/home/dog";
 
-    # Glboal cursor system
+    # Global cursor
     pointerCursor = {
       name = "Bibata-Modern-Ice";
       package = pkgs.bibata-cursors;
-      size = 20;
+      size = 24;
       gtk.enable = true;
     };
   };
@@ -34,37 +54,24 @@
     swww.enable = true; # Auto-start wallpaper manager on boot
     cliphist = {
       enable = true;
-      extraOptions = [ "-preview-width" "200" "-max-items" "20" "-max-dedupe-search" "20" ];
+      extraOptions = [ "-preview-width" "200" "-max-items" "20" "-max-dedupe-search" "5" ];
     };
   };
 
   xdg = {
-    # Symlink all fonts
-    dataFile."fonts" = {
+    dataFile."fonts" = { # Symlink fonts
       target = "./fonts";
       source = ./fonts;
     };
 
     userDirs = {
-      enable = true; # Allows home-manager to manage & create user dirs
+      enable = true;
       createDirectories = true; # Auto-creates all directories
-      extraConfig.XDG_PROJECTS_DIR = "/home/dog/Projects";
-      extraConfig.XDG_CAPTURES_DIR = "/home/dog/Videos/Captures";
-      extraConfig.XDG_MODELS_DIR = "/home/dog/Models";
+      extraConfig = {
+        XDG_PROJECTS_DIR = "/home/dog/Projects";
+        XDG_CAPTURES_DIR = "/home/dog/Videos/Captures";
+        XDG_CLIPS_DIR = "/home/dog/Videos/Clips";
+      };
     };
-
-    # Swappy config
-    configFile."swappy/config".text = ''
-      [Default]
-      save_dir=$HOME/Pictures/Screenshots
-      save_filename_format=%Y%m%d-%H%M%S-edited.png
-      show_panel=false
-      line_size=10
-      text_size=20
-      text_font=Sora
-      paint_mode=brush
-      early_exit=true
-      fill_shape=false
-    '';
   };
 }

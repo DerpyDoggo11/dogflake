@@ -2,7 +2,7 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      nx-switch = "sudo nixos-rebuild switch --flake /home/dog/dogflake";
+      nx-switch = "sudo nixos-rebuild switch --flake /home/dog/Projects/flake/";
       g = "git";
       ga = "git add -A";
       gp = "git pull";

@@ -7,79 +7,69 @@ import osdStyle from './widgets/osd/osd.css';
 import quicksettingsStyle from './widgets/quicksettings/quicksettings.css';
 import powermenuStyle from './widgets/powermenu/powermenu.css';
 
-import { App, Astal } from 'astal/gtk4';
-import { exec } from 'astal';
+import app from "ags/gtk4/app"
+import { exec } from "ags/process";
+import astalIO from "gi://AstalIO"
+import Hyprland from 'gi://AstalHyprland?version=0.1';
+
 import Bar from './widgets/bar/bar';
 import calendar from './widgets/calendar';
 import clipboard from './widgets/clipboard/clipboard';
 import emojiPicker from './widgets/emojiPicker';
-import { cornerTop, cornerBottom } from './widgets/corners';
-import { notifications, clearOldestNotification, DND } from './widgets/notifications/notifications';
 import launcher from './widgets/launcher/launcher';
-import { notifySend } from './services/notifySend';
-import recordMenu from './widgets/record';
-import { isRec, stopRec, startClippingService } from './services/screenRecord';
-import quickSettings from './widgets/quicksettings/quicksettings';
+import recordMenu from './widgets/record/record';
+import { notifications, clearOldestNotification, DND, setDND } from './widgets/notifications/notifications';
 import osd from './widgets/osd/osd';
 import powermenu from './widgets/powermenu/powermenu';
-import Hyprland from 'gi://AstalHyprland?version=0.1';
+import quickSettings from './widgets/quicksettings/quicksettings';
+import { notifySend } from './services/notifySend';
+import { isRec, stopRec, startClippingService } from './widgets/record/service';
 const hypr = Hyprland.get_default();
 
 import { monitorBrightness } from './services/brightness';
 import { initMedia, updTrack, playPause, chngPlaylist } from './services/mediaPlayer';
 
-const widgetMap: Map<number, Astal.Window[]> = new Map();
+const barMap: Map<number, any> = new Map();
 
-// Per-monitor widgets
-const widgets = (monitor: number): Astal.Window[] => [
-    Bar(monitor),
-    cornerTop(monitor),
-    cornerBottom(monitor)
-];
-
-App.start({
+app.start({
     css: style + lancherStyle + clipboardStyle + barStyle + notificationStyle + osdStyle + quicksettingsStyle + powermenuStyle,
     main() {
-        hypr.get_monitors().map((monitor) => widgetMap.set(monitor.id, widgets(monitor.id)));
+        hypr.get_monitors().map((monitor) => barMap.set(monitor.id, Bar(monitor.id)));
 
-        setTimeout(() => {
-            notifications();
-            launcher();
-            calendar();
-            clipboard();
-            quickSettings();
-            recordMenu();
-            startClippingService();
-            osd();
-            powermenu();
-            emojiPicker();
-            reminders();
-            initMedia();
-        }, 500); // Delay to fix widgets on slow devices
+        calendar();
+        clipboard(); 
+        recordMenu();
+        osd();
+        powermenu();
+        emojiPicker();
+        quickSettings();
+        launcher();
 
-        monitorBrightness(); // Start brightness monitor for OSD subscribbable
+        monitorBrightness();
+        notifications();
+        startClippingService();
+        initMedia();
+        reminders();
 
         // Monitor reactivity
         hypr.connect('monitor-added', (_, monitor) =>
-            widgetMap.set(monitor.id, widgets(monitor.id))
+            barMap.set(monitor.id, Bar(monitor.id))
         );
         hypr.connect('monitor-removed', (_, monitorID) => {
-            widgetMap.get(monitorID)?.forEach((w) => w.destroy());
-            widgetMap.delete(monitorID);
+            barMap.get(monitorID)?.destroy();
+            barMap.delete(monitorID);
         });
     },
     requestHandler(req, res) {
-        const reqArgs = req.split(" ");
+        const reqArgs = req[0].split(" ");
         switch(reqArgs[0]) {
             case "hideNotif":
                 clearOldestNotification();
                 break;
             case "record":
-                if (isRec.get() == true) { // If recording, stop
-                    stopRec();
-                } else { // Show record menu to clip or begin recording
-                    App.toggle_window("recordMenu");
-                };
+                (isRec.get() == true)
+                    ? stopRec()
+                    : app.toggle_window("recordMenu");
                 break;
             case "media":
                 switch (reqArgs[1]) {
@@ -101,7 +91,7 @@ App.start({
                 };
                 break;
             case "toggleDND":
-                DND.set(!DND.get())
+                setDND(!DND.get())
                 break;
         };
         res("Request handled successfully");
@@ -110,12 +100,11 @@ App.start({
 
 const reminders = () => {
     const folderSize = Number(exec(`fish -c "du -sb /home/dog/Downloads | awk '{print \$1}'"`));
-    
+
     if (folderSize > 100000000) { // Greater than 100MB
         notifySend({
-            appName: 'System Cleanup',
-            title: 'Clean Downloads folder',
-            iconName: 'system-file-manager-symbolic',
+            appName: 'Cleanup',
+            title: 'Empty Downloads folder',
             actions: [{
                 id: 1,
                 label: 'View folder',

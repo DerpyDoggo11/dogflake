@@ -3,9 +3,9 @@
     enable = true;
     settings = {
       format = lib.concatStrings [
-        "[▓](#a3aed2)"
-        "[ dog ](bg:#a3aed2 fg:#090c0c)"
-        "[](bg:#769ff0 fg:#a3aed2)"
+        "[  Dog ](bg:#d8dee9 fg:#2e3440)"
+        "[](bg:#5e81ac fg:#d8dee9)"
+        "[](bg:#81a1c1 fg:#5e81ac)"
         "$directory"
         "$git_branch"
         "[ ](fg:#81a1c1)"

@@ -1,27 +1,32 @@
 {
-  description = "Dog's Nix system configurations";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.astal.follows = "astal";
+    };
+    astal = {
+      url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { home-manager, nixpkgs, ... }: {
+  outputs = { home-manager, nixpkgs, ... }@inputs: {
     nixosConfigurations = {
-
-      # Laptop config
+      # Primary laptop
       "dogslaptop" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/dogslaptop/default.nix
           home-manager.nixosModules.home-manager
         ];
       };
-
     };
   };
 }

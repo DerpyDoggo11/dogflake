@@ -1,13 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   users.users.dog = { # Default user
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "video" "dialout" "networkmanager" ];
+    extraGroups = [ "wheel" "audio" "video" "dialout" ];
   };
 
   boot = {
     loader = {
       systemd-boot = {
-        enable = true;
+        enable = lib.mkDefault true;
         configurationLimit = 2; # Saves space in boot partition
         editor = false;
       };
@@ -15,20 +15,24 @@
       timeout = 0; # Hold down space on boot to access menu
     };
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_latest; # Latest Linux kernel version
-    enableContainers = false;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   networking.wireless.iwd = {
-    enable = true;
+    enable = lib.mkDefault true;
     settings = {
       IPv6.Enabled = true;
       Settings.AutoConnect = true;
     };
   };
 
-  time.timeZone = "America/Los_Angeles";
-  i18n.defaultLocale = "en_US.UTF-8";
+  # Binary cache
+  nix.settings = {
+    substituters = [ "https://nix-community.cachix.org" ];
+    trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+  };
+
+  time.timeZone = "America/Los_Angeles"; # Locale setting also set to en_US by default
 
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
@@ -37,13 +41,13 @@
     warn-dirty = false;
   };
 
-  services.journald.extraConfig = "SystemMaxUse=1G";
-  fileSystems."/".options = [ "noatime" "nodiratime" "discard" ]; # Optimize SSD trim
+  services.journald.extraConfig = "SystemMaxUse=20M";
+  fileSystems."/".options = [ "noatime" "discard" ]; # Optimize SSD trim
   documentation.enable = false;
 
   environment.defaultPackages = lib.mkForce [];
   programs.command-not-found.enable = false; # Don't show recommendations when a package is missing
 
-  system.stateVersion = "24.05";
+  system.stateVersion = lib.mkDefault "24.05";
 }
 

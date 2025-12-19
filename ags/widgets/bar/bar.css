@@ -1,13 +1,14 @@
-#bar {
+.barElement {
     background: @theme_bg_color;
-    opacity: 0.5;
-    font-family: 'Sora';
+    margin: 0.35rem 0rem 0.35rem 0.3rem;
+    border-radius: 0.5rem;
+    border: 0.15rem @dark4 solid;
 }
 
-
 #bar button {
-    border-radius: 0;
-    padding: 0.2rem 0.5rem;
+    margin: 0;
+    border-radius: 0rem;
+    padding: 0.3rem;
 }
 
 .statusMenu { padding: 0.5rem 0 0.5rem 0; }
@@ -20,27 +21,27 @@
 
 /* Time/date module */
 .time .date, .time .day {
-    font-size: 0.7rem;
-    font-family: 'Liberation Mono';
     font-style: italic;
     color: @blue2;
     text-shadow: 0 0 3px @blue3;
 }
-.time .date { font-size: 0.6rem; }
+.time { font-family: 'WenQuanYi Zen Hei Mono'; }
+.date.bottom { margin-bottom: 3px; }
 .time .time {
-    font-size: 1.45rem;
-    font-family: 'Liberation Mono';
+    font-size: 1.35rem;
     font-weight: bold;
     letter-spacing: 2px;
     color: @blue2;
     text-shadow: 0 0 5px @blue3;
 }
-
+.time .day { font-size: 0.9rem; }
 
 /* Workspace list */
-.workspaceList {
-    padding-top: 0.3rem;
-    min-height: 17rem; /* Combined height of workspace buttons */
+#workspaceList {
+    min-height: 18rem; /* Combined height of workspace buttons */
+}
+#workspaceList .barElement {
+    padding: 0.2rem 0;
 }
 #bar .workspaceBtn {
     background-color: @dark2;
@@ -56,29 +57,14 @@
 }
 #bar .workspaceBtn.occupied { background-color: @dark4; min-height: 1.4rem; }
 
-/* Status menu misc */
-.btConnected { color: @blue3; -gtk-icon-shadow: 0 0 2px @blue3; }
-
 /* Recording indicator */
-.recIndicator { color: #bf616a; }
-.recIndicator image { -gtk-icon-size: 0.7rem; padding-right: 3px; }
-.recIndicator label { font-size: 0.9rem; margin-top: -1px; }
-
-/* Media players */
-#bar .media, #bar .mpris {
-    margin: 3px;
-    outline-offset: -2px;
-    outline: 2px solid #ffffff00;
-    border-radius: 5px;
+.recIndicator {
+    color: #bf616a;
+    padding: 0.5rem;
+    -gtk-icon-shadow: 0 0 10px #bf616a;
 }
 
-#bar .media { transition-duration: 0.1s; }
-
-#bar .mediaBg {
-    margin: 7px;
-    filter: blur(5px);
-    transition-duration: 0.5s;
-}
-#bar .mediaBg.playing { margin: 6px; }
-#bar .media:hover { outline-offset: -3px; }
-#bar .media:active { outline-offset: -4px; }
+/* Media/mpris player */
+#bar #mediaBtn { border-radius: 0.3rem; padding: 0; }
+#bar #mprisBtn { padding: 0.2rem 0; }
+#bar #media, #bar #mediaBtn { transition-duration: 0.3s; }

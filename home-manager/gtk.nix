@@ -5,7 +5,6 @@
       "file:///home/dog/Downloads"
       "file:///home/dog/Documents"
       "file:///home/dog/Music"
-      "file:///home/dog/Models"
       "file:///home/dog/Pictures"
       "file:///home/dog/Projects"
       "file:///home/dog/Videos"

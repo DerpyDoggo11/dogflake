@@ -4,10 +4,9 @@
 
     settings = {
       background = {
-        #path = "/home/dog/dogflake/wallpapers/Study.jpg";
         path = "screenshot";
-        blur_passes = 1;
-        brightness = 0.7;
+        blur_passes = 3;
+        brightness = 0.6;
       };
 
       general = {
@@ -24,7 +23,7 @@
         outline_thickness = 7;
         fail_timeout = 0;
 
-        outer_color = "rgba(255, 255, 255, 0.1)";
+        outer_color = "rgba(255, 255, 255, 0)";
         check_color = "rgba(255, 255, 255, 0.3)";
         fail_color = "rgba(255, 255, 255, 0)";
         inner_color = "rgba(0, 0, 0, 0)";

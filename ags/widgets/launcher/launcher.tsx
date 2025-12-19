@@ -1,84 +1,100 @@
 import Apps from 'gi://AstalApps'
-import { App, Astal, Gtk, Gdk } from 'astal/gtk4';
-import { bind } from 'astal';
+import { Astal, Gtk, Gdk } from 'ags/gtk4';
+import app from 'ags/gtk4/app'
 import { playlistName } from '../../services/mediaPlayer';
+import { createState, For } from 'ags';
+import { execAsync } from 'ags/process';
 
 const apps = new Apps.Apps()
 let textBox: Gtk.Entry;
+const [appsList, setAppsList] = createState(new Array<Apps.Application>())
+setAppsList(apps.fuzzy_query('').slice(0, 5));
 
-const hide = () => App.toggle_window("launcher");
+const search = (text: string) =>
+    setAppsList(apps.fuzzy_query(text).slice(0, 5))
 
-const AppBtn = ({ app }: { app: Apps.Application }) =>
-    <button
-        onKeyPressed={(_, key) => {
-            if (key == Gdk.KEY_Return) {
-                app.launch();
-                hide();
-            }
-        }}
-        onClicked={() => { app.launch(); hide(); }}
-        cssClasses={['button']}
-    >
-        <box>
-            <image iconName={app.iconName}/>
-            <box valign={Gtk.Align.CENTER}>
-                <label
-                    cssClasses={['name']}
-                    xalign={0}
-                    label={app.name}
-                />
-            </box>
-        </box>
-    </button>
+const hide = () => app.toggle_window("launcher");
 
+// Update launcher background to wallpaper
+playlistName.subscribe(() => app.apply_css(`.searchBg { background-image: url("file:///home/dog/Projects/flake/wallpapers/${playlistName.get()}.jpg"); }`))
 
 export default () =>
     <window
         name="launcher"
-        anchor={Astal.WindowAnchor.TOP}
+        anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
         keymode={Astal.Keymode.ON_DEMAND}
-        application={App}
-        visible={false}
+        application={app}
         onShow={() => textBox.text = ''}
-        onKeyPressed={(_, key) =>
+    >
+        <Gtk.EventControllerKey
+            onKeyPressed={(_, key) =>
             (key == 65307) // Gdk.KEY_Escape
                && hide()
-        }
-    >
+        }/>
         <box heightRequest={700}>
-            <box widthRequest={500} cssClasses={['launcher', 'widgetBackground']} vertical valign={Gtk.Align.START}>
+            <box widthRequest={500} cssClasses={['launcher', 'widgetBackground']} orientation={Gtk.Orientation.VERTICAL} valign={Gtk.Align.START}>
                 <overlay>
-                    <box
-                        cssClasses={['searchBg']}
-                        setup={() =>
-                            playlistName.subscribe((w) =>
-                                App.apply_css(`.searchBg { background-image: url("file:///home/dog/dogflake/wallpapers/${w}.jpg"); }`)
-                            )
-                        }
-                    />
+                    <box cssClasses={['searchBg']}/>
                     <entry
-                        type="overlay"
+                        $type='overlay'
                         primaryIconName="system-search-symbolic"
                         placeholderText="Search"
                         onActivate={() => {
-                            apps.fuzzy_query(textBox.text)?.[0].launch();
+                            launchApp(apps.fuzzy_query(textBox.text)?.[0])
                             hide();
                         }}
-                        setup={self => { // Auto-grab focus when launched
+                        onNotifyText={({ text }) => search(text)}
+                        $={self => {
                             textBox = self;
-                            App.connect("window-toggled", () =>
-                                (App.get_window("launcher")?.visible == true)
+                            app.connect("window-toggled", () =>
+                                (app.get_window("launcher")?.visible == true)
                                     && self.grab_focus()
                             );
                         }}
                     />
                 </overlay>
-                <box spacing={6} vertical>
-                    {bind(textBox, 'text').as(text =>
-                        apps.fuzzy_query(text).slice(0, 5)
-                        .map((app: Apps.Application) => <AppBtn app={app}/>)
-                    )}
+                <box spacing={6} orientation={Gtk.Orientation.VERTICAL}>
+                    <For each={appsList}>
+                        {(app) => (
+                            <button
+                                onClicked={() => { launchApp(app); hide(); }}
+                                cssClasses={['button']}
+                            >
+                                <Gtk.EventControllerKey
+                                    onKeyPressed={(_, key) => {
+                                    if (key == Gdk.KEY_Return) {
+                                        launchApp(app)
+                                        hide();
+                                    }
+                                }}/>
+                                <box>
+                                    <image iconName={app.iconName}/>
+                                    <box valign={Gtk.Align.CENTER}>
+                                        <label
+                                            cssClasses={['name']}
+                                            xalign={0}
+                                            label={app.name}
+                                        />
+                                    </box>
+                                </box>
+                            </button>
+                        )}
+                    </For>
                 </box>
             </box>
         </box>
     </window>
+
+// Launch app seperately from astal in wayland mode
+export const launchApp = (app: Apps.Application) => {
+    let exe = app.executable
+        .split(/\s+/)
+        .filter((str) => !str.startsWith('%') && !str.startsWith('@'))
+        .join(' ');
+
+    execAsync(`hyprctl dispatch exec "${exe}"`);
+
+    // Get away from hc & discord addiction
+    if (!app.name.includes('discord') || !app.name.includes('slack'))
+        app.set_frequency(app.get_frequency() + 1);
+};

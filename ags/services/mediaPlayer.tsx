@@ -1,14 +1,16 @@
-import { App, Gdk } from 'astal/gtk4';
-import { exec, execAsync, Variable, bind } from 'astal';
+import app from "ags/gtk4/app"
+import { Gdk, Gtk } from "ags/gtk4";
+import { exec, execAsync } from 'ags/process';
+import { createState } from 'ags';
 
 export type musicAction = 'next' | 'prev';
-export const isPlaying: Variable<boolean> = new Variable(false);
-export const playlist: Variable<number> = new Variable(1);
-export const playlistName: Variable<string> = new Variable('');
+export const [ isPlaying, setIsPlaying] = createState(false);
+export const [ playlist, setPlaylist] = createState(1);
+export const [ playlistName, setPlaylistName] = createState('');
 
 // These playlists match with the folder names in ~/Music
-const playlists =      ['Study',  'Focus',  'Synthwave', 'SynthAmbient', 'Ambient', 'Vibes'];
-const playlistColors = ['CC7F1F', '649FEC', 'C363C7',    '8169E5', '1A47D0', 'C46D00'];
+const playlists =      ['Study',  'Focus',  'Synthwave', 'SynthAmbient', 'Ambient', 'Vibes', 'Instrumental', 'Atmosphere'];
+const playlistColors = ['bf616a', '5e81ac', 'b48ead',    'ebcb8b',       '81a1c1',  'a3be8c', '88c0d0',      '8fbcbb']
 
 export const updTrack = (direction: musicAction) => {
     exec('mpc pause');
@@ -16,31 +18,34 @@ export const updTrack = (direction: musicAction) => {
 
     // Start playing again
     execAsync('mpc play');
-    isPlaying.set(true);
+    setIsPlaying(true);
 };
 
 export const playPause = () => {
     execAsync('mpc toggle');
-    isPlaying.set(!isPlaying.get());
+    setIsPlaying(!isPlaying.get());
 };
 
 export const chngPlaylist = (direction: musicAction) => {
+    let wallpaperTransitionAngle;
     if (direction == 'next') {
+        wallpaperTransitionAngle = 270;
         (playlist.get() == playlists.length)
-        ? (playlist.set(1)) // Go to first
-        : (playlist.set(Number(playlist.get()) + 1));
+        ? (setPlaylist(1)) // Go to first
+        : (setPlaylist(Number(playlist.get()) + 1));
     } else if (direction == 'prev') {
+        wallpaperTransitionAngle = 90;
         (playlist.get() == 1)
-        ? (playlist.set(playlists.length)) // Go to last
-        : (playlist.set(Number(playlist.get()) - 1));
+        ? (setPlaylist(playlists.length)) // Go to last
+        : (setPlaylist(Number(playlist.get()) - 1));
     }
 
     // Stop playing music
     exec('mpc pause');
-    isPlaying.set(false);
+    setIsPlaying(false);
 
-    playlistName.set(playlists[Number(playlist.get()) - 1]);
-    execAsync(`swww img /home/dog/dogflake/wallpapers/${playlistName.get()}.jpg --transition-type grow --transition-fps 90`);
+    setPlaylistName(playlists[Number(playlist.get()) - 1]);
+    execAsync(`swww img /home/dog/Projects/flake/wallpapers/${playlistName.get()}.jpg --transition-type=grow --filter=Nearest --transition-duration=1 --transition-fps=145`);
 
     // Clear the current cache and add the new playlist
     exec('mpc clear');
@@ -50,10 +55,10 @@ export const chngPlaylist = (direction: musicAction) => {
 };
 
 export const initMedia = () => {
-    playlistName.set('Study'); // Must set to invoke binds
+    setPlaylistName('Study'); // Must set to invoke binds
 
     execAsync('mpc crossfade 2');
-    execAsync('swww img /home/dog/dogflake/wallpapers/Study.jpg --transition-type grow --transition-fps 90');
+    execAsync('swww img /home/dog/Projects/flake/wallpapers/Study.jpg --transition-type=grow  --filter=Nearest --transition-duration=1 --transition-fps=145');
 
     exec('mpc clear');
     exec(`mpc add ${playlistName.get()}/`);
@@ -62,14 +67,30 @@ export const initMedia = () => {
 
 
 export const Media = () =>
-            <button
-                cssClasses={['media']}
-                type="overlay"
-                onButtonPressed={() => playPause()}
-                onScroll={(_, __, y) => execAsync('mpc volume ' + ((y < 0) ? '+5' : '-5'))}
-                cursor={Gdk.Cursor.new_from_name('pointer', null)}
-            >
-                <image iconName={bind(isPlaying).as(
-                    (v) => (v) ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic')
-                }/>
-            </button>
+    <button
+        name={'mediaBtn'}
+        onClicked={playPause}
+        cursor={Gdk.Cursor.new_from_name('pointer', null)}
+        $={() =>
+            playlistName.subscribe(() => {
+                const color = playlistColors[playlist.get() - 1];
+                app.apply_css(`
+                    #bar #mediaBtn {
+                        background-color: #${color};
+                    }
+                    #bar #media {
+                        border: 0.15rem shade(#${color}, 1.15) solid;
+                    }
+                `)
+            })
+        }
+    >
+        <Gtk.EventControllerScroll
+            flags={Gtk.EventControllerScrollFlags.VERTICAL} 
+            onScroll={(_, __, y) => {
+                execAsync('mpc volume ' + ((y < 0) ? '+5' : '-5'))
+        }}/>
+        <image iconName={isPlaying.as(
+            (v: boolean) => (v) ? 'media-playback-pause-symbolic' : 'media-playback-start-symbolic')
+        }/>
+    </button>

@@ -3,45 +3,32 @@
     ./hardware-configuration.nix
     ../common.nix
     ../../modules/desktop.nix
+    ../../modules/printing.nix
   ];
 
-  networking.hostName = "dogslaptop"; # Hostname
+  networking.hostName = "dogslaptop";
   home-manager.users.dog.imports = [ ./hm.nix ];
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [
-    libsForQt5.kdenlive # Video editor
-    gimp # GNU image manipulation program
-    teams-for-linux # Unoffical MS Teams client
-    gnome-sound-recorder # Voice recording app
-    blender # 3d modelling software
-    guvcview # microscope/camera viewer
+    gimp3 # Image editor
+    teams-for-linux # Unoffical Teams client
+    libreoffice # Preview Word documents & Excel sheets offline
+    thunderbird # Email client
 
-    gpu-screen-recorder # Screen record & clipping tool - expose binary for use within Astal
+    arduino-ide # Embedded microcontroller programming
+    python3 # Required for Arduino IDE
+    jre # For Minecraft - uses the latest stable Java runtime version
+    bun # All-in-one JS toolkit
   ];
-  programs = {
-    kdeconnect.enable = true; # Device integration
-    gpu-screen-recorder.enable = true; # Clipping software services
-  };
 
-  # Bootloader settings
-  boot.initrd = { # AMD GPU support
+  # Bootloader settings (w/ AMD GPU support)
+  boot.initrd = {
     kernelModules = [ "amdgpu" ];
     includeDefaultModules = false;
   };
 
-  hardware = { # OpenCL drivers for better hardware acceleration
-    graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
-    amdgpu.opencl.enable = true;
-  };
-  services.logind.extraConfig = ''
-    HandlePowerKey=ignore
-    HandleSuspendKey=ignore
-    HandleLidSwitch=ignore
-  '';
-
   services = {
-    flatpak.enable = true; # For running Sober
     upower.enable = true; # For displaying battery level on astal shell
     tlp = { # Better battery life
       enable = true;
@@ -53,5 +40,14 @@
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       };
     };
+    udev.packages = [ # For micro:bit development
+      (pkgs.writeTextFile {
+        name = "microbit_udev";
+        text = ''
+          SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", MODE="0664", TAG+="uaccess"
+        '';
+        destination = "/etc/udev/rules.d/50-microbit.rules";
+      })
+    ];
   };
 }

@@ -1,93 +1,108 @@
-{ pkgs, ... }: {
-  imports = [ ./hyprland.nix ]; # Hyprland-specific config
+{ inputs, pkgs, ... }: {
 
-  # Home-manager primary desktop entrance
-  home-manager.users.dog.imports = [ ../home-manager/home.nix ];
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users.dog.imports = [ ../home-manager/home.nix ];
+    backupFileExtension = "backup2";
+    useGlobalPkgs = true; # Faster eval
+  };
 
-  environment.systemPackages = with pkgs; [
-    # Desktop services
-    libnotify # Astal internal notifications
-    mpc # CLI for Astal media player
-    brightnessctl # Screen brightness CLI for Astal
-    adwaita-icon-theme # Icons for GTK apps
-    hyprshot # Screenshot tool
-    wl-clipboard # Astal clipboard utils
-    killall # Astal screenrecord util
+  environment = {
+    systemPackages = with pkgs; [
+      # Desktop services
+      libnotify # Astal internal notifications
+      mpc # CLI for Astal media player
+      cifs-utils # Needed for mounting Samba NAS drive
+      rsync # Quickly pull files from NAS drive
+      brightnessctl # Screen brightness CLI for Astal
+      adwaita-icon-theme # Icons for GTK apps
+      hyprshot # Screenshot tool
+      wl-clipboard # Astal clipboard utils
+      spotdl
 
-    # Desktop applications
-    swappy # Screenshot editor
-    gthumb # Image & video viewer & lightweight editor
-    gnome-text-editor # GTK text editor
-    gnome-system-monitor # Task manager
-    nemo-with-extensions # File manager
-    nemo-fileroller # Create archives in nemo
-    file-roller # Open archives in nemo
-    discord # Voice & video chat app
+      # Desktop applications
+      gthumb # Image & video viewer & editor
+      gnome-text-editor # Simple text editor
+      gnome-system-monitor # Task manager
+      nemo-with-extensions # File manager
+      nemo-fileroller # Create archives in nemo
+      file-roller # Open archives in nemo
+      discord # Voice & video chat app
+      filezilla # FTP client
+      prismlauncher # Minecraft launcher
+      microsoft-edge
 
-    spotdl # Download Spotify playlists (TODO remove me after finishing Pi sync)
+      # Scripts
+      (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
+      (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
+      (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
+      (writeScriptBin "screenshot" (builtins.readFile ../scripts/screenshot.fish))
+    ];
+    sessionVariables.NIXOS_OZONE_WL = "1"; # For Electron
+  };
 
-    # Wayland MC w/ key modifiers patch
-    (prismlauncher.override {
-      glfw3-minecraft = glfw3-minecraft.overrideAttrs (prev: {
-        patches = [ ../overlays/glfw-key-modifiers.patch ];
-      });
-    })
-
-    # Astal desktop shell
-    (pkgs.ags.bundle {
-      src = ../ags;
-      enableGtk4 = true;
-      pname = "desktop-shell";
-      version = "1.0.0"; # Needed for build to pass
-
-      dependencies = with pkgs.astal; [
-        apps # App launcher
-        mpris # Media controls
-        hyprland # Workspace integration
-        bluetooth # Bluez integration
-        battery # For laptop only - not used on desktop
-        wireplumber # Used by pipewire
-        notifd # Desktop notification integration
-      ];
-    })
-    astal.io # Astal CLI for keybinds
-
-    # Scripts
-    (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
-    (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
-    (writeScriptBin "screenshot" (builtins.readFile ../scripts/screenshot.fish))
-    (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish)) # TODO remove me after finishing Pi server
-  ];
-
-  # Custom fonts
   fonts.packages = with pkgs; [
-    iosevka # Coding font
-    font-awesome # For Swappy
-    wqy_zenhei # Chinese font
+    iosevka # Programming
+    wqy_zenhei # Chinese
   ];
 
   programs = {
+    hyprland.enable = true; # WM
     git = {
       enable = true;
+      package = pkgs.gitMinimal;
       config = {
         init.defaultBranch = "main";
         color.ui = true;
-        core.editor = "codium";
+        core.editor = "code";
         credential.helper = "store";
-        github.user = "DerpyDoggo11"; # Github
-        user.name = "DerpyDoggo11"; # Git
+        github.user = "AmazinAxel"; # Github
+        user.name = "AmazinAxel"; # Git
         push.autoSetupRemote = true;
       };
     };
-    nix-ld.enable = true; # For dynamic executables
   };
 
+  # Chinese input support
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      addons = with pkgs; [ qt6Packages.fcitx5-chinese-addons fcitx5-nord ];
+      waylandFrontend = true;
+
+      settings = {
+        inputMethod = {
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout" = "us";
+            DefaultIM = "pinyin";
+          };
+          "Groups/0/Items/0".Name = "keyboard-us";
+          "Groups/0/Items/1".Name = "pinyin";
+        };
+        globalOptions."Hotkey/TriggerKeys"."0" = "Control+Super+space";
+
+        addons = {
+          clipboard.globalSection."TriggerKey" = ""; # Disable clipboard
+          classicui.globalSection."Theme" = "Nord-Dark"; # Theme
+        };
+      };
+    };
+  };
 
   services = {
-    gvfs.enable = true; # For nemo trash support
-    devmon.enable = true; # Automatically mounts/unmounts drives
+    gvfs.enable = true; # For nemo trash & NAS autodiscov
+    devmon.enable = true; # Automatic drive mount/unmount
+    logind.settings.Login.HandlePowerKey = "ignore"; # Don't turn off computer on power key press
 
-    # Sound support
+    # .local resolution for homelab
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+    };
+
+    # Sound
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -95,8 +110,20 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
-  };
 
-  # Bluetooth support
-  hardware.bluetooth.enable = true;
+    greetd = { # Autologin
+      enable = true;
+      settings.default_session = {
+        command = "Hyprland";
+        user = "dog";
+      };
+    };
+  };
+  security.pam.services.hyprlock = {}; # Hyprlock hm package requires this
+
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false; # Don't start bluetooth until its needed
+  };
 }

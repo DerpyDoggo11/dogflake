@@ -1,5 +1,6 @@
-import { Astal, App } from 'astal/gtk4';
-import { execAsync } from 'astal';
+import { Astal, Gtk } from 'ags/gtk4';
+import app from 'ags/gtk4/app'
+import { execAsync } from 'ags/process';
 import Hyprland from 'gi://AstalHyprland?version=0.1';
 const hypr = Hyprland.get_default();
 
@@ -18,20 +19,22 @@ const centerCursor = () => {
    hypr.dispatch('movecursor', `${x} ${y}`);
 };
 
+let window: Gtk.Window;
 export default () =>
    <window
       name="powermenu"
-      application={App}
-      visible={false}
+      $={(self) => window = self}
+      application={app}
       keymode={Astal.Keymode.ON_DEMAND}
       onShow={centerCursor}
-
-      onKeyPressed={(self, key) => {
-         self.hide();
+   >
+      <Gtk.EventControllerKey
+         onKeyPressed={(_, key) => {
+         window.hide();
          switch (key) {
             case 115: // S - sleep
                execAsync('hyprlock');
-               execAsync('systemctl hibernate');
+               execAsync('systemctl suspend');
                break;
             case 113: // Q - power off
                execAsync('systemctl poweroff')
@@ -43,8 +46,7 @@ export default () =>
                execAsync('systemctl reboot');
                break;
          };
-      }}
-   >
+      }}/>
       <box cssClasses={['widgetBackground']}>
          <image cssClasses={['sleep']} iconName="weather-clear-night-symbolic"/>
          <image cssClasses={['shutdown']} iconName="system-shutdown-symbolic"/>
