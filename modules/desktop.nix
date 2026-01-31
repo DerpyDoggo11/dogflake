@@ -19,6 +19,10 @@
       hyprshot # Screenshot tool
       wl-clipboard # Astal clipboard utils
       spotdl
+      
+      # Utils
+      gnome-themes-extra # gtk themes for E-Ink Emulator 
+      gtk-engine-murrine # gtk themes for E-Ink Emulator 
 
       # Desktop applications
       gthumb # Image & video viewer & editor
