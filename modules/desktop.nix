@@ -35,6 +35,7 @@
       filezilla # FTP client
       prismlauncher # Minecraft launcher
       microsoft-edge
+      firefox
 
       # Scripts
       (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
@@ -60,8 +61,8 @@
         color.ui = true;
         core.editor = "code";
         credential.helper = "store";
-        github.user = "AmazinAxel"; # Github
-        user.name = "AmazinAxel"; # Git
+        github.user = "DerpyDoggo11"; # Github
+        user.name = "DerpyDoggo11"; # Git
         push.autoSetupRemote = true;
       };
     };
@@ -118,7 +119,7 @@
     greetd = { # Autologin
       enable = true;
       settings.default_session = {
-        command = "Hyprland";
+        command = "start-hyprland";
         user = "dog";
       };
     };

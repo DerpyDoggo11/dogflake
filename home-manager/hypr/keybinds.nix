@@ -5,8 +5,8 @@
       "Super, E, exec, microsoft-edge" # Browser
 
       # Desktop shell control
-      "Super, Period, exec, ags toggle emojiPicker" # Emoji picker
       "Super, V, exec, ags toggle clipboard" # Clipboard
+      "Super, Period, exec, ags toggle emojiPicker" # Emoji picker
       "SuperShift, S, exec, ags toggle powermenu" # Power menu
       "Super, space, exec, ags toggle launcher" # App laucher
       "Super, C, exec, ags request hideNotif" # Hide oldest notification
