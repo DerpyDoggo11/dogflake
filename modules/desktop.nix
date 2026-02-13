@@ -21,6 +21,8 @@
       spotdl
       gpu-screen-recorder
       nodejs_24 # runs npm
+      winetricks # used to run affinity
+      lutris # used to run affinity
 
       # Utils
       gnome-themes-extra # gtk themes for E-Ink Emulator 
@@ -38,7 +40,7 @@
       prismlauncher # Minecraft launcher
       microsoft-edge
       firefox
-      inkscape
+      #inkscape 
 
       # Scripts
       (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))

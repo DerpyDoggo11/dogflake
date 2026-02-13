@@ -4,6 +4,7 @@
     enable = true;
 
     settings = {
+
       input = {
         # Keyboard
         kb_layout = "us";
@@ -93,8 +94,13 @@
 
       env = [ # Some legacy apps still use xcursor
         "XCURSOR_THEME, Bibata-Modern-Ice"
-        "XCURSOR_SIZE, 24"
+        "GDK_SCALE,2"
+        "XCURSOR_SIZE,24"
       ];
+
+      xwayland = {
+        force_zero_scaling = true;
+      };
 
       exec-once = [
         "hyprlock" # Screen lock
