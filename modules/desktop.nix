@@ -19,6 +19,7 @@
       hyprshot # Screenshot tool
       wl-clipboard # Astal clipboard utils
       spotdl
+      gpu-screen-recorder
       
       # Utils
       gnome-themes-extra # gtk themes for E-Ink Emulator 
@@ -36,6 +37,7 @@
       prismlauncher # Minecraft launcher
       microsoft-edge
       firefox
+      inkscape
 
       # Scripts
       (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
@@ -52,6 +54,7 @@
   ];
 
   programs = {
+    gpu-screen-recorder.enable = true;
     hyprland.enable = true; # WM
     git = {
       enable = true;
