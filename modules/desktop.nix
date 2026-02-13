@@ -20,6 +20,7 @@
       wl-clipboard # Astal clipboard utils
       spotdl
       gpu-screen-recorder
+      npm
       
       # Utils
       gnome-themes-extra # gtk themes for E-Ink Emulator 
