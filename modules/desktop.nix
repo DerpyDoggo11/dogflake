@@ -20,8 +20,8 @@
       wl-clipboard # Astal clipboard utils
       spotdl
       gpu-screen-recorder
-      npm
-      
+      nodejs_24 # runs npm
+
       # Utils
       gnome-themes-extra # gtk themes for E-Ink Emulator 
       gtk-engine-murrine # gtk themes for E-Ink Emulator 
