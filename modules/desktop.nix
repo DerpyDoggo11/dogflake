@@ -21,9 +21,7 @@
       spotdl
       gpu-screen-recorder
       nodejs_24 # runs npm
-      winetricks # used to run affinity
-      lutris # used to run affinity
-
+      
       # Utils
       gnome-themes-extra # gtk themes for E-Ink Emulator 
       gtk-engine-murrine # gtk themes for E-Ink Emulator 
@@ -38,8 +36,12 @@
       discord # Voice & video chat app
       filezilla # FTP client
       prismlauncher # Minecraft launcher
-      microsoft-edge
-      firefox
+      firefox # main 
+      blender # for 3d models
+      tiled # for making tilemaps
+      blueman # bluetooth gui
+      libresprite # for pixel art/gui stuff
+      
       #inkscape 
 
       # Scripts
@@ -121,11 +123,13 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
+    
+    blueman.enable = true;
 
     greetd = { # Autologin
       enable = true;
       settings.default_session = {
-        command = "start-hyprland";
+        command = "hyprland";
         user = "dog";
       };
     };
@@ -135,6 +139,5 @@
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = false; # Don't start bluetooth until its needed
   };
 }

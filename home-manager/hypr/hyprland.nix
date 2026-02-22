@@ -5,6 +5,7 @@
 
     settings = {
 
+
       input = {
         # Keyboard
         kb_layout = "us";
@@ -87,21 +88,16 @@
       };
 
       # Play Minecraft sounds even when not focused
-      windowrule = [ "render_unfocused on, match:title (Minecraft*)(.*)$" ];
+      #windowrule = [ "render_unfocused on, match:title (Minecraft*)(.*)$" ];
 
       # Hide clipboard history during screenshares
-      layerrule = [ "no_screen_share on, match:namespace clipboard" ];
+      #layerrule = [ "no_screen_share on, match:namespace clipboard" ];
 
       env = [ # Some legacy apps still use xcursor
         "XCURSOR_THEME, Bibata-Modern-Ice"
-        "GDK_SCALE,2"
         "XCURSOR_SIZE,24"
       ];
-
-      xwayland = {
-        force_zero_scaling = true;
-      };
-
+      
       exec-once = [
         "hyprlock" # Screen lock
         "fcitx5 -d" # Chinese input daemon
