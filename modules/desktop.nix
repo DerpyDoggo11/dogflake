@@ -40,7 +40,7 @@
       blender # for 3d models
       tiled # for making tilemaps
       blueman # bluetooth gui
-      libresprite # for pixel art/gui stuff
+      aseprite # for pixel art/gui stuff
       
       #inkscape 
 
