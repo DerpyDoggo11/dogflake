@@ -21,6 +21,7 @@
       spotdl
       gpu-screen-recorder
       nodejs_24 # runs npm
+      godot
       
       # Utils
       gnome-themes-extra # gtk themes for E-Ink Emulator 
@@ -113,6 +114,11 @@
     avahi = {
       enable = true;
       nssmdns4 = true;
+    };
+
+    earlyoom = {
+      enable = true;
+      freeMemThreshold = 5; # 5%
     };
 
     # Sound
