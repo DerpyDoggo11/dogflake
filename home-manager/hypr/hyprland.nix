@@ -99,8 +99,8 @@
       ];
       
       exec-once = [
-        "hyprlock" # Screen lock
-        "fcitx5 -d" # Chinese input daemon
+        "hyprlock" # Screen lockX
+        "batsignal -w 20 -c 5 -d 0 -a Low battery"
       ];
     };
   };

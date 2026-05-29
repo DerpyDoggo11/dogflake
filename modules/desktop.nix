@@ -22,6 +22,11 @@
       gpu-screen-recorder
       nodejs_24 # runs npm
       godot
+      reaper # DAW
+      kicad
+      kikit
+      slack
+      batsignal
       
       # Utils
       gnome-themes-extra # gtk themes for E-Ink Emulator 
@@ -42,8 +47,9 @@
       tiled # for making tilemaps
       blueman # bluetooth gui
       aseprite # for pixel art/gui stuff
+      claude-code
       
-      #inkscape 
+      inkscape 
 
       # Scripts
       (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
@@ -56,7 +62,6 @@
 
   fonts.packages = with pkgs; [
     iosevka # Programming
-    wqy_zenhei # Chinese
   ];
 
   programs = {
@@ -82,7 +87,7 @@
     enable = true;
     type = "fcitx5";
     fcitx5 = {
-      addons = with pkgs; [ qt6Packages.fcitx5-chinese-addons fcitx5-nord ];
+      addons = with pkgs; [ fcitx5-nord ];
       waylandFrontend = true;
 
       settings = {
@@ -90,10 +95,8 @@
           "Groups/0" = {
             Name = "Default";
             "Default Layout" = "us";
-            DefaultIM = "pinyin";
           };
           "Groups/0/Items/0".Name = "keyboard-us";
-          "Groups/0/Items/1".Name = "pinyin";
         };
         globalOptions."Hotkey/TriggerKeys"."0" = "Control+Super+space";
 
