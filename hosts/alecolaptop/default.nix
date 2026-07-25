@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../common.nix
@@ -29,6 +29,7 @@
 
   environment.systemPackages = with pkgs; [
     gimp3
+    godot
     libreoffice
     thunderbird
     zettlr

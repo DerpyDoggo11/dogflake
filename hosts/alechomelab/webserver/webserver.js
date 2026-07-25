@@ -1,12 +1,10 @@
 import { serve } from "bun";
 import { Database } from 'bun:sqlite';
-import { exec } from "child_process";
+import { execSync } from "child_process";
 
-new Promise((resolve, reject) =>
-  exec("mountpoint -q /media", err =>
-    err ? reject(new Error("Drive not found")) : resolve()
-  )
-);
+// is usb mounted?
+try { execSync("mountpoint -q /media"); }
+catch { process.exit(1); }
 
 const db = new Database('/media/airQuality.db');
 
@@ -25,6 +23,7 @@ const getData = db.prepare(`
   WHERE timestamp >= ?
   ORDER BY timestamp ASC
 `);
+const getLatest = db.prepare('SELECT timestamp FROM airquality ORDER BY timestamp DESC LIMIT 1');
 
 const send = (status, message) =>
   new Response(message, {
@@ -40,7 +39,7 @@ async function handlePost(req) {
       return send(400, "Invalid data");
 
     const now = Date.now();
-    const last = getData.get();
+    const last = getLatest.get();
 
     if (last && now - last.timestamp < 540_000)
       return send(429, "Rate limited");

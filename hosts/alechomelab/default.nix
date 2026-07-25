@@ -87,7 +87,6 @@
   environment.persistence."/persist" = {
     directories = [
       "/var/lib/samba" # NAS login
-      "/var/lib/systemd/timers" # daily.timer
       "/etc/homelab" # Airnow token
     ];
     users.alec.files = [ "GithubToken" ]; # githubBackup

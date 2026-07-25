@@ -46,23 +46,30 @@ in {
           Type = "oneshot";
           User = "alec";
           Group = "users";
-          MemoryHigh = "210M";
-          MemoryMax = "280M"; # ceiling
-          MemorySwapMax = "300M";
-          OOMScoreAdjust = 800; # kill first
-          CPUWeight = 10;
-          IOWeight = 10;
+          MemoryHigh = "190M";
+          MemoryMax = "240M"; # ceiling
+          MemorySwapMax = "200M"; # prefer fast zram off usb swap
+          ManagedOOMMemoryPressure = "kill";
+          OOMScoreAdjust = 1000;
           IOSchedulingClass = "idle";
+          IOWeight = 10;
+          IOReadBandwidthMax = "/media 24M";
+          IOWriteBandwidthMax = "/media 10M";
+          IOReadIOPSMax = "/media 1200";
+          IOWriteIOPSMax = "/media 600";
+          CPUWeight = 10;
+          CPUQuota = "200%";
           Nice = 19;
         };
       };
     };
 
+    services.sshd.serviceConfig.OOMScoreAdjust = -900; # NEVER OOM SSH
+
     timers."daily" = { # Every morning at 3AM PT
       wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = "*-*-* 03:00:00";
-        Persistent = true;
         RandomizedDelaySec = "5m";
       };
     };
