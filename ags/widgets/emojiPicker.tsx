@@ -22,7 +22,7 @@ export default () => inputControl('emojiPicker', () =>
     onNotifyText={async (self) => {
       if (self.text != '' && !self.text.match(/[:a-z]/)) {
         hide();
-        await execAsync('wl-copy ' + self.text);
+        await execAsync(['wl-copy', '-t', 'text/plain', self.text]);
       };
     }}
   >

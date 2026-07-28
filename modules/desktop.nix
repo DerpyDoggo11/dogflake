@@ -1,4 +1,24 @@
-{ inputs, pkgs, lib, ... }: {
+{ inputs, pkgs, lib, ... }: let
+
+  # todo better solution than this vibecoded mess omg
+  screenshot = pkgs.writeShellScriptBin "screenshot" ''
+    img=$(mktemp --suffix=.png); geom=$(mktemp)
+    trap 'rm -f "$img" "$geom"' EXIT
+
+    ${pkgs.grim}/bin/grim "$img"
+    ${pkgs.wayfreeze}/bin/wayfreeze --hide-cursor --after-freeze-cmd \
+      "${pkgs.slurp}/bin/slurp > $geom; ${pkgs.procps}/bin/pkill wayfreeze"
+    [ -s "$geom" ] || exit 0 # cancelled
+
+    scale=$(${pkgs.sway}/bin/swaymsg -t get_outputs | ${pkgs.jq}/bin/jq '[.[].scale] | max')
+    crop=$(${pkgs.gawk}/bin/awk -v s="$scale" '{split($1,p,","); split($2,d,"x");
+      printf "%.0fx%.0f+%.0f+%.0f", d[1]*s, d[2]*s, p[1]*s, p[2]*s}' "$geom")
+    # 2x nearest-neighbour: adds no detail, but keeps pixels as hard blocks so
+    # zooming in an image viewer doesn't smear them
+    ${pkgs.imagemagick}/bin/magick "$img" -crop "$crop" +repage \
+      -filter point -resize 200% png:- | ${pkgs.wl-clipboard}/bin/wl-copy
+  '';
+in {
 
   imports = [
     ./tmpfs-root.nix
@@ -90,7 +110,7 @@
       swaybg
       libnotify # Astal internal notifications
       mpc
-      wayfreeze # Screenshot freeze
+      screenshot # Freeze-then-select region screenshot (defined above)
       grim
       slurp
       swappy # Annotation
@@ -109,6 +129,7 @@
 
       # Desktop applications
       gthumb
+      video-trimmer
       gnome-system-monitor
       nemo-with-extensions
       nemo-fileroller
@@ -203,6 +224,10 @@
   ];
 
   programs = {
+    kdeconnect = {
+      enable = true;
+      package = pkgs.valent;
+    };
     dconf.enable = true; # For hm
     nix-ld.enable = true; # For dynamic executables
     gpu-screen-recorder.enable = true; # Clipping & recording software
@@ -269,7 +294,7 @@
     # Prevent crashes
     earlyoom = {
        enable = true;
-       freeMemThreshold = 5; # 5%
+       freeMemThreshold = 10; # 10%
     };
 
     # Sound

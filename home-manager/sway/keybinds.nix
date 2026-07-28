@@ -74,7 +74,7 @@ in {
       "XF86MonBrightnessDown" = "exec brightnessctl set 15%-";
 
       # Apps
-      "${mod}+E" = "exec lightbrowse";
+      "${mod}+E" = "exec busctl --user call com.amazinaxel.lightbrowse /com/amazinaxel/lightbrowse org.gtk.Application Activate 'a{sv}' 0"; # lightbrowse
       "${mod}+return" = "exec ${openFoot}";
 
       # Ags
@@ -128,7 +128,7 @@ in {
       "${mod}+less" = "exec ags request 'media prevPlaylist'";
       "${mod}+slash" = "exec ags request 'media toggle'";
 
-      "Print" = ''exec wayfreeze --hide-cursor --after-freeze-cmd 'grim -g "$(slurp)" - | wl-copy; pkill wayfreeze' ''; # Screenshot
+      "Print" = "exec screenshot"; # Screenshot
 
       # Move focus in a workspace
       "${mod}+left" = "focus left";

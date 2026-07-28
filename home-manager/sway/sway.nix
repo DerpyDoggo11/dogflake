@@ -118,6 +118,7 @@
         { command = "fcitx5 -d"; }
         { command = "wl-gammarelay-rs"; }
         { command = "sleep 1 && busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3500"; }
+        { command = "lightbrowse --prewarm"; }
       ];
     };
     # Disable middle mouse paste

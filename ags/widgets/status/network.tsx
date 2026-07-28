@@ -44,50 +44,66 @@ const busctlAct = (...args: string[]) =>
 let stationPath = '';
 let devicePath = '';
 
+let listBox: Gtk.Box | null = null;
+let powerButton: Gtk.Widget | null = null;
+let scanButton: Gtk.Widget | null = null;
+
+const focusWifiMenu = () => GLib.idle_add(GLib.PRIORITY_DEFAULT_IDLE, () => {
+    if (currentAsideWindow.peek() === 'wifi') {
+        const target = wifiOn()
+            ? (listBox?.get_first_child() ?? scanButton)
+            : powerButton;
+        if (target?.get_mapped()) target.grab_focus();
+    };
+    return GLib.SOURCE_REMOVE;
+});
+
+const menuHasFocus = () => {
+    const root = listBox?.get_root() as Gtk.Window | null;
+    return !!root?.get_focus()?.get_mapped();
+};
+
 const systemBus = Gio.DBus.system;
-let scanSubId = 0;
-let scanTimeoutId = 0;
+let subIds: number[] = [];
+let coalesceId = 0;
 
-const clearScanTimeout = () => {
-    if (scanTimeoutId) {
-        GLib.source_remove(scanTimeoutId);
-        scanTimeoutId = 0;
-    };
-};
-
-const unsubscribeScan = () => {
-    if (scanSubId) {
-        systemBus.signal_unsubscribe(scanSubId);
-        scanSubId = 0;
-    };
-    clearScanTimeout();
-};
-
-const finishScan = () => {
-    unsubscribeScan();
-    refresh().finally(() => setScanning(false));
-};
-
-const watchScanFinish = () => {
-    unsubscribeScan();
-    scanSubId = systemBus.signal_subscribe(
-        iwdBus,
-        'org.freedesktop.DBus.Properties',
-        'PropertiesChanged',
-        stationPath,
-        stationInterface,
-        Gio.DBusSignalFlags.NONE,
-        (_bus, _sender, _path, _iface, _signal, params) => {
-            const [, changed] = params.deep_unpack() as [string, Record<string, any>, string[]];
-            if ('Scanning' in changed && changed.Scanning === false) finishScan();
-        },
-    );
-    // Safety net
-    scanTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 8000, () => {
-        scanTimeoutId = 0;
-        finishScan();
+const queueRefresh = () => {
+    if (coalesceId) return;
+    coalesceId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+        coalesceId = 0;
+        refresh();
         return GLib.SOURCE_REMOVE;
     });
+};
+
+const watchIwd = () => { // update dynamically
+    if (subIds.length) return;
+
+    subIds.push(systemBus.signal_subscribe(
+        iwdBus, 'org.freedesktop.DBus.Properties', 'PropertiesChanged',
+        null, null, Gio.DBusSignalFlags.NONE,
+        (_bus, _sender, path, _iface, _signal, params) => {
+            const [changedIface, changed] = params.deep_unpack() as [string, Record<string, any>, string[]];
+            if (changedIface === stationInterface && path === stationPath && 'Scanning' in changed)
+                setScanning(unwrap(changed.Scanning) === true);
+            queueRefresh();
+        },
+    ));
+
+    subIds.push(systemBus.signal_subscribe(
+        iwdBus, 'org.freedesktop.DBus.ObjectManager', null,
+        null, null, Gio.DBusSignalFlags.NONE,
+        queueRefresh,
+    ));
+};
+
+const unwatchIwd = () => {
+    for (const id of subIds) systemBus.signal_unsubscribe(id);
+    subIds = [];
+    if (coalesceId) {
+        GLib.source_remove(coalesceId);
+        coalesceId = 0;
+    };
 };
 
 type ObjMap = Record<string, Record<string, Record<string, any>>>;
@@ -122,6 +138,7 @@ const refresh = async () => {
 
         const powered: boolean = objects[devicePath]?.[deviceInterface]?.['Powered'] ?? true;
         setWifiOn(powered);
+        setScanning(objects[stationPath]?.[stationInterface]?.['Scanning'] === true);
 
         if (!powered || !stationPath) {
             setNetworks([]);
@@ -148,6 +165,8 @@ const refresh = async () => {
                 .filter((n): n is WifiNet => n !== null)
                 .sort((a, b) => Number(b.connected) - Number(a.connected))
         );
+
+        if (!menuHasFocus()) focusWifiMenu(); // focus in case of a rebuild
     } catch(e) {
         console.error('Network refresh error:', e);
     };
@@ -175,13 +194,12 @@ const scan = async () => {
     setScanning(true);
     try {
         if (!stationPath) await refresh();
-        watchScanFinish();
         await busctlAct(stationPath, stationInterface, 'Scan').catch((e) => {
             if (!String(e).includes('Operation already in progress')) throw e;
         });
+        refresh();
     } catch(e) {
         console.error('Scan error:', e);
-        unsubscribeScan();
         setScanning(false);
     };
 };
@@ -201,11 +219,9 @@ export default () =>
                 onClicked={toggleWifi}
                 cursor={Gdk.Cursor.new_from_name('pointer', null)}
                 $={(self) => {
-                    self.connect('map', refresh);
-                    currentAsideWindow.subscribe(() => {
-                        if (currentAsideWindow.peek() === 'wifi' && !wifiOn())
-                            self.grab_focus();
-                    });
+                    powerButton = self;
+                    self.connect('map', () => { watchIwd(); refresh(); focusWifiMenu(); });
+                    self.connect('unmap', unwatchIwd);
                 }}
             >
                 <image iconName={wifiOn.as(on =>
@@ -218,12 +234,7 @@ export default () =>
                 visible={wifiOn}
                 cursor={Gdk.Cursor.new_from_name('pointer', null)}
                 cssClasses={scanning.as(s => s ? ['active'] : [])}
-                $={(self) => {
-                    currentAsideWindow.subscribe(() => {
-                        if (currentAsideWindow.peek() === 'wifi' && wifiOn())
-                            self.grab_focus();
-                    });
-                }}
+                $={(self) => scanButton = self}
             >
                 <image iconName="view-refresh-symbolic"/>
             </button>
@@ -236,7 +247,7 @@ export default () =>
             maxContentHeight={500}
             visible={wifiOn}
         >
-        <box orientation={Gtk.Orientation.VERTICAL}>
+        <box orientation={Gtk.Orientation.VERTICAL} $={(self) => listBox = self}>
         <For each={networks}>
             {(net: WifiNet) => {
                 let entry: Gtk.Entry | null = null;

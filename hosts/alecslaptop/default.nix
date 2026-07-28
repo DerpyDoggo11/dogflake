@@ -30,10 +30,7 @@
     nodejs_22
     steam-run
   ];
-  programs = {
-    steam.enable = true; # Gaming
-    kdeconnect.enable = true; # Device integration
-  };
+  programs.steam.enable = true; # Gaming
   environment.sessionVariables.LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.systemd ]; # fix MC warning
 
   # Bootloader settings

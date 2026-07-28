@@ -9,11 +9,14 @@ import { streamingMode } from '../notifications/notifications';
 
 const list = new Gtk.ListBox();
 
+const mimeTypes = new Map<string, string>(); // for faster pasting
+
 list.connect('row-activated', async (_, row) => {
     app.get_window('clipboard')?.set_visible(false);
 
     const id = row.child.name;
-    await execAsync(`bash -c 'cliphist decode ${id} | wl-copy'`);
+    const type = mimeTypes.get(id) ?? 'text/plain';
+    await execAsync(`bash -c 'cliphist decode ${id} | wl-copy -t ${type}'`);
 });
 
 list.set_sort_func((a, b) => {
@@ -23,7 +26,13 @@ list.set_sort_func((a, b) => {
     return row2id - row1id;
 });
 
-streamingMode.subscribe(() => refreshItems());
+const rows = new Map<string, Gtk.Widget>();
+
+streamingMode.subscribe(() => {
+    list.remove_all(); // Items render differently in streaming mode, so rebuild them all
+    rows.clear();
+    refreshItems();
+});
 
 const refreshItems = async () => {
     const entries = await execAsync('cliphist list')
@@ -32,14 +41,28 @@ const refreshItems = async () => {
             const [id, content] = entry.split('\t');
             return { id: id, content: content };
         })
+        .filter((entry) => entry.id && entry.content)
     ).catch(() => []);
 
-    list.remove_all();
+    entries.forEach((entry) => {
+        if (rows.has(entry.id)) return;
 
-    if (entries[0]?.content) // has entries
-        entries.forEach((entry) =>
-            list.append(ClipboardItem(entry.id, entry.content) as Gtk.Widget)
-        );
+        const image = entry.content.match(/\[\[ binary data \d+ (?:B|KiB|MiB|GiB) (\w+)/);
+        mimeTypes.set(entry.id, image ? `image/${image[1]}` : 'text/plain');
+
+        const child = ClipboardItem(entry.id, entry.content) as Gtk.Widget;
+        list.append(child);
+        rows.set(entry.id, child);
+    });
+
+    const current = new Set(entries.map((entry) => entry.id));
+    rows.forEach((child, id) => {
+        if (current.has(id)) return;
+
+        list.remove(child.get_parent() as Gtk.Widget); // ListBoxRow parent
+        rows.delete(id);
+        mimeTypes.delete(id);
+    });
 };
 refreshItems();
 

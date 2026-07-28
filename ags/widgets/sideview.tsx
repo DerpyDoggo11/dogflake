@@ -59,13 +59,54 @@ const setFocused = (focused: boolean) => {
   if (dim) dim.visible = focused;
 };
 
+// Fix clipboard pasting
+const PASTE_SHIM_JS = `(function(){
+  var mine = false;
+  document.addEventListener('paste', function(e){
+    if (mine || e.clipboardData.types.length) return;
+    var target = e.target;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    navigator.clipboard.read().then(async function(items){
+      var dt = new DataTransfer();
+      for (var item of items)
+        for (var type of item.types)
+          if (/^(image|video)\\//.test(type))
+            dt.items.add(new File([await item.getType(type)], 'pasted.' + type.split('/')[1], { type: type }));
+      if (!dt.files.length) return;
+      mine = true;
+      target.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true }));
+      mine = false;
+    }).catch(function(){});
+  }, true); // capture
+})();`;
+
 const ensurePage = (name: PageName) => {
   if (webviews[name]) return;
+  const contentManager = new WebKit.UserContentManager();
+  contentManager.add_script(WebKit.UserScript.new(
+    PASTE_SHIM_JS,
+    WebKit.UserContentInjectedFrames.ALL_FRAMES,
+    WebKit.UserScriptInjectionTime.START,
+    null,
+    null
+  ));
+
   const webview = new WebKit.WebView({
-    network_session: getNetworkSession()
+    network_session: getNetworkSession(),
+    user_content_manager: contentManager
   });
 
   webview.get_settings().set_user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15");
+
+  // todo can remove?
+  webview.connect('permission-request', (_webview: any, request: any) => {
+    if (request instanceof WebKit.ClipboardPermissionRequest) {
+      request.allow(); // allow media pasting!!
+      return true;
+    }
+    return false;
+  });
 
   webview.set_zoom_level(0.95);
   webview.load_uri(urls[name]);

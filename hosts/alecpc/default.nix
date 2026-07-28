@@ -21,7 +21,6 @@
     bun
     openjdk25
   ];
-  programs.kdeconnect.enable = true;
 
   services = {
     xserver.videoDrivers = [ "nvidia" ]; # Load nvidia drivers

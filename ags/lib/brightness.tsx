@@ -1,6 +1,5 @@
-import { exec, execAsync } from 'ags/process';
+import { exec, execAsync, subprocess } from 'ags/process';
 import { createState } from 'ags';
-import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
 const get = (args: string) => Number(exec('brightnessctl ' + args));
@@ -16,18 +15,20 @@ const setBrightness = (percent: number) => {
     execAsync(`brightnessctl set ${steps} -q`);
 };
 
-export const monitorBrightness = () => {
-    const file = Gio.File.new_for_path(brightnessPath);
-    const monitor = file.monitor(Gio.FileMonitorFlags.NONE, null);
-    monitor.connect('changed', (_m: Gio.FileMonitor, _f: Gio.File, _o: Gio.File | null, eventType: Gio.FileMonitorEvent) => {
-        if (eventType !== Gio.FileMonitorEvent.CHANGES_DONE_HINT) return;
-        const [ok, contents] = GLib.file_get_contents(brightnessPath);
-        if (!ok) return;
-        const v = Number(new TextDecoder().decode(contents).trim()) / screenMax;
-        if (v !== brightness.peek()) setBrightnessValue(v); // only updates for non internal changes
-    });
-    return monitor;
-};
+// sysfs has no inotify support, so a GFileMonitor on the brightness attribute never
+// fires. udev emits a change event on the backlight device for every write instead.
+export const monitorBrightness = () =>
+    subprocess(
+        ['udevadm', 'monitor', '--udev', '--subsystem-match=backlight'],
+        (line) => {
+            if (!line.includes(screen)) return;
+            const [ok, contents] = GLib.file_get_contents(brightnessPath);
+            if (!ok) return;
+            const v = Number(new TextDecoder().decode(contents).trim()) / screenMax;
+            if (v !== brightness.peek()) setBrightnessValue(v); // only updates for non internal changes
+        },
+        (err) => console.error('[Brightness] ' + err)
+    );
 
 export const BrightnessSlider = () =>
     <box>

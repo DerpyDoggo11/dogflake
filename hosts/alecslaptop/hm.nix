@@ -11,7 +11,6 @@
     };
 
     startup = [
-      { command = ''swaymsg "workspace 3; exec lightbrowse"''; }
       { command = ''swaymsg "workspace 5; exec thunderbird"''; }
     ];
 
@@ -28,6 +27,6 @@
     ];
 
     # Side mouse key screenshot
-    keybindings."Mod4+D" = ''exec wayfreeze --hide-cursor --after-freeze-cmd 'grim -g "$(slurp)" - | wl-copy; pkill wayfreeze' '';
+    keybindings."Mod4+D" = "exec screenshot";
   };
 }

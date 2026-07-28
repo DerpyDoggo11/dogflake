@@ -43,7 +43,6 @@
     claude-code
     platformio-core
   ];
-  programs.kdeconnect.enable = true;
 
   hardware = {
     keyboard.qmk.enable = true;

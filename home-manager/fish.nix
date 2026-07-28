@@ -15,13 +15,17 @@
         gd = "git diff";
         gdh = "git diff HEAD";
         gc = "git commit -v";
+        gac = "git add -A && git commit -v";
 
         n = "nix";
         nfu = "nix flake update";
         nb = "nix build";
         nd = "nix develop";
       };
-      functions.gcm = ''git commit -m "$argv"'';
+      functions = {
+        gcm = ''git commit -m "$argv"'';
+        gacm = ''git add && git commit -m "$argv"'';
+      };
       interactiveShellInit = ''
         set fish_greeting
         fetch

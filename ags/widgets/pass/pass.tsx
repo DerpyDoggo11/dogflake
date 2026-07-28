@@ -34,8 +34,8 @@ const search = (q: string) => {
 const copyPair = async (name: string) => {
     app.get_window('pass')?.set_visible(false);
     const fallback = name.includes('/') ? name.slice(name.lastIndexOf('/') + 1) : name;
-    const userCmd = `u=$(pass show "${name}" | sed -n '2p' | sed -E 's/^[[:space:]]*(login|username|user|email):[[:space:]]*//I' | tr -d '\\n'); [ -z "$u" ] && u=${GLib.shell_quote(fallback)}; printf '%s' "$u" | wl-copy -n`;
-    const passCmd = `pass show "${name}" | head -n1 | tr -d '\\n' | wl-copy -n`;
+    const userCmd = `u=$(pass show "${name}" | sed -n '2p' | sed -E 's/^[[:space:]]*(login|username|user|email):[[:space:]]*//I' | tr -d '\\n'); [ -z "$u" ] && u=${GLib.shell_quote(fallback)}; printf '%s' "$u" | wl-copy -n -t text/plain`;
+    const passCmd = `pass show "${name}" | head -n1 | tr -d '\\n' | wl-copy -n -t text/plain`;
         await execAsync(['bash', '-c', `${userCmd} && sleep 0.15 && ${passCmd}`])};
 
 loadEntries();

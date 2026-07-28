@@ -33,7 +33,7 @@ const save = async () => {
 
     // Copy it
     await execAsync(['bash', '-c',
-        `printf '%s' "$1" | wl-copy -n && sleep 0.15 && printf '%s' "$2" | wl-copy -n`,
+        `printf '%s' "$1" | wl-copy -n -t text/plain && sleep 0.15 && printf '%s' "$2" | wl-copy -n -t text/plain`,
         'bash', user, password
     ]);
 
