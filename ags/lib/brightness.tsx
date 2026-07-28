@@ -15,8 +15,6 @@ const setBrightness = (percent: number) => {
     execAsync(`brightnessctl set ${steps} -q`);
 };
 
-// sysfs has no inotify support, so a GFileMonitor on the brightness attribute never
-// fires. udev emits a change event on the backlight device for every write instead.
 export const monitorBrightness = () =>
     subprocess(
         ['udevadm', 'monitor', '--udev', '--subsystem-match=backlight'],
