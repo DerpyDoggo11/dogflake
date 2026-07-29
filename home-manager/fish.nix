@@ -21,6 +21,7 @@
         nfu = "nix flake update";
         nb = "nix build";
         nd = "nix develop";
+        nfc = "nix flake check --impure";
       };
       functions = {
         gcm = ''git commit -m "$argv"'';
