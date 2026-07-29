@@ -3,7 +3,7 @@
   boot.kernelModules = [ "kvm-amd" ];
 
   fileSystems."/persist" = {
-    device = "/dev/disk/by-uuid/REPLACE-ME"; #!!!!!!!!!!!!!!!!!!!!
+    device = "/dev/disk/by-uuid/ca0e7cbb-b202-4129-a821-ff5dcdbb8488";
     fsType = "ext4";
     neededForBoot = true;
     options = [ "noatime" ];
