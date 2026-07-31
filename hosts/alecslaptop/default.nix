@@ -5,6 +5,7 @@
     ../../modules/desktop.nix
     ../../modules/laptop.nix
     ../../modules/printing.nix
+    ../../modules/bluetooth-audio.nix
   ];
 
   networking.hostName = "alecslaptop"; # Hostname
@@ -35,10 +36,7 @@
 
   # Bootloader settings
   boot = {
-    # Sea Islands Radeon support for Vulkan
-    kernelParams = [
-      "amd_pstate=active" "mem_sleep_default=deep"
-    ];
+    kernelParams = [ "amd_pstate=active" ];
     consoleLogLevel = 3; # Suppress ACPI BIOS firmware bug spam
 
     initrd = { # AMD GPU support

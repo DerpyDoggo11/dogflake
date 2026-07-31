@@ -41,12 +41,44 @@ const checkLogin = (entry: Gtk.Entry) => {
     });
 };
 
+const handleKeys = (entry: Gtk.Entry, key: number, state: Gdk.ModifierType) => {
+    if (key == 65379) return true; // Insert
+    if (!(state & Gdk.ModifierType.CONTROL_MASK)) return false;
+
+    switch (key) {
+        case 115: // S - sleep
+            execAsync('systemctl suspend');
+            break;
+        case 104: // H - hibernate
+            execAsync('systemctl hibernate');
+            break;
+        case 113: // Q - power off
+            execAsync('systemctl poweroff');
+            break;
+        case 99: // C - clear input
+            break;
+        case 86: // V - do not paste from clipboard
+        case 118:
+            return true;
+        default: return false;
+    };
+
+    entry.set_text(''); // wipe anything typed
+    return true;
+};
+
 const assignLockWindow = (monitor: Gdk.Monitor) =>
     createRoot((dispose) => {
         const win = new Gtk.Window({ name: 'lockscreen', cursor: hiddenCursor });
         win.connect('destroy', dispose);
+
+        let entry: Gtk.Entry;
         win.set_child(
             <overlay>
+                <Gtk.EventControllerKey
+                    propagationPhase={Gtk.PropagationPhase.CAPTURE}
+                    onKeyPressed={(_ctrl, key, _keycode, state) => handleKeys(entry, key, state)}
+                />
                 <label
                     halign={Gtk.Align.CENTER}
                     valign={Gtk.Align.CENTER}
@@ -62,7 +94,7 @@ const assignLockWindow = (monitor: Gdk.Monitor) =>
                     visibility={false}
                     invisibleChar={0}
                     onActivate={checkLogin}
-                    $={(self) => self.connect('map', () => self.grab_focus())}
+                    $={(self) => (entry = self, self.connect('map', () => self.grab_focus()))}
                 />
                 <box
                     hexpand

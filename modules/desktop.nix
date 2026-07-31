@@ -1,22 +1,12 @@
 { inputs, pkgs, lib, ... }: let
 
-  # todo better solution than this vibecoded mess omg
   screenshot = pkgs.writeShellScriptBin "screenshot" ''
-    img=$(mktemp --suffix=.png); geom=$(mktemp)
-    trap 'rm -f "$img" "$geom"' EXIT
-
-    ${pkgs.grim}/bin/grim "$img"
-    ${pkgs.wayfreeze}/bin/wayfreeze --hide-cursor --after-freeze-cmd \
-      "${pkgs.slurp}/bin/slurp > $geom; ${pkgs.procps}/bin/pkill wayfreeze"
-    [ -s "$geom" ] || exit 0 # cancelled
-
-    scale=$(${pkgs.sway}/bin/swaymsg -t get_outputs | ${pkgs.jq}/bin/jq '[.[].scale] | max')
-    crop=$(${pkgs.gawk}/bin/awk -v s="$scale" '{split($1,p,","); split($2,d,"x");
-      printf "%.0fx%.0f+%.0f+%.0f", d[1]*s, d[2]*s, p[1]*s, p[2]*s}' "$geom")
-    # 2x nearest-neighbour: adds no detail, but keeps pixels as hard blocks so
-    # zooming in an image viewer doesn't smear them
-    ${pkgs.imagemagick}/bin/magick "$img" -crop "$crop" +repage \
-      -filter point -resize 200% png:- | ${pkgs.wl-clipboard}/bin/wl-copy
+    ${pkgs.wayfreeze}/bin/wayfreeze --hide-cursor --after-freeze-cmd '
+      geom=$(${pkgs.slurp}/bin/slurp) &&
+        ${pkgs.grim}/bin/grim -g "$geom" - |
+          ${pkgs.wl-clipboard}/bin/wl-copy -t image/png
+      ${pkgs.procps}/bin/pkill wayfreeze
+    '
   '';
 in {
 
@@ -181,6 +171,8 @@ in {
           ".cache/spotify"
           ".local/share/mpd"
           ".config/Code"
+          ".vscode-shared" # logins and recents
+          ".vscode" # password store
           ".local/share/ags-sideview"
           ".cache/ags-sideview"
 
