@@ -13,6 +13,7 @@ set playlists \
     "Synthwave https://open.spotify.com/playlist/1YIe34rcmLjCYpY9wJoM2p" \
     "Focus https://open.spotify.com/playlist/3Qk9br14pjEo2aRItDhb2f" \
     "Study https://open.spotify.com/playlist/0vvXsWCC9xrXsKd4FyS8kM" \
+    "Liked https://open.spotify.com/playlist/1t9A5qwCTugNsZsu558xeN" \
     "SynthAmbient https://open.spotify.com/playlist/4murW7FWRb0LFbG7eUwDy0" \
     "Ambient https://open.spotify.com/playlist/07lYUEyTkWP3NqIa7Kzyqx"
 

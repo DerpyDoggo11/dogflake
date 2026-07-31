@@ -13,8 +13,8 @@ export const [ playlist, setPlaylist ] = createState(1);
 export const [ playlistName, setPlaylistName ] = createState('');
 
 // These playlists match with the folder names in ~/Music
-const playlists =      ['Study',  'Focus',  'Synthwave', 'SynthAmbient', 'Ambient'];
-const playlistColors = ['bf616a', '5e81ac', 'b48ead',    'ebcb8b',       '81a1c1'];
+const playlists =      ['Study',  'Focus',  'Synthwave', 'Liked', 'SynthAmbient', 'Ambient'];
+const playlistColors = ['bf616a', '5e81ac', 'b48ead',    '8fbcbb',      'ebcb8b',       '81a1c1'];
 
 export const updTrack = (direction: musicAction) => {
     exec('mpc pause');
