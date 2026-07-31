@@ -240,11 +240,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785527207,
-        "narHash": "sha256-gdJ3Jo8B3KaUFaUfyH6TDtRCDb3CtvDVU6/UKMbXjvE=",
+        "lastModified": 1785528977,
+        "narHash": "sha256-l5WvLqJin7XWGsIUiXptvbYNl3fC616UmH8qZ9l4mHI=",
         "owner": "AmazinAxel",
         "repo": "lightbrowse",
-        "rev": "51c6ea1be25aac0b9147c1ba3dc71d6b475327e2",
+        "rev": "b14b9787c22c2d707aa8dfffa892219944b79330",
         "type": "github"
       },
       "original": {
