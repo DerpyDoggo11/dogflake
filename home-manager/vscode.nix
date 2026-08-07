@@ -54,6 +54,7 @@
           colorTheme = "Nord"; # default
           preferredDarkColorTheme = "Nord";
           preferredLightColorTheme = "Nord Light";
+          experimental.modernUI =  false;
         };
         window.autoDetectColorScheme = true; # Follow system
         chat.disableAIFeatures = true;

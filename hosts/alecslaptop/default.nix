@@ -61,6 +61,7 @@
       ".local/share/Steam" ".steam" # Steam
       ".thunderbird" # Thunderbird
       ".config/kdeconnect" # kdeconnect
+      ".config/playit_gg" # playit agent login
     ];
   };
 

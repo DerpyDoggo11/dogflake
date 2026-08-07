@@ -74,14 +74,7 @@ in {
       "XF86MonBrightnessDown" = "exec brightnessctl set 15%-";
 
       # Apps
-      # lightbrowse. The D-Bus Activate is the fast path and stays first: it reaches
-      # the prewarmed instance in ~2ms, where spawning the binary to make the same
-      # call itself costs ~70ms, nearly all of it dynamically linking WebKit before
-      # main() runs. But Activate only reaches an instance that is already up, and no
-      # D-Bus service file is installed to autostart one, so on its own it left the
-      # key dead until the next login if lightbrowse ever died. It fails in ~1ms when
-      # the name is unowned, so falling back to a real launch costs nothing.
-      "${mod}+E" = "exec busctl --user call com.amazinaxel.lightbrowse /com/amazinaxel/lightbrowse org.gtk.Application Activate 'a{sv}' 0 || exec lightbrowse";
+      "${mod}+E" = ''exec busctl --user call com.amazinaxel.lightbrowse /com/amazinaxel/lightbrowse org.gtk.Application Activate 'a{sv}' 1 activation-token s "$XDG_ACTIVATION_TOKEN" || exec lightbrowse'';
       "${mod}+return" = "exec ${openFoot}";
 
       # Ags

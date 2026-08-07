@@ -22,6 +22,8 @@ const devicesBind = createBinding(bluetooth, 'devices')((devs: BluetoothService.
     devs.filter(d => d.alias.replaceAll('-', ':') != d.address) // not a mac
 );
 
+const firstConnected = () => devicesBind.peek().find(d => d.connected) ?? null;
+
 const nameSubstitute = (name: string) => {
 	if (!name) return '';
 
@@ -65,7 +67,7 @@ export default () =>
                 cssClasses={discovering.as((d) => d ? ['active'] : [])}
                 $={(self) => {
                     currentAsideWindow.subscribe(() => {
-                        if (currentAsideWindow.peek() === 'bluetooth' && bluetooth.isPowered)
+                        if (currentAsideWindow.peek() === 'bluetooth' && bluetooth.isPowered && !firstConnected())
                             self.grab_focus();
                     });
                 }}
@@ -109,10 +111,17 @@ export default () =>
                                 const hConnected = device.connect('notify::connected', update);
                                 const hDiscovering = adapter?.connect('notify::discovering', update);
                                 update();
+
+                                const unsubFocus = currentAsideWindow.subscribe(() => {
+                                    if (currentAsideWindow.peek() === 'bluetooth' && firstConnected() === device)
+                                        self.grab_focus();
+                                });
+
                                 onCleanup(() => {
                                     device.disconnect(hConnected);
                                     if (hDiscovering) adapter?.disconnect(hDiscovering);
                                     if (pairHandler) device.disconnect(pairHandler); // pairing left incomplete
+                                    unsubFocus();
                                 });
                             }}
                             onClicked={() => {
