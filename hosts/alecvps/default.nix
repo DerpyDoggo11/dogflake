@@ -3,7 +3,6 @@ let
   key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICh1nH79rMAd7qEySygClFNsnGRsHRabisFZCD7nKYEz axel@amazinaxel.com";
 in {
   imports = [
-    ../mcscripts.nix
     ../common.nix
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
     inputs.playit.nixosModules.default
@@ -21,14 +20,6 @@ in {
 
   services = {
     fstrim.enable = false; # Proxmox handles this
-    minecraft-server = {
-      enable = true;
-      dataDir = "/var/lib/minecraft";
-      package = pkgs.papermc;
-      jvmOpts = "-Xmx1567M -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -Djava.net.preferIPv6Addresses=true"; # jar is ran with --nogui
-      openFirewall = true;
-      eula = true;
-    };
     openssh = {
       openFirewall = true;
       # settings.PermitRootLogin = "prohibit-password";
@@ -42,17 +33,30 @@ in {
 
   users.users.root.openssh.authorizedKeys.keys = [ key ];
   users.users.alec.openssh.authorizedKeys.keys = [ key ]; # login key for fast access
-  environment.sessionVariables.LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.systemd ]; # fix MC startup warning
 
   programs.nix-ld.enable = true; # for vsc
-  users.users.alec.extraGroups = lib.mkForce [ "minecraft" ];
 
   # https://github.com/pedorich-n/playit-nixos-module
   services.playit = {
     enable = true;
     secretPath = "/etc/playit/secret.toml";
   };
-  systemd.services.minecraft-server.serviceConfig.UMask = lib.mkForce "0007"; # sudo chmod -R g+rwX /var/lib/mcserver
+
+  # Nocturn player count tracker
+  systemd.services.tracker = {
+    wantedBy = [ "multi-user.target" ];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    path = [ pkgs.mcstatus ]; # server list pings
+    serviceConfig = {
+      ExecStart = "${pkgs.bun}/bin/bun ${./tracker}/tracker.js";
+      StateDirectory = "nocturn-tracker"; # /var/lib/nocturn-tracker
+      DynamicUser = true;
+      Restart = "always";
+      RestartSec = 5;
+    };
+  };
+  networking.firewall.allowedTCPPorts = [ 3000 ];
 
   nix.settings.sandbox = false; # fix builds on the vps
   fileSystems = lib.mkForce {}; # no need for noatime
