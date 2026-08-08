@@ -5,7 +5,6 @@ in {
   imports = [
     ../common.nix
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
-    inputs.playit.nixosModules.default
   ];
 
   proxmoxLXC = {
@@ -35,12 +34,6 @@ in {
   users.users.alec.openssh.authorizedKeys.keys = [ key ]; # login key for fast access
 
   programs.nix-ld.enable = true; # for vsc
-
-  # https://github.com/pedorich-n/playit-nixos-module
-  services.playit = {
-    enable = true;
-    secretPath = "/etc/playit/secret.toml";
-  };
 
   # Nocturn player count tracker
   systemd.services.tracker = {
