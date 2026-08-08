@@ -69,8 +69,7 @@ serve({
         : 604800000; // past 7 days
 
       const body = {
-        samples: getData.all(Date.now() - span),
-        records: getRecords.get()
+        samples: getData.all(Date.now() - span)
       };
       return new Response(JSON.stringify(body), {
         headers: { "Content-Type": "application/json" }

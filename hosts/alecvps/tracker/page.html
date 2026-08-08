@@ -42,7 +42,6 @@
     }
 
     .server .name {
-      font-weight: bold;
       color: var(--accent);
     }
 
@@ -91,7 +90,7 @@
       <input type="checkbox" id="show7days">
       <span class="checkmark"></span>
       Show data from past 7 days
-    </label>
+    </label><br>
     <p id="lastUpdatedText">Last updated at <span id="lastUpdated"></span></p>
     <button class="button" onclick="refreshData()">Refresh data</button>
   </div>
@@ -126,7 +125,7 @@
         return;
       };
 
-      const {samples, records} = await response.json();
+      const {samples} = await response.json();
       if (!samples.length) {
         refreshButtonElement.innerHTML = "No data yet";
         return;
@@ -149,13 +148,11 @@
               <p class="count">${current[key] ?? 'offline'}</p>
               <p class="peaks">
                   ${get7Days.checked ? '7d' : '24h'} peak: ${peak(key)}
-                  &middot; record: ${records[key] ?? 0}
               </p>
           </div>
       `).join('');
 
       lastUpdatedElement.innerHTML = new Date(Number(latest.timestamp)).toLocaleString('en-US', {
-        timeZone: 'America/Los_Angeles',
         hour: 'numeric',
         minute: 'numeric',
         hour12: true
@@ -172,7 +169,6 @@
           label: "Time",
           values: (u, ticks) => ticks.map(t =>
             new Date(t * 1000).toLocaleTimeString('en-US', {
-              timeZone: 'America/Los_Angeles',
               hour: '2-digit',
               minute: '2-digit',
               hour12: false
