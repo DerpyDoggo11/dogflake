@@ -59,6 +59,7 @@ in {
   networking.firewall.allowedTCPPorts = [ 3000 ];
 
   nix.settings.sandbox = false; # fix builds on the vps
+  services.logrotate.checkConfig = false; # fix build error
   fileSystems = lib.mkForce {}; # no need for noatime
   nixpkgs.hostPlatform = "x86_64-linux";
 
