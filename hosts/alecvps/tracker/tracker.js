@@ -7,6 +7,7 @@ const servers = {
 };
 const pollInterval = 60_000;
 const pingTimeout = 15_000;
+const maxPlayers = 32; // higher counts are bogus data
 
 const db = new Database("/var/lib/nocturn-tracker/tracker.db");
 
@@ -21,16 +22,13 @@ db.run(`
 
 const insert = db.prepare("INSERT OR REPLACE INTO samples (timestamp, mh, mk) VALUES (?, ?, ?)");
 const getData = db.prepare(`
-  SELECT timestamp, mh, mk FROM samples
-  WHERE timestamp >= ?
-  ORDER BY timestamp ASC
-`);
-const getRecords = db.prepare(`
   SELECT
-    MAX(mh) AS mh,
-    MAX(mk) AS mk,
-    MAX(COALESCE(mh, 0) + COALESCE(mk, 0)) AS total
+    timestamp,
+    CASE WHEN mh <= $max THEN mh END AS mh,
+    CASE WHEN mk <= $max THEN mk END AS mk
   FROM samples
+  WHERE timestamp >= $since
+  ORDER BY timestamp ASC
 `);
 
 async function ping(host) {
@@ -39,7 +37,10 @@ async function ping(host) {
 
   try {
     const status = JSON.parse(await new Response(proc.stdout).text());
-    return status.online ? status.status.players.online : null;
+    if (!status.online) return null;
+
+    const online = status.status.players.online;
+    return online <= maxPlayers ? online : null;
   } catch {
     return null;
   } finally {
@@ -69,7 +70,7 @@ serve({
         : 604800000; // past 7 days
 
       const body = {
-        samples: getData.all(Date.now() - span)
+        samples: getData.all({ $max: maxPlayers, $since: Date.now() - span })
       };
       return new Response(JSON.stringify(body), {
         headers: { "Content-Type": "application/json" }

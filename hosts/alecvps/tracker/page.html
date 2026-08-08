@@ -33,6 +33,7 @@
       gap: 1rem;
       margin: 1rem auto;
       max-width: 700px;
+      border: 6px solid var(--darkest2);
     }
 
     .server {
@@ -89,8 +90,8 @@
     <label class="container">
       <input type="checkbox" id="show7days">
       <span class="checkmark"></span>
-      Show data from past 7 days
-    </label><br>
+      Show data from the past week
+    </label><br><br>
     <p id="lastUpdatedText">Last updated at <span id="lastUpdated"></span></p>
     <button class="button" onclick="refreshData()">Refresh data</button>
   </div>
@@ -146,9 +147,7 @@
           <div class="server ${current[key] == null ? 'offline' : ''}" style="--accent: ${color}">
               <p class="name">${label}</p>
               <p class="count">${current[key] ?? 'offline'}</p>
-              <p class="peaks">
-                  ${get7Days.checked ? '7d' : '24h'} peak: ${peak(key)}
-              </p>
+              <p class="peaks">(${get7Days.checked ? '7d' : '24h'} peak: ${peak(key)})</p>
           </div>
       `).join('');
 
