@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://amazinaxel.com/css/typography.css" />
   <link rel="stylesheet" href="https://amazinaxel.com/css/layout.css" />
   <link rel="stylesheet" href="https://amazinaxel.com/css/other.css" />
-  <title>Nocturn Player Tracker</title>
+  <title>Nocturn tracker</title>
 
   <style>
     #content {
@@ -38,9 +38,7 @@
     .server {
       flex: 1 1 12rem;
       padding: 0.8rem 1rem;
-      background: var(--blue3);
       border-radius: 0.3rem;
-      border-left: 0.3rem solid var(--accent);
     }
 
     .server .name {
@@ -85,17 +83,15 @@
 
 <body>
   <div id="content">
-    <h1>Nocturn Player Tracker</h1>
-    <hr>
+    <h1>Nocturn tracker</h1>
     <div id="servers"></div>
     <hr>
-    <h3>Player history:</h3>
+    <div id="chart"></div>
     <label class="container">
       <input type="checkbox" id="show7days">
       <span class="checkmark"></span>
       Show data from past 7 days
     </label>
-    <div id="chart"></div>
     <p id="lastUpdatedText">Last updated at <span id="lastUpdated"></span></p>
     <button class="button" onclick="refreshData()">Refresh data</button>
   </div>
@@ -108,9 +104,9 @@
     const get7Days = document.getElementById('show7days');
 
     const series = [
-      {key: 'mh', label: 'Nocturn MH', color: '#88c0d0'},
-      {key: 'mk', label: 'Nocturn MK', color: '#bf616a'},
-      {key: 'total', label: 'Combined', color: '#b48ead'}
+      {key: 'mh', label: 'Minehut', color: '#81A1C1'},
+      {key: 'mk', label: 'Minekeep', color: '#BF616A'},
+      {key: 'total', label: 'Combined', color: '#A3BE8C'}
     ];
 
     // both offline stays a gap, otherwise absent counts as 0
@@ -148,15 +144,15 @@
       const peak = (key) => Math.max(0, ...values[key].filter(v => v != null));
 
       serversElement.innerHTML = series.map(({key, label, color}) => `
-                <div class="server ${current[key] == null ? 'offline' : ''}" style="--accent: ${color}">
-                    <p class="name">${label}</p>
-                    <p class="count">${current[key] ?? 'offline'}</p>
-                    <p class="peaks">
-                        ${get7Days.checked ? '7d' : '24h'} peak: ${peak(key)}
-                        &middot; record: ${records[key] ?? 0}
-                    </p>
-                </div>
-            `).join('');
+          <div class="server ${current[key] == null ? 'offline' : ''}" style="--accent: ${color}">
+              <p class="name">${label}</p>
+              <p class="count">${current[key] ?? 'offline'}</p>
+              <p class="peaks">
+                  ${get7Days.checked ? '7d' : '24h'} peak: ${peak(key)}
+                  &middot; record: ${records[key] ?? 0}
+              </p>
+          </div>
+      `).join('');
 
       lastUpdatedElement.innerHTML = new Date(Number(latest.timestamp)).toLocaleString('en-US', {
         timeZone: 'America/Los_Angeles',
