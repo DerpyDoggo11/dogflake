@@ -33,13 +33,13 @@
       gap: 1rem;
       margin: 1rem auto;
       max-width: 700px;
-      border: 6px solid var(--darkest2);
     }
 
     .server {
       flex: 1 1 12rem;
       padding: 0.8rem 1rem;
       border-radius: 0.3rem;
+      border: 6px solid var(--darkest2);
     }
 
     .server .name {
@@ -62,7 +62,7 @@
 
     #chart {
       max-width: 700px;
-      margin: 1rem auto;
+      margin: 1.5rem auto;
       background: var(--blue3);
       border-radius: 0.3rem;
       box-shadow: 0 0 1rem var(--blue3);
@@ -71,6 +71,7 @@
     #lastUpdatedText,
     #lastUpdated {
       color: var(--blue2);
+      padding-top: 1.5rem;
     }
 
     #lastUpdated {
@@ -91,7 +92,7 @@
       <input type="checkbox" id="show7days">
       <span class="checkmark"></span>
       Show data from the past week
-    </label><br><br>
+    </label>
     <p id="lastUpdatedText">Last updated at <span id="lastUpdated"></span></p>
     <button class="button" onclick="refreshData()">Refresh data</button>
   </div>
