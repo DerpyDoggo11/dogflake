@@ -45,11 +45,13 @@ in {
       ExecStart = "${pkgs.bun}/bin/bun ${./tracker}/tracker.js";
       StateDirectory = "nocturn-tracker"; # /var/lib/nocturn-tracker
       DynamicUser = true;
+      AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ]; # port 80 as a dynamic user
+      CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
       Restart = "always";
       RestartSec = 5;
     };
   };
-  networking.firewall.allowedTCPPorts = [ 3000 ];
+  networking.firewall.allowedTCPPorts = [ 80 ];
 
   nix.settings.sandbox = false; # fix builds on the vps
   services.logrotate.checkConfig = false; # fix build error

@@ -58,8 +58,8 @@ setInterval(poll, pollInterval);
 const page = await Bun.file(import.meta.dir + "/page.html").text();
 
 serve({
-  port: 3000,
-  hostname: "::", // Nest's proxy reaches us over the container network
+  port: 80,
+  hostname: "::", // Cloudflare reaches the origin over IPv6
   fetch(req) {
     const pathname = new URL(req.url).pathname;
 
