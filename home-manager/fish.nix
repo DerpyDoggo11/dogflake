@@ -25,7 +25,7 @@
       };
       functions = {
         gcm = ''git commit -m "$argv"'';
-        gacm = ''git add && git commit -m "$argv"'';
+        gacm = ''git add -A && git commit -m "$argv"'';
       };
       interactiveShellInit = ''
         set fish_greeting
