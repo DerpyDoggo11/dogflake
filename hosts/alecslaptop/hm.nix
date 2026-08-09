@@ -8,6 +8,10 @@
         position = "0 0";
       };
       "*".position = "1920 0"; # Laptop/other monitors
+      "DP-1" = {
+        position = "3200 0"; # Right
+        scale = "1.5";
+      };
     };
 
     startup = [
@@ -22,8 +26,8 @@
       { workspace = "5"; output = "eDP-1"; }
       { workspace = "6"; output = "eDP-1"; }
       { workspace = "7"; output = "eDP-1"; }
-      { workspace = "8"; output = "eDP-1"; }
-      { workspace = "9"; output = "eDP-1"; }
+      { workspace = "8"; output = "DP-1"; }
+      { workspace = "9"; output = "DP-1"; }
     ];
 
     # Side mouse key screenshot

@@ -113,10 +113,10 @@ in {
       "${mod}+shift+S" = "exec ags toggle powermenu";
       # S = sleep, Q = shutdown, L = lock, R = restart
 
-      # Mpris
-      "control+${mod}+S" = "exec playerctl play-pause"; # toggle play/pause
-      "control+${mod}+D" = "exec playerctl next"; # toggle play/pause
-      "control+${mod}+A" = "exec playerctl previous"; # toggle play/pause
+      # Mpris/spotify
+      "control+${mod}+S" = ''exec "playerctl --player=spotify,%any play-pause"''; # toggle play/pause
+      "control+${mod}+D" = ''exec "playerctl --player=spotify,%any next"''; # next track
+      "control+${mod}+A" = ''exec "playerctl --player=spotify,%any previous"''; # previous track
 
       # blue light filter toggle
       "${mod}+b" = "exec ags request toggleFilter";
