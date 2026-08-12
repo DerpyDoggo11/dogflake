@@ -2,6 +2,8 @@
   imports = [ ./tmpfs-root.nix ];
 
   boot = {
+    kernelPackages = lib.mkForce pkgs.linuxPackages; # LTS
+
     loader = { # Raspi boot
       systemd-boot.enable = false;
       grub.enable = false;
