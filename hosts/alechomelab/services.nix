@@ -21,11 +21,13 @@ in {
         serviceConfig = service.serviceConfig // privileges // {
           EnvironmentFile = "/etc/homelab/webserver.env";
           ExecStart = "${pkgs.bun}/bin/bun ${./webserver}/webserver.js";
+          MemoryMin = "32M"; # resident
         };
       };
       homelabDisplay = service // {
         serviceConfig = service.serviceConfig // privileges // {
           ExecStart = "${inputs.homelab.packages.aarch64-linux.homelabDisplay}/bin/homelabDisplay";
+          MemoryMin = "8M";
         };
       };
       # lofi = service // {
@@ -60,11 +62,21 @@ in {
           CPUWeight = 10;
           CPUQuota = "200%";
           Nice = 19;
+          # RuntimeMaxSec = "2h";
+          TimeoutStopSec = "1m";
         };
       };
     };
 
-    services.sshd.serviceConfig.OOMScoreAdjust = -900; # NEVER OOM SSH
+    services.sshd.serviceConfig = {
+      OOMScoreAdjust = -900; # NEVER OOM SSH
+      MemoryMin = "16M";
+    };
+
+    settings.Manager = { # wedge auto restart
+      RuntimeWatchdogSec = "14s"; # bcm2835_wdt caps at 15s
+      RebootWatchdogSec = "2min";
+    };
 
     timers."daily" = { # Every morning at 3AM PT
       wantedBy = [ "timers.target" ];
