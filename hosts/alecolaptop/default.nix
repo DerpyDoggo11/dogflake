@@ -60,7 +60,6 @@
     };
     binfmt.emulatedSystems = [ "aarch64-linux" ];
     kernelParams = [
-      "mem_sleep_default=deep"
       "amdgpu.abmlevel=2" # adaptive backlight for display power saving
       "amd_pstate=active" # enable SPPC in the BIOS first!!!
     ];

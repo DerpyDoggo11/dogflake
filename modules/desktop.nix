@@ -122,6 +122,7 @@ in {
           ".config/Code"
           ".vscode-shared" # logins and recents
           ".vscode" # password store
+          ".wakatime" # hackatime cli
           ".local/share/ags-sideview"
           ".cache/ags-sideview"
 
@@ -131,7 +132,10 @@ in {
           ".cache/radv_builtin_shaders"
           ".cache/qtshadercache-x86_64-little_endian-lp64"
         ];
-        files = [ ".claude.json" ]; # claude login
+        files = [
+          ".claude.json" # claude login
+          ".wakatime.cfg" # hackatime key
+        ];
       };
     };
     sessionVariables = {
@@ -156,7 +160,7 @@ in {
       "Z /persist/home/alec/Music - alec users - -" # music proper owner
       "R! /home/alec/*/.Trash-* - - - - -" # wipe trash in each persisted folder on boot
     ];
-    sleep.settings.Sleep.HibernateMode = "shutdown"; # better/faster hibernation
+    sleep.settings.Sleep.HibernateMode = "platform"; # ONLY POWER BUTTON FOR UNHIBERNATION
   };
 
   fonts.packages = with pkgs; [

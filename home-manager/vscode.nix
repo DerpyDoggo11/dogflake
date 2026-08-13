@@ -14,6 +14,7 @@
         ms-vscode-remote.remote-ssh
         svelte.svelte-vscode
         ms-vsliveshare.vsliveshare
+        wakatime.vscode-wakatime # hackatime
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
         name = "Sk-VSC";
         publisher = "ayhamalali";
@@ -66,6 +67,7 @@
           };
         };
         update.mode = "none";
+        wakatime.apiUrl = "https://hackatime.hackclub.com/api/hackatime/v1";
         svelte.enable-ts-plugin = true; # Svelte TS intellisense
         window.titleBarStyle = "custom"; # Fix Wayland bug
         javascript.updateImportsOnFileMove.enabled = "always";

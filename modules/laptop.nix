@@ -1,5 +1,11 @@
 { pkgs, ... }: {
   services = {
+    # only power button & lid for unhibernation TODO can we remove
+    udev.extraRules = ''
+      ACTION=="add|change", SUBSYSTEM=="pci", ATTR{class}=="0x0c0330", ATTR{power/wakeup}="disabled"
+      ACTION=="add|change", SUBSYSTEM=="pci", ATTR{class}=="0x060400", ATTR{power/wakeup}="disabled"
+    '';
+
     upower.enable = true; # battery level for the astal shell
 
     scx = { # sched_ext scheduler for less active cores
