@@ -46,6 +46,7 @@
         pkgs.swappy
         pkgs.swaybg
         pkgs.procps # pkill for gpu-screenrec
+        pkgs.ffmpeg-headless # clipboard video thumbnails
       ];
     };
   };

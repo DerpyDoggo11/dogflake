@@ -58,7 +58,7 @@ export const stopRec = () => {
 	});
 
 	// Copy video to clipboard
-	execAsync(`bash -c "echo -n file:/${file} | wl-copy -t text/uri-list"`);
+	execAsync(`bash -c "echo -n file://${file} | wl-copy -t text/uri-list"`);
 
 	startClippingService(); // Restart screen clipping
 };

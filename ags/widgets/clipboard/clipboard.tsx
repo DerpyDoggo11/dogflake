@@ -2,7 +2,8 @@ import { execAsync } from 'ags/process';
 import { Gtk } from 'ags/gtk4';
 import app from 'ags/gtk4/app'
 import GLib from 'gi://GLib';
-import { ClipboardItem } from './clipboardItem';
+import Gio from 'gi://Gio';
+import { ClipboardItem, entryPath, cacheDir, videoExts } from './clipboardItem';
 import BackgroundSection from '../../lib/backgroundSection';
 import inputControl from '../../lib/inputControl';
 import { streamingMode } from '../notifications/notifications';
@@ -10,6 +11,7 @@ import { streamingMode } from '../notifications/notifications';
 const list = new Gtk.ListBox();
 
 const mimeTypes = new Map<string, string>(); // for faster pasting
+const paths = new Map<string, string>(); // file each entry points at
 
 list.connect('row-activated', async (_, row) => {
     app.get_window('clipboard')?.set_visible(false);
@@ -50,7 +52,10 @@ const refreshItems = async () => {
         const image = entry.content.match(/\[\[ binary data \d+ (?:B|KiB|MiB|GiB) (\w+)/);
         mimeTypes.set(entry.id, image ? `image/${image[1]}` : 'text/plain');
 
-        const child = ClipboardItem(entry.id, entry.content) as Gtk.Widget;
+        const path = entryPath(entry.id, entry.content);
+        if (path) paths.set(entry.id, path);
+
+        const child = ClipboardItem(entry.id, entry.content, path) as Gtk.Widget;
         list.append(child);
         rows.set(entry.id, child);
     });
@@ -62,31 +67,49 @@ const refreshItems = async () => {
         list.remove(child.get_parent() as Gtk.Widget); // ListBoxRow parent
         rows.delete(id);
         mimeTypes.delete(id);
+        paths.delete(id);
     });
 };
 refreshItems();
 
+// File of the selected entry
+const selectedFile = () => {
+    const id = (list.get_selected_row() ?? list.get_row_at_index(0))?.child.name;
+    const file = paths.get(id ?? '');
+
+    return (file && GLib.file_test(file, GLib.FileTest.EXISTS)) ? file : null;
+};
+
 const handleKeys = (_ctrl: any, key: number) => {
     switch (key) {
     case 65293: // Enter
-        (list.get_selected_row() === null)
-        ? list.get_first_child()?.activate()
-        : list.get_selected_row()?.activate();
+        (list.get_selected_row() ?? list.get_row_at_index(0))?.activate();
         break;
     case 99: // C - copy 2nd recent entry
         list.get_row_at_index(1)?.activate()
         break;
     case 101: // E - edit image with swappy
-        const id = list.get_selected_row()?.child.name ?? list.get_row_at_index(0)?.child.name;
-
-        const path = `/tmp/ags/cliphist/${id}.png`; // .png extension is assumed here
-        if (!GLib.file_test(path, GLib.FileTest.EXISTS)) break;
+        const image = selectedFile();
+        if (!image || videoExts.test(image)) break;
 
         app.get_window('clipboard')?.hide()
-        execAsync('swappy -f ' + path);
+        execAsync(['swappy', '-f', image]);
+        break;
+    case 115: // S - show in nemo
+        const file = selectedFile();
+        if (!file) break;
+
+        app.get_window('clipboard')?.hide()
+        Gio.DBus.session.call(
+            'org.freedesktop.FileManager1',
+            '/org/freedesktop/FileManager1',
+            'org.freedesktop.FileManager1',
+            'ShowItems',
+            new GLib.Variant('(ass)', [[GLib.filename_to_uri(file, null)], '']),
+            null, Gio.DBusCallFlags.NONE, -1, null, null);
         break;
     case 119: // W - wipe clipboard history
-        execAsync('cliphist wipe');
+        execAsync(`bash -c 'cliphist wipe && rm -rf ${cacheDir}'`);
         app.get_window('clipboard')?.hide()
         break;
     };
