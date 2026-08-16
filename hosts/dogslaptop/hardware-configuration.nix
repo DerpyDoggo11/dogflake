@@ -35,6 +35,14 @@
     memoryPercent = 50;
   };
 
+  # Platformio Fix
+  programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+  ];
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
