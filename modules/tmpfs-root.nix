@@ -1,14 +1,16 @@
 { lib, ... }: {
   imports = [ ./impermanence.nix ];
 
-  # sudo install -Dm600 <(grep '^alec:' /etc/shadow | cut -d: -f2) /passwords/alec
-  # maybe install to /persist/passwords/alec
+  # / is a tmpfs, so /etc/shadow is wiped every boot. The login password lives in
+  # /persist/passwords/dog instead - a file holding just the password hash.
+  # To change the password later:
+  #   printf '%s' "$(mkpasswd -m yescrypt)" | sudo install -Dm600 /dev/stdin /persist/passwords/dog
   users = {
-    users.alec = {
-      hashedPasswordFile = "/persist/passwords/alec";
-      initialPassword = lib.mkForce null; # todo will NEVER be necessary when we are finished with impermanence config
+    users.dog = {
+      hashedPasswordFile = "/persist/passwords/dog";
+      initialPassword = lib.mkForce null;
     };
-    mutableUsers = false;
+    mutableUsers = false; # passwd(1) changes would be lost on reboot anyway
   };
 
   fileSystems."/" = {

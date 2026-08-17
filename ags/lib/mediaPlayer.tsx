@@ -46,7 +46,7 @@ export const chngPlaylist = (direction: musicAction) => {
     setIsPlaying(false);
 
     setPlaylistName(playlists[Number(playlist.peek()) - 1]);
-    execAsync(`swaybg -i /home/alec/Projects/flake/wallpapers/${playlistName.peek()}.jpg -m fill`);
+    execAsync(`swaybg -i /home/dog/Projects/dogflake/dogflake/wallpapers/${playlistName.peek()}.jpg -m fill`);
 
     // Clear the current cache and add the new playlist
     exec('mpc clear');
@@ -59,7 +59,7 @@ export const initMedia = () => {
     setPlaylistName('Study'); // Must set to invoke binds
 
     execAsync('mpc crossfade 2');
-    execAsync('swaybg -i /home/alec/Projects/flake/wallpapers/Study.jpg -m fill');
+    execAsync('swaybg -i /home/dog/Projects/dogflake/dogflake/wallpapers/Study.jpg -m fill');
 
     exec('mpc clear');
     exec(`mpc add ${playlistName.peek()}/`);

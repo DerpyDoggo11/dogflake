@@ -12,7 +12,6 @@ in {
 
   imports = [
     ./tmpfs-root.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   # Cachy kernel
@@ -24,24 +23,20 @@ in {
     # more ram on desktops so use more zram
     kernel.sysctl."vm.swappiness" = 180;
 
-    loader = { # Secure boot
-      systemd-boot.enable = lib.mkForce false; # lanzaboote replaces systemd-boot
+    # No secure boot - plain systemd-boot (see hosts/common.nix for the rest)
+    loader = {
+      systemd-boot.enable = lib.mkDefault true;
       efi.canTouchEfiVariables = true;
-    };
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/var/lib/sbctl";
-      configurationLimit = 2;
     };
   };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users.alec.imports = [ ../home-manager/home.nix ];
+    users.dog.imports = [ ../home-manager/home.nix ];
     backupFileExtension = "backup2";
     useGlobalPkgs = true; # Faster eval
   };
-  users.users.alec.shell = pkgs.fish; # default shell for ssh and foot
+  users.users.dog.shell = pkgs.fish; # default shell for ssh and foot
 
   environment = {
     systemPackages = with pkgs; [
@@ -70,18 +65,36 @@ in {
       gthumb
       video-trimmer
       gnome-system-monitor
+      gnome-text-editor # Simple text editor
       nemo-with-extensions
       nemo-fileroller
       file-roller
       discord
       slack
       filezilla
+      firefox # main browser
+      prismlauncher # Minecraft launcher
+      blueman # bluetooth gui
+
+      # Creative / dev tools
+      aseprite # pixel art
+      blender # 3d models
+      tiled # tilemaps
+      reaper # DAW
+      kikit # kicad plugin (kicad itself is wrapped per-host)
+      inkscape
+      spotdl
+      nodejs_24 # runs npm
+
+      # GTK theme deps for the E-Ink Emulator
+      # (gtk-engine-murrine was dropped from nixpkgs - it needed GTK2)
+      gnome-themes-extra
 
       inputs.lightbrowse.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # Scripts
       (writeScriptBin "fetch" (builtins.readFile ../scripts/fetch.fish))
-      (writeScriptBin "sys-sync" (builtins.readFile ../scripts/sys-sync.fish))
+      (writeScriptBin "spotify-sync" (builtins.readFile ../scripts/spotify-sync.fish))
       (writeScriptBin "nx-gc" (builtins.readFile ../scripts/nx-gc.fish))
       (writeScriptBin "persist-prune" (builtins.readFile ../scripts/persist-prune.fish))
     ];
@@ -90,9 +103,8 @@ in {
         "/var/lib/iwd" # saved wifi networks
         "/var/lib/systemd" # backlight
         "/var/lib/bluetooth" # bt paired devices
-        "/var/lib/sbctl" # secure boot keys
       ];
-      users.alec = {
+      users.dog = {
         directories = [
           "Documents"
           "Downloads"
@@ -125,6 +137,17 @@ in {
           ".local/share/ags-sideview"
           ".cache/ags-sideview"
 
+          # my apps
+          ".mozilla" # firefox profiles
+          ".cache/mozilla"
+          ".config/aseprite"
+          ".config/blender"
+          ".config/godot"
+          ".local/share/godot"
+          ".config/REAPER"
+          ".config/Inkscape"
+          ".config/tiled"
+
           # GPU cache
           ".cache/mesa_shader_cache"
           ".cache/mesa_shader_cache_db"
@@ -156,8 +179,8 @@ in {
       ProcessSizeMax = "0";
     };
     tmpfiles.rules = [
-      "Z /persist/home/alec/Music - alec users - -" # music proper owner
-      "R! /home/alec/*/.Trash-* - - - - -" # wipe trash in each persisted folder on boot
+      "Z /persist/home/dog/Music - dog users - -" # music proper owner
+      "R! /home/dog/*/.Trash-* - - - - -" # wipe trash in each persisted folder on boot
     ];
     sleep.settings.Sleep.HibernateMode = "platform"; # ONLY POWER BUTTON FOR UNHIBERNATION
   };
@@ -234,6 +257,7 @@ in {
     gvfs.enable = true; # For nemo trash & NAS autodiscov
     devmon.enable = true; # Automatic drive mount/unmount
     logind.settings.Login.HandlePowerKey = "ignore"; # Don't turn off computer on power key press
+    blueman.enable = true; # bluetooth gui
 
     # Prevent crashes
     earlyoom = {
@@ -254,7 +278,7 @@ in {
       enable = true;
       settings.default_session = {
         command = "fish -lc 'exec sway'";
-        user = "alec";
+        user = "dog";
       };
     };
   };
