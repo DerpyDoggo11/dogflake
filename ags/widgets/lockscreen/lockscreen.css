@@ -10,7 +10,7 @@
     background-color: rgba(236, 239, 244, 0.05);
 }
 
-#lockscreen label.timeout {
+#lockscreen label.failed {
     color: @red;
     text-shadow: 0 0 1rem @red;
 }

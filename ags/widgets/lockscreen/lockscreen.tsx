@@ -8,7 +8,7 @@ import { execAsync } from 'ags/process';
 import { createState, createRoot } from 'ags';
 import { playlistName } from '../../lib/mediaPlayer';
 
-const [ isAuthenticating, setIsAuthenticating ] = createState(false);
+const [ authFailed, setAuthFailed ] = createState(false);
 const time = createPoll('', 1000, () => GLib.DateTime.new_now_local().format('%H\n%M'));
 
 let lock: SessionLock.Instance | null = null;
@@ -27,17 +27,17 @@ const checkLogin = (entry: Gtk.Entry) => {
     const password = entry.get_text();
     entry.set_text('');
     entry.set_sensitive(false);
-    setIsAuthenticating(true);
+    setAuthFailed(false);
 
     Auth.Pam.authenticate(password, (_, task) => {
         try {
             Auth.Pam.authenticate_finish(task);
             unlockScreen();
         } catch { // Wrong password
+            setAuthFailed(true);
             GLib.idle_add(GLib.PRIORITY_DEFAULT, () => (entry.grab_focus(), GLib.SOURCE_REMOVE));
         };
         entry.set_sensitive(true);
-        setIsAuthenticating(false);
     });
 };
 
@@ -84,7 +84,7 @@ const assignLockWindow = (monitor: Gdk.Monitor) =>
                     valign={Gtk.Align.CENTER}
                     useMarkup={true}
                     label={time((t) =>  `<span line_height="0.75">${t}</span>`)}
-                    css_classes={isAuthenticating((v) => v ? ['timeout'] : [])}
+                    css_classes={authFailed((v) => v ? ['failed'] : [])}
                     canTarget={false}
                     $type="overlay"
                 />
