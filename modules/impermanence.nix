@@ -15,7 +15,7 @@
       "/etc/machine-id" # stable id
     ];
 
-    users.alec.directories = [
+    users.dog.directories = [
       ".local/share/fish" # shell history
       ".local/share/git" # github login
     ];

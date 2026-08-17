@@ -54,8 +54,8 @@
 
   home = {
     stateVersion = "26.05";
-    username = "alec";
-    homeDirectory = "/home/alec";
+    username = "dog";
+    homeDirectory = "/home/dog";
 
     # Global cursor
     pointerCursor = {
@@ -85,13 +85,13 @@
     userDirs = {
       enable = true;
       createDirectories = true; # Auto-creates all directories
-      desktop = "/home/alec"; # don't want this folder
+      desktop = "/home/dog"; # don't want this folder
       publicShare = null;
       templates = null;
       extraConfig = {
-        PROJECTS = "/home/alec/Projects";
-        CAPTURES = "/home/alec/Videos/Captures";
-        CLIPS = "/home/alec/Videos/Clips";
+        PROJECTS = "/home/dog/Projects";
+        CAPTURES = "/home/dog/Videos/Captures";
+        CLIPS = "/home/dog/Videos/Clips";
       };
     };
   };

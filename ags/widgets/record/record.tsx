@@ -20,7 +20,7 @@ const handleKeys = (_ctrl: any, key: number) => {
                 actions: [{
                     id: 1,
                     label: 'Open Clips folder',
-                    command: 'nemo /home/alec/Videos/Clips',
+                    command: 'nemo /home/dog/Videos/Clips',
                 }]
             });
             app.get_window('recordMenu')?.hide()

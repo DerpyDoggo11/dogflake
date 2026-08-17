@@ -10,7 +10,7 @@
 
   environment.persistence."/persist" = {
     directories = [ "/var/lib/cups" ]; # printer config
-    users.alec.directories = [
+    users.dog.directories = [
       ".thunderbird"
       ".config/GIMP"
       ".config/libreoffice"
@@ -20,13 +20,17 @@
       ".config/kdeconnect"
       ".local/share/kdeconnect"
       ".bun"
+      ".arduino15" # arduino ide
+      ".arduinoIDE"
+      ".config/processing"
+      ".config/teams-for-linux"
     ];
   };
 
-  networking.hostName = "alecolaptop";
-  home-manager.users.alec.imports = [ ./hm.nix ];
+  networking.hostName = "dogslaptop";
+  home-manager.users.dog.imports = [ ./hm.nix ];
 
-  swapDevices = [{ device = "/persist/swapfile"; size = 10 * 1024; }];
+  swapDevices = [{ device = "/persist/swapfile"; size = 8 * 1024; }];
 
   environment.systemPackages = with pkgs; [
     gimp3
@@ -34,12 +38,17 @@
     libreoffice
     thunderbird
     zettlr
+    teams-for-linux # Unofficial Teams client
+    processing # 2D/3D java rendering
+    qpwgraph # edit bluetooth channels
     (symlinkJoin {
       name = "kicad"; paths = [ kicad ]; nativeBuildInputs = [ makeWrapper ];
       postBuild = "wrapProgram $out/bin/kicad --set GTK_THEME Adwaita";
     })
 
-    openjdk25
+    arduino-ide # Embedded microcontroller programming
+    python3 # Required for Arduino IDE
+    openjdk25 # Also the Minecraft runtime
     bun
     claude-code
     platformio-core

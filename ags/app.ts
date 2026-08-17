@@ -9,7 +9,6 @@ import lockscreenStyle from './widgets/lockscreen/lockscreen.css';
 import app from "ags/gtk4/app"
 import { Gtk } from "ags/gtk4"
 import { execAsync } from "ags/process";
-import astalIO from "gi://AstalIO"
 
 import status, { setStatusMargin } from './widgets/status/status';
 import bluetooth from './widgets/status/bluetooth';
@@ -155,22 +154,7 @@ app.start({
 });
 
 const reminders = async () => {
-    const lastSync = Number(astalIO.read_file("/home/alec/Projects/flake/ags/lastSync.txt"));
-
-    if ((Date.now() - lastSync) > 540000000) { // Last sync was ~7 days ago
-        notifySend({
-            appName: 'Sync',
-            title: 'Sync system',
-            actions: [{
-                id: 1,
-                label: 'Update & Sync',
-                command: `footclient -e fish -c 'sys-sync; echo "Press a key to exit"; read --nchars=1'`
-            }]
-        });
-        return;
-    };
-
-    const folderSize = await execAsync(`bash -c "du -sb /home/alec/Downloads | awk '{print \$1}'"`)
+    const folderSize = await execAsync(`bash -c "du -sb /home/dog/Downloads | awk '{print \$1}'"`)
         .then(Number).catch(() => 0);
     if (folderSize > 100000000) { // Greater than 100MB
         notifySend({
@@ -179,7 +163,7 @@ const reminders = async () => {
             actions: [{
                 id: 1,
                 label: 'View folder',
-                command: 'nemo /home/alec/Downloads'
+                command: 'nemo /home/dog/Downloads'
             }]
         });
     };

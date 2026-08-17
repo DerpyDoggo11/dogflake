@@ -12,14 +12,6 @@
         home-manager.follows = "home-manager";
       };
     };
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    playit = {
-      url = "github:pedorich-n/playit-nixos-module";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     # shell
@@ -33,17 +25,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # my programs
+    # upstream programs
     lightbrowse = {
       url = "github:AmazinAxel/lightbrowse";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    homelab = {
-      url = "github:AmazinAxel/homelab";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    printerblot = {
-      url = "github:AmazinAxel/printerblot";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -69,62 +53,12 @@
     nixosConfigurations = {
 
       # Primary laptop
-      "alecslaptop" = nixpkgs.lib.nixosSystem {
+      "dogslaptop" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/alecslaptop/default.nix
+          ./hosts/dogslaptop/default.nix
           home-manager.nixosModules.home-manager
         ];
-      };
-
-      # Old laptop
-      "alecolaptop" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/alecolaptop/default.nix
-          home-manager.nixosModules.home-manager
-        ];
-      };
-
-      # Desktop/compute server
-      "alecpc" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/alecpc/default.nix
-          home-manager.nixosModules.home-manager
-        ];
-      };
-
-      # headless devices
-      # nixos-rebuild switch --flake .#<hostname> --sudo --ask-sudo-password --target-host alec@<hostname>.local
-
-      # Homelab (Zero 2W)
-      "alechomelab" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [ ./hosts/alechomelab/default.nix ];
-      };
-
-      # Localhost development server (Pi 4B)
-      "alecdev" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/alecdev/default.nix
-          home-manager.nixosModules.home-manager
-        ];
-      };
-
-      # VPS
-      "alecvps" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/alecvps/default.nix
-        ];
-      };
-
-      # Permablot (custom printerblot printer, Zero 2W)
-      "permablot" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [ ./hosts/permablot/default.nix ];
       };
     };
   };

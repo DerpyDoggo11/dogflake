@@ -1,9 +1,8 @@
 { pkgs, lib, config, ... }: {
-  users.users.alec = { # Default user
+  users.users.dog = { # Default user
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "video" "dialout" ];
-    initialPassword = "nixos"; # must be changed implicitly with passwd!!!
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNtO18H89dHbyP658hIDMeFZrjdWNUbWrdcL6URrthh alec" ];
+    # Password comes from /persist/passwords/dog - see modules/tmpfs-root.nix
   };
 
   boot = {
@@ -82,10 +81,9 @@
         init.defaultBranch = "main";
         color.ui = true;
         core.editor = "hx";
-        credential.helper = "store --file=/home/alec/.local/share/git/credentials";
-        github.user = "AmazinAxel"; # Github
-        user.name = "AmazinAxel"; # Git
-        user.email = "87440159+AmazinAxel@users.noreply.github.com";
+        credential.helper = "store --file=/home/dog/.local/share/git/credentials";
+        github.user = "DerpyDoggo11"; # Github
+        user.name = "DerpyDoggo11"; # Git
         push.autoSetupRemote = true;
       };
     };
@@ -109,7 +107,7 @@
       auto-optimise-store = true;
       warn-dirty = false;
       download-buffer-size = 268435456; # 256 MiB
-      trusted-users = [ "alec" ]; # for remote deployments
+      trusted-users = [ "dog" ]; # for remote deployments
 
       # Binary caches
       extra-substituters = [
