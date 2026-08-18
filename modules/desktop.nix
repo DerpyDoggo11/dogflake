@@ -80,7 +80,7 @@ in {
       aseprite # pixel art
       blender # 3d models
       tiled # tilemaps
-      reaper # DAW
+      zrythm # DAW
       kikit # kicad plugin (kicad itself is wrapped per-host)
       inkscape
       spotdl
@@ -130,6 +130,7 @@ in {
           ".config/spotify"
           ".cache/spotify"
           ".local/share/mpd"
+          ".config/dconf" # gsettings store (zrythm prefs live here, not in a config file)
           ".config/Code"
           ".vscode-shared" # logins and recents
           ".vscode" # password store
@@ -144,7 +145,7 @@ in {
           ".config/blender"
           ".config/godot"
           ".local/share/godot"
-          ".config/REAPER"
+          ".local/share/zrythm" # DAW: projects, templates, themes, plugin scan cache
           ".config/Inkscape"
           ".config/tiled"
 
@@ -272,6 +273,7 @@ in {
       alsa.support32Bit = true;
       pulse.enable = true;
       wireplumber.enable = true;
+      jack.enable = true;
     };
 
     greetd = { # Autologin
