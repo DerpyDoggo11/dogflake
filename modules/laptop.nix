@@ -18,10 +18,10 @@
       enable = true;
       settings = {
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
 
         PLATFORM_PROFILE_ON_BAT = "low-power";
-        PCIE_ASPM_ON_BAT = "powersupersave";
+        PCIE_ASPM_ON_BAT = "powersave";
 
         # causes crackling noises otherwise
         SOUND_POWER_SAVE_ON_AC = 0;

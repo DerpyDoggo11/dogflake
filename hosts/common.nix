@@ -97,7 +97,7 @@
   time.timeZone = "America/Los_Angeles"; # lang also set to en_US
   zramSwap = {
     enable = lib.mkDefault true;
-    memoryPercent = 100;
+    memoryPercent = lib.mkDefault 100;
   };
 
   nixpkgs.config.allowUnfree = true;

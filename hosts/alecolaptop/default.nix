@@ -28,6 +28,9 @@
 
   swapDevices = [{ device = "/persist/swapfile"; size = 10 * 1024; }];
 
+  # keep more swap in memory instead of in swapfile
+  zramSwap.memoryPercent = 200;
+
   environment.systemPackages = with pkgs; [
     gimp3
     godot
