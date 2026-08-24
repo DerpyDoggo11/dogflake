@@ -1,7 +1,13 @@
-{ pkgs, ... }: {
-  home.packages = [ pkgs.batsignal ];
-
-  wayland.windowManager.sway.config.startup = [
-    { command = "batsignal -w 20 -c 10 -d 5 -m 30 -a 'Low battery' -W '  ' -C '  ' -D '  '"; }
-  ];
+{
+  services.batsignal = {
+    enable = true;
+    extraArgs = [
+      "-w" "20" # warning
+      "-c" "10" # critical
+      "-m" "30" # poll s multiplier
+      "-a" "Low battery"
+      "-W" "  "
+      "-C" "  "
+    ];
+  };
 }

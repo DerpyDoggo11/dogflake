@@ -74,7 +74,8 @@ in {
       "XF86MonBrightnessDown" = "exec brightnessctl set 15%-";
 
       # Apps
-      "${mod}+E" = ''exec busctl --user call com.amazinaxel.lightbrowse /com/amazinaxel/lightbrowse org.gtk.Application Activate 'a{sv}' 1 activation-token s "$XDG_ACTIVATION_TOKEN" || exec lightbrowse'';
+      "${mod}+shift+E" = ''exec busctl --user call com.amazinaxel.lightbrowse /com/amazinaxel/lightbrowse org.gtk.Application Activate 'a{sv}' 1 activation-token s "$XDG_ACTIVATION_TOKEN" || exec lightbrowse'';
+      "${mod}+E" = "exec zen-beta";
       "${mod}+return" = "exec ${openFoot}";
 
       # Ags
@@ -159,6 +160,9 @@ in {
       "control+${mod}+shift+left" = moveItemToWorkspace "-";
       "control+${mod}+shift+l" = moveItemToWorkspace "+";
       "control+${mod}+shift+h" = moveItemToWorkspace "-";
+
+      "${mod}+minus" = "move scratchpad";
+      "${mod}+equal" = "scratchpad show";
 
       "${mod}+F" = "floating toggle";
       "F11" = "fullscreen toggle";
