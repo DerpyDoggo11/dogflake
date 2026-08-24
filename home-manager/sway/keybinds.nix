@@ -77,6 +77,8 @@ in {
       "${mod}+shift+E" = ''exec busctl --user call com.amazinaxel.lightbrowse /com/amazinaxel/lightbrowse org.gtk.Application Activate 'a{sv}' 1 activation-token s "$XDG_ACTIVATION_TOKEN" || exec lightbrowse'';
       "${mod}+E" = "exec zen-beta";
       "${mod}+return" = "exec ${openFoot}";
+      "${mod}+N" = "exec nemo";
+      "${mod}+shift+N" = "exec sudo -E nemo";
 
       # Ags
       "${mod}+space" = "exec ags toggle launcher";
@@ -98,7 +100,7 @@ in {
       "${mod}+G" = "exec ags request toggleSideviewSize";
 
       "${mod}+C" = "exec ags request hideNotif"; # Closes last notification
-      "${mod}+N" = "exec ags request invokeOldestNotif"; # Activates first action of the oldest notification
+      "${mod}+M" = "exec ags request invokeOldestNotif"; # Activates first action of the oldest notification
       "${mod}+S" = "exec ags request toggleStreamingMode";
       "${mod}+O" = "exec ${toggleTheme}";
       "${mod}+T" = "exec ags request toggleFocus";

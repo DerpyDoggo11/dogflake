@@ -111,10 +111,6 @@ in
           };
         };
       };
-      themes."nord-night" = {
-        "inherits" = "nord-night";
-        "ui.background" = { };
-      }; # we cant set background of nord-light to nothing since then the background wont change due to a bug
 
       languages = {
         language-server.harper-ls = {
