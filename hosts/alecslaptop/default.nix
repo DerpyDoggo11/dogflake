@@ -19,6 +19,7 @@
     gnome-sound-recorder
     gnome-disk-utility
     flashprint
+    kdePackages.kdenlive
     thunderbird
     zettlr
     (symlinkJoin {

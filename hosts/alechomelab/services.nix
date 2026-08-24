@@ -30,12 +30,6 @@ in {
           MemoryMin = "8M";
         };
       };
-      # lofi = service // {
-      #   serviceConfig = service.serviceConfig // privileges // {
-      #     ExecStart = "${pkgs.php82}/bin/php -S 0.0.0.0:9000 -t /media/lofi/";
-      #   };
-      # };
-
       daily = {
         path = with pkgs; [ util-linux curl jq gawk spotdl toybox fish git ];
         script = ''

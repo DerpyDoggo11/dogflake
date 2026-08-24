@@ -16,6 +16,8 @@
         gdh = "git diff HEAD";
         gc = "git commit -v";
         gac = "git add -A && git commit -v";
+        gu = "git reset"; # unstage everything
+        guc = "git reset HEAD~"; # undo last commit
 
         n = "nix";
         nfu = "nix flake update";

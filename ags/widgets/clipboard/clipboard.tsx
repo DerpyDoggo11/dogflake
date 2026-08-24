@@ -1,24 +1,25 @@
-import { execAsync } from 'ags/process';
+import { execAsync, createSubprocess } from 'ags/process';
+import { timeout } from 'ags/time';
 import { Gtk } from 'ags/gtk4';
 import app from 'ags/gtk4/app'
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
-import { ClipboardItem, entryPath, cacheDir, videoExts } from './clipboardItem';
+import { ClipboardItem, entryPath, cacheDir, videoExts, binaryData } from './clipboardItem';
+import { openCompress, tmpDir } from './compress';
 import BackgroundSection from '../../lib/backgroundSection';
 import inputControl from '../../lib/inputControl';
 import { streamingMode } from '../notifications/notifications';
 
 const list = new Gtk.ListBox();
+const hide = () => app.get_window('clipboard')?.hide();
+const items = new Map<string, { mime: string, path: string | null, child: Gtk.Widget }>();
 
-const mimeTypes = new Map<string, string>(); // for faster pasting
-const paths = new Map<string, string>(); // file each entry points at
-
-list.connect('row-activated', async (_, row) => {
-    app.get_window('clipboard')?.set_visible(false);
+list.connect('row-activated', (_, row) => {
+    hide();
 
     const id = row.child.name;
-    const type = mimeTypes.get(id) ?? 'text/plain';
-    await execAsync(`bash -c 'cliphist decode ${id} | wl-copy -t ${type}'`);
+    const type = items.get(id)?.mime ?? 'text/plain';
+    execAsync(['bash', '-c', `cliphist decode ${id} | wl-copy -t ${type} 2>/dev/null`]);
 });
 
 list.set_sort_func((a, b) => {
@@ -28,59 +29,71 @@ list.set_sort_func((a, b) => {
     return row2id - row1id;
 });
 
-const rows = new Map<string, Gtk.Widget>();
-
 streamingMode.subscribe(() => {
-    list.remove_all(); // Items render differently in streaming mode, so rebuild them all
-    rows.clear();
+    list.remove_all(); // rebuild
+    items.clear();
     refreshItems();
 });
 
-const refreshItems = async () => {
-    const entries = await execAsync('cliphist list')
-    .then((str) => str.split('\n')
+let inFlight: Promise<void> = Promise.resolve();
+const refreshItems = () => inFlight = inFlight.then(async () => {
+    const entries = (await execAsync('cliphist list')).split('\n')
         .map((entry) => {
             const [id, content] = entry.split('\t');
-            return { id: id, content: content };
+            return { id, content };
         })
-        .filter((entry) => entry.id && entry.content)
-    ).catch(() => []);
+        .filter((entry) => entry.id && entry.content);
 
-    entries.forEach((entry) => {
-        if (rows.has(entry.id)) return;
+    entries.forEach(({ id, content }) => {
+        if (items.has(id)) return;
 
-        const image = entry.content.match(/\[\[ binary data \d+ (?:B|KiB|MiB|GiB) (\w+)/);
-        mimeTypes.set(entry.id, image ? `image/${image[1]}` : 'text/plain');
-
-        const path = entryPath(entry.id, entry.content);
-        if (path) paths.set(entry.id, path);
-
-        const child = ClipboardItem(entry.id, entry.content, path) as Gtk.Widget;
+        const image = content.match(binaryData);
+        const path = entryPath(id, content);
+        const child = ClipboardItem(id, content, path) as Gtk.Widget;
         list.append(child);
-        rows.set(entry.id, child);
+
+        items.set(id, { path, child, mime:
+            image ? `image/${image[1]}`
+            : content.trim().startsWith('file://') ? 'text/uri-list' // paste the ACTUAL file
+            : 'text/plain' });
     });
 
     const current = new Set(entries.map((entry) => entry.id));
-    rows.forEach((child, id) => {
-        if (current.has(id)) return;
+    const stale = [...items].filter(([id]) => !current.has(id));
 
+    stale.forEach(([id, { child }]) => {
         list.remove(child.get_parent() as Gtk.Widget); // ListBoxRow parent
-        rows.delete(id);
-        mimeTypes.delete(id);
-        paths.delete(id);
+        items.delete(id);
     });
-};
+
+    // Their decodes and thumbnails are dead weight now
+    if (stale.length) execAsync(['bash', '-c',
+        'rm -f ' + stale.map(([id]) => `${cacheDir}/${id}.*`).join(' ')]);
+}).catch(() => {});
 refreshItems();
 
-// File of the selected entry
+// build on copy
+createSubprocess('', ['wl-paste', '--watch', 'echo', 'copied'])
+    .subscribe(() => timeout(200, refreshItems));
+
+const focusTop = () => {
+    const first = list.get_row_at_index(0);
+
+    list.select_row(first);
+    first?.grab_focus();
+};
+
+const selectedId = () => (list.get_selected_row() ?? list.get_row_at_index(0))?.child.name ?? '';
+
 const selectedFile = () => {
-    const id = (list.get_selected_row() ?? list.get_row_at_index(0))?.child.name;
-    const file = paths.get(id ?? '');
+    const file = items.get(selectedId())?.path;
 
     return (file && GLib.file_test(file, GLib.FileTest.EXISTS)) ? file : null;
 };
 
 const handleKeys = (_ctrl: any, key: number) => {
+    const file = selectedFile();
+
     switch (key) {
     case 65293: // Enter
         (list.get_selected_row() ?? list.get_row_at_index(0))?.activate();
@@ -89,17 +102,23 @@ const handleKeys = (_ctrl: any, key: number) => {
         list.get_row_at_index(1)?.activate()
         break;
     case 101: // E - edit image with swappy
-        const image = selectedFile();
-        if (!image || videoExts.test(image)) break;
-
-        app.get_window('clipboard')?.hide()
-        execAsync(['swappy', '-f', image]);
+        if (!file || videoExts.test(file)) break;
+        hide();
+        execAsync(['swappy', '-f', file]);
+        break;
+    case 103: // G - open in gthumb
+        if (!file) break;
+        hide();
+        execAsync(['gthumb', file]);
+        break;
+    case 109: // M - compress video to a size limit
+        if (!file || !videoExts.test(file)) break;
+        hide();
+        openCompress(file, selectedId());
         break;
     case 115: // S - show in nemo
-        const file = selectedFile();
         if (!file) break;
-
-        app.get_window('clipboard')?.hide()
+        hide();
         Gio.DBus.session.call(
             'org.freedesktop.FileManager1',
             '/org/freedesktop/FileManager1',
@@ -109,8 +128,8 @@ const handleKeys = (_ctrl: any, key: number) => {
             null, Gio.DBusCallFlags.NONE, -1, null, null);
         break;
     case 119: // W - wipe clipboard history
-        execAsync(`bash -c 'cliphist wipe && rm -rf ${cacheDir}'`);
-        app.get_window('clipboard')?.hide()
+        execAsync(['bash', '-c', `cliphist wipe && rm -rf ${tmpDir}/* && mkdir -p ${cacheDir}`]);
+        hide();
         break;
     };
 };
@@ -131,9 +150,9 @@ export default () => inputControl('clipboard', () =>
             {list}
         </Gtk.ScrolledWindow>}
     />,
-    async () => {
-        await refreshItems();
-        list.get_first_child()?.grab_focus();
+    () => {
+        focusTop();
+        refreshItems().then(focusTop);
     },
     undefined,
     handleKeys);

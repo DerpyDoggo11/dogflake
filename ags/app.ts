@@ -17,6 +17,7 @@ import wifi from './widgets/status/network';
 import sideview, { showPage, closeSideview, hideSideview, toggleSideviewFocus, toggleSideviewSize } from './widgets/sideview';
 import calendar from './widgets/status/calendar';
 import clipboard from './widgets/clipboard/clipboard';
+import compress from './widgets/clipboard/compress';
 import emojiPicker from './widgets/emojiPicker';
 import launcher, { focus, setIsFocused }  from './widgets/launcher/launcher';
 import pass from './widgets/pass/pass';
@@ -44,6 +45,7 @@ app.start({
         status();
         sideview();
         clipboard();
+        compress();
         emojiPicker();
         recordMenu();
         osd();

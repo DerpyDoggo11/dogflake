@@ -46,7 +46,7 @@
         pkgs.swappy
         pkgs.swaybg
         pkgs.procps # pkill for gpu-screenrec
-        pkgs.ffmpeg-headless # clipboard video thumbnails
+        pkgs.ffmpeg-headless # clipboard video thumbnails & compression
       ];
     };
   };
@@ -67,6 +67,8 @@
       sway.enable = true;
     };
   };
+
+  services.wl-clip-persist.enable = true; # always paste instantly!
 
   # Astal clipboard management
   services.cliphist = {
