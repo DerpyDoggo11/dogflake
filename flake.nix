@@ -104,7 +104,7 @@
         modules = [ ./hosts/alechomelab/default.nix ];
       };
 
-      # Localhost development server (Pi 4B)
+      # Pi 4B dev server
       "alecdev" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
@@ -119,12 +119,6 @@
         modules = [
           ./hosts/alecvps/default.nix
         ];
-      };
-
-      # Permablot (custom printerblot printer, Zero 2W)
-      "permablot" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [ ./hosts/permablot/default.nix ];
       };
     };
   };
