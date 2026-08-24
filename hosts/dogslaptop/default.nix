@@ -49,6 +49,7 @@
       postBuild = "wrapProgram $out/bin/kicad --set GTK_THEME Adwaita";
     })
 
+    chromium
     arduino-ide # Embedded microcontroller programming
     python3 # Required for Arduino IDE
     openjdk25 # Also the Minecraft runtime

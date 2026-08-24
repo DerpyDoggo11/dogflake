@@ -86,6 +86,36 @@ in {
       spotdl
       nodejs_24 # runs npm
 
+      # Audio plugins for Zrythm. NixOS links these into
+      # /run/current-system/sw/lib/{lv2,clap,vst3} via pathsToLink "/lib".
+      # Zrythm ignores $LV2_PATH (plugin_manager.c only reads it when testing),
+      # so its search paths are set in its own gsettings instead.
+      #surge-XT # main synth - LV2/CLAP/VST3, huge preset library
+      #vital # wavetable synth
+      #sfizz # SFZ sample player - rhodes/pianos/keys
+      #drumkv1 # drum sampler
+      #geonkick # percussion synth
+      #soundfont-fluid # GM soundfont to feed the samplers
+
+      # lofi character
+      #chow-tape-model # tape wow/flutter/saturation - the core lofi sound
+      #airwindows-lv2 # ~350 fx, incl. tape/console/degrade
+      #mda_lv2 # has Degrade (bitcrush) and Combo (amp/speaker sim)
+      #zam-plugins # ZamTube tube saturation, ZaMultiComp
+      #wolf-shaper # waveshaper with spline editor
+
+      # space + mixing
+      #dragonfly-reverb # room/hall/plate
+      #calf # saturator, vintage delay, chorus
+      #lsp-plugins # EQ, compressors, limiter
+      #x42-plugins # meters and utilities
+
+      # rhythm / glitch
+      #bshapr # envelope shaper - sidechain pumping
+      #bchoppr # stream chopper
+      #bslizr # slice sequencer
+      #artyFX # stutter, bitcrush, roomy
+
       # GTK theme deps for the E-Ink Emulator
       # (gtk-engine-murrine was dropped from nixpkgs - it needed GTK2)
       gnome-themes-extra
@@ -166,6 +196,10 @@ in {
       MOZ_DBUS_REMOTE = "1"; # fix zen screensharing
       NO_AT_BRIDGE = "1"; # suppress warnings
       GTK_A11Y = "none";
+      # for plugin hosts other than Zrythm (carla, ardour...)
+      LV2_PATH = "/run/current-system/sw/lib/lv2";
+      CLAP_PATH = "/run/current-system/sw/lib/clap";
+      VST3_PATH = "/run/current-system/sw/lib/vst3";
     };
     etc."xdg/fcitx5/addon/cloudpinyin.conf".text = ''
       [Addon]
