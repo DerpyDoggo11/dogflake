@@ -44,7 +44,6 @@
 
     openjdk25
     bun
-    claude-code
     platformio-core
   ];
 

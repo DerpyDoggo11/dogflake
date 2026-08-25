@@ -76,7 +76,6 @@ in {
       discord
       slack
       filezilla
-      claude-code
 
       inputs.lightbrowse.packages.${pkgs.stdenv.hostPlatform.system}.default
 

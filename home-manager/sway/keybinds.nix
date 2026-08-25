@@ -78,7 +78,7 @@ in {
       "${mod}+E" = "exec zen-beta";
       "${mod}+return" = "exec ${openFoot}";
       "${mod}+N" = "exec nemo";
-      "${mod}+shift+N" = "exec sudo -E nemo";
+      "${mod}+shift+N" = "exec env SUDO_ASKPASS=${pkgs.writeShellScript "zenity-askpass" "exec ${pkgs.zenity}/bin/zenity --password"} sudo -AE ${pkgs.nemo-with-extensions}/bin/nemo"; # root nemo
 
       # Ags
       "${mod}+space" = "exec ags toggle launcher";
